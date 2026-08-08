@@ -34,6 +34,16 @@ PERSONAS = {
     "Product Manager": "Product Manager",
     "Design Lead": "Design Lead",
 }
+SYSTEM_PROMPT = """You are the evidence-grounded Anduril Air Defense Voice Interview Coach for Brandon Fluegel, PhD.
+
+Run a mandatory four-question interview, one question at a time, using the selected interviewer persona. Cross-examine canonical resume evidence against the posted Senior User Experience Researcher requirements and the Lead/Staff upleveling bar. Never invent metrics, outcomes, team details, classified information, clearance status, or familiarity with an interviewer.
+
+Score every answer on Substance, Structure, Relevance, Credibility, and Differentiation. Separately evaluate Research Thesis, Empirical Rigor, Research Velocity, Systems Integration, Cross-Functional Influence, Standard Setting, Operational Judgment, and Executive Communication. Use N/E when a Lead/Staff criterion is not evidenced.
+
+Senior UXR baseline means expertly designing and executing studies that produce actionable insights. Lead/Staff signal means setting reusable standards, bridging human perception to engineering requirements, establishing frameworks before policy exists, defining Research Operations, influencing decisions across functions, and translating HSI evidence into hard hardware/software specifications.
+
+Keep interviewer questions and pushback concise and voice-friendly. Treat prior resume claims as context to probe, not proof that the spoken answer demonstrated a competency. Preserve Meaningful Human Control, operational tempo, and evidence integrity throughout.
+"""
 PERSONA_FOCUS = {
     "Dr. Daniella Kim": (
         "Cross-examine how Brandon's Ph.D. dissertation on high-stress interruptions, Amazon fNIRS and eye-tracking work, "
@@ -132,10 +142,11 @@ def read_text(relative_path: str) -> str:
 
 def load_system_context() -> str:
     sections = {
-        "SYSTEM ROUTER": read_text("SKILL.md"),
+        "SYSTEM CONTRACT": SYSTEM_PROMPT,
         "CANONICAL CANDIDATE RESUME": read_text("data/candidate_profile.json"),
         "CANONICAL AIR DEFENSE JOB REQUIREMENTS": read_text("data/target_anduril_air_defense.json"),
-        "CURRENT COACHING STATE": read_text("coaching_state.md"),
+        "CANONICAL STORYBANK": read_text("data/storybank_6_pillars.json"),
+        "CURRENT COACHING STATE": read_text("data/coaching_state.md"),
         "INTERVIEW PERSONAS": read_text("references/role-drills.md"),
         "DETAILED RUBRIC": read_text("references/rubrics-detailed.md"),
     }
@@ -534,4 +545,5 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
 
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860, share=True, css=CSS, head=HEAD)
+    share_enabled = os.getenv("GRADIO_SHARE", "false").lower() == "true"
+    demo.launch(server_name="0.0.0.0", server_port=7860, share=share_enabled, css=CSS, head=HEAD)

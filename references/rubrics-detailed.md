@@ -1,6 +1,6 @@
 # Detailed Scoring Rubrics
 
-Use these expanded rubrics when doing deep analysis. The compact version in SKILL.md is for quick scoring.
+Use these rubrics for every structured answer evaluation in the four-question interview arc.
 
 ## Substance (Evidence Quality)
 
@@ -148,7 +148,7 @@ When scoring reveals a pattern, name the root cause explicitly: "This looks like
 
 ### Root Cause Persistence Tracking
 
-When the same root cause appears across 2+ consecutive sessions (or across 2+ answers in the same session), it should be escalated from a per-answer observation to an active entry in `coaching_state.md` → Calibration State → Cross-Dimension Root Causes. See `references/calibration-engine.md` Section 3 for the full lifecycle: Detection → Unified Treatment → Progress Tracking → Resolution. The key principle: prescribe ONE intervention targeting the root cause itself, not separate drills for each affected dimension. A root cause affecting Substance and Differentiation (e.g., conflict avoidance) gets tension-mining drills — not separate Substance drills and Differentiation drills.
+When the same root cause appears across 2+ consecutive sessions (or across 2+ answers in the same session), escalate it to `data/coaching_state.md` under Calibration State → Cross-Dimension Root Causes. Track Detection → Unified Treatment → Progress → Resolution. Prescribe one intervention for the root cause itself, not separate drills for each affected dimension. A root cause affecting Substance and Differentiation (for example, conflict avoidance) gets tension-mining drills rather than separate dimension drills.
 
 ---
 
