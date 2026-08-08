@@ -1,53 +1,122 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "candidate": {
+    "full_name": "Brandon Fluegel, PhD",
     "name": "Dr. Brandon Fluegel",
-    "education": {
-      "degree": "Ph.D. in Human Factors Psychology",
-      "institution": "Old Dominion University"
-    },
+    "current_title": "Staff Human Factors Engineer & Researcher",
+    "location": "Denver, CO",
     "target_level": [
       "Human Factors Research Lead",
       "Staff Human Factors Engineer"
+    ],
+    "core_mission": [
+      "Human-Agent Interaction and Cognitive Systems",
+      "Human Systems Integration (HSI)",
+      "Physical AI",
+      "Safety-critical system validation"
     ],
     "core_philosophy": {
       "name": "Calibrated Cognitive Friction",
       "definition": "Designing intentional friction in autonomous defense systems to prevent automation bias and enforce Meaningful Human Control (MHC)."
     }
   },
+  "education": [
+    {
+      "degree": "Ph.D. in Human Factors Psychology",
+      "year": 2020,
+      "institution": "Old Dominion University",
+      "dissertation": "Working memory, spatial processing, and reaction times during high-stress task interruptions"
+    },
+    {
+      "degree": "M.S. in Human Factors Psychology",
+      "year": 2017,
+      "institution": "Old Dominion University"
+    }
+  ],
   "experience": [
     {
       "organization": "Sling",
-      "role": "Staff Human Factors Engineer",
+      "dates": "Jun 2025 - Present",
+      "role": "Staff Human Factors Engineer & Researcher",
       "evidence": [
-        "Created the Principles for Agentic Trust framework for auditing non-deterministic AI across Alignment, Execution, Control, and Calibration.",
-        "Principles for Agentic Trust was accepted at ACM CSCW 2026 Industry Perspectives."
+        "Leads organizational Human Factors strategy and design validation across core software, hardware, and AI platforms.",
+        "Authored Principles for Agentic Trust, accepted for ACM CSCW 2026 Industry Perspectives, spanning Alignment, Execution, Control, and Calibration.",
+        "Defines physical ergonomics, reach envelope modeling, anatomical safety, and mechanical fit specifications.",
+        "Defines usability criteria for system latency, auditory and visual feedback, spatial layouts, and grounds engineering targets in perceptual thresholds."
       ]
     },
     {
-      "organization": "Amazon Devices",
+      "organization": "Amazon",
+      "team": "Devices Design Group",
+      "dates": "Jun 2020 - Nov 2024",
+      "role": "Human Factors Design Engineer & Researcher",
       "evidence": [
-        "Led a $50M psychophysics program that replaced arbitrary engineering latency targets with human perceptual thresholds.",
-        "Named inventor on US Patent US-12532040-B1 for multimodal interaction architectures.",
-        "Applied fNIRS neuroimaging and eye-tracking to cognitive-load modeling."
+        "Named inventor on US Patent US-12532040-B1 for context-aware multimodal interaction architectures and received a 2023 Amazon Inventor Award.",
+        "Led a multi-year psychophysics program that replaced arbitrary engineering latency targets with human perceptual thresholds and produced $50M in operational value.",
+        "Created an objective cognitive load framework using fNIRS neuroimaging and eye-tracking.",
+        "Influenced product strategy for Echo Show and Echo Hub products serving more than 75M customers."
       ]
     },
     {
-      "organization": "NASA Langley",
+      "organization": "NASA Langley Research Center",
+      "dates": "Jun 2018 - Jan 2019",
+      "role": "Human Factors PhD Intern",
       "evidence": [
-        "Performed Human-Systems Integration validation for Lunar Gateway clinical workstations.",
-        "Applied uFMEA, NASA-STD-3001, and MIL-STD-1472 guidance."
+        "Performed safety-critical Human Systems Integration and validation for Lunar Gateway clinical workstations in simulated microgravity.",
+        "Applied Usability Failure Modes and Effects Analysis (uFMEA) to mitigate high-consequence use errors.",
+        "Redesigned displays and layouts using NASA-STD-3001 and MIL-STD-1472 guidance, reducing task time by 30% and eliminating critical input errors."
       ]
     },
     {
-      "organization": "Mercedes-Benz R&D",
+      "organization": "Mercedes-Benz Research & Development",
+      "dates": "Jun 2017 - Aug 2017",
+      "role": "Human Factors PhD Intern",
       "evidence": [
-        "Studied Level 2 and Level 3 autonomous handovers using biometric, haptic, and auditory feedback in simulator studies."
+        "Ran high-fidelity simulator studies of Level 2 and Level 3 autonomous vehicle handovers using biometric, auditory, tactile, and haptic alerts, improving safety and trust ratings by 24%."
+      ]
+    },
+    {
+      "organization": "Uber",
+      "dates": "Jun 2019 - Sep 2019",
+      "role": "Human Factors PhD Intern",
+      "evidence": [
+        "Conducted urban field studies for mobile HMI and complex spatial navigation, contributing to a 5% increase in driver retention."
+      ]
+    },
+    {
+      "organization": "Brigham and Women's Hospital / Harvard Medical School",
+      "dates": "Jun 2014 - Jul 2015",
+      "role": "Technical Research Assistant",
+      "evidence": [
+        "Processed functional neuroimaging (fMRI), ECG, and telemetry data for acute-stress research."
       ]
     }
   ],
+  "technical_skills": {
+    "interaction_and_systems": [
+      "Human-Robot Interaction (HRI)",
+      "Multimodal Interfaces",
+      "Physical Ergonomics",
+      "Anthropometrics",
+      "Teleoperation Loops"
+    ],
+    "research_and_validation": [
+      "Human Systems Integration (HSI)",
+      "Usability Failure Modes and Effects Analysis (uFMEA)",
+      "Formative Testing",
+      "Summative Testing",
+      "Psychophysics",
+      "Cognitive Load Modeling"
+    ],
+    "standards_and_compliance": [
+      "MIL-STD-1472",
+      "NASA-STD-3001",
+      "IRB compliance",
+      "Federal standards compliance"
+    ]
+  },
   "evidence_policy": {
-    "source": "Candidate facts supplied for this repository refactor",
-    "rule": "Do not invent metrics, study outcomes, team sizes, or operational claims beyond the evidence listed here."
+    "source": "Resume facts supplied for this repository update",
+    "rule": "Treat these details as canonical candidate evidence. Do not invent additional metrics, study outcomes, team sizes, publications, clearances, or operational claims."
   }
 }

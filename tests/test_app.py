@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -41,6 +42,9 @@ class FakeResponses:
             strongest_signal="Rigorous operational framing.",
             primary_gap="More quantified thresholds are needed.",
             priority_move="State the falsification criterion first.",
+            senior_uxr_baseline_assessment="The answer converts a study into an actionable product decision.",
+            lead_staff_uplevel_assessment="The answer defines a reusable standard across teams.",
+            demonstrated_level="Lead/Staff Upleveling Signal",
             next_question=f"Question {turn + 1}?" if turn < 4 else None,
             end_of_session_debrief="Consistent evidence across all four turns." if turn == 4 else None,
             uplevel_verdict="Staff" if turn == 4 else None,
@@ -79,11 +83,51 @@ class InterviewArcTests(unittest.TestCase):
                     self.assertEqual(turn, 0)
                     self.assertIn("End of Session Debrief", scorecard)
                     self.assertIn("Lead/Staff verdict: Staff", scorecard)
+                    self.assertIn("Senior UXR baseline", scorecard)
+                    self.assertIn("Lead/Staff upleveling signal", scorecard)
 
         self.assertTrue(any("Deep-Dive Pushback & Probe" in prompt for prompt in FakeResponses.prompts))
         self.assertTrue(any("Behavioral & Collaboration" in prompt for prompt in FakeResponses.prompts))
         self.assertTrue(any("Leadership, Scaling & Vision" in prompt for prompt in FakeResponses.prompts))
         self.assertTrue(all("NASA-TLX" in prompt for prompt in FakeResponses.prompts))
+
+    def test_canonical_resume_and_job_requirements_are_in_system_context(self) -> None:
+        context = app.load_system_context()
+
+        self.assertIn("Brandon Fluegel, PhD", context)
+        self.assertIn("Working memory, spatial processing, and reaction times", context)
+        self.assertIn("US-12532040-B1", context)
+        self.assertIn("Senior User Experience Researcher", context)
+        self.assertIn('"minimum": 166000', context)
+        self.assertIn("service blueprints", context)
+        self.assertIn("max-diff", context)
+
+    def test_all_personas_receive_specific_resume_to_job_probe(self) -> None:
+        expected_evidence = {
+            "Dr. Daniella Kim — Research Head": "fNIRS",
+            "Systems / ML Engineering Lead": "$50M Amazon psychophysics",
+            "Product Manager": "startup shipping velocity",
+            "Design Lead": "Echo Hub",
+        }
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}), patch.object(app, "OpenAI", FakeOpenAI):
+            for persona, evidence in expected_evidence.items():
+                FakeResponses.prompts.clear()
+                app.generate_question(persona, 1, [])
+                self.assertIn(evidence, FakeResponses.prompts[-1])
+                self.assertIn("Senior UXR baseline", FakeResponses.prompts[-1])
+                self.assertIn("Lead/Staff scope", FakeResponses.prompts[-1])
+
+    def test_canonical_json_has_complete_supplied_collections(self) -> None:
+        data_root = Path(__file__).resolve().parents[1] / "data"
+        candidate = json.loads((data_root / "candidate_profile.json").read_text(encoding="utf-8"))
+        target = json.loads((data_root / "target_anduril_air_defense.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(candidate["schema_version"], "2.0")
+        self.assertEqual(len(candidate["experience"]), 6)
+        self.assertEqual(len(candidate["education"]), 2)
+        self.assertEqual(target["position"]["base_salary_usd"], {"minimum": 166000, "maximum": 220000})
+        self.assertEqual(len(target["key_responsibilities"]), 5)
+        self.assertIn("Eligibility for a Top Secret clearance.", target["qualifications"]["required"])
 
 
 if __name__ == "__main__":

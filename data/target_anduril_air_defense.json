@@ -1,38 +1,77 @@
 {
-  "schema_version": "1.0",
-  "company": "Anduril Industries",
-  "team": {
-    "name": "Air Defense Team",
-    "systems": [
-      "Lattice OS",
-      "Autonomous counter-drone command-and-control systems"
-    ]
-  },
-  "hiring_manager": {
-    "name": "Dr. Daniella Kim",
-    "title": "Head of Research"
-  },
-  "upleveling_target": [
-    "Human Factors Research Lead",
-    "Staff Human Factors Engineer"
-  ],
-  "core_mission": "Build autonomous software and hardware that finds and neutralizes aerial threats in months, not years.",
-  "interview_panel": [
-    "Dr. Daniella Kim, Research Head",
-    "Systems / ML Engineering Lead",
-    "Product Manager",
-    "Design Lead"
-  ],
-  "evaluation_priorities": [
-    "Empirical rigor under operational constraints",
-    "Research velocity and decision impact",
-    "Meaningful Human Control in autonomous systems",
-    "Non-deterministic failure analysis and calibrated trust",
-    "Hardware-software Human-Systems Integration",
-    "Lead/Staff-level standard setting and cross-functional influence"
-  ],
-  "evidence_policy": {
-    "source": "Target facts supplied for this repository refactor",
-    "rule": "Treat unverified company, team, interviewer, and process details as hypotheses until confirmed by a primary source."
+    "schema_version": "2.0",
+    "company": "Anduril Industries",
+    "position": {
+      "posted_title": "Senior User Experience Researcher",
+      "upleveling_target": [
+        "Human Factors Research Lead",
+        "Staff Human Factors Engineer"
+      ],
+      "locations": [
+        "Irvine, CA",
+        "Seattle, WA",
+        "Colorado scope"
+      ],
+      "base_salary_usd": {
+        "minimum": 166000,
+        "maximum": 220000
+      }
+    },
+    "team": {
+      "name": "Air Defense Team",
+      "mission": "Build autonomous robots that find and neutralize aerial threats and provide force protection through Lattice OS, an AI-powered 3D command-and-control center.",
+      "systems": [
+        "Lattice OS",
+        "AI-powered 3D command-and-control center",
+        "Autonomous counter-drone systems"
+      ]
+    },
+    "hiring_manager": {
+      "name": "Dr. Daniella Kim",
+      "title": "Head of Research"
+    },
+    "key_responsibilities": [
+      "Shape Air Defense product and program strategy using rigorous data and user insights.",
+      "Apply service blueprints, contextual inquiry, in-field rapid ethnography, focus groups, observations, workshops, surveys, and usability testing.",
+      "Use storytelling to inspire and align partners and drive recommendations from actionable insights.",
+      "Build Research Operations by consolidating and sharing insights, maintaining research repositories, and creating cross-functional workflows.",
+      "Design end-to-end operator workflows and shape UX research best practices across Anduril."
+    ],
+    "qualifications": {
+      "required": [
+        "At least 5 years of experience working on digital products.",
+        "Ability to work through ambiguity with little oversight.",
+        "Eligibility for a Top Secret clearance."
+      ],
+      "preferred": [
+        "M.S. or Ph.D. in Psychology, HCI, Anthropology, Statistics, or a related field.",
+        "Active Top Secret clearance.",
+        "Group facilitation and co-creation experience.",
+        "Ability to operate at startup speed.",
+        "Hardware and Human Factors experience, including ergonomics and military standards.",
+        "Quantitative research skills including scaled surveys, max-diff, and coding-based data analysis."
+      ]
+    },
+    "interview_panel": [
+      "Dr. Daniella Kim, Research Head",
+      "Systems / ML Engineering Lead",
+      "Product Manager",
+      "Design Lead"
+    ],
+    "evaluation_levels": {
+      "senior_uxr_baseline": "Expertly designs and executes studies that produce actionable product and program insights.",
+      "lead_staff_uplevel_signal": "Sets company-wide standards, bridges engineering latency with human perception, establishes frameworks before policy exists, defines Research Operations tools, and translates complex Human Systems Integration findings into hard hardware and software specifications."
+    },
+    "evaluation_priorities": [
+      "Empirical rigor under operational constraints",
+      "Research velocity and decision impact",
+      "Meaningful Human Control in autonomous systems",
+      "Non-deterministic failure analysis and calibrated trust",
+      "Hardware-software Human Systems Integration",
+      "Lead/Staff-level standard setting and cross-functional influence"
+    ],
+    "evidence_policy": {
+      "source": "Job-description parameters supplied for this repository update",
+      "rule": "Treat these details as the canonical target requirements. Do not imply access to classified programs or invent team, process, clearance, or product details beyond this record."
+    }
   }
-}

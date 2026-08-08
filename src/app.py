@@ -35,10 +35,25 @@ PERSONAS = {
     "Design Lead": "Design Lead",
 }
 PERSONA_FOCUS = {
-    "Dr. Daniella Kim": "research velocity, biometric telemetry, NASA-TLX, and Calibrated Cognitive Friction",
-    "Systems / ML Engineering Lead": "non-deterministic failure modes, latency thresholds, system specifications, MIL-STD compliance, and software/hardware integration",
-    "Product Manager": "shipping speed, operational ROI, cross-functional alignment, and trade-off prioritization",
-    "Design Lead": "interaction architecture, C2 operator workflow, UI information density, and physical ergonomics",
+    "Dr. Daniella Kim": (
+        "Cross-examine how Brandon's Ph.D. dissertation on high-stress interruptions, Amazon fNIRS and eye-tracking work, "
+        "and ACM CSCW 2026 Principles for Agentic Trust framework translate into rapid ethnography, service blueprints, "
+        "research repositories, research velocity, NASA-TLX, and Calibrated Cognitive Friction for Air Defense operators using Lattice OS."
+    ),
+    "Systems / ML Engineering Lead": (
+        "Cross-examine how Brandon's $50M Amazon psychophysics program, NASA uFMEA work, and MIL-STD-1472 experience "
+        "translate into falsifiable non-deterministic C2 latency thresholds, system specifications, counter-drone autonomous "
+        "feedback loops, standards compliance, and software/hardware integration."
+    ),
+    "Product Manager": (
+        "Cross-examine how Brandon balances academic rigor with Anduril's startup shipping velocity measured in months, "
+        "drives product-roadmap trade-offs, proves operational ROI, aligns cross-functional partners, and scales Research Operations."
+    ),
+    "Design Lead": (
+        "Cross-examine how Brandon's Echo Hub and multimodal architecture work, reach-envelope modeling, physical ergonomics, "
+        "and hardware/software validation translate into high-stress 3D C2 tactical operator workflows, information density, "
+        "interaction architecture, and physical fit."
+    ),
 }
 INTERVIEW_ARC = {
     1: (
@@ -98,6 +113,13 @@ class Evaluation(BaseModel):
     strongest_signal: str
     primary_gap: str
     priority_move: str
+    senior_uxr_baseline_assessment: str
+    lead_staff_uplevel_assessment: str
+    demonstrated_level: Literal[
+        "Below Senior UXR Baseline",
+        "Meets Senior UXR Baseline",
+        "Lead/Staff Upleveling Signal",
+    ]
     next_question: str | None = None
     end_of_session_debrief: str | None = None
     uplevel_verdict: Literal["Below Lead Bar", "Lead", "Lead/Staff Borderline", "Staff"] | None = None
@@ -111,6 +133,8 @@ def read_text(relative_path: str) -> str:
 def load_system_context() -> str:
     sections = {
         "SYSTEM ROUTER": read_text("SKILL.md"),
+        "CANONICAL CANDIDATE RESUME": read_text("data/candidate_profile.json"),
+        "CANONICAL AIR DEFENSE JOB REQUIREMENTS": read_text("data/target_anduril_air_defense.json"),
         "CURRENT COACHING STATE": read_text("coaching_state.md"),
         "INTERVIEW PERSONAS": read_text("references/role-drills.md"),
         "DETAILED RUBRIC": read_text("references/rubrics-detailed.md"),
@@ -162,6 +186,14 @@ def render_scorecard(
 **Primary gap:** {evaluation.primary_gap}
 
 **Priority move:** {evaluation.priority_move}
+
+### Senior vs. Lead/Staff Calibration
+
+**Demonstrated level:** {evaluation.demonstrated_level}
+
+**Senior UXR baseline:** {evaluation.senior_uxr_baseline_assessment}
+
+**Lead/Staff upleveling signal:** {evaluation.lead_staff_uplevel_assessment}
 """
     if turn < 4:
         return scorecard
@@ -243,6 +275,8 @@ Persona lens: {PERSONA_FOCUS[persona]}
 Prior conversation: {prior_context}
 
 Ask exactly one concise, voice-friendly question in character. Make it answerable aloud. For Turn 2, directly challenge a specific assumption or missing falsifiable metric from Turn 1. Do not provide coaching, an answer, or a question number. Do not invent candidate evidence or classified Anduril details.
+
+Cross-examine a concrete claim from the canonical resume against a concrete Air Defense responsibility or qualification. Do not ask a generic interview question. Distinguish evidence that merely meets the Senior UXR baseline from evidence that could prove Lead/Staff scope.
 """
     response = OpenAI(api_key=require_api_key()).responses.parse(
         model=MODEL,
@@ -297,6 +331,12 @@ Arc objective: {objective}
 Persona lens: {PERSONA_FOCUS[persona]}
 
 Evaluate the candidate answer below. Apply all five core dimensions and every Lead/Staff criterion. Use null for a Lead/Staff score when this answer does not provide evidence for that criterion; missing evidence is not automatically poor performance.
+
+Explicitly classify demonstrated_level using this bar:
+- Senior UXR baseline: expertly designs and executes studies that produce actionable product and program insights.
+- Lead/Staff upleveling signal: sets company-wide standards, bridges engineering latency with human perception, establishes frameworks before policy exists, defines Research Operations tools, and translates complex HSI into hard hardware/software specifications.
+
+For senior_uxr_baseline_assessment and lead_staff_uplevel_assessment, cite specific evidence from this answer and compare it with the canonical resume and Air Defense job requirements. Prior resume claims are context to probe, not proof that the spoken answer demonstrated the competency.
 
 The interviewer_pushback must be in character, voice-friendly, and no more than two short sentences. It should acknowledge the answer only as needed and identify its highest-leverage weakness. The detailed evidence belongs in the scorecard.
 
