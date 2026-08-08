@@ -49,11 +49,11 @@ Flag these common mistakes:
 ## Questions To Avoid This Round
 - [1-2 specific questions the candidate might be tempted to ask, with brief explanation of why to skip them]
 
-**Recommended next**: `hype` — build your pre-interview confidence plan with these questions loaded. **Alternatives**: `prep [company]`, `mock [format]`
+**Recommended next**: `practice [persona]` — rehearse asking the strongest question and handling the likely response. **Alternatives**: `prep [company]`, `mock panel`
 ```
 
 ### Coaching State Integration
 
 After generating questions, save the top 3 to `coaching_state.md` so other commands can reference them:
 - **In Interview Loops** (if company-specific): Add `- Prepared questions: [top 3, one-line each]` under the relevant company entry.
-- **Why**: `hype` generates its own "3 Questions To Ask" section. If `questions` has already been run for this interview, `hype` should pull from those (already tailored) rather than generating fresh ones. This prevents contradictory advice between commands.
+- **Why**: `prep` and `mock` should reuse these tailored questions rather than generating a contradictory set.

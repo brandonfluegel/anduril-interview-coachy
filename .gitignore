@@ -9,3 +9,6 @@ materials/
 
 # Active skill file (created by copying SKILL.md during setup)
 CLAUDE.md
+
+# Gradio local runtime artifacts
+.gradio/

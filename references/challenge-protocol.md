@@ -67,21 +67,6 @@ Lens 5 (Strengthening Path) is delivered through the progress review's Top 2 Pri
 
 At Levels 1-4: Omit entirely.
 
-### Pre-Mortem — `hype`
-
-The honest counterweight to the confidence boost. After the 60-Second Hype Reel, before the Pre-Call 3x3:
-
-Present 2-3 most likely failure modes for this specific interview, each with a one-line prevention cue. Source from:
-- Active Coaching Strategy bottleneck
-- Storybank gaps for this company/role
-- Self-assessment calibration tendency (over-rater may not self-correct in the moment)
-- Avoidance patterns from Coaching Notes
-- Previous rejection feedback from similar companies
-
-End with the release cue: "You know these risks. Now set them aside and go execute." The pre-mortem's purpose is to move failure anxiety from the subconscious (where it causes freeze) to the conscious (where it becomes actionable). Once acknowledged, let it go.
-
-At Levels 1-4: Skip entirely. Hype stays pure boost.
-
 ### Rejection Leverage — `feedback` (Type B rejection outcomes)
 
 Don't lead with comfort. Lead with extraction: "What can we extract from this?"

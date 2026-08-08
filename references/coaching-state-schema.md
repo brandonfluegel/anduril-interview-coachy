@@ -16,9 +16,9 @@ Last updated: [date]
 - Interview history: [first-time / active but not advancing / experienced but rusty]
 - Biggest concern:
 - Known interview formats: [e.g., "behavioral screen, system design (verbal walkthrough)" — updated by Format Discovery Protocol during prep/mock]
-- Anxiety profile: [confident-underprepared / anxious-specific / generalized / post-rejection / impostor — set by hype, reused in subsequent sessions]
+- Anxiety profile: [confident-underprepared / anxious-specific / generalized / post-rejection / impostor / unknown — set during kickoff, prep, or coaching]
 - Career transition: [none / function change / domain shift / IC↔management / industry pivot / career restart — set by kickoff]
-- Transition narrative status: [not started / in progress / solid — set by kickoff, updated by pitch/stories]
+- Transition narrative status: [not started / in progress / solid — set by kickoff, updated by stories/prep]
 
 ## Resume Analysis
 - Positioning strengths: [the 2-3 signals a hiring manager sees in 30 seconds]
@@ -117,6 +117,18 @@ Last updated: [date]
 - Self-assessment tendency: [over-rater / under-rater / well-calibrated]
 - Previous approaches: [list of abandoned strategies with brief reason — e.g., "Structure drills — ceiling at 3.5, diminishing returns"]
 
+## Lead/Staff Upleveling Readiness
+| Criterion | Rating | Evidence | Gap To Close |
+|-----------|--------|----------|--------------|
+| Research Thesis | [1-5 / N/E] | | |
+| Empirical Rigor | [1-5 / N/E] | | |
+| Research Velocity | [1-5 / N/E] | | |
+| Systems Integration | [1-5 / N/E] | | |
+| Cross-Functional Influence | [1-5 / N/E] | | |
+| Standard Setting | [1-5 / N/E] | | |
+| Operational Judgment | [1-5 / N/E] | | |
+| Executive Communication | [1-5 / N/E] | | |
+
 ## Calibration State
 
 ### Calibration Status
@@ -135,51 +147,6 @@ Last updated: [date]
 
 ### Unmeasured Factor Investigations
 | Date | Trigger | Hypothesis | Investigation | Finding | Action |
-
-## LinkedIn Analysis
-- Date: [date]
-- Depth: [Quick Audit / Standard / Deep Optimization]
-- Overall: [Strong / Needs Work / Weak]
-- Recruiter discoverability: [Strong / Moderate / Weak]
-- Credibility on visit: [Strong / Moderate / Weak]
-- Differentiation: [Strong / Moderate / Weak]
-- Top fixes pending: [1-3 line items]
-- Positioning gaps: [resume ↔ LinkedIn inconsistencies, if assessed]
-
-## Resume Optimization
-- Date: [date]
-- Depth: [Quick Audit / Standard / Deep Optimization]
-- Overall: [Strong / Needs Work / Weak]
-- ATS compatibility: [ATS-Ready / ATS-Risky / ATS-Broken]
-- Recruiter scan: [Strong / Moderate / Weak]
-- Bullet quality: [Strong / Moderate / Weak]
-- Seniority calibration: [Aligned / Mismatched]
-- Keyword coverage: [Strong / Moderate / Weak]
-- Top fixes pending: [1-3 line items]
-- JD-targeted: [yes — which JD / no]
-- Cross-surface gaps: [resume ↔ LinkedIn inconsistencies, if assessed]
-
-## Positioning Statement
-- Date: [date]
-- Depth: [Quick Draft / Standard / Deep Positioning]
-- Core statement: [the full hook + context + bridge — 30-45 second version]
-- Hook (10s): [the curiosity-gap opener alone]
-- Key differentiator: [one sentence]
-- Earned secret anchor: [the earned secret or spiky POV powering the positioning]
-- Target audience: [primary audience this was optimized for]
-- Variant status: [which variants were produced]
-- Consistency status: [aligned / gaps identified — brief summary]
-
-## Outreach Strategy
-- Date: [date]
-- Depth: [Quick / Standard / Deep]
-- Positioning source: [Positioning Statement / Resume Analysis fallback]
-- Message types coached: [list]
-- Targets contacted: [people/companies]
-- Channel strategy: [primary channels]
-- Follow-up status: [pending follow-ups with timing]
-- LinkedIn profile flagged: [yes/no]
-- Key hooks identified: [1-2 reusable positioning hooks]
 
 ## JD Analysis: [Company] — [Role]
 - Date: [date]

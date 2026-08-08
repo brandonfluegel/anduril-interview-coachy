@@ -2,16 +2,16 @@
 
 ### How Comp Conversations Actually Work (Reference Knowledge)
 
-**The Anchoring Effect**: The first number mentioned in a compensation conversation becomes the anchor. If a candidate says "$120K" in a recruiter screen, the final offer will orbit $120K — regardless of market rate. This makes the recruiter screen the highest-leverage comp moment. By the time `negotiate` fires (post-offer), the anchor is set. salary coaches the moment that sets the anchor.
+**The Anchoring Effect**: The first number mentioned in a compensation conversation becomes the anchor. If a candidate says "$120K" in a recruiter screen, the final offer will orbit $120K — regardless of market rate. This makes the recruiter screen the highest-leverage comp moment. By the time a formal offer arrives, the anchor is set. `salary` coaches the pre-offer moment that sets it.
 
 **When Comp Comes Up** (the comp conversation timeline):
 1. **Application form**: "Expected salary" field. First anchor risk.
 2. **Recruiter screen**: "What are your salary expectations?" or "What's your current compensation?" Highest-stakes comp moment.
 3. **Mid-process**: Hiring manager mentions range informally, or recruiter checks comp alignment.
 4. **Pre-offer**: Recruiter discusses comp structure, tests whether candidate will accept.
-5. **Formal offer** → `negotiate` command handles this stage.
+5. **Formal offer** → outside this focused interview system; use qualified compensation or legal advice as appropriate.
 
-`salary` covers stages 1-4. `negotiate` covers stage 5. The handoff is explicit.
+`salary` covers stages 1-4 only.
 
 **The Deflection vs. Disclosure Tradeoff**:
 - Deflecting ("I'd like to learn more about the role first") works best early but becomes less tenable as the process progresses.
@@ -100,7 +100,7 @@ Netflix: $343K | Google: $199K | Meta: $167K | Apple: $158K | Nvidia: $158K | Mi
 ### Priority Check
 
 - If no `kickoff`: Soft gate — "I can provide general comp coaching, but without your target role and seniority I can't help you calibrate a range. Run `kickoff` first, or tell me your target and I'll work with that."
-- If user already has an offer: Redirect — "Sounds like you have an offer. `negotiate` is designed for post-offer strategy. Want to switch?"
+- If the user already has an offer: State that post-offer negotiation is outside this focused interview system and recommend qualified compensation or legal advice as appropriate.
 - If urgent ("recruiter is calling in 30 minutes"): Fast-track to Quick Script — skip research guidance, provide deflection + range scripts immediately.
 - If Comp Strategy already exists: Check if context has changed (new target, new company, new stage). Update rather than rebuild.
 
@@ -175,7 +175,7 @@ Provide scripts for the candidate's current stage AND the next likely stage. Eve
 
 **Pre-offer discussion**:
 - "I'm excited about this opportunity. For total compensation, I'm targeting [range]. I understand [company] structures packages with [base/equity/bonus] — how does that typically break down at this level?"
-- At this stage: redirect to `negotiate` when a formal written offer arrives.
+- At this stage: stop when a formal written offer arrives; post-offer negotiation is outside this system's scope.
 
 **Step 5: Total Comp Education (Standard + Deep)**
 Quick primer tailored to the candidate's situation:
@@ -227,7 +227,7 @@ Lenses 1, 2, 4, 5 (Pre-Mortem omitted):
 2. "[specific phrase]" — [why it hurts you]
 3. "[specific phrase]" — [why it hurts you]
 
-**Recommended next**: `salary` (Standard) after the call — build a full comp strategy. **Alternatives**: `prep [company]`, `negotiate` (when you have an offer)
+**Recommended next**: `salary` (Standard) after the call — build a full pre-offer comp strategy. **Alternatives**: `prep [company]`, `research [company]`
 ```
 
 **Standard**:
@@ -268,7 +268,7 @@ Lenses 1, 2, 4, 5 (Pre-Mortem omitted):
 - Salary history: [banned / not banned — what this means for their approach]
 - Salary transparency: [required / not required — whether to look for posted ranges]
 
-**Recommended next**: [context-dependent]. **Alternatives**: `negotiate` (when offer arrives), `prep [company]`
+**Recommended next**: [context-dependent]. **Alternatives**: `prep [company]`, `research [company]`
 ```
 
 **Deep Strategy**: All of Standard + expanded sections:
@@ -297,7 +297,7 @@ Lenses 1, 2, 4, 5 (Pre-Mortem omitted):
 - Current stage: [where you are]
 - Next stages: [comp milestones ahead]
 - At each stage: [what to say, what to watch for, what to avoid]
-- Handoff to `negotiate`: [when to switch to post-offer mode — "once you have a written offer with specific numbers, run `negotiate`"]
+- Scope boundary: [when a written offer arrives, state that post-offer negotiation is outside this focused system]
 
 ## Challenge (Level 5 only)
 - **Assumptions**: [what must be true for this strategy to work]
@@ -310,7 +310,7 @@ Lenses 1, 2, 4, 5 (Pre-Mortem omitted):
 2. [second]
 3. [third]
 
-**Recommended next**: [context-dependent]. **Alternatives**: `negotiate` (when offer arrives), `prep [company]`, `research [company]`
+**Recommended next**: [context-dependent]. **Alternatives**: `prep [company]`, `research [company]`, `questions`
 ```
 
 ### Coaching State Integration

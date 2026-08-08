@@ -35,7 +35,7 @@ Captures what happened in a real interview while it's still fresh. This is the b
 5. **Surprise capture.** "Was there anything you didn't expect? A question you weren't prepared for, a format difference, something about the interviewer or environment?" Unexpected moments are often the most informative for coaching.
 6. **Story usage log.** "Which stories did you use? Did any of them land differently than in practice?" Cross-reference with storybank — update `Last Used` dates, increment `Use Count` for each story used, and add performance notes.
 7. **Immediate tactical notes.** "Is there anything you want to do differently for the next round, based on this one?" Capture their own coaching instinct.
-8. **Positioning performance check.** "How did your introduction / 'tell me about yourself' land? Did the interviewer seem engaged, or did they jump to questions quickly?" Capture this signal — it feeds back to `pitch` for positioning iteration. Record in Interview Intelligence → Effective/Ineffective Patterns if the response reveals something actionable about how the candidate's positioning lands.
+8. **Thesis-opening performance check.** "How did your introduction and Human Factors thesis land? Did the interviewer engage, challenge it, or move on quickly?" Record actionable patterns in Interview Intelligence → Effective/Ineffective Patterns and use them in the next persona drill.
 9. **Recruiter/interviewer feedback capture.** "Did you get any feedback from the recruiter about this round? Even informal comments — 'they really liked your background' or 'the interviewer had some concerns about X' — are valuable signal." If feedback exists, record it for the Recruiter/Interviewer Feedback table in Interview Intelligence.
 10. **Past question similarity check.** Scan the Interview Intelligence Question Bank for questions similar to what the candidate recalled. If matches exist, note them briefly: "You've seen a prioritization question like Q2 before — at [Company] in Round [N]. Your score on that one was [X]." Only surface matches that are useful (same competency tested, score trajectory, or company pattern). Don't force connections.
 11. **Transcript availability check.** "Do you have a recording or transcript? If so, we can do a full `analyze` later. If not, I'll work from what you've captured here." If they do have a transcript, mention the tool it came from so they know they can paste raw output: "You can paste the raw transcript directly from Otter, Zoom, Grain, or whatever tool you used — I'll detect the format and clean it up automatically."
@@ -59,7 +59,7 @@ Captures what happened in a real interview while it's still fresh. This is the b
 Based on the emotional check in step 1, adapt:
 
 - **Candidate feels good**: Proceed normally. Capture data. Offer `analyze` or `thankyou` as next steps.
-- **Candidate feels terrible**: Don't jump to tactical feedback. Acknowledge it: "That sounds rough. Let's capture what happened while it's fresh — we can analyze it later when there's some distance." Focus on capture, not coaching. Offer `hype` if another interview is coming soon. Reference the Psychological Readiness Module's rejection reframe if needed.
+- **Candidate feels terrible**: Don't jump to tactical feedback. Acknowledge it: "That sounds rough. Let's capture what happened while it's fresh — we can analyze it later when there's some distance." Focus on capture, not coaching. If another interview is imminent, use a short `prep` recovery plan before further practice.
 - **Candidate is uncertain**: This is actually the most valuable state — they don't know how it went. Say: "Uncertainty is normal. Let's capture the data and see what it actually tells us."
 
 ### Output Schema
@@ -109,7 +109,7 @@ Based on the emotional check in step 1, adapt:
 - [ ] Transcript available → run `analyze` when ready
 - [ ] No transcript → directional analysis above is what we have
 
-**Recommended next**: `analyze` — run full transcript analysis while impressions are fresh (if transcript available). **Alternatives**: `thankyou`, `hype`, `progress`
+**Recommended next**: `analyze` — run full transcript analysis while impressions are fresh (if transcript available). **Alternatives**: `thankyou`, `progress`, `practice [persona]`
 ```
 
 ### Coaching State Integration

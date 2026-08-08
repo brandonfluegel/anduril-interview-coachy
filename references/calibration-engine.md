@@ -122,30 +122,26 @@ Role-specific drills (from `references/role-drills.md`) use native scoring axes 
 
 | Role | Drill Axis | Maps To Core Dimension(s) |
 |---|---|---|
-| PM | Acknowledging tension | Credibility |
-| PM | Specific evidence | Substance |
-| PM | Decision rationale | Substance + Structure |
-| PM | Stakeholder awareness | Relevance |
-| PM | Trade-off articulation | Substance + Differentiation |
-| Engineer | Depth of understanding | Substance + Credibility |
-| Engineer | Explaining technical decisions | Structure |
-| Engineer | Acknowledging constraints | Credibility |
-| Engineer | Systems thinking | Substance |
-| Designer | Rationale clarity | Structure |
-| Designer | User evidence | Substance + Credibility |
-| Designer | Design trade-offs | Substance + Differentiation |
-| Designer | Process articulation | Structure |
-| Data Science | Statistical rigor | Substance + Credibility |
-| Data Science | Business translation | Relevance + Structure |
-| Data Science | Methodology defense | Credibility + Differentiation |
-| Research | Evidence quality | Substance |
-| Research | Insight articulation | Differentiation |
-| Research | Stakeholder translation | Relevance + Structure |
-| Marketing | Metric articulation | Substance + Credibility |
-| Marketing | Creative rationale | Differentiation + Structure |
-| Operations | Process thinking | Structure |
-| Operations | Scale articulation | Substance |
-| Operations | Constraint navigation | Credibility + Differentiation |
+| Dr. Kim | Thesis clarity and falsifiability | Structure + Differentiation |
+| Dr. Kim | Methodological rigor | Substance + Credibility |
+| Dr. Kim | Research velocity judgment | Relevance + Substance |
+| Dr. Kim | Telemetry and measure selection | Substance + Credibility |
+| Dr. Kim | Standard-setting leverage | Differentiation + Credibility |
+| Systems / ML | Failure-mode reasoning | Substance + Credibility |
+| Systems / ML | Requirement specificity and testability | Structure + Credibility |
+| Systems / ML | Tradeoff and threshold articulation | Substance + Differentiation |
+| Systems / ML | Standards and uFMEA application | Substance + Credibility |
+| Systems / ML | Hardware-software systems thinking | Substance + Relevance |
+| Product | Decision and ROI orientation | Relevance + Substance |
+| Product | Research-to-roadmap translation | Relevance + Structure |
+| Product | Speed-versus-risk judgment | Substance + Differentiation |
+| Product | Prioritization and tradeoff clarity | Structure + Relevance |
+| Product | Influence without authority | Credibility + Differentiation |
+| Design | Interaction-architecture reasoning | Structure + Substance |
+| Design | Physical-digital ergonomics | Substance + Relevance |
+| Design | Information-density judgment | Relevance + Differentiation |
+| Design | Multimodal and handover reasoning | Substance + Credibility |
+| Design | Design partnership and influence | Credibility + Differentiation |
 
 ### After Scoring a Role Drill
 

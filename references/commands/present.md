@@ -86,7 +86,7 @@ State this boundary explicitly at the start: "I'll coach the structure, narrativ
 
 - If no `kickoff`: Soft gate — "I can help structure your presentation, but without your target role context I can't calibrate for your audience. Run `kickoff` first, or tell me about the audience and I'll work with what we have."
 - If interview within 48 hours AND this is the presentation round: This IS the priority. Proceed immediately.
-- If interview within 48 hours but the presentation round is NOT next: "You have a [format] round in [X] hours. Want to focus on `hype`/`prep` for that first and come back to presentation prep?"
+- If the interview is within 48 hours but the presentation round is not next: "You have a [format] round in [X] hours. Let's focus on `prep` and the relevant persona first, then return to presentation prep."
 - If Prep Brief exists for this company: Use it (evaluation criteria, culture, interviewer intel feed into audience calibration and Q&A prediction).
 
 ### Required Inputs
@@ -295,7 +295,7 @@ Lenses 1, 2, 4, 5 (Pre-Mortem omitted — replaced with devil's advocate Q&A whi
 - Q&A time: [adequate / tight / insufficient]
 - Recommendation: [specific adjustments]
 
-**Recommended next**: Practice delivering with a timer. Or `present` (Deep Prep) for final polish. **Alternatives**: `hype` (before the round), `prep [company]`
+**Recommended next**: Practice delivering with a timer, then run persona-specific Q&A. **Alternatives**: `present` (Deep Prep), `prep [company]`
 ```
 
 **Deep Prep**: All of Standard + expanded sections:
@@ -338,7 +338,7 @@ Lenses 1, 2, 4, 5 (Pre-Mortem omitted — replaced with devil's advocate Q&A whi
 2. [second]
 3. [third]
 
-**Recommended next**: Practice delivering with a timer. Then `hype` before the actual round. **Alternatives**: `mock` (for Q&A simulation), `prep [company]`
+**Recommended next**: Practice delivering with a timer, then run `mock panel` for Q&A. **Alternatives**: `practice [persona]`, `prep [company]`
 ```
 
 ### Coaching State Integration

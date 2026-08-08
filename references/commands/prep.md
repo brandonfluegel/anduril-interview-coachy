@@ -200,9 +200,9 @@ After running Format Discovery, save the format details to `coaching_state.md` s
     - Round 2: System design, 50min verbal walkthrough, collaborative, senior engineer
     - Round 3: Technical+behavioral mix, 60min, alternating, hiring manager
   ```
-  Include format type, duration, format variant (if applicable), and interviewer type for each round. This level of detail allows `mock`, `practice technical`, and `hype` to tailor their output without re-running discovery.
+   Include format type, duration, format variant (if applicable), and interviewer type for each round. This allows `mock` and persona practice to tailor output without re-running discovery.
 
-This prevents re-running discovery when the candidate later runs `mock`, `practice technical`, or `hype` for the same company.
+This prevents re-running discovery when the candidate later runs `mock` or persona practice for the same company.
 
 #### Format Variability Acknowledgment
 
@@ -474,5 +474,5 @@ When generating Likely Concerns, pull from the Role-Fit Assessment's gap classif
 - **The concern to be ready for**: [the #1 most likely concern + your counter in one sentence]
 - **Your question to ask**: [the single best question for this interviewer/round]
 
-**Recommended next**: `practice` — drill the competencies this prep identified as critical. If the format is a presentation round and `present` hasn't been run: `present` instead — structure your content before drilling delivery. **Alternatives**: `mock [format]`, `concerns`, `hype`, `present`
+**Recommended next**: `practice [highest-risk persona]` — drill the competency this prep identified as critical. If the format is a presentation round and `present` has not been run, structure the content first. **Alternatives**: `mock panel`, `concerns`, `present`
 ```

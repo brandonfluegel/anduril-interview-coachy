@@ -81,6 +81,6 @@ Score each round and add to Score History in `coaching_state.md` (Type: practice
 
 After generating, save the ranked concerns to `coaching_state.md` (in the Interview Loops section under the relevant company's Concerns surfaced field, or in Active Coaching Strategy if general). This allows:
 - `prep` to pull from previously generated concerns instead of re-deriving them
-- `hype` to reference the top concern + counter in the 3x3
+- `prep` and persona practice to pressure-test the top concern and counter
 - `progress` to track whether concerns are being addressed over time
 - `mock` to include questions targeting known concerns

@@ -57,7 +57,7 @@ After resume analysis, check whether the candidate's target role represents a ca
 **When detected**, this changes downstream coaching significantly:
 - **Stories**: The candidate needs "bridge stories" — experiences that connect the old context to the new target. Flag this for `stories`: "You're making a [type] transition. We need to build 2-3 bridge stories that show how your [old context] experience translates to [new target]. This is the most important storybank work for your search."
 - **Concerns**: The transition IS the primary concern. `concerns` should prioritize it.
-- **Positioning**: `pitch` needs to frame the transition as intentional and strategic, not reactive. "I moved from X to Y because..." needs to be compelling.
+- **Transition thesis**: Active Coaching Strategy and `stories` must frame the move into autonomous defense as intentional, evidence-backed, and strategically coherent.
 - **Prep**: `prep` should expect interviewers to probe the transition — it will dominate at least one question.
 - **Comp**: `salary` should flag that transitions often involve comp recalibration — the candidate's current comp may not be a useful anchor for the new role.
 
@@ -90,7 +90,7 @@ After resume analysis, cross-reference the candidate's profile against their sta
 
 Write the initial `coaching_state.md` file (see SKILL.md Session State System for format) with:
 - Profile section populated from Steps 1-2
-- Resume Analysis section populated from Step 2.5 output (positioning strengths, likely concerns, career narrative gaps, story seeds). This is critical — every downstream command (`concerns`, `prep`, `stories`, `hype`) benefits from having the resume analysis persisted. Don't lose this work.
+- Resume Analysis section populated from Step 2.5 output (positioning strengths, likely concerns, career narrative gaps, story seeds). This is critical — `concerns`, `prep`, and `stories` depend on this evidence context.
 - Empty storybank (or populated if initial stories were provided — if initial stories are provided, write full STAR text to the Story Details section)
 - Empty score history, outcome log, drill progression at Stage 1
 - Empty Interview Intelligence section (Question Bank, Effective Patterns, Ineffective Patterns, Recruiter/Interviewer Feedback, Company Patterns, Historical Intelligence Summary — all empty, will be populated by `analyze`, `debrief`, and `feedback`)
@@ -108,7 +108,7 @@ Candidates' targets often evolve mid-search — they discover they prefer a diff
 2. **Show what carries over**: "Your storybank, practice scores, and coaching patterns all still apply. Here's what changes with your new target:"
 3. **Update Profile in coaching_state.md**: Target role, seniority band, career transition status (if newly triggered).
 4. **Flag downstream impacts**:
-   - If target role changed: `concerns` needs re-running (different role = different concerns). `pitch` positioning statement needs updating. `resume` may need re-targeting.
+   - If target role changed: rerun `concerns`, update the interview thesis in Active Coaching Strategy, and remap stories during `prep`.
    - If seniority changed: `prep` scoring weights shift. Practice drill calibration may need adjustment.
    - If domain changed: New domain gap becomes a primary concern. Bridge stories needed.
 5. **Preserve history**: Don't delete old target data — move it to a "Previous targets" section. Score history, practice data, and storybank remain valid.
@@ -118,7 +118,7 @@ Output a brief "Profile Update Summary" showing what changed, what carries over,
 ### Time-Aware Coaching
 
 The interview timeline collected in Step 1 shapes everything:
-- **≤48 hours**: Triage mode. Skip storybank building. Run `prep` → `hype` → done. Every minute counts.
+- **≤48 hours**: Triage mode. Skip broad storybank building. Run `prep`, then one drill with the highest-risk persona.
 - **1-2 weeks**: Focused mode. `prep` + one targeted `practice` drill on the weakest dimension. `stories` only to check for critical gaps.
 - **3+ weeks**: Full system. Build storybank, run progression drills, develop differentiation. This is where the full value of the system is realized.
 

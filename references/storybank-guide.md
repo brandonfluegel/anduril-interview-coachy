@@ -108,15 +108,14 @@ Update the storybank:
 3. Adjust strength scores based on actual performance
 4. Note any new stories that emerged in conversation
 
-### Cross-Surface Consumption
+### Interview-System Consumption
 
-Your storybank feeds more than just interview prep. When optimizing any candidate-facing surface, note story gaps or repurposing opportunities that emerge:
-- `resume` mines stories for bullet rewrites — earned secrets become the differentiating clause in resume bullets
-- `linkedin` uses earned secrets for high-impact profile sections (headline, About, Experience)
-- `pitch` anchors the core positioning statement to your strongest stories and sharpest earned secrets
-- `outreach` pulls hooks from earned secrets to differentiate networking messages
-- `decode` cross-references storybank skills against JD competencies for fit assessment
-- `present` suggests supporting stories that can be woven into presentation narratives
+The storybank powers the focused interview system:
+- `decode` cross-references story skills against Lead/Staff requisition signals.
+- `prep` maps the six pillars across the four-persona panel.
+- `practice` and `mock` pressure-test the same evidence from different decision perspectives.
+- `present` selects supporting stories for the research thesis.
+- `debrief` records which stories were used and how they landed.
 
 ---
 

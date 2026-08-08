@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "company": "Anduril Industries",
+  "team": {
+    "name": "Air Defense Team",
+    "systems": [
+      "Lattice OS",
+      "Autonomous counter-drone command-and-control systems"
+    ]
+  },
+  "hiring_manager": {
+    "name": "Dr. Daniella Kim",
+    "title": "Head of Research"
+  },
+  "upleveling_target": [
+    "Human Factors Research Lead",
+    "Staff Human Factors Engineer"
+  ],
+  "core_mission": "Build autonomous software and hardware that finds and neutralizes aerial threats in months, not years.",
+  "interview_panel": [
+    "Dr. Daniella Kim, Research Head",
+    "Systems / ML Engineering Lead",
+    "Product Manager",
+    "Design Lead"
+  ],
+  "evaluation_priorities": [
+    "Empirical rigor under operational constraints",
+    "Research velocity and decision impact",
+    "Meaningful Human Control in autonomous systems",
+    "Non-deterministic failure analysis and calibrated trust",
+    "Hardware-software Human-Systems Integration",
+    "Lead/Staff-level standard setting and cross-functional influence"
+  ],
+  "evidence_policy": {
+    "source": "Target facts supplied for this repository refactor",
+    "rule": "Treat unverified company, team, interviewer, and process details as hypotheses until confirmed by a primary source."
+  }
+}

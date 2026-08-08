@@ -51,7 +51,7 @@ Every interpretation gets a confidence label. This is non-negotiable — it's wh
 ### Priority Check
 
 - If no `kickoff`: Soft gate — "I can decode the JD's language and structure, but without your profile I can't assess fit. Run `kickoff` first for a fit assessment, or proceed with a general decode?"
-- If interview within 48 hours: Redirect to `hype`/`prep`.
+- If interview is within 48 hours: Redirect to `prep` and one highest-risk persona drill.
 - If JD Analysis already exists for this company+role: Show the existing decode and ask if the JD has changed. Don't re-decode unchanged JDs.
 
 ### Required Inputs
@@ -299,7 +299,7 @@ Based on top competencies and identified gaps:
 ## Your Market Profile
 [What these JDs collectively reveal about what the market wants from someone like the candidate. This is career intelligence, not just job-search tactics.]
 
-**Recommended next**: `research [top-ranked company]` or `prep [top-ranked company]`. **Alternatives**: `decode` with more JDs, `resume` (JD-targeted optimization for top target)
+**Recommended next**: `research [top-ranked company]` or `prep [top-ranked company]`. **Alternatives**: `decode` with updated requisition evidence, `concerns`
 ```
 
 ### Coaching State Integration

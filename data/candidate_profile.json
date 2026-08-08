@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "candidate": {
+    "name": "Dr. Brandon Fluegel",
+    "education": {
+      "degree": "Ph.D. in Human Factors Psychology",
+      "institution": "Old Dominion University"
+    },
+    "target_level": [
+      "Human Factors Research Lead",
+      "Staff Human Factors Engineer"
+    ],
+    "core_philosophy": {
+      "name": "Calibrated Cognitive Friction",
+      "definition": "Designing intentional friction in autonomous defense systems to prevent automation bias and enforce Meaningful Human Control (MHC)."
+    }
+  },
+  "experience": [
+    {
+      "organization": "Sling",
+      "role": "Staff Human Factors Engineer",
+      "evidence": [
+        "Created the Principles for Agentic Trust framework for auditing non-deterministic AI across Alignment, Execution, Control, and Calibration.",
+        "Principles for Agentic Trust was accepted at ACM CSCW 2026 Industry Perspectives."
+      ]
+    },
+    {
+      "organization": "Amazon Devices",
+      "evidence": [
+        "Led a $50M psychophysics program that replaced arbitrary engineering latency targets with human perceptual thresholds.",
+        "Named inventor on US Patent US-12532040-B1 for multimodal interaction architectures.",
+        "Applied fNIRS neuroimaging and eye-tracking to cognitive-load modeling."
+      ]
+    },
+    {
+      "organization": "NASA Langley",
+      "evidence": [
+        "Performed Human-Systems Integration validation for Lunar Gateway clinical workstations.",
+        "Applied uFMEA, NASA-STD-3001, and MIL-STD-1472 guidance."
+      ]
+    },
+    {
+      "organization": "Mercedes-Benz R&D",
+      "evidence": [
+        "Studied Level 2 and Level 3 autonomous handovers using biometric, haptic, and auditory feedback in simulator studies."
+      ]
+    }
+  ],
+  "evidence_policy": {
+    "source": "Candidate facts supplied for this repository refactor",
+    "rule": "Do not invent metrics, study outcomes, team sizes, or operational claims beyond the evidence listed here."
+  }
+}

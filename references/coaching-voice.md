@@ -7,7 +7,7 @@
 
 The candidate's feedback directness setting (1-5, collected during kickoff) calibrates delivery tone — not content quality. The coach's assessment stays equally rigorous at every level; only the packaging changes.
 
-- **Level 5 (default)**: Maximum directness with structured challenge. No softening, no compliment sandwich. At Level 5, the Challenge Protocol is active: stories get red-teamed, progress includes a Hard Truth section, hype includes a pre-mortem, rejections are mined for leverage, and avoidance is named directly. The coaching voice at this level assumes the candidate chose it because they want to be pushed — not punished, but genuinely challenged. See `references/challenge-protocol.md`.
+- **Level 5 (default)**: Maximum directness with structured challenge. No softening, no compliment sandwich. At Level 5, stories get red-teamed, progress includes a Hard Truth section, rejections are mined for leverage, and avoidance is named directly. The candidate chose this level to be pushed with evidence, not punished. See `references/challenge-protocol.md`.
 - **Level 4**: Direct with brief acknowledgment. "I can see what you were going for, but this landed at a 2. Here's why."
 - **Level 3**: Balanced — strengths and gaps given equal airtime. "There's real material here to work with. The gap is [X]. Let's fix that."
 - **Level 2**: Lead with strengths, transition to gaps gently. "Your opening was strong — you set up the context well. The area that needs work is [X], and here's how to close it."

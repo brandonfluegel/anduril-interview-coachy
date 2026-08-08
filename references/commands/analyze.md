@@ -11,21 +11,9 @@ If a candidate drops a transcript without having run `kickoff` first, don't refu
 3. **Proceed with analysis.** Use inferred or stated seniority band for calibration. Skip story-mapping sections (no storybank exists). Skip cross-referencing with prep data.
 4. **After the analysis, suggest kickoff**: "I've scored this transcript, but I'm working without your full context — no storybank, no coaching history, no target company profile. If you want to get the most from this system, run `kickoff` to set up your coaching profile. Your analysis scores will carry forward."
 
-### Comp Call Detection
+### Compensation Call Boundary
 
-Before running the standard transcript analysis below, scan for compensation-discussion markers. Comp calls are structurally different from interviews and should not be scored on the interview rubric.
-
-**Detection logic.** Count occurrences of these markers (case-insensitive): `salary`, `base`, `equity`, `bonus`, `offer`, `package`, `counter`, `negotiate`, `compensation`, `vesting`, `sign-on`, `stock`, `RSU`, `pro-rate`, `band`, `range`, `budget`.
-
-- **3+ distinct markers** → route to negotiation-specific analysis: score against the 5 Negotiation Performance Dimensions in `references/commands/negotiate.md` ("Comp Call Scoring"), not the standard interview rubric. Output the Negotiation Performance Scorecard. Write results to the `Comp Strategy` section of `coaching_state.md` (not Score History — comp calls aren't interviews).
-- **Fewer than 3 markers** → proceed with the standard Step Sequence below.
-
-**Why this matters.** In a comp call, success is the package outcome, not answer quality; the counterpart is a negotiator, not an evaluator; and silence, timing, and information control matter more than Substance/Structure. The interview rubric doesn't map to any of that — scoring a comp call on it produces meaningless results.
-
-**Edge cases.**
-- **Mixed transcript (interview + comp in one call):** score the interview portion on the standard rubric and the comp portion on negotiation dimensions; note both.
-- **Recruiter screen where salary came up briefly (1-2 markers):** score as a standard interview, but add a line: "Salary handling: [how the candidate handled the comp question]."
-- **Purely administrative post-offer call (start date, paperwork):** flag as "administrative call — no analysis applicable."
+Do not score a compensation-only or administrative call with the interview rubric. Route pre-offer salary questions to `salary`; state that post-offer negotiation is outside this focused interview system. For a mixed recruiter screen, score only the interview portion and add a brief unscored note about salary handling.
 
 ### Step Sequence
 
