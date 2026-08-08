@@ -34,6 +34,34 @@ PERSONAS = {
     "Product Manager": "Product Manager",
     "Design Lead": "Design Lead",
 }
+PERSONA_FOCUS = {
+    "Dr. Daniella Kim": "research velocity, biometric telemetry, NASA-TLX, and Calibrated Cognitive Friction",
+    "Systems / ML Engineering Lead": "non-deterministic failure modes, latency thresholds, system specifications, MIL-STD compliance, and software/hardware integration",
+    "Product Manager": "shipping speed, operational ROI, cross-functional alignment, and trade-off prioritization",
+    "Design Lead": "interaction architecture, C2 operator workflow, UI information density, and physical ergonomics",
+}
+INTERVIEW_ARC = {
+    1: (
+        "Technical & Domain Core",
+        "foundational Human Factors expertise, psychophysics, uFMEA, and evidence aligned with the candidate's whitepaper and resume",
+    ),
+    2: (
+        "Deep-Dive Pushback & Probe",
+        "direct technical pushback on the first answer that challenges assumptions and demands falsifiable metrics",
+    ),
+    3: (
+        "Behavioral & Collaboration",
+        "friction with PMs and ML/software engineers, execution under extreme startup ambiguity, and conflict resolution without compromising safety standards",
+    ),
+    4: (
+        "Leadership, Scaling & Vision",
+        "org-wide standards, scalable Human Factors frameworks, team culture, and alignment with Anduril Air Defense's fast-paced mission",
+    ),
+}
+
+
+class InterviewQuestion(BaseModel):
+    question: str
 
 
 class CoreScore(BaseModel):
@@ -70,7 +98,9 @@ class Evaluation(BaseModel):
     strongest_signal: str
     primary_gap: str
     priority_move: str
-    next_question: str
+    next_question: str | None = None
+    end_of_session_debrief: str | None = None
+    uplevel_verdict: Literal["Below Lead Bar", "Lead", "Lead/Staff Borderline", "Staff"] | None = None
     confidence: Literal["High", "Medium", "Low"]
 
 
@@ -98,7 +128,11 @@ def validate_evaluation(evaluation: Evaluation) -> None:
         raise ValueError("The model did not return all eight Lead/Staff criteria exactly once.")
 
 
-def render_scorecard(evaluation: Evaluation) -> str:
+def render_scorecard(
+    evaluation: Evaluation,
+    turn: int,
+    cumulative_scores: list[dict[str, object]],
+) -> str:
     core_rows = "\n".join(
         f"| {item.dimension} | **{item.score}/5** | {item.evidence} |"
         for item in evaluation.core_scores
@@ -109,7 +143,7 @@ def render_scorecard(evaluation: Evaluation) -> str:
         else f"| {item.criterion} | **N/E** | {item.evidence} |"
         for item in evaluation.uplevel_scores
     )
-    return f"""## Coach Scorecard
+    scorecard = f"""## Question {turn} Scorecard
 
 **Confidence:** {evaluation.confidence}
 
@@ -128,46 +162,158 @@ def render_scorecard(evaluation: Evaluation) -> str:
 **Primary gap:** {evaluation.primary_gap}
 
 **Priority move:** {evaluation.priority_move}
-
-### Next Question
-
-{evaluation.next_question}
 """
+    if turn < 4:
+        return scorecard
+
+    core_averages = {
+        dimension: sum(
+            item["score"]
+            for result in cumulative_scores
+            for item in result["core_scores"]
+            if item["dimension"] == dimension
+        )
+        / len(cumulative_scores)
+        for dimension in CORE_DIMENSIONS
+    }
+    uplevel_averages = {}
+    for criterion in LEAD_STAFF_CRITERIA:
+        ratings = [
+            item["score"]
+            for result in cumulative_scores
+            for item in result["uplevel_scores"]
+            if item["criterion"] == criterion and item["score"] is not None
+        ]
+        uplevel_averages[criterion] = sum(ratings) / len(ratings) if ratings else None
+
+    core_summary = "\n".join(
+        f"| {dimension} | **{average:.1f}/5** |" for dimension, average in core_averages.items()
+    )
+    uplevel_summary = "\n".join(
+        f"| {criterion} | **{average:.1f}/5** |" if average is not None else f"| {criterion} | **N/E** |"
+        for criterion, average in uplevel_averages.items()
+    )
+    return f"""# End of Session Debrief
+
+**Lead/Staff verdict: {evaluation.uplevel_verdict}**
+
+{evaluation.end_of_session_debrief}
+
+## Four-Turn Averages
+
+| Core dimension | Average |
+|---|---:|
+{core_summary}
+
+| Lead/Staff criterion | Average |
+|---|---:|
+{uplevel_summary}
+
+---
+
+{scorecard}
+"""
+
+
+def turn_indicator(turn: int) -> str:
+    title, _ = INTERVIEW_ARC[turn]
+    return f"**Question {turn} of 4: {title}**"
+
+
+def require_api_key() -> str:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise gr.Error("OPENAI_API_KEY is not set. In PowerShell, run: $env:OPENAI_API_KEY='your-key'")
+    return api_key
+
+
+def generate_question(
+    persona_label: str,
+    turn: int,
+    history: list[dict[str, str]],
+) -> str:
+    persona = PERSONAS[persona_label]
+    title, objective = INTERVIEW_ARC[turn]
+    prior_context = history[-8:] if history else "No prior turns; open the interview without preamble."
+    prompt = f"""Generate Question {turn} of a mandatory four-question interview as {persona}.
+
+Arc stage: {title}
+Stage objective: {objective}
+Persona lens: {PERSONA_FOCUS[persona]}
+Prior conversation: {prior_context}
+
+Ask exactly one concise, voice-friendly question in character. Make it answerable aloud. For Turn 2, directly challenge a specific assumption or missing falsifiable metric from Turn 1. Do not provide coaching, an answer, or a question number. Do not invent candidate evidence or classified Anduril details.
+"""
+    response = OpenAI(api_key=require_api_key()).responses.parse(
+        model=MODEL,
+        instructions=load_system_context(),
+        input=prompt,
+        text_format=InterviewQuestion,
+        temperature=0.3,
+        max_output_tokens=350,
+    )
+    result = response.output_parsed
+    if result is None:
+        raise gr.Error("The model returned no interview question. Please try again.")
+    return result.question.strip()
+
+
+def start_interview(
+    persona_label: str,
+) -> tuple[str, str, str, int, list[dict[str, str]], list[dict[str, object]], str]:
+    question = generate_question(persona_label, 1, [])
+    history = [{"role": "assistant", "content": question}]
+    return turn_indicator(1), f"## {PERSONAS[persona_label]}\n\n{question}", "Scorecards will appear after each answer.", 1, history, [], ""
 
 
 def evaluate_answer(
     answer: str,
     persona_label: str,
+    turn: int,
     history: list[dict[str, str]] | None,
-) -> tuple[str, str, list[dict[str, str]], str]:
+    cumulative_scores: list[dict[str, object]] | None,
+) -> tuple[str, str, str, int, list[dict[str, str]], list[dict[str, object]], str]:
     answer = answer.strip()
     if not answer:
         raise gr.Error("Dictate or paste an answer first.")
 
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise gr.Error("OPENAI_API_KEY is not set. In PowerShell, run: $env:OPENAI_API_KEY='your-key'")
+    if turn not in INTERVIEW_ARC:
+        raise gr.Error("Start a new four-question interview before submitting an answer.")
 
     persona = PERSONAS[persona_label]
     prior_turns = history or []
-    compact_history = prior_turns[-6:]
-    prompt = f"""Act as {persona} for the immediate pushback, then switch to the independent coach scorecard.
+    prior_scores = cumulative_scores or []
+    title, objective = INTERVIEW_ARC[turn]
+    next_stage = INTERVIEW_ARC.get(turn + 1)
+    next_instruction = (
+        f"Generate next_question for Question {turn + 1}, '{next_stage[0]}': {next_stage[1]}."
+        if next_stage
+        else "Set next_question to null. Produce a comprehensive end_of_session_debrief and a clear uplevel_verdict using all four answers and prior scorecards."
+    )
+    prompt = f"""Act as {persona} for the immediate response, then switch to the independent coach scorecard.
 
-Evaluate the candidate answer below. Apply the five core dimensions and every Lead/Staff criterion. Use null for a Lead/Staff score when the answer does not provide evidence for that criterion; missing evidence is not automatically poor performance.
+This is Question {turn} of 4: {title}.
+Arc objective: {objective}
+Persona lens: {PERSONA_FOCUS[persona]}
 
-The pushback must be in character, voice-friendly, and no more than two short sentences. It must challenge the answer's highest-leverage weakness, not summarize it. The detailed evidence belongs in the scorecard.
+Evaluate the candidate answer below. Apply all five core dimensions and every Lead/Staff criterion. Use null for a Lead/Staff score when this answer does not provide evidence for that criterion; missing evidence is not automatically poor performance.
 
-Do not invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions. Treat the supplied system context as the evidence boundary. End with exactly one incisive next question from the selected persona.
+The interviewer_pushback must be in character, voice-friendly, and no more than two short sentences. It should acknowledge the answer only as needed and identify its highest-leverage weakness. The detailed evidence belongs in the scorecard.
 
-Recent practice context:
-{compact_history}
+{next_instruction}
+The next question must be exactly one concise, voice-friendly question in character. For Question 2, directly challenge a specific assumption or request a falsifiable metric from the first answer. Do not invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions.
+
+Conversation so far:
+{prior_turns[-8:]}
+
+Prior structured scorecards:
+{prior_scores}
 
 Candidate answer:
 {answer}
 """
 
-    client = OpenAI(api_key=api_key)
-    response = client.responses.parse(
+    response = OpenAI(api_key=require_api_key()).responses.parse(
         model=MODEL,
         instructions=load_system_context(),
         input=prompt,
@@ -180,20 +326,43 @@ Candidate answer:
         raise gr.Error("The model returned no structured evaluation. Please try again.")
 
     validate_evaluation(evaluation)
-    pushback = f"## {persona}\n\n{evaluation.interviewer_pushback}"
-    scorecard = render_scorecard(evaluation)
+    if turn < 4 and not evaluation.next_question:
+        raise gr.Error("The model did not return the next interview question. Please try again.")
+    if turn == 4 and (not evaluation.end_of_session_debrief or not evaluation.uplevel_verdict):
+        raise gr.Error("The model did not return the final debrief and verdict. Please try again.")
+
+    updated_scores = [*prior_scores, evaluation.model_dump()]
     updated_history = [
-        *compact_history,
+        *prior_turns,
         {"role": "user", "content": answer},
         {"role": "assistant", "content": evaluation.interviewer_pushback},
     ]
-    return pushback, scorecard, updated_history, ""
+    scorecard = render_scorecard(evaluation, turn, updated_scores)
+    if turn == 4:
+        return (
+            "**Interview Complete: End of Session Debrief**",
+            f"## {persona}\n\n{evaluation.interviewer_pushback}\n\nThe four-question interview is complete.",
+            scorecard,
+            0,
+            updated_history,
+            updated_scores,
+            "",
+        )
+
+    next_turn = turn + 1
+    next_question = evaluation.next_question or ""
+    updated_history.append({"role": "assistant", "content": next_question})
+    interviewer_output = f"## {persona}\n\n{evaluation.interviewer_pushback}\n\n### Your Next Question\n\n{next_question}"
+    return turn_indicator(next_turn), interviewer_output, scorecard, next_turn, updated_history, updated_scores, ""
 
 
-def clear_session() -> tuple[str, str, list[dict[str, str]], str]:
+def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], list[dict[str, object]], str]:
     return (
-        "Select an interviewer, then dictate an answer through Superwhisper.",
-        "Your scored evidence will appear here.",
+        "**No interview in progress**",
+        "Select an interviewer and start a new four-question interview.",
+        "Scorecards will appear after each answer.",
+        0,
+        [],
         [],
         "",
     )
@@ -256,6 +425,7 @@ body.dark {
 #shell label:has(input[type='radio']) { background: #fffdf7 !important; color: var(--ink) !important; border-color: var(--line) !important; }
 #shell label.selected:has(input[type='radio']) { background: #ebe7dd !important; border-color: var(--signal) !important; }
 #answer textarea { min-height: 190px; font-size: 1.05rem; line-height: 1.55; }
+#turn-indicator { border-left: 5px solid var(--steel); background: #ebe7dd; padding: 7px 14px; }
 #pushback { border-left: 5px solid var(--signal); background: #fffdf7; padding: 8px 16px; min-height: 126px; }
 #scorecard { border-top: 3px solid var(--steel); background: rgba(255, 253, 247, 0.86); padding: 10px 16px; min-height: 360px; }
 #pushback *, #scorecard * { color: var(--ink) !important; }
@@ -271,7 +441,9 @@ footer { display: none !important; }
 
 
 with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
-    history_state = gr.State([])
+    turn_state = gr.State(0)
+    conversation_history = gr.State([])
+    cumulative_scores = gr.State([])
     with gr.Column(elem_id="shell"):
         gr.HTML(
             """
@@ -286,6 +458,13 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
             value="Dr. Daniella Kim — Research Head",
             label="Interviewer",
         )
+        start_button = gr.Button("Start New 4-Question Interview")
+        indicator = gr.Markdown("**No interview in progress**", elem_id="turn-indicator")
+        interviewer = gr.Markdown(
+            "Select an interviewer and start a new four-question interview.",
+            elem_id="pushback",
+        )
+        listen_button = gr.Button("Listen to Interviewer")
         answer = gr.Textbox(
             label="Candidate answer",
             placeholder="Place the cursor here, dictate with Superwhisper, then submit.",
@@ -295,19 +474,23 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
             elem_id="answer",
         )
         with gr.Row():
-            evaluate_button = gr.Button("Evaluate Answer", variant="primary", elem_id="evaluate")
+            evaluate_button = gr.Button("Submit Answer", variant="primary", elem_id="evaluate")
             clear_button = gr.Button("Clear Session")
-        pushback = gr.Markdown(
-            "Select an interviewer, then dictate an answer through Superwhisper.",
-            elem_id="pushback",
-        )
-        scorecard = gr.Markdown("Your scored evidence will appear here.", elem_id="scorecard")
+        scorecard = gr.Markdown("Scorecards will appear after each answer.", elem_id="scorecard")
 
-    submit_inputs = [answer, persona, history_state]
-    submit_outputs = [pushback, scorecard, history_state, answer]
+    session_outputs = [indicator, interviewer, scorecard, turn_state, conversation_history, cumulative_scores, answer]
+    start_button.click(start_interview, inputs=[persona], outputs=session_outputs)
+    listen_button.click(
+        fn=None,
+        inputs=[interviewer],
+        js="(text) => { window.speechSynthesis.cancel(); const voice = new SpeechSynthesisUtterance(text.replaceAll('#', '').replaceAll('*', '')); voice.rate = 0.96; window.speechSynthesis.speak(voice); }",
+        queue=False,
+    )
+    submit_inputs = [answer, persona, turn_state, conversation_history, cumulative_scores]
+    submit_outputs = session_outputs
     evaluate_button.click(evaluate_answer, submit_inputs, submit_outputs)
     answer.submit(evaluate_answer, submit_inputs, submit_outputs)
-    clear_button.click(clear_session, outputs=submit_outputs)
+    clear_button.click(clear_session, outputs=session_outputs)
 
 
 if __name__ == "__main__":
