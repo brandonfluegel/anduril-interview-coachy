@@ -1,7 +1,8 @@
-"""Live end-to-end 4-turn integration test against the real OpenAI API.
+"""Live end-to-end multi-turn integration test against the real OpenAI API.
 
-Backs up data/coaching_state.md, runs a full interview, validates scorecards,
-persistence, and the dashboard, then restores the file byte-for-byte.
+Backs up data/coaching_state.md, runs a continuous interview past the legacy four-turn
+cutoff, finalizes it holistically, validates the scorecard, persistence, and the
+dashboard, then restores the file byte-for-byte.
 """
 
 from __future__ import annotations
@@ -54,6 +55,11 @@ ANSWERS = [
     clears a performance budget. Stand up a research repository and a rapid ethnography cadence so an engineer
     can answer an operator question in a day without waiting on me. And instrument the counter-drone
     engagement workflow so we can detect automation bias in the field rather than inferring it in a lab.""",
+    # Turn 5 — proves the conversation continues past the legacy four-turn cutoff
+    """On adoption, I would not measure the framework by whether people say they like it. I would measure
+    whether a release actually gets blocked when it misses a trust calibration criterion, and whether the
+    time from an operator question to an instrumented answer drops. If neither number moves in a quarter,
+    the standard is decoration and I would rewrite it.""",
 ]
 
 
@@ -83,7 +89,7 @@ def main() -> int:
     new_timestamp: str | None = None
 
     try:
-        indicator, interviewer, _, turn, history, scores, answer_box = app.start_interview(PERSONA_LABEL)
+        indicator, interviewer, _, turn, history, answer_box = app.start_interview(PERSONA_LABEL)
         question = strip_spoken(interviewer)
         print(f"[Q1] {question}")
         print(f"     words={words(question)} turn_state={turn} answer_box_cleared={answer_box == ''}\n")
@@ -91,61 +97,60 @@ def main() -> int:
             failures.append(f"Q1 spoken length {words(question)} exceeds the 45-word voice budget")
 
         for index, candidate_answer in enumerate(ANSWERS, start=1):
-            indicator, interviewer, scorecard, turn, history, scores, answer_box = app.evaluate_answer(
-                candidate_answer, PERSONA_LABEL, index, history, scores
+            indicator, interviewer, scorecard, turn, history, answer_box = app.continue_conversation(
+                candidate_answer, PERSONA_LABEL, index, history
             )
-            evaluation = scores[-1]
             spoken = strip_spoken(interviewer)
 
-            core = {item["dimension"]: item["score"] for item in evaluation["core_scores"]}
-            tone = evaluation["tone_and_authority"]
-            evidenced = sum(1 for item in evaluation["uplevel_scores"] if item["score"] is not None)
+            print(f"--- TURN {index} ---")
+            print(f"  interviewer ({words(spoken)}w): {spoken}")
+            print(f"  turn_state: {turn} | answer box cleared: {answer_box == ''}")
+            print(f"  indicator: {indicator}")
 
-            print(f"--- TURN {index} EVALUATED ---")
-            print(f"  core: {core}")
-            print(f"  tone_and_authority: {tone['score']}/5 — {tone['voice_register']}")
-            print(f"  demonstrated_level: {evaluation['demonstrated_level']}")
-            print(f"  uplevel criteria evidenced: {evidenced}/8   confidence: {evaluation['confidence']}")
-            print(f"  pushback ({words(evaluation['interviewer_pushback'])}w): {evaluation['interviewer_pushback']}")
-            if evaluation["next_question"]:
-                print(f"  next Q ({words(evaluation['next_question'])}w): {evaluation['next_question']}")
-            print(f"  spoken block: {words(spoken)}w | answer box cleared: {answer_box == ''}")
-            print(f"  scorecard has Tone & Authority section: {'### Tone & Authority' in scorecard}")
-
-            if set(core) != set(app.CORE_DIMENSIONS):
-                failures.append(f"Turn {index} missing core dimensions")
-            if not tone.get("voice_register") or not tone.get("evidence"):
-                failures.append(f"Turn {index} Tone & Authority incomplete")
-            if "### Tone & Authority" not in scorecard:
-                failures.append(f"Turn {index} scorecard omitted Tone & Authority")
-            if words(spoken) > 45:
-                failures.append(f"Turn {index} spoken block {words(spoken)}w exceeds the 45-word voice budget")
+            if turn != index + 1:
+                failures.append(f"Turn {index} advanced to turn {turn}, expected {index + 1}")
             if answer_box != "":
                 failures.append(f"Turn {index} did not auto-clear the dictation box")
-
-            if index < 4:
-                if not evaluation["next_question"]:
-                    failures.append(f"Turn {index} returned no next question")
-                if turn != index + 1:
-                    failures.append(f"Turn {index} advanced to turn {turn}, expected {index + 1}")
-            else:
-                print(f"  verdict: {evaluation['uplevel_verdict']}")
-                print(f"  debrief: {(evaluation['end_of_session_debrief'] or '')[:220]}…")
-                if "End of Session Debrief" not in scorecard:
-                    failures.append("Turn 4 scorecard is missing the end-of-session debrief")
-                if not evaluation["uplevel_verdict"]:
-                    failures.append("Turn 4 returned no uplevel verdict")
+            if words(spoken) > 55:
+                failures.append(f"Turn {index} spoken block {words(spoken)}w exceeds the voice budget")
+            if scorecard != app.SCORECARD_PLACEHOLDER:
+                failures.append(f"Turn {index} leaked a scorecard into the live conversation")
+            for leaked in ("/5", "Substance", "Credibility", "Differentiation", "Lead/Staff"):
+                if leaked in interviewer:
+                    failures.append(f"Turn {index} interviewer output leaked grading text '{leaked}'")
+            if app.completed_turns(history) != index:
+                failures.append(f"Turn {index} transcript recorded {app.completed_turns(history)} answers")
             print()
+
+        print("--- FINALIZATION ---")
+        indicator, interviewer, scorecard, turn, history, answer_box = app.finalize_session(
+            PERSONA_LABEL, turn, history
+        )
+        print(f"  indicator: {indicator}")
+        print(f"  turn_state reset: {turn == 0}")
+        print(f"  scorecard has holistic debrief: {'End of Session Debrief' in scorecard}")
+        print(f"  scorecard has Tone & Authority: {'### Tone & Authority' in scorecard}")
+        print(f"  scorecard reports turn count: {f'**Turns completed:** {len(ANSWERS)}' in scorecard}")
+        if "End of Session Debrief" not in scorecard:
+            failures.append("Finalization did not render the end-of-session debrief")
+        if "### Tone & Authority" not in scorecard:
+            failures.append("Finalization omitted Tone & Authority")
+        if f"**Turns completed:** {len(ANSWERS)}" not in scorecard:
+            failures.append("Finalization did not report the completed turn count")
+        if turn != 0:
+            failures.append("Finalization did not reset the turn state")
+        print()
 
         print("--- PERSISTENCE & DASHBOARD ---")
         records = app.load_session_records()
         print(f"  session records: {sessions_before} -> {len(records)}")
         if len(records) != sessions_before + 1:
-            failures.append("Turn 4 did not append exactly one session record")
+            failures.append("Finalization did not append exactly one session record")
         else:
             record = records[-1]
             new_timestamp = record.timestamp
             print(f"  persona: {record.persona}")
+            print(f"  turns completed: {record.turns_completed}")
             print(f"  core averages: {record.core_averages}")
             print(f"  uplevel: {record.uplevel_rating} | readiness: {record.readiness_rating}")
             print(f"  bottleneck: {record.primary_bottleneck}")
@@ -153,6 +158,8 @@ def main() -> int:
                 failures.append("Persisted record has an incomplete core-average set")
             if record.persona != "Dr. Daniella Kim":
                 failures.append("Persisted record has the wrong persona")
+            if record.turns_completed != len(ANSWERS):
+                failures.append("Persisted record has the wrong turn count")
 
         summary_after, history_after = app.load_progress_dashboard()
         print(f"  dashboard rows: {len(history_before)} -> {len(history_after)}")

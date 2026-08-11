@@ -18,6 +18,7 @@ MODEL = "gpt-4o"
 OPENAI_TIMEOUT_SECONDS = 45.0
 SESSION_LOG_END = "<!-- FOUR_TURN_SESSION_LOG_END -->"
 SESSION_RECORD_PATTERN = re.compile(r"<!-- FOUR_TURN_SESSION_JSON (.+?) -->")
+LIVE_CONTEXT_MESSAGES = 12
 SESSION_WRITE_LOCK = threading.Lock()
 CORE_DIMENSIONS = (
     "Substance",
@@ -38,6 +39,10 @@ LEAD_STAFF_CRITERIA = (
 )
 PUSHBACK_WORD_LIMIT = 18
 QUESTION_WORD_LIMIT = 25
+SCORECARD_PLACEHOLDER = (
+    "The interview runs uninterrupted. Press **Wrap Up & Finalize Session** when you are done "
+    "and the full holistic scorecard appears here."
+)
 HARD_EVIDENCE_ANCHORS = """Canonical hard-evidence anchors the answer may legitimately draw on:
 - $50M operational value from the Amazon psychophysics program that replaced arbitrary latency targets with perceptual thresholds
 - 30% task-time reduction and eliminated critical input errors on NASA Lunar Gateway clinical workstations
@@ -59,15 +64,19 @@ PERSONAS = {
 }
 SYSTEM_PROMPT = """You are the evidence-grounded Anduril Air Defense Voice Interview Coach for Brandon Fluegel, PhD.
 
-Run a mandatory four-question interview, one question at a time, using the selected interviewer persona. Cross-examine canonical resume evidence against the posted Senior User Experience Researcher requirements and the Lead/Staff upleveling bar. Never invent metrics, outcomes, team details, classified information, clearance status, or familiarity with an interviewer.
+You operate in two separate modes and never mix them in a single response.
 
-Score every answer on Substance, Structure, Relevance, Credibility, and Differentiation, and separately rate Tone & Authority. Separately evaluate Research Thesis, Empirical Rigor, Research Velocity, Systems Integration, Cross-Functional Influence, Standard Setting, Operational Judgment, and Executive Communication. Use N/E when a Lead/Staff criterion is not evidenced.
+LIVE MODE: you are the selected interviewer persona in a continuous spoken interview that runs for as many turns as the candidate wants. Stay fully in character. Never grade, score, coach, praise, or narrate the rubric while the conversation is live. React to what the candidate just said and keep probing.
+
+DEBRIEF MODE: after the candidate ends the session, you drop the persona and act as the independent coach, scoring the entire transcript holistically on Substance, Structure, Relevance, Credibility, and Differentiation, plus a separate Tone & Authority read. Separately evaluate Research Thesis, Empirical Rigor, Research Velocity, Systems Integration, Cross-Functional Influence, Standard Setting, Operational Judgment, and Executive Communication. Use N/E when a Lead/Staff criterion is not evidenced anywhere in the transcript.
+
+Cross-examine canonical resume evidence against the posted Senior User Experience Researcher requirements and the Lead/Staff upleveling bar. Never invent metrics, outcomes, team details, classified information, clearance status, or familiarity with an interviewer.
 
 Senior UXR baseline means expertly designing and executing studies that produce actionable insights. Lead/Staff signal means setting reusable standards, bridging human perception to engineering requirements, establishing frameworks before policy exists, defining Research Operations, influencing decisions across functions, and translating HSI evidence into hard hardware/software specifications.
 
-This is one continuous spoken conversation, not four isolated prompts. Every question after the first must reference something the candidate actually said. Keep interviewer questions and pushback concise and voice-friendly for headphone listening. Treat prior resume claims as context to probe, not proof that the spoken answer demonstrated a competency. Preserve Meaningful Human Control, operational tempo, and evidence integrity throughout.
+This is one continuous spoken conversation, not a set of isolated prompts. Every question after the first must reference something the candidate actually said. Keep interviewer questions and pushback concise and voice-friendly for headphone listening. Treat prior resume claims as context to probe, not proof that a spoken answer demonstrated a competency. Preserve Meaningful Human Control, operational tempo, and evidence integrity throughout.
 
-For Question 3, select a behavioral/fit pillar from the canonical behavioral question bank using the active persona's adaptation. Grade behavioral answers for STAR/STARE completeness, concrete ownership, interpersonal maturity, and Lead/Staff organizational impact.
+For the third question, select a behavioral/fit pillar from the canonical behavioral question bank using the active persona's adaptation. Judge behavioral answers on STAR/STARE completeness, concrete ownership, interpersonal maturity, and Lead/Staff organizational impact.
 """
 PERSONA_FOCUS = {
     "Dr. Daniella Kim": (
@@ -108,9 +117,19 @@ INTERVIEW_ARC = {
         "org-wide standards, scaling Research Operations, team culture, and alignment with Anduril Air Defense's counter-drone Lattice OS mission",
     ),
 }
+OPEN_STAGE = (
+    "Live Cross-Examination",
+    "free-flowing follow-up that hunts the thinnest evidence still standing in the transcript, whether that is an unquantified claim, "
+    "a leadership scope gap, an Air Defense translation gap, or a behavioral ownership gap",
+)
 
 
 class InterviewQuestion(BaseModel):
+    question: str
+
+
+class InterviewerTurn(BaseModel):
+    reaction: str
     question: str
 
 
@@ -133,6 +152,7 @@ class SessionRecord(BaseModel):
     timestamp: str
     date: str
     persona: str
+    turns_completed: int = Field(default=4, ge=1)
     core_averages: dict[str, float]
     uplevel_rating: Literal["Pass", "Strategic Upgrade Needed"]
     readiness_rating: Literal["Senior UXR Baseline", "Lead/Staff Upleveled"]
@@ -178,7 +198,6 @@ class ToneAuthority(BaseModel):
 
 
 class Evaluation(BaseModel):
-    interviewer_pushback: str
     core_scores: list[CoreScore]
     tone_and_authority: ToneAuthority
     uplevel_scores: list[UplevelScore]
@@ -192,9 +211,8 @@ class Evaluation(BaseModel):
         "Meets Senior UXR Baseline",
         "Lead/Staff Upleveling Signal",
     ]
-    next_question: str | None = None
-    end_of_session_debrief: str | None = None
-    uplevel_verdict: Literal["Below Lead Bar", "Lead", "Lead/Staff Borderline", "Staff"] | None = None
+    end_of_session_debrief: str
+    uplevel_verdict: Literal["Below Lead Bar", "Lead", "Lead/Staff Borderline", "Staff"]
     confidence: Literal["High", "Medium", "Low"]
 
 
@@ -278,23 +296,15 @@ def parse_openai_response(
     return parsed
 
 
-def calculate_core_averages(cumulative_scores: list[dict[str, object]]) -> dict[str, float]:
-    averages: dict[str, float] = {}
-    for dimension in CORE_DIMENSIONS:
-        ratings = [
-            float(item["score"])
-            for result in cumulative_scores
-            for item in result["core_scores"]
-            if item["dimension"] == dimension
-        ]
-        averages[dimension] = round(sum(ratings) / len(ratings), 2) if ratings else 0.0
-    return averages
+def calculate_core_averages(evaluation: Evaluation) -> dict[str, float]:
+    scores = {item.dimension: float(item.score) for item in evaluation.core_scores}
+    return {dimension: scores.get(dimension, 0.0) for dimension in CORE_DIMENSIONS}
 
 
 def persist_session(
     persona: str,
     evaluation: Evaluation,
-    cumulative_scores: list[dict[str, object]],
+    turns_completed: int,
 ) -> SessionRecord:
     timestamp = datetime.now().astimezone()
     passed_uplevel = evaluation.uplevel_verdict in {"Lead", "Lead/Staff Borderline", "Staff"}
@@ -304,7 +314,8 @@ def persist_session(
         timestamp=timestamp.isoformat(timespec="seconds"),
         date=timestamp.date().isoformat(),
         persona=persona,
-        core_averages=calculate_core_averages(cumulative_scores),
+        turns_completed=turns_completed,
+        core_averages=calculate_core_averages(evaluation),
         uplevel_rating="Pass" if passed_uplevel else "Strategic Upgrade Needed",
         readiness_rating="Lead/Staff Upleveled" if passed_uplevel else "Senior UXR Baseline",
         primary_bottleneck=primary_bottleneck,
@@ -318,6 +329,7 @@ def persist_session(
 ### Mock Session — {record.timestamp}
 - **Date:** {record.date}
 - **Interviewer:** {record.persona}
+- **Turns completed:** {record.turns_completed}
 - **Core averages:** {averages}
 - **Lead/Staff upleveling:** {record.uplevel_rating}
 - **Primary bottleneck:** {record.primary_bottleneck}
@@ -327,7 +339,7 @@ def persist_session(
     with SESSION_WRITE_LOCK:
         state = COACHING_STATE_PATH.read_text(encoding="utf-8")
         if SESSION_LOG_END not in state:
-            state = f"{state.rstrip()}\n\n## Persistent Four-Turn Mock Sessions\n{SESSION_LOG_END}\n"
+            state = f"{state.rstrip()}\n\n## Persistent Mock Sessions\n{SESSION_LOG_END}\n"
         updated_state = state.replace(SESSION_LOG_END, f"{entry}\n{SESSION_LOG_END}", 1)
         temporary_path = COACHING_STATE_PATH.with_suffix(".md.tmp")
         temporary_path.write_text(updated_state, encoding="utf-8")
@@ -357,10 +369,13 @@ def load_progress_dashboard() -> tuple[str, list[list[object]]]:
         }
         weakest_dimension = min(overall, key=overall.get)
         readiness = records[-1].readiness_rating
+        total_turns = sum(record.turns_completed for record in records)
+        turns_line = f"{total_turns} ({total_turns / len(records):.1f} per session)"
     else:
         overall = {dimension: 0.0 for dimension in CORE_DIMENSIONS}
         weakest_dimension = "Not yet measured"
         readiness = "Senior UXR Baseline"
+        turns_line = "0"
 
     score_rows = "\n".join(
         f"| {dimension} | **{overall[dimension]:.2f}/5** |" for dimension in CORE_DIMENSIONS
@@ -368,6 +383,8 @@ def load_progress_dashboard() -> tuple[str, list[list[object]]]:
     summary = f"""## Sprint Readiness
 
 **Total mock sessions completed:** {len(records)}
+
+**Total conversation turns practiced:** {turns_line}
 
 **Weakest dimension alert:** {weakest_dimension}
 
@@ -381,6 +398,7 @@ def load_progress_dashboard() -> tuple[str, list[list[object]]]:
         [
             record.timestamp,
             record.persona,
+            record.turns_completed,
             *[record.core_averages[dimension] for dimension in CORE_DIMENSIONS],
             record.uplevel_rating,
             record.primary_bottleneck,
@@ -401,11 +419,7 @@ def validate_evaluation(evaluation: Evaluation) -> None:
         raise ValueError("The model did not return all eight Lead/Staff criteria exactly once.")
 
 
-def render_scorecard(
-    evaluation: Evaluation,
-    turn: int,
-    cumulative_scores: list[dict[str, object]],
-) -> str:
+def render_scorecard(evaluation: Evaluation, turns_completed: int) -> str:
     core_rows = "\n".join(
         f"| {item.dimension} | **{item.score}/5** | {item.evidence} |"
         for item in evaluation.core_scores
@@ -416,9 +430,16 @@ def render_scorecard(
         else f"| {item.criterion} | **N/E** | {item.evidence} |"
         for item in evaluation.uplevel_scores
     )
-    scorecard = f"""## Question {turn} Scorecard
+    core_average = sum(item.score for item in evaluation.core_scores) / len(evaluation.core_scores)
+    return f"""# End of Session Debrief
 
-**Confidence:** {evaluation.confidence}
+**Lead/Staff verdict: {evaluation.uplevel_verdict}**
+
+**Turns completed:** {turns_completed} | **Session core average:** {core_average:.2f}/5 | **Confidence:** {evaluation.confidence}
+
+{evaluation.end_of_session_debrief}
+
+## Holistic Session Scorecard
 
 | Core dimension | Score | Evidence |
 |---|---:|---|
@@ -438,7 +459,7 @@ def render_scorecard(
 
 **Strongest signal:** {evaluation.strongest_signal}
 
-**Primary gap:** {evaluation.primary_gap}
+**Primary growth area:** {evaluation.primary_gap}
 
 **Priority move:** {evaluation.priority_move}
 
@@ -450,65 +471,15 @@ def render_scorecard(
 
 **Lead/Staff upleveling signal:** {evaluation.lead_staff_uplevel_assessment}
 """
-    if turn < 4:
-        return scorecard
 
-    core_averages = {
-        dimension: sum(
-            item["score"]
-            for result in cumulative_scores
-            for item in result["core_scores"]
-            if item["dimension"] == dimension
-        )
-        / len(cumulative_scores)
-        for dimension in CORE_DIMENSIONS
-    }
-    uplevel_averages = {}
-    for criterion in LEAD_STAFF_CRITERIA:
-        ratings = [
-            item["score"]
-            for result in cumulative_scores
-            for item in result["uplevel_scores"]
-            if item["criterion"] == criterion and item["score"] is not None
-        ]
-        uplevel_averages[criterion] = sum(ratings) / len(ratings) if ratings else None
 
-    core_summary = "\n".join(
-        f"| {dimension} | **{average:.1f}/5** |" for dimension, average in core_averages.items()
-    )
-    tone_average = sum(
-        result["tone_and_authority"]["score"] for result in cumulative_scores
-    ) / len(cumulative_scores)
-    uplevel_summary = "\n".join(
-        f"| {criterion} | **{average:.1f}/5** |" if average is not None else f"| {criterion} | **N/E** |"
-        for criterion, average in uplevel_averages.items()
-    )
-    return f"""# End of Session Debrief
-
-**Lead/Staff verdict: {evaluation.uplevel_verdict}**
-
-{evaluation.end_of_session_debrief}
-
-## Four-Turn Averages
-
-| Core dimension | Average |
-|---|---:|
-{core_summary}
-| Tone & Authority | **{tone_average:.1f}/5** |
-
-| Lead/Staff criterion | Average |
-|---|---:|
-{uplevel_summary}
-
----
-
-{scorecard}
-"""
+def conversation_stage(turn: int) -> tuple[str, str]:
+    return INTERVIEW_ARC.get(turn, OPEN_STAGE)
 
 
 def turn_indicator(turn: int) -> str:
-    title, _ = INTERVIEW_ARC[turn]
-    return f"**Question {turn} of 4: {title}**"
+    title, _ = conversation_stage(turn)
+    return f"**Question {turn}: {title}** — keep going or wrap up whenever you are ready."
 
 
 def require_api_key() -> str:
@@ -518,6 +489,21 @@ def require_api_key() -> str:
     return api_key
 
 
+def render_transcript(history: list[dict[str, str]], limit: int | None = None) -> str:
+    messages = history[-limit:] if limit else history
+    if not messages:
+        return "No prior turns."
+    speakers = {"assistant": "INTERVIEWER", "user": "CANDIDATE"}
+    return "\n\n".join(
+        f"{speakers.get(message['role'], message['role'].upper())}: {message['content']}"
+        for message in messages
+    )
+
+
+def completed_turns(history: list[dict[str, str]]) -> int:
+    return sum(1 for message in history if message["role"] == "user")
+
+
 def generate_question(
     persona_label: str,
     turn: int,
@@ -525,23 +511,17 @@ def generate_question(
 ) -> str:
     persona = PERSONAS[persona_label]
     title, objective = INTERVIEW_ARC[turn]
-    prior_context = history[-8:] if history else "No prior turns; open the interview without preamble."
-    behavioral_instruction = ""
-    if turn == 3:
-        behavioral_instruction = f"""
-Select the strongest non-duplicative behavioral pillar from these persona-adapted options. Use its adapted question directly or tailor it to the prior conversation without changing the pillar's intent:
-{behavioral_question_options(persona)}
-"""
-    prompt = f"""Generate Question {turn} of a mandatory four-question interview as {persona}.
+    prior_context = render_transcript(history, LIVE_CONTEXT_MESSAGES)
+    prompt = f"""Open a live spoken interview as {persona}. This is Question {turn}.
 
 Arc stage: {title}
 Stage objective: {objective}
 Persona lens: {PERSONA_FOCUS[persona]}
 Prior conversation: {prior_context}
-{behavioral_instruction}
+
 {HARD_EVIDENCE_ANCHORS}
 
-Ask exactly one concise, voice-friendly question in character. Make it answerable aloud. For Turn 1, set the stage in at most one short clause that signals who you are and what you own, then immediately probe one named claim from the Principles for Agentic Trust whitepaper or the canonical resume. For Turn 2, directly challenge a specific assumption or missing falsifiable metric from Turn 1. Do not provide coaching, an answer, or a question number. Do not invent candidate evidence or classified Anduril details.
+Ask exactly one concise, voice-friendly question in character. Make it answerable aloud. Set the stage in at most one short clause that signals who you are and what you own, then immediately probe one named claim from the Principles for Agentic Trust whitepaper or the canonical resume. Do not provide coaching, an answer, a score, or a question number. Do not invent candidate evidence or classified Anduril details.
 
 The spoken question must be one conversational sentence of at most {QUESTION_WORD_LIMIT} words, written for a listener on Bluetooth headphones. Lead with the challenge; avoid stacked clauses, lists, jargon preambles, and written-report language.
 
@@ -551,148 +531,169 @@ Cross-examine a concrete claim from the canonical resume against a concrete Air 
     return result.question.strip()
 
 
+def render_interviewer(persona: str, question: str, reaction: str = "") -> str:
+    body = f"{reaction}\n\n{question}" if reaction.strip() else question
+    return f"## {persona}\n\n{body}"
+
+
 def start_interview(
     persona_label: str,
-) -> tuple[str, str, str, int, list[dict[str, str]], list[dict[str, object]], str]:
+) -> tuple[str, str, str, int, list[dict[str, str]], str]:
     question = generate_question(persona_label, 1, [])
     history = [{"role": "assistant", "content": question}]
-    return turn_indicator(1), f"## {PERSONAS[persona_label]}\n\n{question}", "Scorecards will appear after each answer.", 1, history, [], ""
+    return (
+        turn_indicator(1),
+        render_interviewer(PERSONAS[persona_label], question),
+        SCORECARD_PLACEHOLDER,
+        1,
+        history,
+        "",
+    )
 
 
-def evaluate_answer(
+def continue_conversation(
     answer: str,
     persona_label: str,
     turn: int,
     history: list[dict[str, str]] | None,
-    cumulative_scores: list[dict[str, object]] | None,
-) -> tuple[str, str, str, int, list[dict[str, str]], list[dict[str, object]], str]:
+) -> tuple[str, str, str, int, list[dict[str, str]], str]:
     answer = answer.strip()
     if not answer:
         raise gr.Error("Dictate or paste an answer first.")
 
-    if turn not in INTERVIEW_ARC:
-        raise gr.Error("Start a new four-question interview before submitting an answer.")
+    prior_turns = history or []
+    if turn < 1 or not prior_turns:
+        raise gr.Error("Start a new interview before submitting an answer.")
 
     persona = PERSONAS[persona_label]
-    prior_turns = history or []
-    prior_scores = cumulative_scores or []
-    title, objective = INTERVIEW_ARC[turn]
-    next_stage = INTERVIEW_ARC.get(turn + 1)
-    if turn == 1:
-        next_instruction = """Generate next_question for Question 2, 'Dynamic Technical Pushback'.
-First, parse the candidate's Turn 1 answer and locate its single weakest link: the claim with no falsifiable metric, the causal leap, the borrowed team credit, the unstated assumption, or the number with no measurement method behind it.
-Then ask one direct question that attacks exactly that weak link and demands the missing falsifiable evidence, in the style of "What falsifiable metric proved that latency threshold degraded operator trust?"
-Quote or paraphrase the candidate's own words so the question is unmistakably about what they just said. Never fall back to a generic follow-up."""
-    elif turn == 2:
-        next_instruction = f"""Generate next_question for Question 3, 'Behavioral & Cross-Functional Friction'.
-Select the strongest non-duplicative pillar from the following persona-adapted behavioral bank, then frame it so it directly tests handling friction with a PM, an ML/software engineer, or a military operator under fast-paced startup constraints. Use the adapted question directly or tailor it to the candidate's prior answers without changing the pillar's intent:
+    next_turn = turn + 1
+    title, objective = conversation_stage(next_turn)
+    stage_instruction = ""
+    if next_turn == 2:
+        stage_instruction = """Find the single weakest link in the answer you just heard: the claim with no falsifiable metric, the causal leap, the borrowed team credit, the unstated assumption, or the number with no measurement method behind it. Attack exactly that weak link and demand the missing falsifiable evidence, in the style of "What falsifiable metric proved that latency threshold degraded operator trust?" Quote or paraphrase the candidate's own words so the question is unmistakably about what they just said."""
+    elif next_turn == 3:
+        stage_instruction = f"""Move the conversation to behavioral and cross-functional friction. Select the strongest non-duplicative pillar from the following persona-adapted behavioral bank, then frame it so it directly tests handling friction with a PM, an ML/software engineer, or a military operator under fast-paced startup constraints. Use the adapted question directly or tailor it to what the candidate just said, without changing the pillar's intent:
 {behavioral_question_options(persona)}"""
-    elif turn == 3:
-        next_instruction = """Generate next_question for Question 4, 'Leadership, Vision & Scaling'.
-Test whether the candidate can set org-wide Human Factors standards, scale Research Operations beyond their own hands, and tie that to Anduril Air Defense's counter-drone Lattice OS mission. Build the question off a specific commitment or gap the candidate revealed in an earlier turn."""
-    elif next_stage:
-        next_instruction = f"Generate next_question for Question {turn + 1}, '{next_stage[0]}': {next_stage[1]}."
+    elif next_turn == 4:
+        stage_instruction = """Test whether the candidate can set org-wide Human Factors standards, scale Research Operations beyond their own hands, and tie that to Anduril Air Defense's counter-drone Lattice OS mission. Build the question off a specific commitment or gap the candidate revealed earlier."""
     else:
-        next_instruction = "Set next_question to null. Produce a comprehensive end_of_session_debrief and a clear uplevel_verdict using all four answers and prior scorecards."
+        stage_instruction = """Stay in the flow of the live conversation. Hunt the thinnest evidence still standing across the whole transcript and press it, or follow a genuinely interesting thread the candidate just opened. Do not restart the interview, summarize it, or signal that it is ending."""
 
-    behavioral_evaluation = ""
-    if turn == 3:
-        behavioral_evaluation = """
-This is the behavioral and cross-functional friction response. Evaluate its STAR/STARE evidence explicitly:
-- Situation: specific defense-tech, safety-critical, startup, or cross-functional context and stakes.
-- Task: the candidate's mandate, constraints, and decision responsibility.
-- Action: concrete first-person ownership, choices, influence tactics, and trade-offs rather than vague "we" activity.
-- Result: observable decision, safety, operator, product, team, or business outcome with bounded evidence.
-- Earned Secret: the non-obvious lesson or reusable practice only someone who lived this friction could state.
+    prompt = f"""You are {persona} in a live spoken interview. LIVE MODE only.
 
-Require real friction. If the answer describes smooth agreement rather than a concrete disagreement with a PM, an ML or software engineer, or a military operator, cap Substance and Differentiation at 3 and say so. Penalize missing concrete ownership in Substance and Credibility. Assess interpersonal maturity through directness, listening, conflict handling, ethical judgment, and respect for engineering and product constraints, including how the candidate held a safety standard without stalling delivery velocity. Award Lead/Staff signal only when the answer demonstrates organizational impact such as a reusable standard, escalation protocol, research-ops mechanism, mentoring system, cross-team decision model, or durable culture change.
-"""
-    prompt = f"""Act as {persona} for the immediate response, then switch to the independent coach scorecard.
-
-This is Question {turn} of 4: {title}.
-Arc objective: {objective}
+This is your response to the candidate's answer to Question {turn}. Your next question is Question {next_turn}.
+Conversation stage: {title}
+Stage objective: {objective}
 Persona lens: {PERSONA_FOCUS[persona]}
-{behavioral_evaluation}
 
-Evaluate the candidate answer below. Apply all five core dimensions, rate Tone & Authority, and apply every Lead/Staff criterion. Use null for a Lead/Staff score when this answer does not provide evidence for that criterion; missing evidence is not automatically poor performance.
+{stage_instruction}
+
+{HARD_EVIDENCE_ANCHORS}
+
+Return two fields and nothing else.
+- reaction: your immediate in-character reaction to what the candidate just said, at most {PUSHBACK_WORD_LIMIT} words across at most two short sentences. Name the specific thing you are pushing on, or acknowledge the strongest concrete detail in one clause. It may be empty only if the follow-up question carries the pushback on its own.
+- question: exactly one concise, voice-friendly follow-up question of at most {QUESTION_WORD_LIMIT} words, in character, that builds on what the candidate actually just said so the interview reads as one continuous conversation.
+
+Absolute rules for LIVE MODE: never score, never grade, never mention rubrics, dimensions, STAR, Senior versus Lead/Staff calibration, or coaching advice. Never praise generically. Never announce how many questions remain or that the interview is over. Never invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions. Write both fields to be heard through headphones, not read on a page.
+
+Conversation so far:
+{render_transcript(prior_turns, LIVE_CONTEXT_MESSAGES)}
+
+Candidate's newest answer:
+{answer}
+"""
+
+    result = parse_openai_response(prompt, InterviewerTurn, temperature=0.5, max_output_tokens=400)
+    question = result.question.strip()
+    if not question:
+        raise gr.Error("The interviewer returned no follow-up question. Please submit again.")
+    reaction = result.reaction.strip()
+
+    updated_history = [*prior_turns, {"role": "user", "content": answer}]
+    if reaction:
+        updated_history.append({"role": "assistant", "content": reaction})
+    updated_history.append({"role": "assistant", "content": question})
+    return (
+        turn_indicator(next_turn),
+        render_interviewer(persona, question, reaction),
+        SCORECARD_PLACEHOLDER,
+        next_turn,
+        updated_history,
+        "",
+    )
+
+
+def finalize_session(
+    persona_label: str,
+    turn: int,
+    history: list[dict[str, str]] | None,
+) -> tuple[str, str, str, int, list[dict[str, str]], str]:
+    prior_turns = history or []
+    turns_completed = completed_turns(prior_turns)
+    if turns_completed < 1:
+        raise gr.Error("Answer at least one question before wrapping up the session.")
+
+    persona = PERSONAS[persona_label]
+    prompt = f"""DEBRIEF MODE. Drop the persona and act as the independent coach.
+
+The candidate just ended a live interview with {persona} after {turns_completed} answered turns. Evaluate the ENTIRE transcript holistically as one performance, not turn by turn. Weigh the whole arc: how the candidate opened, how they held up under pushback, whether they escalated their evidence when pressed, and where they ended.
+
+Persona lens used in the room: {PERSONA_FOCUS[persona]}
+
+Apply all five core dimensions once for the session, rate Tone & Authority once for the session, and apply every Lead/Staff criterion once for the session. Use null for a Lead/Staff score when the transcript provides no evidence for that criterion; missing evidence is not automatically poor performance.
 
 Grade the core dimensions with this calibration:
-- STRUCTURE: score STAR plus STARE. Situation, Task, Action, Result, and an explicit Earned Secret, meaning a non-obvious lesson only someone who actually ran this work could state. Cap Structure at 3 when the Earned Secret is missing. Penalize answers that recite a generic textbook process instead of a specific lived sequence.
-- SUBSTANCE: audit for hard data. {HARD_EVIDENCE_ANCHORS}
+- STRUCTURE: score STAR plus STARE across the transcript. Situation, Task, Action, Result, and an explicit Earned Secret, meaning a non-obvious lesson only someone who actually ran this work could state. Cap Structure at 3 when no answer delivered an Earned Secret. Penalize generic textbook process instead of specific lived sequences.
+- SUBSTANCE: audit for hard data across the session. {HARD_EVIDENCE_ANCHORS}
 - RELEVANCE: reward direct connection to Lattice OS, counter-drone command and control, 3D operator workflows, and startup execution speed. Abstract Human Factors theory with no Air Defense translation caps Relevance at 3.
-- CREDIBILITY: verify first-person ownership, plausible mechanism, and named method. Downgrade borrowed team credit and unverifiable causal leaps.
+- CREDIBILITY: verify first-person ownership, plausible mechanism, and named method. Downgrade borrowed team credit and unverifiable causal leaps, especially claims that stayed unquantified after direct pushback.
 - DIFFERENTIATION: award the top band only for seamless, load-bearing use of the Calibrated Cognitive Friction thesis or the Principles for Agentic Trust framework. Name-dropping either without applying it is a 2.
 
-Rate tone_and_authority separately from the five core dimensions, choosing the voice_register that matches how the candidate speaks:
+If the transcript contains a behavioral or cross-functional friction answer, judge it explicitly on STAR/STARE completeness, concrete first-person ownership, real friction rather than smooth agreement, interpersonal maturity, and whether it produced organizational impact such as a reusable standard, escalation protocol, research-ops mechanism, mentoring system, or durable culture change. If the answer describes agreement rather than a concrete disagreement with a PM, an ML or software engineer, or a military operator, cap Substance and Differentiation at 3 and say so.
+
+Rate tone_and_authority once for the whole session, choosing the voice_register that matches how the candidate speaks:
 - 1-2 'Executing IC': narrates assigned usability tests, defers trade-offs upward, hedges, seeks permission.
-- 3 'Emerging Lead': owns a project end to end but frames impact locally.
-- 4-5 'Standard-Setting Lead/Staff': speaks as the person who sets the standard, names the trade-off they owned and why, states the bar for the organization, and disagrees with engineering or product from evidence rather than authority.
+- 3 'Emerging Lead': owns projects end to end but frames impact locally.
+- 4-5 'Standard-Setting Lead/Staff': speaks as the person who sets the standard, names the trade-offs they owned and why, states the bar for the organization, and disagrees with engineering or product from evidence rather than authority.
 Quote the specific phrasing that drove the register call.
 
 Explicitly classify demonstrated_level using this bar:
 {UPLEVEL_BAR}
 
-For senior_uxr_baseline_assessment, state plainly what in this answer clears or misses the Senior baseline of expertly planned and executed studies with clear timelines and actionable tactical insights. For lead_staff_uplevel_assessment, state whether this answer shows pre-regulation framework setting, latency-to-psychophysics bridging, HSI translated into hard system specs, Research Operations definition, or multi-million-dollar business impact, and name the one upgrade that would convert it. Cite specific evidence from this answer and compare it with the canonical resume and Air Defense job requirements. Prior resume claims are context to probe, not proof that the spoken answer demonstrated the competency.
+For strongest_signal, name the single most convincing moment in the transcript and quote it. For primary_gap, name the single highest-leverage growth area for the next session. For priority_move, give one concrete rehearsal action.
 
-The interviewer_pushback must be in character, conversational, and no more than {PUSHBACK_WORD_LIMIT} words across at most two short sentences, written to be heard through headphones. Lead with the challenge and identify the highest-leverage weakness. The detailed evidence belongs in the scorecard.
+For senior_uxr_baseline_assessment, state plainly what across this session clears or misses the Senior baseline of expertly planned and executed studies with clear timelines and actionable tactical insights. For lead_staff_uplevel_assessment, state whether the session showed pre-regulation framework setting, latency-to-psychophysics bridging, HSI translated into hard system specs, Research Operations definition, or multi-million-dollar business impact, and name the one upgrade that would convert it. Cite specific evidence from the transcript and compare it with the canonical resume and Air Defense job requirements. Prior resume claims are context to probe, not proof that a spoken answer demonstrated the competency.
 
-{next_instruction}
-The next question must be exactly one concise, voice-friendly question in character of at most {QUESTION_WORD_LIMIT} words. It must build on what the candidate actually said in this answer so the interview reads as one continuous conversation. Do not invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions.
+Produce a comprehensive end_of_session_debrief covering how the candidate performed across all {turns_completed} turns, and a clear uplevel_verdict.
 
-Conversation so far:
-{prior_turns[-8:]}
-
-Prior structured scorecards:
-{prior_scores}
-
-Candidate answer:
-{answer}
+Full interview transcript:
+{render_transcript(prior_turns)}
 """
 
-    evaluation = parse_openai_response(prompt, Evaluation, temperature=0.2, max_output_tokens=2200)
-
+    evaluation = parse_openai_response(prompt, Evaluation, temperature=0.2, max_output_tokens=2600)
     validate_evaluation(evaluation)
-    if turn < 4 and not evaluation.next_question:
-        raise gr.Error("The model did not return the next interview question. Please try again.")
-    if turn == 4 and (not evaluation.end_of_session_debrief or not evaluation.uplevel_verdict):
-        raise gr.Error("The model did not return the final debrief and verdict. Please try again.")
 
-    updated_scores = [*prior_scores, evaluation.model_dump()]
-    updated_history = [
-        *prior_turns,
-        {"role": "user", "content": answer},
-        {"role": "assistant", "content": evaluation.interviewer_pushback},
-    ]
-    scorecard = render_scorecard(evaluation, turn, updated_scores)
-    if turn == 4:
-        try:
-            persist_session(persona, evaluation, updated_scores)
-        except OSError as exc:
-            gr.Warning(f"Interview completed, but progress could not be saved: {exc}")
-        return (
-            "**Interview Complete: End of Session Debrief**",
-            f"## {persona}\n\n{evaluation.interviewer_pushback}\n\nThe four-question interview is complete.",
-            scorecard,
-            0,
-            updated_history,
-            updated_scores,
-            "",
-        )
+    try:
+        persist_session(persona, evaluation, turns_completed)
+    except OSError as exc:
+        gr.Warning(f"Interview completed, but progress could not be saved: {exc}")
 
-    next_turn = turn + 1
-    next_question = evaluation.next_question or ""
-    updated_history.append({"role": "assistant", "content": next_question})
-    interviewer_output = f"## {persona}\n\n{evaluation.interviewer_pushback}\n\n### Your Next Question\n\n{next_question}"
-    return turn_indicator(next_turn), interviewer_output, scorecard, next_turn, updated_history, updated_scores, ""
+    return (
+        f"**Session complete — {turns_completed} turns with {persona}**",
+        f"## {persona}\n\nThat is where we will stop. Thanks for the conversation.",
+        render_scorecard(evaluation, turns_completed),
+        0,
+        prior_turns,
+        "",
+    )
 
 
-def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], list[dict[str, object]], str]:
+def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], str]:
     return (
         "**No interview in progress**",
-        "Select an interviewer and start a new four-question interview.",
-        "Scorecards will appear after each answer.",
+        "Select an interviewer and start a new interview.",
+        SCORECARD_PLACEHOLDER,
         0,
-        [],
         [],
         "",
     )
@@ -710,13 +711,14 @@ SPRINT_CHECKLIST = [
     "Day 3: Ethics, Friction & Warfare Philosophy — Pillars 4 & 6: Calibrated Friction and Keynote Unanswerable Questions",
     "Day 4: Cross-Functional Pressure Tests — PM and ML Engineering Personas",
     "Day 5: Behavioral & Operator Fit Drill — 10 Behavioral/Military Operator Scenarios",
-    "Day 6: Full 4-Turn Dynamic Loop Runs — Dr. Daniella Kim Persona",
+    "Day 6: Full multi-turn dynamic loop runs — Dr. Daniella Kim Persona",
     "Day 7: Final Polish & Peak Performance Simulation",
 ]
 
 SESSION_HISTORY_HEADERS = [
     "Timestamp",
     "Interviewer",
+    "Turns",
     *CORE_DIMENSIONS,
     "Lead/Staff Rating",
     "Primary Bottleneck",
@@ -813,13 +815,12 @@ initial_dashboard, initial_history = load_progress_dashboard()
 with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
     turn_state = gr.State(0)
     conversation_history = gr.State([])
-    cumulative_scores = gr.State([])
     with gr.Column(elem_id="shell"):
         gr.HTML(
             """
             <header id="masthead">
               <h1>HUMAN FACTORS // AIR DEFENSE</h1>
-              <p>Lead/Staff interview pressure testing for Dr. Brandon Fluegel. Dictate through Superwhisper, then evaluate against the core rubric and the Anduril uplevel bar.</p>
+              <p>Lead/Staff interview pressure testing for Dr. Brandon Fluegel. Dictate through Superwhisper, hold a continuous conversation with the interviewer, then finalize for one holistic scorecard.</p>
             </header>
             """
         )
@@ -830,10 +831,10 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     value="Dr. Daniella Kim — Research Head",
                     label="Interviewer",
                 )
-                start_button = gr.Button("Start New 4-Question Interview")
+                start_button = gr.Button("Start New Interview")
                 indicator = gr.Markdown("**No interview in progress**", elem_id="turn-indicator")
                 interviewer = gr.Markdown(
-                    "Select an interviewer and start a new four-question interview.",
+                    "Select an interviewer and start a new interview.",
                     elem_id="pushback",
                 )
                 listen_button = gr.Button("Listen to Interviewer")
@@ -846,9 +847,12 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     elem_id="answer",
                 )
                 with gr.Row():
-                    evaluate_button = gr.Button("Submit Answer", variant="primary", elem_id="evaluate")
+                    continue_button = gr.Button(
+                        "Submit Answer / Continue Conversation", variant="primary", elem_id="evaluate"
+                    )
+                    finalize_button = gr.Button("Wrap Up & Finalize Session")
                     clear_button = gr.Button("Clear Session")
-                scorecard = gr.Markdown("Scorecards will appear after each answer.", elem_id="scorecard")
+                scorecard = gr.Markdown(SCORECARD_PLACEHOLDER, elem_id="scorecard")
 
             with gr.Tab("📈 Progress & 1-Week Sprint Tracker"):
                 dashboard = gr.Markdown(initial_dashboard, elem_id="progress-dashboard")
@@ -863,12 +867,24 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                 session_history = gr.Dataframe(
                     value=initial_history,
                     headers=SESSION_HISTORY_HEADERS,
-                    datatype=["str", "str", "number", "number", "number", "number", "number", "str", "str", "str"],
+                    datatype=[
+                        "str",
+                        "str",
+                        "number",
+                        "number",
+                        "number",
+                        "number",
+                        "number",
+                        "number",
+                        "str",
+                        "str",
+                        "str",
+                    ],
                     interactive=False,
                     elem_id="history-table",
                 )
 
-    session_outputs = [indicator, interviewer, scorecard, turn_state, conversation_history, cumulative_scores, answer]
+    session_outputs = [indicator, interviewer, scorecard, turn_state, conversation_history, answer]
     start_button.click(start_interview, inputs=[persona], outputs=session_outputs)
     listen_button.click(
         fn=None,
@@ -876,12 +892,13 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
         js="(text) => { window.speechSynthesis.cancel(); const spoken = text.split('\\n').filter(line => !line.trim().startsWith('#')).join(' ').replaceAll('*', '').replace(/\\s+/g, ' ').trim(); if (!spoken) { return; } const voice = new SpeechSynthesisUtterance(spoken); voice.rate = 0.96; window.speechSynthesis.speak(voice); }",
         queue=False,
     )
-    submit_inputs = [answer, persona, turn_state, conversation_history, cumulative_scores]
-    submit_outputs = session_outputs
-    evaluate_event = evaluate_button.click(evaluate_answer, submit_inputs, submit_outputs)
-    evaluate_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
-    answer_event = answer.submit(evaluate_answer, submit_inputs, submit_outputs)
-    answer_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
+    submit_inputs = [answer, persona, turn_state, conversation_history]
+    continue_button.click(continue_conversation, submit_inputs, session_outputs)
+    answer.submit(continue_conversation, submit_inputs, session_outputs)
+    finalize_event = finalize_button.click(
+        finalize_session, [persona, turn_state, conversation_history], session_outputs
+    )
+    finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
     clear_button.click(clear_session, outputs=session_outputs)
     refresh_dashboard.click(load_progress_dashboard, outputs=[dashboard, session_history])
 

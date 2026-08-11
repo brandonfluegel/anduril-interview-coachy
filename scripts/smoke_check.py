@@ -1,4 +1,4 @@
-"""Offline verification of scorecard rendering, session persistence, and dashboard reads."""
+"""Offline verification of holistic scorecard rendering, session persistence, and dashboard reads."""
 
 from __future__ import annotations
 
@@ -13,11 +13,10 @@ import app  # noqa: E402
 from openai.lib._parsing._responses import type_to_text_format_param  # noqa: E402
 
 
-def build_evaluation(turn: int) -> app.Evaluation:
+def build_evaluation() -> app.Evaluation:
     return app.Evaluation(
-        interviewer_pushback="That number is unowned. What measurement proved the threshold?",
         core_scores=[
-            app.CoreScore(dimension=name, score=4, evidence=f"{name} evidence for turn {turn}.")
+            app.CoreScore(dimension=name, score=4, evidence=f"{name} evidence across the session.")
             for name in app.CORE_DIMENSIONS
         ],
         tone_and_authority=app.ToneAuthority(
@@ -35,27 +34,39 @@ def build_evaluation(turn: int) -> app.Evaluation:
         senior_uxr_baseline_assessment="Clears the baseline.",
         lead_staff_uplevel_assessment="Approaching the uplevel bar.",
         demonstrated_level="Lead/Staff Upleveling Signal",
-        next_question=None if turn == 4 else "What falsifiable metric proved operator trust degraded?",
-        end_of_session_debrief="Strong systems framing; tighten metric ownership." if turn == 4 else None,
-        uplevel_verdict="Lead/Staff Borderline" if turn == 4 else None,
+        end_of_session_debrief="Strong systems framing; tighten metric ownership.",
+        uplevel_verdict="Lead/Staff Borderline",
         confidence="High",
     )
 
 
+def build_transcript(turns: int) -> list[dict[str, str]]:
+    history: list[dict[str, str]] = [{"role": "assistant", "content": "Opening question."}]
+    for index in range(1, turns + 1):
+        history.append({"role": "user", "content": f"Answer {index}."})
+        history.append({"role": "assistant", "content": f"Follow-up question {index + 1}."})
+    return history
+
+
 def main() -> None:
     type_to_text_format_param(app.Evaluation)
-    print("OK  structured-output schema builds for Evaluation")
+    type_to_text_format_param(app.InterviewerTurn)
+    print("OK  structured-output schemas build for Evaluation and InterviewerTurn")
 
-    cumulative: list[dict[str, object]] = []
-    for turn in (1, 2, 3, 4):
-        evaluation = build_evaluation(turn)
-        app.validate_evaluation(evaluation)
-        cumulative.append(evaluation.model_dump())
-        card = app.render_scorecard(evaluation, turn, cumulative)
-        assert "Tone & Authority" in card, f"turn {turn} scorecard missing Tone & Authority"
+    transcript = build_transcript(7)
+    turns = app.completed_turns(transcript)
+    assert turns == 7, f"expected 7 completed turns, got {turns}"
+    assert "CANDIDATE: Answer 7." in app.render_transcript(transcript)
+    assert app.conversation_stage(9)[0] == app.OPEN_STAGE[0], "turns past 4 must fall back to the open stage"
+    print("OK  multi-turn transcript helpers handle unlimited turns")
+
+    evaluation = build_evaluation()
+    app.validate_evaluation(evaluation)
+    card = app.render_scorecard(evaluation, turns)
     assert "End of Session Debrief" in card
-    assert "| Tone & Authority | **4.0/5** |" in card
-    print("OK  four-turn scorecards render with Tone & Authority")
+    assert "### Tone & Authority" in card
+    assert "**Turns completed:** 7" in card
+    print("OK  holistic scorecard renders with Tone & Authority and the turn count")
 
     with tempfile.TemporaryDirectory() as tmp:
         sandbox = Path(tmp) / "coaching_state.md"
@@ -64,18 +75,21 @@ def main() -> None:
         app.COACHING_STATE_PATH = sandbox
         try:
             before = len(app.load_session_records())
-            record = app.persist_session("Dr. Daniella Kim", build_evaluation(4), cumulative)
+            record = app.persist_session("Dr. Daniella Kim", evaluation, turns)
             records = app.load_session_records()
             assert len(records) == before + 1
             assert records[-1].timestamp == record.timestamp
+            assert records[-1].turns_completed == 7
             assert set(records[-1].core_averages) == set(app.CORE_DIMENSIONS)
             summary, history = app.load_progress_dashboard()
             assert f"**Total mock sessions completed:** {before + 1}" in summary
+            assert "**Total conversation turns practiced:**" in summary
             assert history[0][0] == record.timestamp
+            assert history[0][2] == 7
             assert len(history[0]) == len(app.SESSION_HISTORY_HEADERS)
         finally:
             app.COACHING_STATE_PATH = original
-    print("OK  session persistence round-trips into the progress dashboard")
+    print("OK  multi-turn session persistence round-trips into the progress dashboard")
 
     summary, history = app.load_progress_dashboard()
     assert "Sprint Readiness" in summary

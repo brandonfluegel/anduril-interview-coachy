@@ -2,7 +2,7 @@
 
 ## Scope
 
-This repository is a single-purpose interview system for Brandon Fluegel, PhD, targeting Anduril Industries' Air Defense team. Keep changes focused on the four-question Gradio interview arc, evidence-grounded persona probing, and Senior-to-Lead/Staff calibration.
+This repository is a single-purpose interview system for Brandon Fluegel, PhD, targeting Anduril Industries' Air Defense team. Keep changes focused on the continuous multi-turn Gradio interview, evidence-grounded persona probing, and Senior-to-Lead/Staff calibration.
 
 ## Canonical Context
 
@@ -18,15 +18,16 @@ Never invent metrics, outcomes, clearance status, classified details, team struc
 
 ## Product Contract
 
-- Preserve the mandatory four-question arc in `src/app.py`.
-- Select Question 3 from the behavioral bank and retain STAR/STARE behavioral calibration.
+- Keep the interview loop continuous in `src/app.py`: the persona stays fully in character for every live turn, the conversation runs for as many turns as the candidate wants, and no grading appears until the session is finalized.
+- Keep the first four turns' arc guidance (technical core, technical pushback, behavioral friction, leadership and scaling) as stage direction, not as a hard cutoff.
+- Select the third question from the behavioral bank and retain STAR/STARE behavioral calibration in the holistic evaluation.
 - Keep questions and pushback concise and voice-friendly.
 - Maintain all five core scores: Substance, Structure, Relevance, Credibility, and Differentiation.
 - Maintain separate Lead/Staff criteria and explicit Senior UXR versus Lead/Staff calibration.
 - Treat `N/E` as not evidenced; do not convert missing evidence into a low score.
 - Keep the four native personas: Dr. Daniella Kim, Systems/ML Engineering Lead, Product Manager, and Design Lead.
 - Preserve structured OpenAI responses and validate their complete score sets.
-- Persist completed four-turn session summaries to `data/coaching_state.md` and keep the Progress Tracker derived from those records.
+- Persist finalized multi-turn session summaries, including the turn count, to `data/coaching_state.md` and keep the Progress Tracker derived from those records.
 - Preserve the seven-day intensive sprint checklist and both Gradio tabs.
 
 ## Engineering
