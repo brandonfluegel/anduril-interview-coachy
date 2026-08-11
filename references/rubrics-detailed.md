@@ -152,6 +152,26 @@ When the same root cause appears across 2+ consecutive sessions (or across 2+ an
 
 ---
 
+## Tone & Authority (Voice Register)
+
+Rated separately from the five core dimensions. This measures whether the candidate *sounds* like the person who sets the bar, independent of how good the underlying evidence is.
+
+| Score | Register | Description |
+|-------|----------|-------------|
+| 1 | Executing IC | Narrates assigned work, seeks permission, attributes every decision upward or to "the team" |
+| 2 | Executing IC | Owns tasks but hedges on trade-offs; frames the research function as a service desk |
+| 3 | Emerging Lead | Owns a project end to end and defends a method, but frames impact locally to that project |
+| 4 | Standard-Setting Lead/Staff | Names the trade-off they owned and why, states a bar for others, disagrees with engineering or product from evidence |
+| 5 | Standard-Setting Lead/Staff | Speaks as the owner of the standard itself — sets the definition of done for the org, and treats engineering constraints as a shared design space rather than an obstacle |
+
+**Coaching notes:**
+- Score the register, not the volume. Quiet, precise authority outranks assertive vagueness.
+- "We ran a usability test and reported findings" is a 1-2 no matter how large the program was.
+- "I set the perceptual-threshold spec that latency budgets now have to clear" is a 4-5.
+- Hedging language ("I sort of drove", "they let me") caps this at 2 even when the underlying work was Staff-scope.
+
+---
+
 ## Seniority Calibration
 
 Scoring is not absolute — calibrate expectations to career stage. When scoring, always state which calibration band you're using.
@@ -160,6 +180,20 @@ Scoring is not absolute — calibrate expectations to career stage. When scoring
 - **Mid-career (4-8 years)**: A "4 on Substance" means quantified impact with alternatives considered. Differentiation requires genuine earned secrets from hands-on work. Should demonstrate ownership of outcomes, not just tasks.
 - **Senior/Lead (8-15 years)**: A "4 on Substance" means systems-level thinking — second-order effects, organizational impact. Differentiation requires insights that reshape how the interviewer thinks about the problem. Should show judgment across ambiguous tradeoffs.
 - **Executive (15+ years)**: A "4 on Substance" means business-level impact with P&L awareness. Differentiation requires a coherent leadership philosophy backed by pattern recognition across multiple contexts. Should demonstrate how they build and scale through others.
+
+### Senior UXR vs. Lead/Staff Gate (Anduril Air Defense)
+
+Every answer must be placed on one side of this line. Executing an excellent study is the baseline, not the uplevel.
+
+| | Senior UXR Signal (baseline) | Lead/Staff Upleveling Signal |
+|---|---|---|
+| **Studies** | Expertly plans and executes research with clear timelines and actionable tactical insights | Defines the Research Operations mechanism, repository, and workflow that lets others run the study without them |
+| **Standards** | Applies existing standards correctly (MIL-STD-1472, NASA-STD-3001) | Establishes company-wide AI safety and trust frameworks *before* regulations exist |
+| **Engineering** | Reports usability findings to engineering | Bridges engineering latency targets with human psychophysics so the perceptual threshold *becomes* the spec |
+| **Output** | Recommendations and insight decks | Complex HSI translated into hard hardware and software system requirements |
+| **Impact** | Improves a product surface | Drives multi-million-dollar business impact and changes what the org considers shippable |
+
+Gating rule: an answer may only be marked "Lead/Staff Upleveling Signal" when the spoken response evidences at least one right-hand-column behavior with a named mechanism. Resume proximity to a right-hand-column achievement is not sufficient — the answer must show the candidate driving it.
 
 ---
 
