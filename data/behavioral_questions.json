@@ -1,0 +1,182 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Defense-tech behavioral and fit question bank for Question 3 of the Anduril Air Defense interview arc.",
+  "personas": [
+    "Dr. Daniella Kim",
+    "Systems / ML Engineering Lead",
+    "Product Manager",
+    "Design Lead"
+  ],
+  "questions": [
+    {
+      "id": "BQ01",
+      "pillar": "Warfare & Ethics",
+      "question": "How do you think about the moral and ethical responsibility of designing UX for autonomous weapons and counter-drone C2 systems?",
+      "resume_and_role_links": [
+        "Sling Principles for Agentic Trust",
+        "Calibrated Cognitive Friction",
+        "Meaningful Human Control",
+        "Lattice OS autonomous counter-drone command and control"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "What research philosophy would you use to define and test the moral boundaries of UX for autonomous weapons and counter-drone C2 systems without slowing responsible Air Defense delivery?",
+        "Systems / ML Engineering Lead": "When a non-deterministic counter-drone system can act faster than an operator, what ethical constraints must become hard trust, intervention, and verification requirements?",
+        "Product Manager": "How would you turn ethical concerns about autonomous weapons UX into product decisions that preserve mission value without becoming an open-ended reason not to ship?",
+        "Design Lead": "Where should an Air Defense operator workflow introduce deliberate friction, confirmation, or control handoff so the physical-digital experience preserves meaningful human authority?"
+      }
+    },
+    {
+      "id": "BQ02",
+      "pillar": "Military Operators",
+      "question": "Describe your experience working directly with military operators or high-stress domain experts in field conditions. How do you cut through operator bias or bravado to get true operational data?",
+      "resume_and_role_links": [
+        "NASA Lunar Gateway clinical workstation validation",
+        "Uber urban field studies",
+        "Mercedes-Benz autonomous handover simulation",
+        "Anduril in-field rapid ethnography and contextual inquiry"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Using your NASA and field-research experience, how would you design rapid ethnography with Air Defense operators that separates genuine operational constraints from recall bias, status signaling, or bravado?",
+        "Systems / ML Engineering Lead": "How would you convert conflicting operator accounts from stressful field conditions into falsifiable system requirements instead of anecdotes engineering cannot implement?",
+        "Product Manager": "When field operators demand mutually incompatible changes, how do you identify the highest-value operational truth quickly enough to influence the next release?",
+        "Design Lead": "How would you observe an operator's full physical-digital C2 workflow and reconcile what they say with breakdowns visible in posture, reach, attention, and interaction sequence?"
+      }
+    },
+    {
+      "id": "BQ03",
+      "pillar": "Scrappiness vs. Rigor",
+      "question": "You hold a Ph.D. and have published in academic tracks like ACM CSCW. How do you balance scientific rigor with Anduril's requirement to ship functional tech in months, not years?",
+      "resume_and_role_links": [
+        "Ph.D. in Human Factors Psychology",
+        "ACM CSCW 2026 Principles for Agentic Trust",
+        "Amazon multi-year psychophysics program",
+        "Anduril startup-speed delivery"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Your Ph.D. and CSCW work show rigor; tell me how you would preserve validity while compressing an Air Defense research program into evidence that changes a decision in weeks, not years.",
+        "Systems / ML Engineering Lead": "What minimum evidence would you require before turning a psychophysics or trust finding into a latency threshold or verification test on a rapidly changing C2 system?",
+        "Product Manager": "Give me an example of how you have traded methodological completeness for decision speed without making the resulting product recommendation intellectually dishonest.",
+        "Design Lead": "How would you combine fast prototype testing and service-blueprint work with enough rigor to prevent a rushed C2 interaction pattern from becoming an unsafe design standard?"
+      }
+    },
+    {
+      "id": "BQ04",
+      "pillar": "Cross-Functional Standoff",
+      "question": "Tell me about a time an Engineering Lead or PM strongly resisted your research recommendations or wanted to strip a safety feature for speed. How did you resolve it?",
+      "resume_and_role_links": [
+        "Amazon engineering latency targets",
+        "NASA uFMEA safety controls",
+        "Sling organizational Human Factors strategy",
+        "Cross-functional influence without formal authority"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Tell me about a time you protected the integrity of a research or safety recommendation under executive pressure while still preserving trust and delivery velocity across the team.",
+        "Systems / ML Engineering Lead": "Describe a technical standoff where engineering rejected your Human Factors threshold or safety control. What evidence, trade space, and verification criterion changed the decision?",
+        "Product Manager": "Tell me about a time a PM wanted to remove a safety or usability control to hit a date. How did you frame the user risk, business cost, and reversible compromise?",
+        "Design Lead": "Describe a conflict over an operator-workflow safeguard or physical-digital interaction. How did you keep research, design, product, and engineering aligned without diluting the safety intent?"
+      }
+    },
+    {
+      "id": "BQ05",
+      "pillar": "Startup Intensity & Hours",
+      "question": "Defense tech requires high-intensity field testing, 25-30% travel, and dynamic schedules. How do you stay effective and prevent burnout under high operational friction?",
+      "resume_and_role_links": [
+        "Cross-domain field and laboratory research",
+        "High-stress task-interruption dissertation",
+        "25-30% travel scenario supplied for interview preparation",
+        "Sustained operational effectiveness"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How would you build a high-performance research culture that can sustain field intensity and dynamic schedules without normalizing burnout or lowering evidence quality?",
+        "Systems / ML Engineering Lead": "During repeated field-test cycles with shifting hardware and software builds, what operating practices keep your judgment and technical handoffs reliable under fatigue?",
+        "Product Manager": "How do you protect the highest-value work and communicate capacity when travel, field failures, and release pressure collide in the same week?",
+        "Design Lead": "How do you maintain observational quality and collaborative design judgment during intensive field studies where physical conditions, travel, and rapid redesign cycles create fatigue?"
+      }
+    },
+    {
+      "id": "BQ06",
+      "pillar": "Extreme Ambiguity",
+      "question": "How do you design a research strategy when hardware/software requirements are completely undefined and the product team is changing direction weekly?",
+      "resume_and_role_links": [
+        "Sling Human Factors strategy across software, hardware, and AI",
+        "Principles for Agentic Trust framework",
+        "Anduril ambiguity with little oversight",
+        "End-to-end operator workflow design"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How would you establish a coherent Air Defense research thesis and repository when product direction changes weekly and no stable policy or requirements exist yet?",
+        "Systems / ML Engineering Lead": "When hardware interfaces, autonomy behavior, and software architecture are all moving, how do you create Human Factors hypotheses that can still mature into testable specifications?",
+        "Product Manager": "What research do you fund first when the roadmap changes weekly, and how do you prevent discovery work from becoming obsolete before it changes a decision?",
+        "Design Lead": "How would you use service blueprints and workflow models as stable artifacts when screens, hardware controls, and operator roles are all still changing?"
+      }
+    },
+    {
+      "id": "BQ07",
+      "pillar": "Handling Ignored Insights",
+      "question": "What is your protocol when leadership or engineering acknowledges your research findings but decides to ship an unsafe or sub-optimal UX anyway?",
+      "resume_and_role_links": [
+        "NASA uFMEA",
+        "MIL-STD-1472 and NASA-STD-3001",
+        "Calibrated Cognitive Friction",
+        "Operational judgment and escalation"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "When leaders accept your evidence but choose a riskier design anyway, how do you document uncertainty, define escalation thresholds, and preserve the research function's influence?",
+        "Systems / ML Engineering Lead": "If engineering ships despite a validated Human Factors failure mode, what severity, detectability, verification, and stop-ship criteria govern your response?",
+        "Product Manager": "How do you respond when a roadmap owner accepts your data but chooses to ship a sub-optimal or unsafe workflow for schedule or mission reasons?",
+        "Design Lead": "If an unsafe interaction survives design review, how do you preserve the evidence in the service blueprint, negotiate mitigations, and keep the operator workflow from silently normalizing the risk?"
+      }
+    },
+    {
+      "id": "BQ08",
+      "pillar": "Failure & Course Correction",
+      "question": "Tell me about a research study or interface design of yours that completely failed during testing. What went wrong, and how did you recover?",
+      "resume_and_role_links": [
+        "Amazon multimodal interfaces",
+        "Mercedes-Benz autonomous handovers",
+        "NASA workstation validation",
+        "Evidence-based course correction"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Tell me about a study whose assumptions or methods failed. How did you recognize the failure, protect credibility, and turn it into a stronger research direction?",
+        "Systems / ML Engineering Lead": "Describe a test where the interface or system behavior invalidated your Human Factors model. What technical evidence forced the course correction?",
+        "Product Manager": "Tell me about research that failed to answer the roadmap question or arrived too late. How did you recover value and change your operating approach?",
+        "Design Lead": "Describe an interaction design that broke under realistic workflow or ergonomic testing. What did you own, redesign, and validate next?"
+      }
+    },
+    {
+      "id": "BQ09",
+      "pillar": "Scaling Culture & Mentorship",
+      "question": "How do you scale research operations, build shared insight repositories, and mentor junior team members as a Lead/Staff engineer?",
+      "resume_and_role_links": [
+        "Sling organizational Human Factors strategy",
+        "Principles for Agentic Trust framework",
+        "Anduril Research Operations responsibility",
+        "Company-wide UX research best practices"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "What operating system would you build for Air Defense research so repositories, standards, mentorship, and research quality scale beyond your own studies?",
+        "Systems / ML Engineering Lead": "How would you make Human Factors insights reusable by systems and ML teams through traceable requirements, failure modes, and verification artifacts while developing junior researchers?",
+        "Product Manager": "How would you build research operations that help multiple product teams find prior evidence, understand decision impact, and avoid repeating low-value studies?",
+        "Design Lead": "How would you connect shared insights, service blueprints, design patterns, and mentorship so operator-workflow knowledge compounds across Air Defense products?"
+      }
+    },
+    {
+      "id": "BQ10",
+      "pillar": "Competing Priorities",
+      "question": "When three different product managers are demanding urgent user research for different Air Defense platforms simultaneously, how do you triage and allocate your time?",
+      "resume_and_role_links": [
+        "Amazon product strategy at scale",
+        "Sling portfolio-level Human Factors strategy",
+        "Air Defense product and program strategy",
+        "Research velocity and operational ROI"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How would you allocate scarce research capacity across three urgent Air Defense programs while protecting the long-term research agenda and team health?",
+        "Systems / ML Engineering Lead": "How do you rank simultaneous research requests when one affects a safety-critical autonomy threshold, one blocks integration, and one improves operator efficiency?",
+        "Product Manager": "Three PMs each claim their Air Defense study is urgent. Walk me through the decision framework, ROI evidence, and stakeholder conversation you use to allocate research capacity.",
+        "Design Lead": "How would you triage competing workflow studies across platforms while preserving shared service-blueprint knowledge and avoiding fragmented operator experiences?"
+      }
+    }
+  ]
+}

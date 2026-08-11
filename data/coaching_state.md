@@ -243,3 +243,8 @@ No historical sessions.
 - 2026-08-08: Treat Calibrated Cognitive Friction as a falsifiable operating thesis, not a slogan.
 - 2026-08-08: Preserve evidence boundaries around S003, S005, and especially S006 until Brandon confirms exact outcomes and source details.
 - 2026-08-08: Default drill sequence is Dr. Kim → Systems/ML → Product → Design, with concise pushback before scorecards.
+
+## Persistent Four-Turn Mock Sessions
+Completed interview sessions are appended here by the Progress Tracker.
+
+<!-- FOUR_TURN_SESSION_LOG_END -->

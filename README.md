@@ -2,6 +2,8 @@
 
 A focused four-question interview simulator for Brandon Fluegel, PhD, targeting Anduril Industries' Air Defense team. The Gradio interface supports Superwhisper dictation, browser speech playback, four adaptive interviewer personas, structured answer scoring, and a final Senior-versus-Lead/Staff debrief.
 
+The Progress & 1-Week Sprint Tracker persists completed mock-session averages, upleveling readiness, bottlenecks, and next actions directly in `data/coaching_state.md`. It also provides a seven-day practice checklist and recent-session history.
+
 ## Interview Arc
 
 1. Technical and Domain Core
@@ -30,6 +32,7 @@ Public sharing is disabled by default. To request a temporary public Gradio URL,
 - `data/candidate_profile.json`: canonical resume evidence
 - `data/target_anduril_air_defense.json`: canonical role requirements
 - `data/storybank_6_pillars.json`: six approved interview stories
+- `data/behavioral_questions.json`: ten defense-tech behavioral pillars with persona adaptations
 - `data/coaching_state.md`: active readiness and session context
 - `references/role-drills.md`: interviewer persona definitions
 - `references/rubrics-detailed.md`: detailed scoring anchors
@@ -44,3 +47,5 @@ python -m pip check
 ```
 
 The application requires `OPENAI_API_KEY` for question generation and answer evaluation. Browser speech playback uses the Web Speech API; `pyttsx3` remains available for local/offline speech extensions.
+
+OpenAI requests use a bounded timeout and preserve in-browser session state when a timeout, connection failure, rate limit, or API error occurs.
