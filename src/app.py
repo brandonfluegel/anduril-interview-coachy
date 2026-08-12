@@ -826,6 +826,12 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
         )
         with gr.Tabs():
             with gr.Tab("🛡️ Interview Simulator"):
+                gr.Markdown(
+                    "📱 **Mobile Practice Note:** Keep Safari in the foreground during multi-turn "
+                    "sessions to prevent iOS background tab reloads before tapping "
+                    "**Wrap Up & Finalize Session**.",
+                    elem_id="mobile-note",
+                )
                 persona = gr.Radio(
                     choices=list(PERSONAS),
                     value="Dr. Daniella Kim — Research Head",

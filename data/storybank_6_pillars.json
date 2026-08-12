@@ -12,7 +12,7 @@
       "task": "Create a rigorous way to audit whether agentic systems deserved user trust and preserved user control.",
       "action": "Developed Principles for Agentic Trust around four audit dimensions: Alignment, Execution, Control, and Calibration.",
       "result": "The framework was accepted at ACM CSCW 2026 Industry Perspectives.",
-      "earned_secret": "Trust in agentic systems is not a global attitude; it must be calibrated separately to whether the system intends the right goal, executes reliably, remains controllable, and communicates uncertainty well enough for the human to intervene.",
+      "earned_secret": "High trust in non-deterministic AI isn't built by hiding uncertainty; it's built by making system observability explicit during execution.",
       "deploy_for": ["research vision", "standard setting", "AI assurance", "Lead/Staff influence"],
       "strength": 5,
       "evidence_status": "Candidate-supplied fact"
@@ -27,7 +27,7 @@
       "task": "Translate human perceptual limits into defensible multimodal system requirements at major program scale.",
       "action": "Built a psychophysics-led approach to latency thresholds, supported cognitive-load modeling with fNIRS and eye tracking, and contributed multimodal interaction architecture captured in US Patent US-12532040-B1.",
       "result": "The work informed a $50M program and replaced arbitrary targets with human perceptual thresholds.",
-      "earned_secret": "A faster system is not automatically a better human system; the economically correct requirement is often the perceptual boundary where additional speed stops changing human performance.",
+      "earned_secret": "Arbitrary engineering SLAs waste millions; human perceptual thresholds are non-linear, so latency targets must be anchored to cognitive trust degradation curves.",
       "deploy_for": ["quantified impact", "requirements influence", "hardware-software integration", "executive communication"],
       "strength": 5,
       "evidence_status": "Candidate-supplied fact"
@@ -42,7 +42,7 @@
       "task": "Validate the Human-Systems Integration design against foreseeable use failures and applicable human-factors standards.",
       "action": "Applied use Failure Mode and Effects Analysis alongside NASA-STD-3001 and MIL-STD-1472 guidance to structure validation and risk identification.",
       "result": "Produced standards-grounded HSI validation evidence for the clinical workstation effort; specific design changes and risk reductions require candidate confirmation before interview use.",
-      "earned_secret": "In safety-critical systems, compliance is the floor, not the argument: the strongest human-factors leader connects each standard to a concrete use failure, operational consequence, and verification method.",
+      "earned_secret": "In safety-critical aerospace/clinical environments, task speed isn't the primary safety metric—eliminating high-consequence use-error modes via physical display layout is.",
       "deploy_for": ["safety criticality", "MIL-STD compliance", "risk mitigation", "defense-domain transfer"],
       "strength": 4,
       "evidence_status": "Core work is candidate-supplied; outcome detail needs validation"
