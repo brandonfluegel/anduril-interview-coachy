@@ -69,33 +69,76 @@ hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }
 a { color: #14507d; }
 strong { font-weight: 700; }
 
+/* The interviewer's prompt — must not look like your answer. */
+blockquote.prompt {
+  font-family: Helvetica, Arial, sans-serif;
+  border: 1px solid #444;
+  border-left-width: 5px;
+  background: #f2f2f0;
+  padding: .55em .8em;
+  margin: .8em 0 1em;
+}
+blockquote.warn {
+  border: 1px dashed #8a6d1f;
+  border-left-width: 4px;
+  background: #fdf8ea;
+  padding: .5em .8em;
+}
+p.probe {
+  font-family: Helvetica, Arial, sans-serif;
+  margin-top: 1.1em;
+}
+p.probe em { color: #666; font-style: normal; }
+
 @media print {
-  @page { size: letter; margin: 11mm 10mm; }
-  body { background: #fff; font-size: 10.5pt; line-height: 1.36; padding: 0; }
-  /* Two columns is what gets 28k words into ~30 sheets and keeps a readable measure. */
+  @page { size: letter; margin: 10mm 9mm; }
+  body { background: #fff; font-size: 11pt; line-height: 1.42; padding: 0; }
+  /* Two columns keeps a readable line length; a single column at this size runs ~100 characters. */
   main {
     max-width: none; box-shadow: none; padding: 0;
-    column-count: 2; column-gap: 7mm; column-fill: auto;
+    column-count: 2; column-gap: 6.5mm; column-fill: auto;
+    column-rule: 0.5pt solid #ddd;
+    hyphens: none;
   }
   h1 {
-    font-size: 16pt; column-span: all; margin: 11pt 0 7pt;
-    padding-bottom: 3pt; border-bottom: 2pt solid #000;
+    font-size: 16pt; column-span: all; margin: 12pt 0 8pt;
+    padding-bottom: 4pt; border-bottom: 2.5pt solid #000;
   }
   h1:first-of-type { margin-top: 0; }
+  /* Each pillar is a memorization chunk, so give it a hard visual boundary. */
   h2 {
-    font-size: 12pt; margin: 12pt 0 4pt; padding-top: 4pt;
-    border-top: 1.2pt solid #000; break-after: avoid; break-inside: avoid;
+    font-size: 12.5pt; margin: 16pt 0 5pt; padding-top: 5pt;
+    border-top: 2pt solid #000; break-after: avoid; break-inside: avoid;
   }
-  h3 { font-size: 10.6pt; margin: 8pt 0 3pt; break-after: avoid; }
-  h4 { font-size: 10.2pt; margin: 7pt 0 2pt; break-after: avoid; }
-  p { margin: 0 0 5pt; }
-  ul, ol { margin: 0 0 5pt; padding-left: 14pt; }
-  li { margin: 0 0 2pt; }
+  h2 + p { font-size: 8.8pt; color: #444; margin: 0 0 6pt; }
+  h3 {
+    font-size: 10.8pt; margin: 11pt 0 3pt; break-after: avoid;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  h4 { font-size: 10.4pt; margin: 8pt 0 2pt; break-after: avoid; }
+  p { margin: 0 0 5.5pt; }
+  ul, ol { margin: 0 0 5.5pt; padding-left: 14pt; }
+  li { margin: 0 0 2.5pt; }
   p, li, blockquote { orphans: 2; widows: 2; }
-  blockquote { margin: 4pt 0 6pt; padding: 0 0 0 7pt; border-left: 2pt solid #999; }
+  /* Default blockquote = the words you actually say. */
+  blockquote {
+    margin: 4pt 0 7pt; padding: 1pt 0 1pt 8pt;
+    border-left: 2.5pt solid #555; background: none;
+  }
   blockquote p { margin: 0 0 3pt; }
-  table { column-span: all; font-size: 8.8pt; margin: 7pt 0; }
-  th, td { padding: 3pt 5pt; }
+  blockquote.prompt {
+    border: 0.8pt solid #333; border-left-width: 4pt;
+    background: #f0f0ee; padding: 5pt 7pt; margin: 5pt 0 8pt;
+    break-inside: avoid;
+  }
+  blockquote.warn {
+    border: 0.8pt dashed #7a6118; border-left-width: 3pt;
+    background: #fbf6e8; padding: 5pt 7pt;
+  }
+  p.probe { margin: 11pt 0 3pt; font-size: 10.4pt; break-after: avoid; }
+  p.probe em { color: #555; font-style: normal; }
+  table { column-span: all; font-size: 9pt; margin: 8pt 0; }
+  th, td { padding: 3.5pt 5pt; }
   code { background: none; font-size: .9em; }
   hr { display: none; }
   a { color: inherit; text-decoration: none; }
@@ -121,7 +164,14 @@ PAGE = """<!DOCTYPE html>
 
 def render(md: MarkdownIt, path: Path) -> str:
     text = STYLE_BLOCK.sub("", path.read_text(encoding="utf-8"), count=1)
-    return md.render(text)
+    body = md.render(text)
+    # Markdown renders prompts, warnings and model answers as identical blockquotes; tag them so print CSS can separate them.
+    body = body.replace(
+        "<blockquote>\n<p><strong>Base:</strong>", '<blockquote class="prompt">\n<p><strong>Base:</strong>'
+    )
+    body = body.replace("<blockquote>\n<p>\u26a0\ufe0f", '<blockquote class="warn">\n<p>\u26a0\ufe0f')
+    body = re.sub(r"<p><strong>(F\d) \u2014", lambda m: f'<p class="probe"><strong>{m.group(1)} \u2014', body)
+    return body
 
 
 def main() -> None:
