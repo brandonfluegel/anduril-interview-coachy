@@ -125,6 +125,20 @@ def main() -> None:
             assert banned not in spoken, f"{pillar_id} asks about the settled recruiter topic '{banned}'"
     print("OK  all four personas build every stage instruction and no pillar re-opens settled topics")
 
+    live_context = app.load_live_context()
+    debrief_context = app.load_debrief_context()
+    for bank_file in ("technical_questions", "culture_questions", "positioning_questions"):
+        assert bank_file not in live_context, f"{bank_file} must not ship in the live instruction payload"
+    assert "DETAILED RUBRIC" not in live_context, "grading rubric must not ship on live turns"
+    assert "DETAILED RUBRIC" in debrief_context, "debrief still needs the rubric"
+    assert "TQ01 | Research Thesis" in debrief_context, "debrief needs the compact pillar index"
+    assert len(live_context) < len(debrief_context)
+    assert len(live_context) // 4 < 12000, "live instructions exceed the per-turn token budget"
+    print(
+        f"OK  instruction payloads split: live ~{len(live_context) // 4} tok, "
+        f"debrief ~{len(debrief_context) // 4} tok"
+    )
+
     summary, history = app.load_progress_dashboard()
     assert "Sprint Readiness" in summary
     print(f"OK  live dashboard reads {len(history)} prior session rows")

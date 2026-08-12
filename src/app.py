@@ -22,6 +22,7 @@ MODEL = "gpt-4o"
 TTS_MODEL = "tts-1"
 AUDIO_RETENTION_SECONDS = 3600.0
 OPENAI_TIMEOUT_SECONDS = 45.0
+OPENAI_MAX_RETRIES = 3
 SESSION_LOG_END = "<!-- FOUR_TURN_SESSION_LOG_END -->"
 SPEAKING_WORDS_PER_MINUTE = 150
 SESSION_RECORD_PATTERN = re.compile(r"<!-- FOUR_TURN_SESSION_JSON (.+?) -->")
@@ -478,6 +479,13 @@ def selected_pillar_id(pillar_choice: str) -> str:
     return pillar_choice.split("|", 1)[0].strip() if "|" in pillar_choice else ""
 
 
+def pillar_index() -> str:
+    return "\n".join(
+        f"- {pillar_id} | {question.pillar} ({bank_name})"
+        for pillar_id, (bank_name, question) in PILLAR_REGISTRY.items()
+    )
+
+
 def pillar_brief(pillar_id: str, persona: str) -> str:
     entry = PILLAR_REGISTRY.get(pillar_id)
     if entry is None:
@@ -540,16 +548,24 @@ Positioning and close pillars:
     return instructions.get(next_turn, instructions["open"])
 
 
-def load_system_context() -> str:
+def load_live_context() -> str:
+    """Live turns get only what the persona needs in the room; the banks arrive per-turn in the prompt."""
     sections = {
         "SYSTEM CONTRACT": SYSTEM_PROMPT,
         "CANONICAL CANDIDATE RESUME": read_text("data/candidate_profile.json"),
         "CANONICAL AIR DEFENSE JOB REQUIREMENTS": read_text("data/target_anduril_air_defense.json"),
-        "CANONICAL STORYBANK": read_text("data/storybank_6_pillars.json"),
-        "BEHAVIORAL AND FIT QUESTION BANK": read_text("data/behavioral_questions.json"),
-        "TECHNICAL AND RESEARCH-CRAFT QUESTION BANK": read_text("data/technical_questions.json"),
-        "CULTURE AND STAKEHOLDER COLLABORATION QUESTION BANK": read_text("data/culture_questions.json"),
-        "POSITIONING, SCOPE AND CLOSE QUESTION BANK": read_text("data/positioning_questions.json"),
+        "CANONICAL STORYBANK AND EVIDENCE TIERS": read_text("data/storybank_6_pillars.json"),
+    }
+    return "\n\n".join(f"## {name}\n{content}" for name, content in sections.items())
+
+
+def load_debrief_context() -> str:
+    sections = {
+        "SYSTEM CONTRACT": SYSTEM_PROMPT,
+        "CANONICAL CANDIDATE RESUME": read_text("data/candidate_profile.json"),
+        "CANONICAL AIR DEFENSE JOB REQUIREMENTS": read_text("data/target_anduril_air_defense.json"),
+        "CANONICAL STORYBANK AND EVIDENCE TIERS": read_text("data/storybank_6_pillars.json"),
+        "CANONICAL PILLAR INDEX": pillar_index(),
         "CURRENT COACHING STATE": read_text("data/coaching_state.md"),
         "INTERVIEW PERSONAS": read_text("references/role-drills.md"),
         "DETAILED RUBRIC": read_text("references/rubrics-detailed.md"),
@@ -562,15 +578,16 @@ def parse_openai_response(
     response_format: type[ResponseModel],
     temperature: float,
     max_output_tokens: int,
+    instructions: str,
 ) -> ResponseModel:
     try:
         response = OpenAI(
             api_key=require_api_key(),
             timeout=OPENAI_TIMEOUT_SECONDS,
-            max_retries=1,
+            max_retries=OPENAI_MAX_RETRIES,
         ).responses.parse(
             model=MODEL,
-            instructions=load_system_context(),
+            instructions=instructions,
             input=prompt,
             text_format=response_format,
             temperature=temperature,
@@ -581,7 +598,14 @@ def parse_openai_response(
     except APIConnectionError as exc:
         raise gr.Error("The interview service is unreachable. Check your connection and try again.") from exc
     except RateLimitError as exc:
-        raise gr.Error("The interview service is temporarily busy. Wait a moment and try again.") from exc
+        if "quota" in str(exc).lower():
+            raise gr.Error(
+                "OpenAI reports no remaining quota on this API key. Check billing, then try again."
+            ) from exc
+        raise gr.Error(
+            "OpenAI rate-limited this request after 3 retries. Wait about a minute, then submit again — "
+            "your session is intact."
+        ) from exc
     except APIStatusError as exc:
         raise gr.Error(f"The interview service returned an error ({exc.status_code}). Please try again.") from exc
     except ValidationError as exc:
@@ -1028,7 +1052,13 @@ Cross-examine a concrete claim from the canonical resume against a concrete Air 
 
 Return pillar_id as the canonical bank ID this question tests, such as TQ02 or PQ01.
 """
-    result = parse_openai_response(prompt, InterviewQuestion, temperature=0.3, max_output_tokens=350)
+    result = parse_openai_response(
+        prompt,
+        InterviewQuestion,
+        temperature=0.3,
+        max_output_tokens=350,
+        instructions=load_live_context(),
+    )
     return result.question.strip(), result.pillar_id.strip()
 
 
@@ -1112,7 +1142,13 @@ Candidate's newest answer:
 {answer}
 """
 
-    result = parse_openai_response(prompt, InterviewerTurn, temperature=0.5, max_output_tokens=500)
+    result = parse_openai_response(
+        prompt,
+        InterviewerTurn,
+        temperature=0.5,
+        max_output_tokens=500,
+        instructions=load_live_context(),
+    )
     question = result.question.strip()
     if not question:
         raise gr.Error("The interviewer returned no follow-up question. Please submit again.")
@@ -1198,7 +1234,13 @@ Full interview transcript:
 {render_transcript(prior_turns)}
 """
 
-    evaluation = parse_openai_response(prompt, Evaluation, temperature=0.2, max_output_tokens=2600)
+    evaluation = parse_openai_response(
+        prompt,
+        Evaluation,
+        temperature=0.2,
+        max_output_tokens=2600,
+        instructions=load_debrief_context(),
+    )
     validate_evaluation(evaluation)
     session_pillars = covered_pillars + [
         pillar for pillar in known_pillars(evaluation.pillars_covered) if pillar not in covered_pillars
@@ -1245,10 +1287,31 @@ def unlock_setup() -> tuple[gr.Accordion, gr.Radio]:
 
 
 HEAD = r"""
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f4f1e9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function () {
+  // After each turn, drop the iOS keyboard and bring the new question into view.
+  window.focusInterviewer = function () {
+    var active = document.activeElement;
+    if (active && typeof active.blur === "function") { active.blur(); }
+    var target = document.getElementById("pushback");
+    if (!target) { return; }
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.setTimeout(function () {
+      target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }, 60);
+  };
+})();
+</script>
 """
+
+FOCUS_INTERVIEWER_JS = "() => { if (window.focusInterviewer) { window.focusInterviewer(); } }"
 
 SPRINT_CHECKLIST = [
     "Block 1: Dr. Kim — positioning and thesis (PQ01, PQ02, TQ01)",
@@ -1309,9 +1372,27 @@ body.dark {
   background-size: 28px 28px;
 }
 
-html, body { max-width: 100%; overflow-x: hidden; }
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overscroll-behavior-y: contain;
+  -webkit-tap-highlight-color: transparent;
+}
 
-#shell { max-width: 1120px; margin: 0 auto; padding: 20px 16px 40px; overflow-x: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+#shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 16px calc(40px + env(safe-area-inset-bottom));
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+  overflow-x: clip;
+}
 #shell *, #masthead * { overflow-wrap: anywhere; word-break: break-word; }
 #masthead { border-top: 7px solid var(--signal); border-bottom: 1px solid var(--line); padding: 18px 0 16px; margin-bottom: 18px; }
 #masthead h1 { font-family: 'IBM Plex Mono', monospace; font-size: clamp(1.55rem, 4vw, 2.5rem); line-height: 1.05; letter-spacing: 0; margin: 0; color: var(--ink) !important; }
@@ -1357,9 +1438,10 @@ ul.options .item span {
   color: #0f172a !important;
   -webkit-text-fill-color: #0f172a !important;
   opacity: 1 !important;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.4;
-  padding: 8px 10px;
+  padding: 12px 12px;
+  min-height: 44px;
 }
 ul.options li.selected,
 ul.options li.active,
@@ -1374,7 +1456,47 @@ ul.options li:hover span {
 #shell input[type='radio'] + span,
 #shell label:has(input[type='radio']) { background: #fffdf7 !important; color: var(--ink) !important; border-color: var(--line) !important; }
 #shell label.selected:has(input[type='radio']) { background: #ebe7dd !important; border-color: var(--signal) !important; }
-#answer textarea { min-height: 190px; max-height: 60vh; font-size: 1.05rem; line-height: 1.55; overflow-y: auto; overflow-x: hidden; }
+#answer textarea {
+  min-height: 190px;
+  max-height: 55dvh;
+  font-size: 16px;
+  line-height: 1.55;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* iOS zooms the page whenever a focused field is under 16px. */
+#shell textarea,
+#shell input:not([type='radio']):not([type='checkbox']),
+ul.options input {
+  font-size: 16px !important;
+}
+#shell button {
+  min-height: 46px;
+  transition: background-color 120ms ease, border-color 120ms ease, transform 80ms ease;
+  touch-action: manipulation;
+}
+#shell button:active { transform: scale(0.985); }
+#shell label:has(input[type='radio']),
+#sprint-checklist label {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+}
+#shell [role='tab'] {
+  flex: 1 1 auto;
+  min-height: 48px;
+  font-size: 0.95rem;
+}
+#interviewer-audio { --size-96: 3.4rem; }
+#interviewer-audio .controls,
+#interviewer-audio .waveform-container { min-height: 44px; }
+@media (prefers-reduced-motion: reduce) {
+  #shell *, #shell *::before, #shell *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 #turn-indicator { border-left: 5px solid var(--steel); background: #ebe7dd; padding: 7px 14px; }
 #answer-meter { padding: 2px 2px 6px; font-size: 0.9rem; }
 #answer-meter * { color: #475569 !important; }
@@ -1465,18 +1587,38 @@ ul.options li:hover span {
 #evaluate:hover { background: #b92e24; border-color: #b92e24; }
 footer { display: none !important; }
 @media (max-width: 700px) {
-  #shell { padding: 8px 8px 28px; }
-  #answer textarea { min-height: 230px; }
-  #masthead { padding-top: 12px; }
-    #shell button { white-space: normal; }
-    #shell .tab-nav { overflow-x: auto; }
+  #shell { padding: 8px 8px calc(28px + env(safe-area-inset-bottom)); }
+  #answer textarea { min-height: 34dvh; }
+  /* Reclaim the fold: the masthead blurb and practice note are read once, not every turn. */
+  #masthead { padding: 8px 0 10px; margin-bottom: 10px; border-top-width: 5px; }
+  #masthead p { display: none; }
+  #mobile-note { font-size: 0.78rem; opacity: 0.75; margin: 0; }
+  #shell button { white-space: normal; }
+  #shell .tab-container { display: flex; overflow-x: visible; }
+  #shell .gap,
+  #shell .column,
+  #shell .row { gap: 10px !important; }
+  #shell .block { padding: 10px !important; }
+  #mobile-note { padding: 0 !important; }
+  ul.options { max-height: 38dvh !important; }
+  /* Keep Submit reachable with one thumb while the keyboard is up. */
+  #evaluate {
+    position: sticky;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 40;
+    box-shadow: 0 8px 20px rgba(23, 23, 23, 0.22);
+  }
+  /* Clears the sticky turn indicator when a new question is scrolled into view. */
+  #pushback { scroll-margin-top: 58px; }
+  #turn-indicator { position: sticky; top: 0; z-index: 30; }
 }
 @media (max-width: 440px) {
-  #shell { padding: 6px 6px 24px; }
+  #shell { padding: 6px 6px calc(24px + env(safe-area-inset-bottom)); }
   #shell .gap, #shell .form { gap: 8px !important; }
   #pushback, #scorecard, #turn-indicator { padding-left: 10px; padding-right: 10px; }
   #scorecard { min-height: 240px; }
   #shell .block { padding: 8px !important; }
+  #masthead h1 { font-size: 1.4rem; }
 }
 """
 
@@ -1502,9 +1644,7 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
         with gr.Tabs():
             with gr.Tab("🛡️ Interview Simulator"):
                 gr.Markdown(
-                    "📱 **Mobile Practice Note:** Keep Safari in the foreground during multi-turn "
-                    "sessions to prevent iOS background tab reloads before tapping "
-                    "**Wrap Up & Finalize Session**.",
+                    "📱 Keep Safari in the foreground until you finalize — iOS reloads background tabs.",
                     elem_id="mobile-note",
                 )
                 with gr.Accordion("Session setup", open=True, elem_id="setup-panel") as setup_panel:
@@ -1536,10 +1676,9 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                 )
                 answer = gr.Textbox(
                     label="Candidate answer",
-                    placeholder="Place the cursor here, dictate with Superwhisper, then submit.",
+                    placeholder="Tap here, dictate with Superwhisper, then submit.",
                     lines=10,
                     max_lines=30,
-                    autofocus=True,
                     elem_id="answer",
                 )
                 answer_readout = gr.Markdown(answer_meter(""), elem_id="answer-meter")
@@ -1603,10 +1742,13 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
     )
     start_event.then(lock_setup, outputs=setup_outputs, queue=False)
     start_event.then(speak_interviewer, speak_inputs, interviewer_audio)
+    start_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
     continue_event = continue_button.click(continue_conversation, submit_inputs, session_outputs)
     continue_event.then(speak_interviewer, speak_inputs, interviewer_audio)
+    continue_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
     submit_event = answer.submit(continue_conversation, submit_inputs, session_outputs)
     submit_event.then(speak_interviewer, speak_inputs, interviewer_audio)
+    submit_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
     finalize_event = finalize_button.click(finalize_session, finalize_inputs, session_outputs)
     finalize_event.then(unlock_setup, outputs=setup_outputs, queue=False)
     finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
