@@ -28,6 +28,7 @@ def build_evaluation() -> app.Evaluation:
             app.UplevelScore(criterion=name, score=None if name == "Research Velocity" else 4, evidence="Cited.")
             for name in app.LEAD_STAFF_CRITERIA
         ],
+        pillars_covered=["TQ02", "BQ04", "PQ01", "NOPE99"],
         strongest_signal="Bridged latency targets to perceptual thresholds.",
         primary_gap="No falsifiable trust metric.",
         priority_move="Name the measurement instrument.",
@@ -58,6 +59,7 @@ def main() -> None:
     assert turns == 7, f"expected 7 completed turns, got {turns}"
     assert "CANDIDATE: Answer 7." in app.render_transcript(transcript)
     assert app.conversation_stage(9)[0] == app.OPEN_STAGE[0], "turns past 4 must fall back to the open stage"
+    assert app.conversation_stage(2, "hm")[0] == app.HM_ARC[2][0], "hiring manager mode must use its own arc"
     print("OK  multi-turn transcript helpers handle unlimited turns")
 
     evaluation = build_evaluation()
@@ -75,21 +77,33 @@ def main() -> None:
         app.COACHING_STATE_PATH = sandbox
         try:
             before = len(app.load_session_records())
-            record = app.persist_session("Dr. Daniella Kim", evaluation, turns)
+            record = app.persist_session("Dr. Daniella Kim", "hm", evaluation, turns)
             records = app.load_session_records()
             assert len(records) == before + 1
             assert records[-1].timestamp == record.timestamp
             assert records[-1].turns_completed == 7
+            assert records[-1].mode == "hm"
+            assert records[-1].pillars_covered == ["TQ02", "BQ04", "PQ01"], "unknown pillar IDs must be dropped"
             assert set(records[-1].core_averages) == set(app.CORE_DIMENSIONS)
             summary, history = app.load_progress_dashboard()
             assert f"**Total mock sessions completed:** {before + 1}" in summary
             assert "**Total conversation turns practiced:**" in summary
+            assert "### Pillar Coverage" in summary
             assert history[0][0] == record.timestamp
-            assert history[0][2] == 7
+            assert history[0][3] == 7
             assert len(history[0]) == len(app.SESSION_HISTORY_HEADERS)
         finally:
             app.COACHING_STATE_PATH = original
     print("OK  multi-turn session persistence round-trips into the progress dashboard")
+
+    for mode in app.SESSION_MODES.values():
+        instruction = app.mode_stage_instruction(mode, 2, "Dr. Daniella Kim")
+        assert instruction.strip(), f"{mode} produced an empty stage instruction"
+    for banned in ("relocation", "compensation", "salary", "clearance", "travel"):
+        assert banned not in app.mode_stage_instruction("hm", 3, "Dr. Daniella Kim").lower(), (
+            f"hiring manager mode must not re-open the settled recruiter topic '{banned}'"
+        )
+    print("OK  every session format builds stage instructions and the HM mode stays off settled topics")
 
     summary, history = app.load_progress_dashboard()
     assert "Sprint Readiness" in summary

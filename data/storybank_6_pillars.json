@@ -1,6 +1,20 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "candidate": "Dr. Brandon Fluegel",
+  "evidence_tiers": {
+    "resume_canonical": "Stated on the canonical resume with its outcome. Safe to assert verbatim under pushback.",
+    "resume_backed_unquantified": "The work and role are on the canonical resume, but no outcome metric exists. Assert the work and the mechanism; never invent a number.",
+    "thesis_no_deployment": "A position or framework the candidate holds. Assert it as a thesis. Never imply it shipped or produced an operational result.",
+    "unverified_do_not_assert": "Not on the canonical resume and not independently verified. Never state it as fact in a live answer; may only be raised as an explicit hypothesis."
+  },
+  "do_not_claim": [
+    "fNIRS use at Brigham and Women's Hospital or Harvard Medical School — the resume places fNIRS at Amazon only",
+    "Any head-to-head result showing fNIRS or ECG outperformed NASA-TLX — no such comparison is on the resume",
+    "The content of any Dr. Daniella Kim keynote, or any prior interaction with her",
+    "Any operational deployment, adoption, or outcome for Calibrated Cognitive Friction",
+    "Any Echo Hub or Echo Show metric beyond shaping strategy for a portfolio reaching 75M+ customers",
+    "Any clearance status, classified program detail, or Anduril-internal process, team, or headcount detail"
+  ],
   "stories": [
     {
       "id": "S001",
@@ -15,7 +29,8 @@
       "earned_secret": "High trust in non-deterministic AI isn't built by hiding uncertainty; it's built by making system observability explicit during execution.",
       "deploy_for": ["research vision", "standard setting", "AI assurance", "Lead/Staff influence"],
       "strength": 5,
-      "evidence_status": "Candidate-supplied fact"
+      "evidence_tier": "resume_canonical",
+      "evidence_status": "Resume-canonical: authored at Sling, accepted to ACM CSCW 2026 Industry Perspectives."
     },
     {
       "id": "S002",
@@ -30,7 +45,8 @@
       "earned_secret": "Arbitrary engineering SLAs waste millions; human perceptual thresholds are non-linear, so latency targets must be anchored to cognitive trust degradation curves.",
       "deploy_for": ["quantified impact", "requirements influence", "hardware-software integration", "executive communication"],
       "strength": 5,
-      "evidence_status": "Candidate-supplied fact"
+      "evidence_tier": "resume_canonical",
+      "evidence_status": "Resume-canonical: $50M operational value, US Patent US-12532040-B1, 2023 Amazon Inventor Award."
     },
     {
       "id": "S003",
@@ -41,11 +57,12 @@
       "situation": "NASA Langley's Lunar Gateway clinical workstation work involved safety-critical human performance in a constrained spaceflight environment.",
       "task": "Validate the Human-Systems Integration design against foreseeable use failures and applicable human-factors standards.",
       "action": "Applied use Failure Mode and Effects Analysis alongside NASA-STD-3001 and MIL-STD-1472 guidance to structure validation and risk identification.",
-      "result": "Produced standards-grounded HSI validation evidence for the clinical workstation effort; specific design changes and risk reductions require candidate confirmation before interview use.",
-      "earned_secret": "In safety-critical aerospace/clinical environments, task speed isn't the primary safety metric—eliminating high-consequence use-error modes via physical display layout is.",
+      "result": "Redesigned physical layouts and control displays against NASA-STD-3001 and MIL-STD-1472, reducing operator task completion times by 30% while eliminating critical system input errors.",
+      "earned_secret": "In safety-critical aerospace/clinical environments, task speed isn't the primary safety metric\u2014eliminating high-consequence use-error modes via physical display layout is.",
       "deploy_for": ["safety criticality", "MIL-STD compliance", "risk mitigation", "defense-domain transfer"],
-      "strength": 4,
-      "evidence_status": "Core work is candidate-supplied; outcome detail needs validation"
+      "strength": 5,
+      "evidence_tier": "resume_canonical",
+      "evidence_status": "Resume-canonical: the 30% task-time reduction and elimination of critical input errors are stated on the resume. Assert them directly."
     },
     {
       "id": "S004",
@@ -60,7 +77,8 @@
       "earned_secret": "Friction is not inherently a usability defect. At consequential decision boundaries, well-calibrated friction is a control surface that protects human agency and improves the quality of authorization.",
       "deploy_for": ["research thesis", "ethical challenge", "product tradeoffs", "autonomous lethal systems"],
       "strength": 4,
-      "evidence_status": "Philosophy supplied; operational result not yet evidenced"
+      "evidence_tier": "thesis_no_deployment",
+      "evidence_status": "Thesis only. Present it as the candidate's position and reason it through from first principles. Never imply it was deployed or produced an operational result."
     },
     {
       "id": "S005",
@@ -71,11 +89,12 @@
       "situation": "At Amazon Devices and Mercedes-Benz R&D, user performance depended on coordinated physical and digital cues rather than a screen-only interface.",
       "task": "Determine how biometric, haptic, auditory, and visual signals should support attention, cognitive load, and control transitions.",
       "action": "Used multimodal interaction architecture, simulator studies of Level 2/Level 3 handovers, and biometric methods including fNIRS and eye tracking to study human-system performance.",
-      "result": "Generated evidence relevant to multimodal architecture and autonomous handovers; Echo Hub-specific outcome details require candidate confirmation.",
+      "result": "Directly shaped product and interaction strategy for the Echo Show and Echo Hub portfolio reaching more than 75M customers, and generated the multimodal handover evidence behind US Patent US-12532040-B1.",
       "earned_secret": "A handover is not a notification event; it is a time-bounded transfer of situation awareness, confidence, and physical control across modalities.",
       "deploy_for": ["C2 operator workflow", "physical-digital ergonomics", "multimodal alerts", "system integration"],
       "strength": 4,
-      "evidence_status": "Methods supplied; product-specific outcome detail needs validation"
+      "evidence_tier": "resume_backed_unquantified",
+      "evidence_status": "Resume-backed: the portfolio influence and 75M+ customer reach are on the resume. No Echo Hub-specific performance metric exists \u2014 describe the mechanism, never invent a number."
     },
     {
       "id": "S006",
@@ -89,8 +108,9 @@
       "result": "Prepared a Lead/Staff-level interview agenda; the exact keynote questions, proposed studies, and any interaction with Dr. Kim must be validated before use.",
       "earned_secret": "Lead-level influence does not require pretending an ambiguous question is solved; it requires converting ambiguity into a falsifiable research program whose decision consequences are clear to engineering and product leaders.",
       "deploy_for": ["Dr. Kim interview", "research strategy", "executive ambiguity", "first-90-days plan"],
-      "strength": 3,
-      "evidence_status": "Interview preparation hypothesis; requires source validation"
+      "strength": 2,
+      "evidence_tier": "unverified_do_not_assert",
+      "evidence_status": "Unverified. No keynote content and no prior interaction with Dr. Kim may be asserted. Use this only as a private framing exercise for building a first-90-days research agenda."
     },
     {
       "id": "S007",
@@ -105,7 +125,8 @@
       "earned_secret": "Multimodal alerts (auditory + haptic) reduce handover panic by priming driver situational awareness before control transition.",
       "deploy_for": ["operator handover", "multimodal alerting", "trust calibration", "autonomy transfer of control"],
       "strength": 4,
-      "evidence_status": "Candidate-supplied fact"
+      "evidence_tier": "resume_canonical",
+      "evidence_status": "Resume-canonical: 24% improvement in safety and trust ratings."
     },
     {
       "id": "S008",
@@ -120,7 +141,8 @@
       "earned_secret": "Information density must dynamically scale down during high-stress maneuvers to prevent visual cognitive overload.",
       "deploy_for": ["field research", "mobile and handheld C2", "cognitive load under tempo", "business impact"],
       "strength": 3,
-      "evidence_status": "Candidate-supplied fact"
+      "evidence_tier": "resume_canonical",
+      "evidence_status": "Resume-canonical: 5% increase in driver retention."
     },
     {
       "id": "S009",
@@ -130,12 +152,13 @@
       "secondary_skills": ["Neuroimaging", "Physiological telemetry", "High-stress task interruption"],
       "situation": "At Brigham and Women's Hospital / Harvard Medical School, acute-stress research depended on physiological signal processing rather than self-report, and the candidate's Old Dominion doctoral work studied working memory, spatial processing, and reaction times during high-stress task interruptions.",
       "task": "Establish what objective physiological data reveals about cognitive state under acute stress.",
-      "action": "Processed functional neuroimaging (fMRI), ECG, and telemetry data for acute-stress research, and later built an fNIRS and eye-tracking cognitive load framework at Amazon.",
-      "result": "Produced an objective measurement foundation for cognitive workload; the specific comparison against subjective survey instruments requires candidate confirmation before interview use.",
-      "earned_secret": "Objective biometric telemetry (fNIRS/ECG) uncovers cognitive workload spikes that subjective post-task surveys (like NASA-TLX) completely miss.",
+      "action": "Processed functional neuroimaging (fMRI), ECG, and telemetry data for acute-stress research at Brigham and Women's / Harvard, and separately built an fNIRS and eye-tracking cognitive load framework at Amazon.",
+      "result": "Established an objective measurement foundation for cognitive workload across two settings.",
+      "earned_secret": "Objective biometric telemetry surfaces workload dynamics inside the task that a post-task subjective rating can only summarize after the fact.",
       "deploy_for": ["objective workload measurement", "method rigor", "operator stress", "measurement validity"],
       "strength": 3,
-      "evidence_status": "Methods are candidate-supplied; NASA-TLX comparison and fNIRS use at Brigham are not in the canonical resume and need validation"
+      "evidence_tier": "resume_backed_unquantified",
+      "evidence_status": "Resume-backed with a hard boundary: fMRI/ECG/telemetry belong to Brigham, fNIRS and eye tracking belong to Amazon. Never merge them, and never claim a head-to-head result against NASA-TLX."
     }
   ],
   "portfolio_rules": {

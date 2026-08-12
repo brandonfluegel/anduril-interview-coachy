@@ -35,6 +35,7 @@ Public sharing is disabled by default. To request a temporary public Gradio URL,
 - `data/behavioral_questions.json`: ten defense-tech behavioral pillars with persona adaptations, follow-up probes, and Lead/Staff bars
 - `data/technical_questions.json`: ten technical and research-craft pillars mapping every posted responsibility and qualification to resume evidence, with persona adaptations, follow-up probes, and Lead/Staff bars
 - `data/culture_questions.json`: ten Anduril culture, mission-fit, and stakeholder-collaboration pillars with named stakeholder groups, persona adaptations, follow-up probes, and Lead/Staff bars
+- `data/positioning_questions.json`: ten positioning, scope, and close pillars covering the ninety-second pitch, first ninety days, research vision, level argument, cross-panel message discipline, portfolio framing, questions for the interviewer, and objection handling
 - `data/coaching_state.md`: active readiness and session context
 - `references/role-drills.md`: interviewer persona definitions
 - `references/rubrics-detailed.md`: detailed scoring anchors

@@ -65,6 +65,19 @@
       "Product Manager",
       "Design Lead"
     ],
+    "interview_process": {
+      "status": "Recruiter screen complete. Location preference, compensation expectations, and clearance eligibility are settled and closed.",
+      "remaining_stages": [
+        "30-minute conversation with the hiring manager, Dr. Daniella Kim, Head of Research.",
+        "Onsite loop of four back-to-back 1:1 interviews with engineering, design, and product partners.",
+        "Portfolio presentation, to be prepared separately at a later stage."
+      ],
+      "preparation_priority": [
+        "1. The 30-minute hiring manager conversation.",
+        "2. The four onsite 1:1 interviews.",
+        "3. The portfolio presentation."
+      ]
+    },
     "evaluation_levels": {
       "senior_uxr_baseline": "Expertly designs and executes studies that produce actionable product and program insights.",
       "lead_staff_uplevel_signal": "Sets company-wide standards, bridges engineering latency with human perception, establishes frameworks before policy exists, defines Research Operations tools, and translates complex Human Systems Integration findings into hard hardware and software specifications."

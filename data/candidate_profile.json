@@ -1,10 +1,11 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "3.0",
   "candidate": {
     "full_name": "Brandon Fluegel, PhD",
     "name": "Dr. Brandon Fluegel",
     "current_title": "Staff Human Factors Engineer & Researcher",
     "location": "Denver, CO",
+    "applied_experience_years": 6,
     "target_level": [
       "Human Factors Research Lead",
       "Staff Human Factors Engineer"
@@ -92,6 +93,35 @@
       ]
     }
   ],
+  "awards_and_patents": [
+    {
+      "name": "Amazon Inventor Award & US Patent US-12532040-B1",
+      "year": 2023,
+      "detail": "Recognized for developing novel multimodal interaction architectures for context-based user interface control inputs."
+    },
+    {
+      "name": "First-Year Student Honorarium",
+      "year": 2016,
+      "detail": "Awarded by the Human Factors & Ergonomics Society International."
+    },
+    {
+      "name": "James Jerger Award",
+      "year": 2014,
+      "detail": "For Excellence in Undergraduate Research, American Academy of Audiology."
+    }
+  ],
+  "logistics_settled": {
+    "status": "The recruiter screen is complete. These topics are closed and must never be re-opened by an interviewer persona or raised as a gap by the coach.",
+    "items": [
+      "Location: preference stated for Irvine / Costa Mesa, California.",
+      "Compensation: expectations already communicated to the recruiter. No number is recorded here and none may be asserted.",
+      "Clearance: eligibility to obtain and maintain a U.S. Top Secret clearance has been confirmed with the recruiter. Never state or imply an active clearance status.",
+      "Travel: the posted 25-30% travel expectation was covered in the screen."
+    ],
+    "still_open": [
+      "Level: the requisition is posted at Senior; the candidate targets Lead/Staff. This is argued from scope in the interviews, not settled."
+    ]
+  },
   "technical_skills": {
     "interaction_and_systems": [
       "Human-Robot Interaction (HRI)",
@@ -117,6 +147,6 @@
   },
   "evidence_policy": {
     "source": "Resume facts supplied for this repository update",
-    "rule": "Treat these details as canonical candidate evidence. Do not invent additional metrics, study outcomes, team sizes, publications, clearances, or operational claims."
+    "rule": "Treat these details as canonical candidate evidence. Do not invent additional metrics, study outcomes, team sizes, publications, clearances, or operational claims. Everything in logistics_settled is closed: never re-open it and never assert a compensation number or an active clearance status."
   }
 }

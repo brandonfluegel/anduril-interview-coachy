@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Positioning, scope, and close question bank for the 30-minute hiring manager conversation with Dr. Daniella Kim and the four onsite 1:1 interviews with engineering, design, and product partners.",
+  "usage_policy": "The recruiter screen is already complete. Location preference, compensation expectations, and clearance eligibility have been settled with the recruiter and are closed topics: never re-open them, never ask about relocation, travel percentage, salary, or clearance status, and never state or imply a clearance status. Ground every question in the posted job description and canonical resume.",
+  "personas": [
+    "Dr. Daniella Kim",
+    "Systems / ML Engineering Lead",
+    "Product Manager",
+    "Design Lead"
+  ],
+  "questions": [
+    {
+      "id": "PQ01",
+      "pillar": "Opening Positioning Pitch",
+      "arc_stages": ["opening", "close"],
+      "question": "Walk me through your background. Ninety seconds.",
+      "resume_and_role_links": [
+        "Six years of applied Human Factors across Amazon, NASA, Mercedes-Benz, Uber, Sling",
+        "Ph.D. in Human Factors Psychology, Old Dominion University",
+        "Calibrated Cognitive Friction and Principles for Agentic Trust",
+        "JD: Senior User Experience Researcher, Air Defense"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Before we get into specifics, give me the ninety-second version of who you are as a researcher and what you want to be known for.",
+        "Systems / ML Engineering Lead": "Give me the short version of your background, weighted toward the parts where your work turned into system requirements.",
+        "Product Manager": "Ninety seconds: who are you, what have you shipped, and why are you sitting here?",
+        "Design Lead": "Give me the quick version of your background and where you sit between research, design, and hardware."
+      },
+      "follow_ups": [
+        "You just gave me a career history. Give it to me again as an argument for why you are the right person for this specific role.",
+        "What is the one sentence you want me to repeat about you when I debrief with the panel?",
+        "You have a Ph.D. and a patent. Which of those actually matters for Air Defense, and why?"
+      ],
+      "lead_staff_bar": "Senior recites a competent chronological history. Lead/Staff opens with a thesis about the work, uses three proof points to support it, and lands on why this role is the next move — in under ninety seconds."
+    },
+    {
+      "id": "PQ02",
+      "pillar": "Why Leave, Why Here, Why Now",
+      "arc_stages": ["opening", "midpoint"],
+      "question": "You started at Sling in 2025 as a Staff Human Factors Engineer. Why leave, and why this role?",
+      "resume_and_role_links": [
+        "Sling Staff Human Factors Engineer & Researcher, Jun 2025 to present",
+        "Amazon Devices tenure Jun 2020 to Nov 2024",
+        "JD: Air Defense team, autonomous counter-drone systems and Lattice OS",
+        "Candidate target level: Lead/Staff"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "You are already Staff-titled at Sling. What does this role give you that your current one does not?",
+        "Systems / ML Engineering Lead": "Short tenure at your current company, and a posted role one rung below your current title. Help me understand the logic.",
+        "Product Manager": "Why leave a Staff role after about a year? I want to understand what you are moving toward, not away from.",
+        "Design Lead": "What kind of work do you want to be doing in three years that made you look at Air Defense?"
+      },
+      "follow_ups": [
+        "What would have to be true here for you to still be in this role in four years?",
+        "What is the honest answer about what is not working where you are now?",
+        "What specifically about counter-drone air defense pulled you, as opposed to any other defense program?"
+      ],
+      "lead_staff_bar": "Senior gives a credible, non-negative reason for moving. Lead/Staff frames the move around a mission and a scope of influence they intend to own, and answers the short-tenure and title-step questions without defensiveness."
+    },
+    {
+      "id": "PQ03",
+      "pillar": "First 90 Days & Entry Plan",
+      "arc_stages": ["midpoint", "close"],
+      "question": "Say you start next month. What are you doing in your first ninety days, and what have you shipped by day ninety?",
+      "resume_and_role_links": [
+        "Sling organizational Human Factors strategy from a standing start",
+        "Principles for Agentic Trust built without an external mandate",
+        "JD: work through ambiguity with little oversight",
+        "JD: operationalize ways to consolidate and share research insights"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Walk me through your first ninety days. What do you learn, what do you decide, and what artifact exists at the end of it?",
+        "Systems / ML Engineering Lead": "In your first quarter, what would you need from my team, and what would we get back that we could actually use?",
+        "Product Manager": "What does research produce in your first ninety days that changes something on my roadmap?",
+        "Design Lead": "In your first ninety days, how much of your time goes to learning the operator versus producing something the team can design against?"
+      },
+      "follow_ups": [
+        "What is the single artifact you would ship in that window, and who is forced to use it?",
+        "What would you deliberately not do in the first ninety days, even though someone will ask for it?",
+        "How would you know at day ninety that you had picked the wrong first problem?"
+      ],
+      "lead_staff_bar": "Senior plans a thorough onboarding and a first study. Lead/Staff commits to a decision, an artifact, and an operating mechanism by day ninety, and names what they are consciously deferring."
+    },
+    {
+      "id": "PQ04",
+      "pillar": "Research Vision for Air Defense",
+      "arc_stages": ["opening", "midpoint"],
+      "question": "If you owned Human Factors research for Air Defense, what would you build that does not exist yet?",
+      "resume_and_role_links": [
+        "Principles for Agentic Trust as a reusable audit framework",
+        "Amazon perceptual-threshold program that replaced arbitrary engineering targets",
+        "JD: help shape UX research best practices in Air Defense and across Anduril at large",
+        "JD: shape product and program strategy using rigorous data and user insights"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "If this were your research agenda to set, what is the program you would build, and what does it make possible that we cannot do today?",
+        "Systems / ML Engineering Lead": "What Human Factors capability would you build that would change how we write requirements, not just how we evaluate screens?",
+        "Product Manager": "What would you build in research here that pays for itself, and how would you prove it did?",
+        "Design Lead": "What research capability would most change the quality of operator experiences we can design?"
+      },
+      "follow_ups": [
+        "What would you have to stop doing to fund that?",
+        "Who has to agree for that to exist, and how do you get them there?",
+        "What is the smallest first version of it that proves the idea in one quarter?"
+      ],
+      "lead_staff_bar": "Senior proposes better studies. Lead/Staff proposes a durable capability — a framework, standard, or operating mechanism — names its owner and cost, and sizes a first version that ships fast."
+    },
+    {
+      "id": "PQ05",
+      "pillar": "Level & Scope Argument",
+      "arc_stages": ["midpoint", "close"],
+      "question": "This requisition is posted at Senior. Make the case for the scope you actually intend to own.",
+      "resume_and_role_links": [
+        "Current title: Staff Human Factors Engineer & Researcher at Sling",
+        "Candidate target: Human Factors Research Lead / Staff Human Factors Engineer",
+        "JD posted title: Senior User Experience Researcher",
+        "Lead/Staff bar: standards, ResearchOps, HSI translated into hard specifications"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Make the case for the level this work actually is, using what you would own rather than what you have been called.",
+        "Systems / ML Engineering Lead": "What is the scope difference between a Senior and a Staff researcher on a program like this, in your view?",
+        "Product Manager": "What would you own that a Senior researcher on this team would not?",
+        "Design Lead": "What decisions do you expect to be in the room for, and which ones do you expect to own outright?"
+      },
+      "follow_ups": [
+        "Name the three things you would own that a Senior researcher would not.",
+        "What evidence from this conversation supports that scope claim?",
+        "What would you need to demonstrate in the first six months to make that scope obvious to everyone?"
+      ],
+      "lead_staff_bar": "Senior asks for a title. Lead/Staff argues scope — standards owned, decisions changed, mechanisms built — and states what they would demonstrate to earn it rather than what they would like to be called."
+    },
+    {
+      "id": "PQ06",
+      "pillar": "How You Work With Research Leadership",
+      "arc_stages": ["midpoint"],
+      "question": "How do you want to be managed, and what do you need from a research leader to do your best work?",
+      "resume_and_role_links": [
+        "Sling ownership of organizational Human Factors strategy",
+        "JD: work through ambiguity with little oversight",
+        "JD preferred: proactiveness in helping to shape team culture",
+        "Interview panel: Research, Systems/ML, Product, Design"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How do you want to be managed? Be specific about what support looks like and what would get in your way.",
+        "Systems / ML Engineering Lead": "When you disagree with your own research leadership about a technical call, how does that go?",
+        "Product Manager": "How much direction do you want, and how do you signal when you are stuck?",
+        "Design Lead": "What does a good working relationship with your lead look like when the two of you disagree in front of the team?"
+      },
+      "follow_ups": [
+        "Tell me about the best manager relationship you have had and what specifically made it work.",
+        "How do you raise a problem with your own leadership before it becomes visible to everyone else?",
+        "What feedback have you received that you initially rejected and later acted on?"
+      ],
+      "lead_staff_bar": "Senior describes preferred management style. Lead/Staff describes a working contract — what they will own without being asked, what they will escalate, and how disagreement gets handled."
+    },
+    {
+      "id": "PQ07",
+      "pillar": "Cross-Panel Message Discipline",
+      "arc_stages": ["midpoint", "close"],
+      "question": "You will say this to four different interviewers today. Give me the version of your thesis that an engineer, a PM, and a designer would each accept.",
+      "resume_and_role_links": [
+        "Calibrated Cognitive Friction thesis",
+        "Principles for Agentic Trust — Alignment, Execution, Control, Calibration",
+        "JD: use storytelling to inspire and align partners and key stakeholders",
+        "Interview loop: four back-to-back 1:1 conversations"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Say your thesis the way you would say it to an engineer, then the way you would say it to a PM. What has to stay identical?",
+        "Systems / ML Engineering Lead": "Give me the engineering version of your thesis, and tell me what the product version of it sounds like.",
+        "Product Manager": "Translate your research position into the version I would repeat to a program lead who has three minutes.",
+        "Design Lead": "Give me the version of your thesis that a designer can act on this week."
+      },
+      "follow_ups": [
+        "Which part of that message do you catch yourself changing depending on the audience, and is that translation or drift?",
+        "What is the shortest defensible version — one sentence?",
+        "If two of us compare notes tonight, what should we both have heard?"
+      ],
+      "lead_staff_bar": "Senior tailors tone to the audience. Lead/Staff keeps one invariant claim across all four conversations and changes only the evidence and consequence that each partner cares about."
+    },
+    {
+      "id": "PQ08",
+      "pillar": "Portfolio Framing",
+      "arc_stages": ["opening", "close"],
+      "question": "Which two pieces of your work show that research changed both a tactical and a strategic decision, and why those two?",
+      "resume_and_role_links": [
+        "Amazon $50M psychophysics latency program",
+        "NASA Lunar Gateway uFMEA and standards work",
+        "Principles for Agentic Trust framework",
+        "JD required: portfolio demonstrating research and insights that influenced both tactical and strategic product development work"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Which piece of your work shows tactical decision impact, and which shows strategic impact? Do not give me the same project twice.",
+        "Systems / ML Engineering Lead": "Show me the project where your research became a specification, not a recommendation.",
+        "Product Manager": "Which piece of your work would convince me that research changes decisions rather than documenting them?",
+        "Design Lead": "Which project best shows how you shaped an end-to-end experience rather than evaluating a screen?"
+      },
+      "follow_ups": [
+        "What in that work was yours specifically, and what was the team's?",
+        "What would you cut from that story if you had eight minutes instead of thirty?",
+        "Which piece is your weakest, and why do you still lead with it?"
+      ],
+      "lead_staff_bar": "Senior presents strong project work. Lead/Staff curates the work as an argument for a level, separates tactical from strategic influence explicitly, and is precise about personal versus team attribution."
+    },
+    {
+      "id": "PQ09",
+      "pillar": "Questions For The Interviewer",
+      "arc_stages": ["close"],
+      "question": "We have a few minutes left. What questions do you have for me?",
+      "resume_and_role_links": [
+        "Prepared questions on autonomy uncertainty, shipping velocity, and a strong first six months",
+        "JD: shape UX research best practices in Air Defense and across Anduril at large",
+        "JD: research operations and repositories",
+        "Interview panel: Research, Systems/ML, Product, Design"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "What do you want to ask me about the research function, the bar, or how this team works?",
+        "Systems / ML Engineering Lead": "Anything you want to ask me about the systems, the constraints, or how research and engineering interact here?",
+        "Product Manager": "What do you want to know about the roadmap, the pace, or how decisions get made?",
+        "Design Lead": "What would you want to ask me about the design partnership or the operator experience?"
+      },
+      "follow_ups": [
+        "That is a question you could ask any company. What do you actually want to know about this one?",
+        "What answer to that question would make you less interested in the role?",
+        "What is the question you are hesitant to ask?"
+      ],
+      "lead_staff_bar": "Senior asks informed, respectful questions. Lead/Staff asks questions that reveal a point of view — about where research authority sits, what the team refuses to do, and how evidence and velocity are traded — and treats the answer as decision-relevant."
+    },
+    {
+      "id": "PQ10",
+      "pillar": "Objection Handling & Close",
+      "arc_stages": ["midpoint", "close"],
+      "question": "The strongest argument against hiring you is that you have never worked in defense. What is your answer?",
+      "resume_and_role_links": [
+        "Career arc across consumer, spaceflight, automotive, and clinical domains",
+        "MIL-STD-1472 and NASA-STD-3001 application",
+        "Coaching state structural gap: no confirmed direct Air Defense field experience",
+        "JD: autonomous counter-drone systems and Lattice OS"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Name the biggest gap between your background and this role, and tell me how you would close it in the first six months.",
+        "Systems / ML Engineering Lead": "Everything you have worked on had a forgiving failure mode compared with this. Why should I trust your judgment here?",
+        "Product Manager": "Give me the honest case against hiring you, and then tell me why I should anyway.",
+        "Design Lead": "What part of this domain do you genuinely not understand yet?"
+      },
+      "follow_ups": [
+        "What is the first thing you would be wrong about here, and how would you find out fast?",
+        "Which of your transferable claims does not transfer? Be specific.",
+        "If we hire you and it does not work out, what will the reason have been?"
+      ],
+      "lead_staff_bar": "Senior deflects the objection with transferable-skills language. Lead/Staff names the real gap precisely, states the boundary of what transfers, and gives a concrete plan with a detection mechanism for being wrong."
+    }
+  ]
+}
