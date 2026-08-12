@@ -104,7 +104,7 @@
     {
       "id": "BQ05",
       "pillar": "Startup Intensity & Hours",
-      "question": "Defense tech requires high-intensity field testing, 25-30% travel, and dynamic schedules. How do you stay effective and prevent burnout under high operational friction?",
+      "question": "Defense tech requires high-intensity field testing and dynamic schedules. How do you stay effective and prevent burnout under high operational friction?",
       "resume_and_role_links": [
         "Cross-domain field and laboratory research",
         "High-stress task-interruption dissertation",
@@ -118,7 +118,7 @@
         "Design Lead": "How do you maintain observational quality and collaborative design judgment during intensive field studies where physical conditions, travel, and rapid redesign cycles create fatigue?"
       },
       "follow_ups": [
-        "Twenty-five to thirty percent travel is the posted expectation. Walk me through what a heavy field month actually looks like for you.",
+        "Walk me through your heaviest field-testing month. What actually happened to your evidence quality?",
         "Tell me about a week where the intensity degraded your work. What did you change afterward?",
         "How do you protect a team's sustainability without becoming the person who slows the deployment down?"
       ],

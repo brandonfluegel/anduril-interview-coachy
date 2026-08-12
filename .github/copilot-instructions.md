@@ -26,9 +26,9 @@ Never invent metrics, outcomes, clearance status, classified details, team struc
 - Select the third question from the behavioral bank and retain STAR/STARE behavioral calibration in the holistic evaluation. Apply STAR/STARE to behavioral and experience answers only; score technical and research-craft answers on claim, method, evidence and limits, threshold or decision, and what would change it.
 - Anchor the opening, pushback, and leadership turns to the technical bank, and use each bank entry's follow-ups as the escalation ladder. Keep both banks at exactly ten pillars with all four persona adaptations, follow-ups, and a Lead/Staff bar.
 - Offer the culture and stakeholder-collaboration bank on the behavioral, leadership, and open turns. Keep it at exactly ten pillars and keep every question grounded in the posted job description: never assert internal Anduril process, team structure, or program details, and never state or imply clearance status.
-- Keep the four session formats: 30-minute hiring manager, onsite 1:1 panel, research design case, and portfolio deep dive. Each has its own arc and open stage; all four share the personas, the banks, and the holistic scorecard.
+- Keep one continuous interview arc driven entirely by the four interviewer personas. There are no session-format modes; the persona plus the optional target-pillar drill selects the ground the session covers.
 - The recruiter screen is complete. Location, compensation, travel, and clearance are settled: never ask about them, never treat them as gaps, and never assert a compensation number or an active clearance status.
-- Persist the session format and the covered pillar IDs with every finalized session, and keep the Pillar Coverage matrix on the progress dashboard derived from those records.
+- Persist the covered pillar IDs with every finalized session, and keep the Pillar Coverage matrix on the progress dashboard derived from those records.
 - Keep questions and pushback concise and voice-friendly.
 - Maintain all five core scores: Substance, Structure, Relevance, Credibility, and Differentiation.
 - Maintain separate Lead/Staff criteria and explicit Senior UXR versus Lead/Staff calibration.

@@ -98,7 +98,7 @@ A third canonical bank covers Anduril culture, mission fit, and collaboration wi
 
 A fourth canonical bank covers positioning, scope, and close: the ninety-second pitch, why leave and why here, the first ninety days, research vision, the level and scope argument, working with research leadership, cross-panel message discipline, portfolio framing, the candidate's questions for the interviewer, and objection handling. Draw from it in the hiring manager conversation and at the close of any session.
 
-The recruiter screen is already complete. Location preference, compensation expectations, travel, and clearance eligibility are settled and closed: never ask about them, never treat them as gaps, and never assert a compensation number or an active clearance status. The remaining loop is a thirty-minute conversation with Dr. Daniella Kim followed by four back-to-back onsite 1:1 interviews with engineering, design, and product partners; the portfolio presentation is being prepared later.
+The recruiter screen is already complete. Location preference, compensation expectations, travel, and clearance eligibility are settled and closed: never ask about them, never treat them as gaps, and never assert a compensation number or an active clearance status. The remaining loop is a thirty-minute conversation with Dr. Daniella Kim followed by four back-to-back onsite 1:1 interviews with engineering, design, and product partners; the portfolio presentation is being prepared later. Every rehearsal runs as one continuous conversation with a single selected persona, so any of the four personas may draw from any bank when the transcript calls for it.
 """
 PERSONA_FOCUS = {
     "Dr. Daniella Kim": (
@@ -123,8 +123,8 @@ PERSONA_FOCUS = {
 }
 INTERVIEW_ARC = {
     1: (
-        "Technical & Domain Core",
-        "the persona sets the stage in one breath, then probes a specific claim from the candidate's Principles for Agentic Trust whitepaper or resume for foundational Human Factors, psychophysics, and uFMEA depth",
+        "Positioning & Technical Core",
+        "the persona sets the stage in one breath, then probes either the candidate's positioning for this role or a specific claim from the Principles for Agentic Trust whitepaper or resume for foundational Human Factors, psychophysics, and uFMEA depth",
     ),
     2: (
         "Dynamic Technical Pushback",
@@ -135,118 +135,15 @@ INTERVIEW_ARC = {
         "friction with PMs, ML/software engineers, or military operators in a fast-paced startup, and conflict resolution without compromising safety standards",
     ),
     4: (
-        "Leadership, Vision & Scaling",
-        "org-wide standards, scaling Research Operations, team culture, and alignment with Anduril Air Defense's counter-drone Lattice OS mission",
+        "Leadership, Scope & Scaling",
+        "org-wide standards, scaling Research Operations, the scope the candidate intends to own, team culture, and alignment with Anduril Air Defense's counter-drone Lattice OS mission",
     ),
 }
 OPEN_STAGE = (
     "Live Cross-Examination",
     "free-flowing follow-up that hunts the thinnest evidence still standing in the transcript, whether that is an unquantified claim, "
-    "a leadership scope gap, an Air Defense translation gap, or a behavioral ownership gap",
+    "a leadership scope gap, an Air Defense translation gap, a behavioral ownership gap, or an untested positioning and close pillar",
 )
-PORTFOLIO_ARC = {
-    1: (
-        "Portfolio Walkthrough",
-        "the candidate presents the single project they would lead a portfolio review with, and the persona demands the decision it changed before any method detail",
-    ),
-    2: (
-        "Method Interrogation",
-        "line-by-line interrogation of how that project's evidence was produced, including sample, measure validity, and what the method could not detect",
-    ),
-    3: (
-        "Attribution & Impact Challenge",
-        "separating the candidate's personal contribution from the team's, and testing whether the claimed outcome is theirs to claim",
-    ),
-    4: (
-        "Tactical vs Strategic Influence",
-        "forcing a second portfolio piece that shows strategic influence, then comparing which one proves Lead/Staff scope",
-    ),
-}
-PORTFOLIO_OPEN_STAGE = (
-    "Portfolio Cross-Examination",
-    "continued hostile review of any portfolio claim whose attribution, method, or decision impact is still soft",
-)
-CASE_ARC = {
-    1: (
-        "The Brief",
-        "the persona hands the candidate a constrained Air Defense research problem and demands a study plan out loud: question, method, participants, measures, and the decision it unblocks",
-    ),
-    2: (
-        "Constraint Injection",
-        "the persona removes time, operator access, or the preferred instrument and forces the candidate to re-plan without losing decision validity",
-    ),
-    3: (
-        "Analysis & Threshold",
-        "what result would change the decision, what the analysis actually is, and what the candidate would do with an ambiguous or null result",
-    ),
-    4: (
-        "Socializing & Standardizing",
-        "how the finding reaches engineering, product, and design, and what reusable standard or artifact survives the study",
-    ),
-}
-CASE_OPEN_STAGE = (
-    "Case Pressure Test",
-    "continued attack on the weakest joint in the proposed study design, whether that is validity, feasibility, or decision relevance",
-)
-HM_ARC = {
-    1: (
-        "Positioning & Why Here",
-        "the ninety-second background pitch and the case for why this role, tested for a thesis rather than a chronology",
-    ),
-    2: (
-        "Evidence Probe",
-        "one hard probe into the strongest claim the candidate just made, demanding the method and the decision it changed",
-    ),
-    3: (
-        "Scope & Research Vision",
-        "what the candidate would own and build here, and whether that scope reads Senior or Lead/Staff",
-    ),
-    4: (
-        "Partnership & Close",
-        "how the candidate works with engineering, product, and design, then handing the floor over for their questions",
-    ),
-}
-HM_OPEN_STAGE = (
-    "Close Out",
-    "the remaining minutes of a thirty-minute conversation: the honest objection, the first-ninety-days plan, or the candidate's own questions",
-)
-SESSION_MODES = {
-    "🧭 30-Min Hiring Manager (Dr. Kim)": "hm",
-    "🛡️ Onsite 1:1 Panel": "panel",
-    "🧪 Research Design Case": "case",
-    "📂 Portfolio Deep Dive": "portfolio",
-}
-MODE_ARCS = {
-    "panel": INTERVIEW_ARC,
-    "portfolio": PORTFOLIO_ARC,
-    "case": CASE_ARC,
-    "hm": HM_ARC,
-}
-MODE_OPEN_STAGES = {
-    "panel": OPEN_STAGE,
-    "portfolio": PORTFOLIO_OPEN_STAGE,
-    "case": CASE_OPEN_STAGE,
-    "hm": HM_OPEN_STAGE,
-}
-MODE_BRIEFS = {
-    "panel": (
-        "One of four back-to-back onsite 1:1 interviews with an engineering, product, or design partner. "
-        "Assume the other three conversations happen the same day, so the consistency of the candidate's thesis matters."
-    ),
-    "portfolio": (
-        "A portfolio deep dive. The candidate is walking a hostile reviewer through their own past work. "
-        "Demand the decision the work changed before accepting any method detail, and separate personal contribution from team contribution."
-    ),
-    "case": (
-        "A live research design case. You set a constrained Air Defense research problem and the candidate must design the study aloud. "
-        "Invent only the scenario constraints, never Anduril-internal facts, program details, or systems that are not in the posted job description."
-    ),
-    "hm": (
-        "A thirty-minute hiring manager conversation with Dr. Daniella Kim, Head of Research. Time is short: move briskly, ask one thing at a "
-        "time, and reserve the final minutes for the candidate's own questions. The recruiter screen is already complete, so location, "
-        "compensation, travel, and clearance are closed topics that must never be raised."
-    ),
-}
 
 
 class InterviewQuestion(BaseModel):
@@ -338,7 +235,6 @@ class SessionRecord(BaseModel):
     timestamp: str
     date: str
     persona: str
-    mode: str = "panel"
     turns_completed: int = Field(default=4, ge=1)
     core_averages: dict[str, float]
     pillars_covered: list[str] = Field(default_factory=list)
@@ -591,52 +487,24 @@ def pillar_brief(pillar_id: str, persona: str) -> str:
     )
 
 
-MODE_OPENING_ANCHORS = {
-    "panel": (
-        "Anchor this opener to exactly one pillar from the canonical bank below. Use the persona-adapted line as the spine of the "
-        "question, tightened for speech, or a sharper variant that tests the same pillar. Do not blend pillars and do not read the "
-        "Lead/Staff bar aloud."
-    ),
-    "portfolio": (
-        "Open the portfolio review. Ask the candidate to walk you through the one project they would lead with, and make clear you "
-        "want the decision it changed before any method detail. Anchor the framing to one pillar below and never read the Lead/Staff "
-        "bar aloud."
-    ),
-    "case": (
-        "Set the case brief. State a constrained Air Defense research scenario in at most one clause, invent only scenario constraints "
-        "such as time, access, or instrumentation, and then ask for the study plan aloud. Anchor the underlying subject to one pillar "
-        "below and never read the Lead/Staff bar aloud."
-    ),
-    "hm": (
-        "Open the thirty-minute hiring manager conversation. Anchor to one pillar below, keep the register warm but efficient, and never "
-        "read the Lead/Staff bar aloud."
-    ),
-}
+OPENING_ANCHOR = (
+    "Anchor this opener to exactly one pillar from the canonical banks below. Use the persona-adapted line as the spine of the "
+    "question, tightened for speech, or a sharper variant that tests the same pillar. Do not blend pillars and do not read the "
+    "Lead/Staff bar aloud."
+)
 
 
-def mode_opening_bank(persona: str, mode: str) -> str:
-    if mode == "hm":
-        return positioning_question_options(persona, "opening")
-    if mode == "portfolio":
-        return "\n".join(
-            [positioning_question_options(persona, "opening"), technical_question_options(persona, "opening")]
-        )
-    return technical_question_options(persona, "opening")
+def opening_bank(persona: str) -> str:
+    return "\n".join(
+        [
+            technical_question_options(persona, "opening"),
+            positioning_question_options(persona, "opening"),
+        ]
+    )
 
 
-def mode_stage_instruction(mode: str, next_turn: int, persona: str) -> str:
-    builders = {
-        "panel": panel_stage_instructions,
-        "portfolio": portfolio_stage_instructions,
-        "case": case_stage_instructions,
-        "hm": hm_stage_instructions,
-    }
-    instructions = builders.get(mode, panel_stage_instructions)(persona)
-    return instructions.get(next_turn, instructions["open"])
-
-
-def panel_stage_instructions(persona: str) -> dict[object, str]:
-    return {
+def stage_instruction(next_turn: int, persona: str) -> str:
+    instructions = {
         2: f"""Find the single weakest link in the answer you just heard: the claim with no falsifiable metric, the causal leap, the borrowed team credit, the unstated assumption, or the number with no measurement method behind it. Attack exactly that weak link and demand the missing falsifiable evidence, in the style of "What falsifiable metric proved that latency threshold degraded operator trust?" Quote or paraphrase the candidate's own words so the question is unmistakably about what they just said.
 
 Escalate using the canonical probe library below when one of these probes targets the exact gap the candidate left open. Prefer a probe rebuilt from the candidate's own phrasing over a verbatim reading:
@@ -646,56 +514,25 @@ Escalate using the canonical probe library below when one of these probes target
 
 If the transcript already covered the friction the behavioral bank targets, you may instead take one non-duplicative pillar from the culture, mission-fit, and stakeholder-collaboration bank below. Keep it grounded in the posted job description and never assert internal Anduril process, team structure, program details, or the candidate's clearance status:
 {culture_question_options(persona, "behavioral")}""",
-        4: f"""Test whether the candidate can set org-wide Human Factors standards, scale Research Operations beyond their own hands, and tie that to Anduril Air Defense's counter-drone Lattice OS mission. Build the question off a specific commitment or gap the candidate revealed earlier. Anchor it to one non-duplicative pillar from this leadership-stage bank:
+        4: f"""Test whether the candidate can set org-wide Human Factors standards, scale Research Operations beyond their own hands, name the scope they intend to own, and tie that to Anduril Air Defense's counter-drone Lattice OS mission. Build the question off a specific commitment or gap the candidate revealed earlier. Anchor it to one non-duplicative pillar from this leadership-stage bank:
 {technical_question_options(persona, "leadership")}
 
 When the stronger gap is culture, ownership without oversight, delivery cadence, or collaboration with a specific stakeholder group, anchor to one of these instead:
-{culture_question_options(persona, "leadership")}""",
-        "open": f"""Stay in the flow of the live conversation. Hunt the thinnest evidence still standing across the whole transcript and press it, or follow a genuinely interesting thread the candidate just opened. Do not restart the interview, summarize it, or signal that it is ending.
+{culture_question_options(persona, "leadership")}
 
-Draw from the full canonical probe libraries below, or from a behavioral pillar not yet covered, whenever it sharpens the hunt. Never repeat a pillar the transcript already covered.
+When the stronger gap is scope, research vision, the first ninety days, or how the candidate works with research leadership, anchor to one of these instead:
+{positioning_question_options(persona, "midpoint")}""",
+        "open": f"""Stay in the flow of the live conversation. Hunt the thinnest evidence still standing across the whole transcript and press it, or follow a genuinely interesting thread the candidate just opened. Do not restart the interview, summarize it, or signal that it is ending. If the conversation has reached a natural close, you may hand the floor over and ask what questions the candidate has for you.
+
+Draw from the full canonical probe libraries below, or from a behavioral pillar not yet covered, whenever it sharpens the hunt. Never repeat a pillar the transcript already covered, and never raise location, compensation, travel, or clearance.
 Technical and research-craft probes:
 {technical_follow_up_probes()}
 Culture and stakeholder-collaboration probes:
-{culture_follow_up_probes()}""",
-    }
-
-
-def portfolio_stage_instructions(persona: str) -> dict[object, str]:
-    return {
-        2: f"""Interrogate how the evidence in that project was actually produced. Demand the sample, the measure, the comparison, and what the method could not have detected. Treat a described process as unproven until the candidate names the mechanism. Use these probes where they hit the exact gap:
-{technical_follow_up_probes("pushback")}""",
-        3: """Separate the candidate's personal contribution from the team's. Press on any first-person plural, any outcome number whose attribution is unclear, and any claim that depends on someone else's decision. Ask what would have happened to that outcome without them. Stay conversational, not prosecutorial.""",
-        4: f"""Force a second, different portfolio piece that demonstrates strategic rather than tactical influence, then compare the two. Make the candidate say which one proves the level they are asking for. Anchor to one of these pillars:
-{positioning_question_options(persona, "opening")}""",
-        "open": f"""Keep reviewing the portfolio. Attack whichever claim still has the softest attribution, weakest method, or thinnest decision impact. Never repeat a project or pillar already fully covered.
-{technical_follow_up_probes()}""",
-    }
-
-
-def case_stage_instructions(persona: str) -> dict[object, str]:
-    return {
-        2: """Remove a resource from the plan the candidate just described: cut the timeline in half, take away operator access, remove the preferred instrument, or shrink the sample to what is realistically available. State the new constraint in one clause and make them re-plan without losing decision validity. Do not accept a smaller version of the same study as an answer; make them say what claim they can no longer make.""",
-        3: """Push into analysis and decision thresholds. What specific result would change the decision, what is the actual analysis, and what happens on an ambiguous or null result? Demand a number, a threshold, or a rule, not a description of a method.""",
-        4: f"""Move to how the finding travels. Who gets it, in what artifact, and what reusable standard or specification survives the study once it ends? Anchor to one of these pillars:
-{technical_question_options(persona, "leadership")}""",
-        "open": f"""Keep pressure-testing the proposed design. Attack the weakest joint still standing: internal validity, feasibility under field conditions, measure sensitivity, or whether the result would actually change a decision.
-{technical_follow_up_probes()}""",
-    }
-
-
-def hm_stage_instructions(persona: str) -> dict[object, str]:
-    return {
-        2: f"""You have thirty minutes total, so move. Take the strongest single claim the candidate just made and probe it once, hard: the method behind it, and the decision it actually changed. Quote their own words. Use a canonical probe only where it hits the exact gap:
-{technical_follow_up_probes("pushback")}""",
-        3: f"""Move to scope and vision: what this candidate would own here, what they would build that does not exist yet, and whether that reads Senior or Lead/Staff. Anchor to one non-duplicative pillar:
-{positioning_question_options(persona, "midpoint")}""",
-        4: f"""You are near the end of the half hour. Either test how they work with engineering, product, and design, or hand the floor over and ask what questions they have for you. Anchor to one of these:
+{culture_follow_up_probes()}
+Positioning and close pillars:
 {positioning_question_options(persona, "close")}""",
-        "open": f"""Close out the conversation. Cover the honest objection, the first-ninety-days plan, or the candidate's own questions \u2014 whichever has not been tested yet. Never repeat a pillar already covered, and never raise location, compensation, travel, or clearance:
-{positioning_question_options(persona, "close")}
-{culture_follow_up_probes("open")}""",
     }
+    return instructions.get(next_turn, instructions["open"])
 
 
 def load_system_context() -> str:
@@ -767,7 +604,6 @@ def known_pillars(raw_ids: list[str]) -> list[str]:
 
 def persist_session(
     persona: str,
-    mode: str,
     evaluation: Evaluation,
     turns_completed: int,
 ) -> SessionRecord:
@@ -779,7 +615,6 @@ def persist_session(
         timestamp=timestamp.isoformat(timespec="seconds"),
         date=timestamp.date().isoformat(),
         persona=persona,
-        mode=mode,
         turns_completed=turns_completed,
         core_averages=calculate_core_averages(evaluation),
         pillars_covered=known_pillars(evaluation.pillars_covered),
@@ -796,7 +631,6 @@ def persist_session(
 ### Mock Session — {record.timestamp}
 - **Date:** {record.date}
 - **Interviewer:** {record.persona}
-- **Session format:** {record.mode}
 - **Turns completed:** {record.turns_completed}
 - **Pillars covered:** {', '.join(record.pillars_covered) or 'None recorded'}
 - **Core averages:** {averages}
@@ -926,7 +760,6 @@ def load_progress_dashboard() -> tuple[str, list[list[object]]]:
         [
             record.timestamp,
             record.persona,
-            record.mode,
             record.turns_completed,
             *[record.core_averages[dimension] for dimension in CORE_DIMENSIONS],
             record.uplevel_rating,
@@ -1002,18 +835,13 @@ def render_scorecard(evaluation: Evaluation, turns_completed: int) -> str:
 """
 
 
-def conversation_stage(turn: int, mode: str = "panel") -> tuple[str, str]:
-    return MODE_ARCS.get(mode, INTERVIEW_ARC).get(turn, MODE_OPEN_STAGES.get(mode, OPEN_STAGE))
+def conversation_stage(turn: int) -> tuple[str, str]:
+    return INTERVIEW_ARC.get(turn, OPEN_STAGE)
 
 
-def turn_indicator(turn: int, mode: str = "panel") -> str:
-    title, _ = conversation_stage(turn, mode)
-    tail = (
-        "you are at the thirty-minute mark soon — wrap up when you are ready."
-        if mode == "hm"
-        else "keep going or wrap up whenever you are ready."
-    )
-    return f"**Question {turn}: {title}** — {tail}"
+def turn_indicator(turn: int) -> str:
+    title, _ = conversation_stage(turn)
+    return f"**Question {turn}: {title}** — keep going or wrap up whenever you are ready."
 
 
 def require_api_key() -> str:
@@ -1100,21 +928,19 @@ def generate_question(
     persona_label: str,
     turn: int,
     history: list[dict[str, str]],
-    mode: str,
     pillar_choice: str,
 ) -> str:
     persona = PERSONAS[persona_label]
-    title, objective = conversation_stage(turn, mode)
+    title, objective = conversation_stage(turn)
     prior_context = render_transcript(history, LIVE_CONTEXT_MESSAGES)
     pillar_id = selected_pillar_id(pillar_choice)
     if pillar_id:
         anchor = pillar_brief(pillar_id, persona)
     else:
-        anchor = f"""{MODE_OPENING_ANCHORS[mode]}
-{mode_opening_bank(persona, mode)}"""
+        anchor = f"""{OPENING_ANCHOR}
+{opening_bank(persona)}"""
     prompt = f"""Open a live spoken interview as {persona}. This is Question {turn}.
 
-Session format: {MODE_BRIEFS[mode]}
 Arc stage: {title}
 Stage objective: {objective}
 Persona lens: {PERSONA_FOCUS[persona]}
@@ -1141,14 +967,12 @@ def render_interviewer(persona: str, question: str, reaction: str = "") -> str:
 
 def start_interview(
     persona_label: str,
-    mode_label: str,
     pillar_choice: str,
 ) -> tuple[str, str, str, int, list[dict[str, str]], str]:
-    mode = SESSION_MODES[mode_label]
-    question = generate_question(persona_label, 1, [], mode, pillar_choice)
+    question = generate_question(persona_label, 1, [], pillar_choice)
     history = [{"role": "assistant", "content": question}]
     return (
-        turn_indicator(1, mode),
+        turn_indicator(1),
         render_interviewer(PERSONAS[persona_label], question),
         SCORECARD_PLACEHOLDER,
         1,
@@ -1160,7 +984,6 @@ def start_interview(
 def continue_conversation(
     answer: str,
     persona_label: str,
-    mode_label: str,
     turn: int,
     history: list[dict[str, str]] | None,
 ) -> tuple[str, str, str, int, list[dict[str, str]], str]:
@@ -1173,20 +996,18 @@ def continue_conversation(
         raise gr.Error("Start a new interview before submitting an answer.")
 
     persona = PERSONAS[persona_label]
-    mode = SESSION_MODES[mode_label]
     next_turn = turn + 1
-    title, objective = conversation_stage(next_turn, mode)
-    stage_instruction = mode_stage_instruction(mode, next_turn, persona)
+    title, objective = conversation_stage(next_turn)
+    stage_directive = stage_instruction(next_turn, persona)
 
     prompt = f"""You are {persona} in a live spoken interview. LIVE MODE only.
 
-Session format: {MODE_BRIEFS[mode]}
 This is your response to the candidate's answer to Question {turn}. Your next question is Question {next_turn}.
 Conversation stage: {title}
 Stage objective: {objective}
 Persona lens: {PERSONA_FOCUS[persona]}
 
-{stage_instruction}
+{stage_directive}
 
 {HARD_EVIDENCE_ANCHORS}
 
@@ -1214,7 +1035,7 @@ Candidate's newest answer:
         updated_history.append({"role": "assistant", "content": reaction})
     updated_history.append({"role": "assistant", "content": question})
     return (
-        turn_indicator(next_turn, mode),
+        turn_indicator(next_turn),
         render_interviewer(persona, question, reaction),
         SCORECARD_PLACEHOLDER,
         next_turn,
@@ -1225,7 +1046,6 @@ Candidate's newest answer:
 
 def finalize_session(
     persona_label: str,
-    mode_label: str,
     turn: int,
     history: list[dict[str, str]] | None,
 ) -> tuple[str, str, str, int, list[dict[str, str]], str]:
@@ -1235,10 +1055,9 @@ def finalize_session(
         raise gr.Error("Answer at least one question before wrapping up the session.")
 
     persona = PERSONAS[persona_label]
-    mode = SESSION_MODES[mode_label]
     prompt = f"""DEBRIEF MODE. Drop the persona and act as the independent coach.
 
-The candidate just ended a live interview with {persona} after {turns_completed} answered turns. Session format: {MODE_BRIEFS[mode]} Evaluate the ENTIRE transcript holistically as one performance, not turn by turn. Weigh the whole arc: how the candidate opened, how they held up under pushback, whether they escalated their evidence when pressed, and where they ended.
+The candidate just ended a live interview with {persona} after {turns_completed} answered turns. Evaluate the ENTIRE transcript holistically as one performance, not turn by turn. Weigh the whole arc: how the candidate opened, how they held up under pushback, whether they escalated their evidence when pressed, and where they ended.
 
 Persona lens used in the room: {PERSONA_FOCUS[persona]}
 
@@ -1278,7 +1097,7 @@ Full interview transcript:
     validate_evaluation(evaluation)
 
     try:
-        persist_session(persona, mode, evaluation, turns_completed)
+        persist_session(persona, evaluation, turns_completed)
     except OSError as exc:
         gr.Warning(f"Interview completed, but progress could not be saved: {exc}")
 
@@ -1310,19 +1129,18 @@ HEAD = r"""
 """
 
 SPRINT_CHECKLIST = [
-    "Block 1: Ninety-second pitch and why-here — PQ01, PQ02 with Dr. Kim",
-    "Block 2: Thesis and falsifiability under pressure — TQ01, TQ05 with Dr. Kim",
-    "Block 3: Full 30-minute hiring manager run — scope, vision, and close (PQ03, PQ04, PQ05, PQ09)",
-    "Block 4: Engineering 1:1 — TQ02, TQ04, TQ07 with the Systems / ML Engineering Lead",
-    "Block 5: Product 1:1 — TQ08, CQ03, CQ06 with the Product Manager",
-    "Block 6: Design 1:1 — TQ06, CQ07, TQ09 with the Design Lead",
-    "Block 7: Behavioral friction and cross-panel message discipline — BQ04, BQ07, PQ07, PQ10",
+    "Block 1: Dr. Kim — positioning and thesis (PQ01, PQ02, TQ01)",
+    "Block 2: Dr. Kim — scope, research vision, and close (PQ03, PQ04, PQ05, PQ09)",
+    "Block 3: Systems / ML Engineering Lead — requirements and safety (TQ02, TQ04, TQ07)",
+    "Block 4: Product Manager — velocity, ROI, and prioritization (TQ08, CQ03, CQ06)",
+    "Block 5: Design Lead — workflow, density, and partnership (TQ06, CQ07, TQ09)",
+    "Block 6: Behavioral friction across all four personas (BQ04, BQ07, BQ09)",
+    "Block 7: Cross-panel message discipline and objection handling (PQ07, PQ10)",
 ]
 
 SESSION_HISTORY_HEADERS = [
     "Timestamp",
     "Interviewer",
-    "Format",
     "Turns",
     *CORE_DIMENSIONS,
     "Lead/Staff Rating",
@@ -1382,6 +1200,55 @@ html, body { max-width: 100%; overflow-x: hidden; }
 #shell textarea { background: #fffdf7 !important; color: var(--ink) !important; border-color: var(--line) !important; max-width: 100%; overflow-wrap: anywhere; white-space: pre-wrap; resize: vertical; }
 #shell textarea::placeholder { color: #6f736f !important; }
 #shell input[type='radio'] { accent-color: var(--signal) !important; }
+#shell input:not([type='radio']):not([type='checkbox']),
+#target-pillar input {
+  background: #fffdf7 !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  border-color: var(--line) !important;
+  opacity: 1 !important;
+}
+#target-pillar,
+#target-pillar .wrap,
+#target-pillar .wrap-inner,
+#target-pillar .secondary-wrap,
+#target-pillar .token,
+#target-pillar span {
+  background-color: #fffdf7 !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+#target-pillar svg { color: #0f172a !important; fill: #0f172a !important; }
+ul.options,
+.gradio-container ul.options {
+  background: #fffdf7 !important;
+  border: 1px solid #94a3b8 !important;
+  color: #0f172a !important;
+  max-height: 46vh !important;
+  z-index: 9999 !important;
+}
+ul.options li,
+ul.options li.item,
+ul.options li span,
+ul.options .item span {
+  background-color: #fffdf7 !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  opacity: 1 !important;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  padding: 8px 10px;
+}
+ul.options li.selected,
+ul.options li.active,
+ul.options li:hover,
+ul.options li.selected span,
+ul.options li.active span,
+ul.options li:hover span {
+  background-color: #ebe7dd !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
 #shell input[type='radio'] + span,
 #shell label:has(input[type='radio']) { background: #fffdf7 !important; color: var(--ink) !important; border-color: var(--line) !important; }
 #shell label.selected:has(input[type='radio']) { background: #ebe7dd !important; border-color: var(--signal) !important; }
@@ -1492,7 +1359,7 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
             """
             <header id="masthead">
               <h1>HUMAN FACTORS // AIR DEFENSE</h1>
-              <p>Lead/Staff interview pressure testing for Dr. Brandon Fluegel. Next up: the 30-minute conversation with Dr. Daniella Kim, then four onsite 1:1s with engineering, design, and product. Dictate through Superwhisper, hold a continuous conversation, then finalize for one holistic scorecard.</p>
+              <p>Lead/Staff interview pressure testing for Dr. Brandon Fluegel. Pick an interviewer, optionally target a specific pillar, dictate through Superwhisper, then finalize for one holistic scorecard.</p>
             </header>
             """
         )
@@ -1509,16 +1376,12 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     value="Dr. Daniella Kim — Research Head",
                     label="Interviewer",
                 )
-                session_mode = gr.Radio(
-                    choices=list(SESSION_MODES),
-                    value="🧭 30-Min Hiring Manager (Dr. Kim)",
-                    label="Session format",
-                )
                 target_pillar = gr.Dropdown(
                     choices=PILLAR_CHOICES,
                     value=AUTO_PILLAR,
                     label="Target pillar (optional drill)",
                     filterable=True,
+                    elem_id="target-pillar",
                 )
                 start_button = gr.Button("Start New Interview")
                 indicator = gr.Markdown("**No interview in progress**", elem_id="turn-indicator")
@@ -1568,7 +1431,6 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     datatype=[
                         "str",
                         "str",
-                        "str",
                         "number",
                         "number",
                         "number",
@@ -1586,17 +1448,17 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
     session_outputs = [indicator, interviewer, scorecard, turn_state, conversation_history, answer]
     speak_inputs = [interviewer, persona]
     start_event = start_button.click(
-        start_interview, inputs=[persona, session_mode, target_pillar], outputs=session_outputs
+        start_interview, inputs=[persona, target_pillar], outputs=session_outputs
     )
     start_event.then(speak_interviewer, speak_inputs, interviewer_audio)
     listen_button.click(speak_interviewer, speak_inputs, interviewer_audio)
-    submit_inputs = [answer, persona, session_mode, turn_state, conversation_history]
+    submit_inputs = [answer, persona, turn_state, conversation_history]
     continue_event = continue_button.click(continue_conversation, submit_inputs, session_outputs)
     continue_event.then(speak_interviewer, speak_inputs, interviewer_audio)
     submit_event = answer.submit(continue_conversation, submit_inputs, session_outputs)
     submit_event.then(speak_interviewer, speak_inputs, interviewer_audio)
     finalize_event = finalize_button.click(
-        finalize_session, [persona, session_mode, turn_state, conversation_history], session_outputs
+        finalize_session, [persona, turn_state, conversation_history], session_outputs
     )
     finalize_event.then(speak_interviewer, speak_inputs, interviewer_audio)
     finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])

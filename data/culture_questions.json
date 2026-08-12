@@ -189,7 +189,7 @@
       "pillar": "Operator & Customer Access",
       "arc_stages": ["behavioral", "open"],
       "stakeholders": ["Military operators", "Government and program customers", "Field liaisons", "Training staff"],
-      "question": "Operator access is scarce and expensive. How do you build and protect a relationship with military end users across 25-30% travel?",
+      "question": "Operator access is scarce and expensive. How do you build and protect a working relationship with military end users across a program?",
       "resume_and_role_links": [
         "Uber urban field studies with working drivers",
         "NASA clinical workstation validation with domain experts",
@@ -200,8 +200,7 @@
         "Dr. Daniella Kim": "How would you build a sustainable operator research panel and cadence when access is limited and every visit is expensive?",
         "Systems / ML Engineering Lead": "How do you make one field visit produce enough evidence to change a requirement, given we may not get back for months?",
         "Product Manager": "How do you maximize the return on a trip when three teams all want their questions answered by the same operators?",
-        "Design Lead": "How do you keep operators engaged as partners across a program rather than treating each visit as a one-off test session?"
-      },
+        "Design Lead": "How do you keep operators engaged as partners across a program rather than treating each visit as a one-off test session?"      },
       "follow_ups": [
         "How do you earn credibility with an operator in the first ten minutes?",
         "How do you share operator time with other teams without burning the relationship?",

@@ -19,7 +19,6 @@ sys.path.insert(0, str(ROOT / "src"))
 import app  # noqa: E402
 
 PERSONA_LABEL = "Dr. Daniella Kim — Research Head"
-MODE_LABEL = "🧭 30-Min Hiring Manager (Dr. Kim)"
 
 ANSWERS = [
     # Turn 1 — technical core
@@ -91,7 +90,7 @@ def main() -> int:
 
     try:
         indicator, interviewer, _, turn, history, answer_box = app.start_interview(
-            PERSONA_LABEL, MODE_LABEL, app.AUTO_PILLAR
+            PERSONA_LABEL, app.AUTO_PILLAR
         )
         question = strip_spoken(interviewer)
         print(f"[Q1] {question}")
@@ -101,7 +100,7 @@ def main() -> int:
 
         for index, candidate_answer in enumerate(ANSWERS, start=1):
             indicator, interviewer, scorecard, turn, history, answer_box = app.continue_conversation(
-                candidate_answer, PERSONA_LABEL, MODE_LABEL, index, history
+                candidate_answer, PERSONA_LABEL, index, history
             )
             spoken = strip_spoken(interviewer)
 
@@ -127,7 +126,7 @@ def main() -> int:
 
         print("--- FINALIZATION ---")
         indicator, interviewer, scorecard, turn, history, answer_box = app.finalize_session(
-            PERSONA_LABEL, MODE_LABEL, turn, history
+            PERSONA_LABEL, turn, history
         )
         print(f"  indicator: {indicator}")
         print(f"  turn_state reset: {turn == 0}")
