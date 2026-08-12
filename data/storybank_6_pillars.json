@@ -91,6 +91,51 @@
       "deploy_for": ["Dr. Kim interview", "research strategy", "executive ambiguity", "first-90-days plan"],
       "strength": 3,
       "evidence_status": "Interview preparation hypothesis; requires source validation"
+    },
+    {
+      "id": "S007",
+      "pillar": 7,
+      "title": "Mercedes-Benz L2/L3 Autonomous Handover Alerting",
+      "primary_skill": "Automation handover design",
+      "secondary_skills": ["Multimodal alerting", "Simulator methodology", "Trust calibration"],
+      "situation": "At Mercedes-Benz Research & Development, Level 2 and Level 3 autonomy required the driver to resume control on short notice without losing situational awareness.",
+      "task": "Determine which alert modalities prepare a disengaged driver to take back control safely.",
+      "action": "Ran high-fidelity simulator studies of Level 2 and Level 3 handovers using biometric, auditory, tactile, and haptic alerts.",
+      "result": "Improved safety and trust ratings by 24%.",
+      "earned_secret": "Multimodal alerts (auditory + haptic) reduce handover panic by priming driver situational awareness before control transition.",
+      "deploy_for": ["operator handover", "multimodal alerting", "trust calibration", "autonomy transfer of control"],
+      "strength": 4,
+      "evidence_status": "Candidate-supplied fact"
+    },
+    {
+      "id": "S008",
+      "pillar": 8,
+      "title": "Uber Mobile HMI and Urban Spatial Navigation",
+      "primary_skill": "Field research under real operational stress",
+      "secondary_skills": ["Mobile HMI", "Spatial navigation", "Retention impact"],
+      "situation": "At Uber, drivers used a mobile interface for complex spatial navigation while managing live traffic, passengers, and time pressure.",
+      "task": "Understand how in-the-moment interface demands affected driver performance and willingness to keep driving.",
+      "action": "Conducted urban field studies of mobile HMI and complex spatial navigation in real driving conditions rather than in the lab.",
+      "result": "Contributed to a 5% increase in driver retention.",
+      "earned_secret": "Information density must dynamically scale down during high-stress maneuvers to prevent visual cognitive overload.",
+      "deploy_for": ["field research", "mobile and handheld C2", "cognitive load under tempo", "business impact"],
+      "strength": 3,
+      "evidence_status": "Candidate-supplied fact"
+    },
+    {
+      "id": "S009",
+      "pillar": 9,
+      "title": "Objective Biometric Telemetry for Acute-Stress Workload",
+      "primary_skill": "Objective workload measurement",
+      "secondary_skills": ["Neuroimaging", "Physiological telemetry", "High-stress task interruption"],
+      "situation": "At Brigham and Women's Hospital / Harvard Medical School, acute-stress research depended on physiological signal processing rather than self-report, and the candidate's Old Dominion doctoral work studied working memory, spatial processing, and reaction times during high-stress task interruptions.",
+      "task": "Establish what objective physiological data reveals about cognitive state under acute stress.",
+      "action": "Processed functional neuroimaging (fMRI), ECG, and telemetry data for acute-stress research, and later built an fNIRS and eye-tracking cognitive load framework at Amazon.",
+      "result": "Produced an objective measurement foundation for cognitive workload; the specific comparison against subjective survey instruments requires candidate confirmation before interview use.",
+      "earned_secret": "Objective biometric telemetry (fNIRS/ECG) uncovers cognitive workload spikes that subjective post-task surveys (like NASA-TLX) completely miss.",
+      "deploy_for": ["objective workload measurement", "method rigor", "operator stress", "measurement validity"],
+      "strength": 3,
+      "evidence_status": "Methods are candidate-supplied; NASA-TLX comparison and fNIRS use at Brigham are not in the canonical resume and need validation"
     }
   ],
   "portfolio_rules": {
@@ -99,6 +144,9 @@
     "defense_transfer_story": "S003",
     "research_thesis_story": "S004",
     "integration_story": "S005",
-    "executive_ambiguity_story": "S006"
+    "executive_ambiguity_story": "S006",
+    "handover_alerting_story": "S007",
+    "field_research_story": "S008",
+    "objective_measurement_story": "S009"
   }
 }

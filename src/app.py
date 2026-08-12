@@ -699,11 +699,64 @@ def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], str]:
     )
 
 
-HEAD = """
+HEAD = r"""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function () {
+  var synth = window.speechSynthesis;
+  var state = { unlocked: false, last: "" };
+
+  // iOS only allows speech that traces back to a user gesture, so claim that
+  // permission on the first tap and reuse it for every later auto-spoken turn.
+  function unlock() {
+    if (state.unlocked || !synth) { return; }
+    state.unlocked = true;
+    var warmup = new SpeechSynthesisUtterance(" ");
+    warmup.volume = 0;
+    synth.speak(warmup);
+  }
+
+  ["pointerdown", "touchend", "keydown"].forEach(function (name) {
+    document.addEventListener(name, unlock, { capture: true });
+  });
+
+  function toSpoken(markdown) {
+    return String(markdown == null ? "" : markdown)
+      .split("\n")
+      .filter(function (line) { return line.trim().charAt(0) !== "#"; })
+      .join(" ")
+      .replace(/\*/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  window.interviewerVoice = {
+    speak: function (markdown, force) {
+      if (!synth) { return; }
+      var spoken = toSpoken(markdown);
+      if (!spoken || (!force && spoken === state.last)) { return; }
+      state.last = spoken;
+      unlock();
+      synth.cancel();
+      var line = new SpeechSynthesisUtterance(spoken);
+      line.rate = 0.96;
+      // Safari drops an utterance queued in the same tick as cancel().
+      setTimeout(function () { synth.speak(line); }, 90);
+    },
+    stop: function () {
+      state.last = "";
+      if (synth) { synth.cancel(); }
+    }
+  };
+})();
+</script>
 """
+
+AUTO_SPEAK_JS = "(text) => { if (window.interviewerVoice) { window.interviewerVoice.speak(text); } }"
+REPLAY_SPEAK_JS = "(text) => { if (window.interviewerVoice) { window.interviewerVoice.speak(text, true); } }"
+STOP_SPEAK_JS = "() => { if (window.interviewerVoice) { window.interviewerVoice.stop(); } }"
 
 SPRINT_CHECKLIST = [
     "Day 1: Foundational STAR Calibration — Pillars 1 & 2: Agentic Trust and Amazon $50M",
@@ -843,7 +896,7 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     "Select an interviewer and start a new interview.",
                     elem_id="pushback",
                 )
-                listen_button = gr.Button("Listen to Interviewer")
+                listen_button = gr.Button("🔊 Replay Question")
                 answer = gr.Textbox(
                     label="Candidate answer",
                     placeholder="Place the cursor here, dictate with Superwhisper, then submit.",
@@ -891,21 +944,21 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                 )
 
     session_outputs = [indicator, interviewer, scorecard, turn_state, conversation_history, answer]
-    start_button.click(start_interview, inputs=[persona], outputs=session_outputs)
-    listen_button.click(
-        fn=None,
-        inputs=[interviewer],
-        js="(text) => { window.speechSynthesis.cancel(); const spoken = text.split('\\n').filter(line => !line.trim().startsWith('#')).join(' ').replaceAll('*', '').replace(/\\s+/g, ' ').trim(); if (!spoken) { return; } const voice = new SpeechSynthesisUtterance(spoken); voice.rate = 0.96; window.speechSynthesis.speak(voice); }",
-        queue=False,
-    )
+    start_event = start_button.click(start_interview, inputs=[persona], outputs=session_outputs)
+    start_event.then(fn=None, inputs=[interviewer], js=AUTO_SPEAK_JS, queue=False)
+    listen_button.click(fn=None, inputs=[interviewer], js=REPLAY_SPEAK_JS, queue=False)
     submit_inputs = [answer, persona, turn_state, conversation_history]
-    continue_button.click(continue_conversation, submit_inputs, session_outputs)
-    answer.submit(continue_conversation, submit_inputs, session_outputs)
+    continue_event = continue_button.click(continue_conversation, submit_inputs, session_outputs)
+    continue_event.then(fn=None, inputs=[interviewer], js=AUTO_SPEAK_JS, queue=False)
+    submit_event = answer.submit(continue_conversation, submit_inputs, session_outputs)
+    submit_event.then(fn=None, inputs=[interviewer], js=AUTO_SPEAK_JS, queue=False)
     finalize_event = finalize_button.click(
         finalize_session, [persona, turn_state, conversation_history], session_outputs
     )
+    finalize_event.then(fn=None, inputs=[interviewer], js=AUTO_SPEAK_JS, queue=False)
     finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
-    clear_button.click(clear_session, outputs=session_outputs)
+    clear_event = clear_button.click(clear_session, outputs=session_outputs)
+    clear_event.then(fn=None, js=STOP_SPEAK_JS, queue=False)
     refresh_dashboard.click(load_progress_dashboard, outputs=[dashboard, session_history])
 
 
