@@ -952,8 +952,8 @@ def generate_interviewer_audio(text: str, persona: str) -> str:
         return ""
 
 
-def speak_interviewer(markdown_text: str, persona_label: str) -> str | None:
-    return generate_interviewer_audio(markdown_text, persona_label) or None
+def speak_interviewer(markdown_text: str, persona_label: str) -> str:
+    return generate_interviewer_audio(markdown_text, persona_label)
 
 
 def render_transcript(history: list[dict[str, str]], limit: int | None = None) -> str:
@@ -1296,6 +1296,62 @@ HEAD = r"""
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 (function () {
+  // A 0.05s silent WAV. iOS grants an element permission to play audible media
+  // only after a real, audible-capable play() inside a user gesture; a muted
+  // play does not count, so the unlock clip must be genuinely silent instead.
+  var SILENT = "data:audio/wav;base64,UklGRkQDAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YSADAAAA";
+  var player = null;
+  var unlocked = false;
+  var lastUrl = "";
+
+  function ensurePlayer() {
+    if (!player) {
+      player = new Audio();
+      player.preload = "auto";
+    }
+    return player;
+  }
+
+  function unlock() {
+    if (unlocked) { return; }
+    var element = ensurePlayer();
+    if (!element.paused) { unlocked = true; return; }
+    if (!element.src) { element.src = SILENT; }
+    var attempt = element.play();
+    if (attempt && attempt.then) {
+      attempt.then(function () {
+        unlocked = true;
+        if (element.src === SILENT) {
+          element.pause();
+          element.currentTime = 0;
+        }
+      }).catch(function () {});
+    } else {
+      unlocked = true;
+    }
+  }
+
+  ["pointerdown", "touchend", "keydown"].forEach(function (name) {
+    document.addEventListener(name, unlock, { capture: true });
+  });
+
+  window.playInterviewer = function (path) {
+    if (!path) { return; }
+    lastUrl = "gradio_api/file=" + encodeURIComponent(String(path));
+    var element = ensurePlayer();
+    element.src = lastUrl;
+    element.currentTime = 0;
+    element.play().catch(function () {});
+  };
+
+  window.replayInterviewer = function () {
+    if (!lastUrl) { return; }
+    var element = ensurePlayer();
+    if (element.src.indexOf(lastUrl) === -1) { element.src = lastUrl; }
+    element.currentTime = 0;
+    element.play().catch(function () {});
+  };
+
   // After each turn, drop the iOS keyboard and bring the new question into view.
   window.focusInterviewer = function () {
     var active = document.activeElement;
@@ -1312,6 +1368,8 @@ HEAD = r"""
 """
 
 FOCUS_INTERVIEWER_JS = "() => { if (window.focusInterviewer) { window.focusInterviewer(); } }"
+PLAY_AUDIO_JS = "(path) => { if (window.playInterviewer) { window.playInterviewer(path); } }"
+REPLAY_AUDIO_JS = "() => { if (window.replayInterviewer) { window.replayInterviewer(); } }"
 
 SPRINT_CHECKLIST = [
     "Block 1: Dr. Kim — positioning and thesis (PQ01, PQ02, TQ01)",
@@ -1488,9 +1546,12 @@ ul.options input {
   min-height: 48px;
   font-size: 0.95rem;
 }
-#interviewer-audio { --size-96: 3.4rem; }
-#interviewer-audio .controls,
-#interviewer-audio .waveform-container { min-height: 44px; }
+#replay {
+  min-height: 40px !important;
+  font-size: 0.9rem;
+  background: #ebe7dd !important;
+  border-color: var(--line) !important;
+}
 @media (prefers-reduced-motion: reduce) {
   #shell *, #shell *::before, #shell *::after {
     animation-duration: 0.01ms !important;
@@ -1666,14 +1727,8 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     "Select an interviewer and start a new interview.",
                     elem_id="pushback",
                 )
-                interviewer_audio = gr.Audio(
-                    label="Interviewer Audio",
-                    autoplay=True,
-                    visible=True,
-                    interactive=False,
-                    type="filepath",
-                    elem_id="interviewer-audio",
-                )
+                audio_path = gr.Textbox(visible=False, elem_id="audio-path")
+                replay_button = gr.Button("🔊 Replay question", elem_id="replay")
                 answer = gr.Textbox(
                     label="Candidate answer",
                     placeholder="Tap here, dictate with Superwhisper, then submit.",
@@ -1741,20 +1796,23 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
         start_interview, inputs=[persona, target_pillar], outputs=session_outputs
     )
     start_event.then(lock_setup, outputs=setup_outputs, queue=False)
-    start_event.then(speak_interviewer, speak_inputs, interviewer_audio)
+    start_speak = start_event.then(speak_interviewer, speak_inputs, audio_path)
+    start_speak.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
     start_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
     continue_event = continue_button.click(continue_conversation, submit_inputs, session_outputs)
-    continue_event.then(speak_interviewer, speak_inputs, interviewer_audio)
+    continue_speak = continue_event.then(speak_interviewer, speak_inputs, audio_path)
+    continue_speak.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
     continue_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
     submit_event = answer.submit(continue_conversation, submit_inputs, session_outputs)
-    submit_event.then(speak_interviewer, speak_inputs, interviewer_audio)
+    submit_speak = submit_event.then(speak_interviewer, speak_inputs, audio_path)
+    submit_speak.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
     submit_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
+    replay_button.click(fn=None, js=REPLAY_AUDIO_JS, queue=False)
     finalize_event = finalize_button.click(finalize_session, finalize_inputs, session_outputs)
     finalize_event.then(unlock_setup, outputs=setup_outputs, queue=False)
     finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
     clear_event = clear_button.click(clear_session, outputs=session_outputs)
     clear_event.then(unlock_setup, outputs=setup_outputs, queue=False)
-    clear_event.then(lambda: None, outputs=interviewer_audio, queue=False)
     answer.change(answer_meter, inputs=answer, outputs=answer_readout, queue=False)
     refresh_dashboard.click(load_progress_dashboard, outputs=[dashboard, session_history])
     sprint_checklist.change(save_sprint_progress, inputs=sprint_checklist, outputs=None)
