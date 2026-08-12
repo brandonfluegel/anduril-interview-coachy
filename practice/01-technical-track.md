@@ -2,7 +2,7 @@
 
 Ten pillars. Each has the question, one model answer, all three follow-ups with scoped answers, and the Senior → Lead/Staff delta. One answer per question — however the interviewer words it.
 
-**Structure for this entire track: CMELT** — Claim → Method/mechanism → Evidence + limits → Line (threshold/decision) → Turn (falsifier). Do **not** use STAR here. STAR on a technical question is a Relevance penalty.
+**Structure for this entire track.** State the claim, then how you would know, then your evidence and where it stops, then the decision it drives, then what would change your mind. Do **not** use the Situation-Task-Action-Result format here — narrating a story in answer to a question about method costs you on relevance even when the content is right.
 
 **Target length: 160–230 words ≈ 65–90 seconds.** Follow-ups: 45–90 words ≈ 20–35 seconds.
 
@@ -12,7 +12,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ01 — Research Thesis & Falsifiability
 
-**Arc:** opening, leadership · **Structure:** CMELT · **Target:** ~80s
+**Arc:** opening, leadership · **Target:** ~80s
 
 > **Base:** State your Human Factors thesis for autonomous Air Defense in one sentence, and tell me what evidence would falsify it.
 
@@ -22,15 +22,15 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Method.** The testable core is trust calibration, not trust. I'd measure operator acceptance rate conditioned on autonomy correctness and on the system's own confidence band. Over-trust shows up as flat acceptance across confidence bands — the operator approves a low-confidence recommendation as fast as a high-confidence one. That is measurable in decision latency distributions and acceptance-by-confidence curves before it is ever measurable in an incident.
 
-**Evidence and limits.** My Mercedes L2/L3 handover work improved safety and trust ratings 24% using multimodal alerts to prepare a disengaged operator before transfer. The limit is real: those were drivers, not warfighters, with no adversary and no lethal consequence. And Calibrated Cognitive Friction is a thesis — I have not deployed it. What I have shipped is the audit structure behind it, *Principles for Agentic Trust*, accepted to CSCW 2026.
+**Evidence and limits.** My Mercedes-Benz work on Level 2 and Level 3 automation handovers improved safety and trust ratings 24% using multimodal alerts to prepare a disengaged operator before transfer. The limit is real: those were drivers, not warfighters, with no adversary and no lethal consequence. And Calibrated Cognitive Friction is a thesis — I have not deployed it. What I have shipped is the audit structure behind it, *Principles for Agentic Trust*, accepted to CSCW 2026.
 
-**Line.** It governs one decision: where a confirmation step is mandatory versus advisory, tiered by reversibility.
+**The decision it drives.** It governs one decision: where a confirmation step is mandatory versus advisory, tiered by reversibility.
 
-**Turn.** It's falsified if friction at the authorization boundary shows no reduction in erroneous authorization while pushing time-to-decide outside the threat's kinematic window. Same acceptance-by-confidence curve, worse timeline — I abandon it.
+**What would change my mind.** It's falsified if friction at the authorization boundary shows no reduction in erroneous authorization while pushing time-to-decide outside the threat's kinematic window. Same acceptance-by-confidence curve, worse timeline — I abandon it.
 
 ### Follow-ups
 
-**F1 — "Which of your four Agentic Trust dimensions fails first in a non-deterministic C2 system, and how would you detect it?"** *(~70 words)*
+**F1 — "Which of your four Agentic Trust dimensions fails first in a non-deterministic command and control system, and how would you detect it?"** *(~70 words)*
 
 > Calibration fails first. Alignment, Execution, and Control are mostly design-time properties — you can specify and verify them. Calibration is a running property of the human-system pair, and it drifts every time the model updates or the operator gets a streak of correct recommendations. Detection signal: acceptance rate flattening across the system's own confidence bands, plus decision latency collapsing toward zero on low-confidence items.
 
@@ -52,7 +52,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ02 — Psychophysics to System Requirements
 
-**Arc:** opening, pushback · **Structure:** CMELT · **Target:** ~85s
+**Arc:** opening, pushback · **Target:** ~85s
 
 > **Base:** You replaced arbitrary engineering latency targets with human perceptual thresholds. Walk me from the psychophysics to the written specification.
 
@@ -62,11 +62,11 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Method.** Four steps. One: define the perceptual event precisely — not "system latency" but the interval between the operator's input and the first system feedback in a named modality. Two: estimate the threshold with an adaptive procedure, converging on the detection point rather than sampling a fixed grid, because the interesting region is narrow and non-linear. Three: fit the psychometric function and carry the confidence interval forward — the spec inherits the uncertainty. Four: choose the population percentile deliberately and write down who that excludes.
 
-**Evidence and limits.** At Amazon I ran a multi-year psychophysics program that replaced arbitrary engineering latency targets with human perceptual thresholds; it informed roughly $50M in operational value, and the multimodal interaction architecture is captured in US Patent US-12532040-B1. At Sling I now define latency, auditory and visual feedback, and spatial layout criteria against perceptual thresholds. The limit: thresholds are modality- and workload-specific. A visual-feedback threshold from a consumer device does not port to a gloved, high-tempo, auditory-loaded C2 station. The method ports; the number does not.
+**Evidence and limits.** At Amazon I ran a multi-year psychophysics program that replaced arbitrary engineering latency targets with human perceptual thresholds; it informed roughly $50M in operational value, and the multimodal interaction architecture is captured in US Patent US-12532040-B1. At Sling I now define latency, auditory and visual feedback, and spatial layout criteria against perceptual thresholds. The limit: thresholds are modality- and workload-specific. A visual-feedback threshold from a consumer device does not port to a gloved, high-tempo, auditory-loaded command and control station. The method ports; the number does not.
 
-**Line.** The spec reads as an acceptance test: end-to-end feedback latency at [percentile] of the operator population, verified under worst-case system load, with a named fallback if the hardware cannot hit it.
+**The decision it drives.** The specification reads as an acceptance test: end-to-end feedback latency at [percentile] of the operator population, verified under worst-case system load, with a named fallback if the hardware cannot hit it.
 
-**Turn.** If operators under realistic workload show no performance or trust difference across the threshold band, latency isn't the binding constraint and I re-derive it under load.
+**What would change my mind.** If operators under realistic workload show no performance or trust difference across the threshold band, latency isn't the binding constraint and I re-derive it under load.
 
 ### Follow-ups
 
@@ -92,25 +92,25 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ03 — Objective Workload & Measure Selection
 
-**Arc:** opening, pushback · **Structure:** CMELT · **Target:** ~80s
+**Arc:** opening, pushback · **Target:** ~80s
 
-> **Base:** When is fNIRS, eye tracking, or ECG worth the cost over NASA-TLX and behavioral performance data for an Air Defense operator study?
+> **Base:** When is functional near-infrared spectroscopy, eye tracking, or heart-rate telemetry worth the cost over the NASA Task Load Index and behavioral performance data for an Air Defense operator study?
 
 ### Model answer (~195 words / 78s)
 
 **Claim.** Instrument choice follows the decision, not the prestige of the signal. Objective measures earn their cost in exactly two cases: when you need *within-task* dynamics — where in the task the load spikes — or when self-report is structurally compromised by the task itself.
 
-**Method.** I work down a ladder and stop at the cheapest rung that answers the question. Behavioral performance and system telemetry first — errors, mode confusions, time-to-acknowledge. Then eye tracking, when the question is attention allocation and specifically *what the operator never looked at*, which no post-task rating can recover. Then continuous physiological measures when I need a time-series of state across a long, uneven task. NASA-TLX stays in the kit as a cheap, comparable post-task summary — it just can't tell me *when*.
+**Method.** I work down a ladder and stop at the cheapest rung that answers the question. Behavioral performance and system telemetry first — errors, mode confusions, time-to-acknowledge. Then eye tracking, when the question is attention allocation and specifically *what the operator never looked at*, which no post-task rating can recover. Then continuous physiological measures when I need a time-series of state across a long, uneven task. The NASA Task Load Index stays in the kit as a cheap, comparable post-task summary — it just can't tell me *when*.
 
-**Evidence and limits.** At Amazon I built an objective cognitive load framework using fNIRS and eye tracking. Separately, at Brigham and Women's I processed fMRI, ECG, and telemetry for acute-stress research. Two different toolkits in two different settings — I keep them separate. And I want to be precise: I do not have a head-to-head result showing a biometric measure outperformed NASA-TLX. My claim is about the *class of question* each answers, not a bake-off I can cite.
+**Evidence and limits.** At Amazon I built an objective cognitive load framework using functional near-infrared spectroscopy — fNIRS — and eye tracking. Separately, at Brigham and Women's I processed functional magnetic resonance imaging, heart-rate, and telemetry data for acute-stress research. Two different toolkits in two different settings — I keep them separate. And I want to be precise: I do not have a head-to-head result showing a biometric measure outperformed the NASA Task Load Index. My claim is about the *class of question* each answers, not a bake-off I can cite.
 
-**Line.** The rule I'd bring: a biometric measure gets funded only when it's pre-committed to a decision. If no plausible result changes a decision, it's expensive theater and I'd kill it myself.
+**The decision it drives.** The rule I'd bring: a biometric measure gets funded only when it's pre-committed to a decision. If no plausible result changes a decision, it's expensive theater and I'd kill it myself.
 
-**Turn.** If the biometric signal never dissociates from behavioral performance across conditions, it's redundant and I drop it.
+**What would change my mind.** If the biometric signal never dissociates from behavioral performance across conditions, it's redundant and I drop it.
 
 ### Follow-ups
 
-**F1 — "Take fNIRS away. What is your next-best measure, and what claim can you no longer make?"** *(~65 words)*
+**F1 — "Take functional near-infrared spectroscopy away. What is your next-best measure, and what claim can you no longer make?"** *(~65 words)*
 
 > Next best is eye tracking plus task-embedded performance probes — secondary-task decrement and time-to-acknowledge. What I lose is the claim about internal load *when behavior looks fine*. That's the compensating-operator case: performance holds while effort climbs, and the only visible signal is the collapse later. Without a continuous physiological measure I can infer that from degradation over time, but I can't assert it in the moment.
 
@@ -132,9 +132,9 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ04 — Safety Analysis & Military Standards
 
-**Arc:** opening, pushback · **Structure:** CMELT · **Target:** ~85s
+**Arc:** opening, pushback · **Target:** ~85s
 
-> **Base:** Walk me through a uFMEA for an autonomous threat recommendation that arrives with uncertain confidence, and where MIL-STD-1472 stops being enough.
+> **Base:** Walk me through a use-error analysis — a use Failure Mode and Effects Analysis — for an autonomous threat recommendation that arrives with uncertain confidence, and tell me where MIL-STD-1472 stops being enough.
 
 ### Model answer (~205 words / 82s)
 
@@ -142,11 +142,11 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Method.** I decompose the authorization sequence into use steps — detect, assess, authorize, intervene — and enumerate foreseeable use errors at each, including the omission errors, which teams routinely skip. Then severity, occurrence, and detectability. The critical discipline is that detectability in a *use*-FMEA means whether the operator or the system can catch the error before consequence — not whether a test catches it in the lab. Under uncertain confidence, the highest-severity mode is almost always the same one: authorizing a low-confidence recommendation at the same speed as a high-confidence one, with no independent path to catch it.
 
-**Evidence and limits.** At NASA Langley I applied uFMEA to Lunar Gateway clinical workstations against NASA-STD-3001 and MIL-STD-1472. We reduced operator task time 30% and eliminated critical input errors. The honest read on that result: speed was a by-product. The errors were eliminated by physical layout and control-display redesign — separating controls whose consequence classes differed — not by making anything faster.
+**Evidence and limits.** At NASA Langley I applied use-error analysis to Lunar Gateway clinical workstations against NASA-STD-3001 and MIL-STD-1472. We reduced operator task time 30% and eliminated critical input errors. The honest read on that result: speed was a by-product. The errors were eliminated by physical layout and control-display redesign — separating controls whose consequence classes differed — not by making anything faster.
 
-**Line.** My stop-ship criterion is a catastrophic-severity use error with no independent detection path before consequence. That's the one I escalate rather than document.
+**The decision it drives.** My stop-ship criterion is a catastrophic-severity use error with no independent detection path before consequence. That's the one I escalate rather than document.
 
-**Turn.** If field data shows my predicted top mode never occurs and an unmodeled one dominates, the analysis was mis-scoped and I redo the decomposition, not the ratings.
+**What would change my mind.** If field data shows my predicted top mode never occurs and an unmodeled one dominates, the analysis was mis-scoped and I redo the decomposition, not the ratings.
 
 ### Follow-ups
 
@@ -172,7 +172,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ05 — Non-Deterministic Autonomy & Trust Calibration
 
-**Arc:** opening, pushback, leadership · **Structure:** CMELT · **Target:** ~85s
+**Arc:** opening, pushback, leadership · **Target:** ~85s
 
 > **Base:** What is the failure mode when the autonomy is correct but the operator's trust calibration is wrong, and how would you detect it before an incident?
 
@@ -182,11 +182,11 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Method.** Trust is a rating; calibration is a relationship. I measure operator agreement *conditioned on* system correctness and on displayed confidence, which gives four cells: correct-accept, correct-reject, incorrect-reject, and incorrect-accept. The last one is the one that kills people, and its leading indicator is available long before it occurs — acceptance rate going flat across the system's own confidence bands, and decision latency collapsing toward zero on low-confidence items. An operator who takes the same 400 milliseconds on a 0.5-confidence track as on a 0.95 track is no longer evaluating.
 
-**Evidence and limits.** Calibration is one of the four dimensions in *Principles for Agentic Trust*, accepted to CSCW 2026, and it's the one I argue fails first. My empirical grounding for handover and trust is the Mercedes L2/L3 work — 24% improvement in safety and trust ratings. The limit is that those were drivers with no adversary; what transfers is the mechanism of preparing a disengaged operator before transfer, not the numbers.
+**Evidence and limits.** Calibration is one of the four dimensions in *Principles for Agentic Trust*, accepted to CSCW 2026, and it's the one I argue fails first. My empirical grounding for handover and trust is the Mercedes-Benz work on Level 2 and Level 3 automation — 24% improvement in safety and trust ratings. The limit is that those were drivers with no adversary; what transfers is the mechanism of preparing a disengaged operator before transfer, not the numbers.
 
-**Line.** Two concrete requirements. Production must log recommendation, displayed confidence, operator decision, latency, and outcome, so calibration is computable without a study. And any model change that shifts the confidence distribution triggers revalidation — the interface didn't change, but the human-system pair did.
+**The decision it drives.** Two concrete requirements. Production must log recommendation, displayed confidence, operator decision, latency, and outcome, so calibration is computable without a study. And any model change that shifts the confidence distribution triggers revalidation — the interface didn't change, but the human-system pair did.
 
-**Turn.** If acceptance already tracks confidence cleanly and errors are dominated by system error rather than operator concurrence, I'm emphasizing the wrong problem.
+**What would change my mind.** If acceptance already tracks confidence cleanly and errors are dominated by system error rather than operator concurrence, I'm emphasizing the wrong problem.
 
 ### Follow-ups
 
@@ -212,9 +212,9 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ06 — Operator Workflow & Interaction Architecture
 
-**Arc:** opening, leadership · **Structure:** CMELT · **Target:** ~80s
+**Arc:** opening, leadership · **Target:** ~80s
 
-> **Base:** Map an operator's attention across detection, assessment, authorization, and intervention. Where does a dense 3D C2 interface compete with the mission?
+> **Base:** Map an operator's attention across detection, assessment, authorization, and intervention. Where does a dense three-dimensional command and control interface compete with the mission?
 
 ### Model answer (~195 words / 78s)
 
@@ -222,11 +222,11 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Method.** I map each of the four stages against three questions: what must the operator know, what must they decide, and what must they physically do. Then I mark every point where authority moves between human and system. Those authority transitions are the design surface. The rule I apply: every one of them must be a discrete, observable state — the operator should never have to *infer* who is in control, because inference under load is where mode errors come from.
 
-**Evidence and limits.** At Uber I ran urban field studies of mobile HMI and complex spatial navigation under live traffic and time pressure, contributing to a 5% retention increase; the finding I carry is that information density has to scale down during high-stress maneuvers or it produces visual overload. At Amazon I built multimodal interaction architecture — captured in patent US-12532040-B1 — and shaped strategy for a portfolio reaching 75M+ customers. The limit: neither population was operating under adversarial time pressure, and a 3D C2 display has spatial-reasoning demands neither of those studies touched.
+**Evidence and limits.** At Uber I ran urban field studies of mobile HMI and complex spatial navigation under live traffic and time pressure, contributing to a 5% retention increase; the finding I carry is that information density has to scale down during high-stress maneuvers or it produces visual overload. At Amazon I built multimodal interaction architecture — captured in patent US-12532040-B1 — and shaped strategy for a portfolio reaching 75M+ customers. The limit: neither population was operating under adversarial time pressure, and a three-dimensional command and control display has spatial-reasoning demands neither of those studies touched.
 
-**Line.** The output isn't a screen critique — it's a workflow model with named authority states that every downstream interaction has to be consistent with.
+**The decision it drives.** The output isn't a screen critique — it's a workflow model with named authority states that every downstream interaction has to be consistent with.
 
-**Turn.** If operators tell me the binding constraint is upstream — getting the data at all, rather than interpreting it — I've scoped the problem wrong.
+**What would change my mind.** If operators tell me the binding constraint is upstream — getting the data at all, rather than interpreting it — I've scoped the problem wrong.
 
 ### Follow-ups
 
@@ -252,7 +252,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ07 — Hardware Ergonomics & Physical-Digital Integration
 
-**Arc:** opening, pushback · **Structure:** CMELT · **Target:** ~80s
+**Arc:** opening, pushback · **Target:** ~80s
 
 > **Base:** Before touching screen design, what physical and anthropometric constraints would you investigate for a fielded Air Defense operator station?
 
@@ -264,9 +264,9 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Evidence and limits.** At Sling I define physical ergonomics, reach-envelope modeling, anatomical safety, and mechanical fit specifications. At NASA Langley I redesigned physical layouts and control displays for Lunar Gateway clinical workstations against NASA-STD-3001 and MIL-STD-1472, cutting task time 30% and eliminating critical input errors. The limit: simulated microgravity and consumer hardware are both different constraint sets from a fielded ground station. What ports is the method — encumbered anthropometry, mock-up-first, layout as a safety control.
 
-**Line.** The output is a hardware requirement with a pass/fail test, not a report — for example, all primary controls actuable without torso translation across the specified encumbered anthropometric range, verified on a physical mock-up.
+**The decision it drives.** The output is a hardware requirement with a pass/fail test, not a report — for example, all primary controls actuable without torso translation across the specified encumbered anthropometric range, verified on a physical mock-up.
 
-**Turn.** If the operators' real posture differs from the assumed one — they stand, or work from a vehicle — the envelope is wrong and everything built on it is wrong.
+**What would change my mind.** If the operators' real posture differs from the assumed one — they stand, or work from a vehicle — the envelope is wrong and everything built on it is wrong.
 
 ### Follow-ups
 
@@ -292,7 +292,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ08 — Quantitative Methods & Analysis
 
-**Arc:** opening, pushback · **Structure:** CMELT · **Target:** ~80s
+**Arc:** opening, pushback · **Target:** ~80s
 
 > **Base:** Walk me through how you would use scaled surveys, max-diff, and your own analysis code to prioritize competing Air Defense operator needs.
 
@@ -302,11 +302,11 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Method.** Max-diff earns its place here for a structural reason: each respondent contributes many forced comparisons, so the information per participant is high even when participant count is low. I'd fit individual-level utilities hierarchically and report intervals, never a clean ranked list — a rank order with overlapping intervals is a false precision that will get quoted back at me for two years. Rating scales I use sparingly, because with a small expert population they compress toward the top and stop discriminating. And I pre-commit the decision rule before data collection: which result leads to which action.
 
-**Evidence and limits.** My quantitative background is psychophysics — which is exactly the small-n, many-trials tradition — plus signal processing on fMRI, ECG, and telemetry data at Brigham and Women's, and formative and summative testing throughout. The limit is that max-diff tells me what operators trade off among the items *I chose*. It is completely blind to the thing I failed to put on the list, which is why it never runs without prior qualitative work.
+**Evidence and limits.** My quantitative background is psychophysics — which is exactly the small-sample, many-trials tradition — plus signal processing on imaging, heart-rate, and telemetry data at Brigham and Women's, and formative and summative testing throughout. The limit is that max-diff tells me what operators trade off among the items *I chose*. It is completely blind to the thing I failed to put on the list, which is why it never runs without prior qualitative work.
 
-**Line.** The bar I'd hold: prioritization-grade evidence can rank a backlog; only threshold-grade evidence can move a number in the system. Different questions, different bars, stated in advance.
+**The decision it drives.** The bar I'd hold: prioritization-grade evidence can rank a backlog; only threshold-grade evidence can move a number in the system. Different questions, different bars, stated in advance.
 
-**Turn.** If the top-ranked items don't survive a behavioral check in a realistic task, item framing drove the result and the ranking is an artifact.
+**What would change my mind.** If the top-ranked items don't survive a behavioral check in a realistic task, item framing drove the result and the ranking is an artifact.
 
 ### Follow-ups
 
@@ -320,7 +320,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **F3 — "Which analysis did you write code for, and what would break if someone else re-ran it?"** *(~70 words)*
 
-> My analysis work has run from psychophysical threshold fitting to physiological signal processing on fMRI, ECG, and telemetry. The honest answer to what breaks: the preprocessing decisions. Filtering, artifact rejection, exclusion criteria — those are where reproducibility dies, because they're usually in someone's head rather than in the script. My standard is that the exclusion rule and the preprocessing chain live in the code with the raw data preserved, so a re-run is a re-run and not an approximation.
+> My analysis work has run from psychophysical threshold fitting to physiological signal processing on imaging, heart-rate, and telemetry data. The honest answer to what breaks: the preprocessing decisions. Filtering, artifact rejection, exclusion criteria — those are where reproducibility dies, because they're usually in someone's head rather than in the script. My standard is that the exclusion rule and the preprocessing chain live in the code with the raw data preserved, so a re-run is a re-run and not an approximation.
 
 ### Senior → Lead/Staff
 
@@ -332,7 +332,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ09 — Field Craft, Facilitation & Service Blueprints
 
-**Arc:** opening, pushback · **Structure:** CMELT · **Target:** ~80s
+**Arc:** opening, pushback · **Target:** ~80s
 
 > **Base:** Design the first two weeks of rapid in-field ethnography with Air Defense operators. What do you run, and what artifact comes out?
 
@@ -342,11 +342,11 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Method.** Week one is observation-first contextual inquiry. I shadow complete cycles including the parts teams skip — shift handoff, degraded operation, and dead time, because dead time is where vigilance failures are built. I anchor every interview to an artifact or a real event rather than a hypothetical, and I use retrospective decision probing on specific past incidents: what did you notice, what did you consider, what would have changed your call. Week two is targeted re-observation on the breakdowns I found, plus a validation session where I show operators my model of their work and let them correct it. Being wrong in front of them is the fastest credibility I know of.
 
-**Evidence and limits.** At Uber I ran urban field studies in live driving conditions rather than in a lab; at NASA I validated workstations in simulated microgravity; at Mercedes I ran high-fidelity simulator studies of L2/L3 handovers. The limit is that none of those populations faced an adversary, and I have not done this with military operators. What transfers is field method under uncontrolled conditions, not domain familiarity.
+**Evidence and limits.** At Uber I ran urban field studies in live driving conditions rather than in a lab; at NASA I validated workstations in simulated microgravity; at Mercedes I ran high-fidelity simulator studies of Level 2 and Level 3 automation handovers. The limit is that none of those populations faced an adversary, and I have not done this with military operators. What transfers is field method under uncontrolled conditions, not domain familiarity.
 
-**Line.** The artifact is a service blueprint with the operator's frontstage actions, the system and autonomy behavior backstage, and the failure and recovery lanes — plus a delta list of requirements it implies, each traceable to an observation.
+**The decision it drives.** The artifact is a service blueprint with the operator's frontstage actions, the system and autonomy behavior backstage, and the failure and recovery lanes — plus a delta list of requirements it implies, each traceable to an observation.
 
-**Turn.** If the breakdowns I find are training artifacts rather than design ones, I'm solving the wrong problem and I redirect the second week.
+**What would change my mind.** If the breakdowns I find are training artifacts rather than design ones, I'm solving the wrong problem and I redirect the second week.
 
 ### Follow-ups
 
@@ -372,7 +372,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 ## TQ10 — Research Operations, Repositories & Storytelling
 
-**Arc:** leadership · **Structure:** CMELT · **Target:** ~80s
+**Arc:** leadership · **Target:** ~80s
 
 > **Base:** How would you operationalize Air Defense research so insights are found, reused, and actually change decisions across Anduril?
 
@@ -384,9 +384,9 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 
 **Evidence and limits.** At Sling I lead organizational Human Factors strategy across software, hardware, and AI platforms, and I authored *Principles for Agentic Trust* as a reusable audit framework rather than a one-off study — it was accepted to CSCW 2026. At Amazon my perceptual-threshold work outlived the studies because it became how latency targets were set. The limit: I don't know this organization's tooling or constraints, so I'd expect the first version of this to be shaped by what already exists here rather than imported wholesale.
 
-**Line.** The measurable test is that a team about to commission a study can find in minutes whether the question is already answered, and if it is, they don't run it.
+**The decision it drives.** The measurable test is that a team about to commission a study can find in minutes whether the question is already answered, and if it is, they don't run it.
 
-**Turn.** If teams keep re-running the same study anyway, the failure is intake, not search — and I'd fix intake rather than buy a better repository.
+**What would change my mind.** If teams keep re-running the same study anyway, the failure is intake, not search — and I'd fix intake rather than buy a better repository.
 
 ### Follow-ups
 
@@ -417,7 +417,7 @@ Ten pillars. Each has the question, one model answer, all three follow-ups with 
 | TQ01 | Thesis & falsifiability | F2 — the specific falsifier | |
 | TQ02 | Psychophysics → spec | F3 — fallback spec | |
 | TQ03 | Measure selection | F2 — arousal confound | |
-| TQ04 | uFMEA & MIL-STD | F3 — who overrules you | |
+| TQ04 | Use-error analysis & military standards | F3 — who overrules you | |
 | TQ05 | Trust calibration | F3 — what doesn't transfer | |
 | TQ06 | Workflow architecture | F3 — modality allocation | |
 | TQ07 | Hardware ergonomics | F1 — percentile & exclusion | |

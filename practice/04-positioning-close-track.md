@@ -24,7 +24,7 @@ The frame around everything else: the pitch, the level argument, the objection, 
 >
 > At Amazon I ran a multi-year psychophysics program that replaced arbitrary engineering latency targets with human perceptual thresholds. It informed about $50 million in operational value, and the multimodal interaction architecture became US Patent US-12532040-B1.
 >
-> At NASA Langley I did human-systems integration for Lunar Gateway clinical workstations — a use-FMEA against NASA-STD-3001 and MIL-STD-1472. Task time down 30%, critical input errors eliminated. And the errors were eliminated by physical layout, not by speed.
+> At NASA Langley I did human-systems integration for Lunar Gateway clinical workstations — a use-error analysis against NASA-STD-3001 and MIL-STD-1472. Task time down 30%, critical input errors eliminated. And the errors were eliminated by physical layout, not by speed.
 >
 > At Sling I'm Staff, and I own human factors across software, hardware, and AI — reach envelopes and mechanical fit specs on one side, and on the other I wrote *Principles for Agentic Trust*, accepted to CSCW 2026, for auditing systems whose behavior isn't deterministic.
 >
@@ -36,7 +36,7 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 **F1 — "You just gave me a career history. Give it to me again as an argument for why you are the right person for this specific role."** *(~80 words)*
 
-> Three claims. One: I've done human-systems integration on safety-critical systems against military and NASA standards, and I know where those standards stop being enough. Two: I turn human evidence into specifications with acceptance tests, not recommendations — that's what the Amazon latency work actually was. Three: I've built the audit framework for non-deterministic systems, which is the specific gap between conventional usability method and autonomous C2. The thing I don't have is defense domain experience, and I'd rather name that than talk around it.
+> Three claims. One: I've done human-systems integration on safety-critical systems against military and NASA standards, and I know where those standards stop being enough. Two: I turn human evidence into specifications with acceptance tests, not recommendations — that's what the Amazon latency work actually was. Three: I've built the audit framework for non-deterministic systems, which is the specific gap between conventional usability method and autonomous command and control. The thing I don't have is defense domain experience, and I'd rather name that than talk around it.
 
 **F2 — "What is the one sentence you want me to repeat about you when I debrief with the panel?"** *(~40 words)*
 
@@ -307,7 +307,7 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 ### Model answer (~190 words / 76s)
 
-**Tactical — NASA Langley.** Lunar Gateway clinical workstations. I ran a use-FMEA against NASA-STD-3001 and MIL-STD-1472 and it changed a specific design: physical layout and control-display placement. Task time down 30%, critical input errors eliminated. That's tactical in the sense that it changed one system — and the reason I lead with it here is the mechanism. The errors were eliminated by geometry, by putting distance and dissimilarity between controls whose consequences differed. Not by a confirmation dialog and not by speed.
+**Tactical — NASA Langley.** Lunar Gateway clinical workstations. I ran a use-error analysis against NASA-STD-3001 and MIL-STD-1472 and it changed a specific design: physical layout and control-display placement. Task time down 30%, critical input errors eliminated. That's tactical in the sense that it changed one system — and the reason I lead with it here is the mechanism. The errors were eliminated by geometry, by putting distance and dissimilarity between controls whose consequences differed. Not by a confirmation dialog and not by speed.
 
 **Strategic — Amazon.** The psychophysics latency program. It didn't change one decision; it changed how a class of decisions got made. Arbitrary engineering targets were replaced with human perceptual thresholds — roughly $50M in operational value, and the multimodal interaction architecture became US Patent US-12532040-B1. But the durable part was the spec format: after that, proposing a latency target meant stating a percentile, a modality, and a fallback.
 
@@ -317,7 +317,7 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 **F1 — "What in that work was yours specifically, and what was the team's?"** *(~70 words)*
 
-> At NASA the uFMEA structure and the layout redesign recommendations were mine; the workstation itself and the broader HSI program were a team's, and I was an intern on it — I want that stated rather than implied. At Amazon the psychophysical method, the threshold derivation, and the spec format were mine. The $50M is a program figure my work informed, not a number I produced alone.
+> At NASA the use-error analysis structure and the layout redesign recommendations were mine; the workstation itself and the broader human-systems integration program were a team's, and I was an intern on it — I want that stated rather than implied. At Amazon the psychophysical method, the threshold derivation, and the spec format were mine. The $50M is a program figure my work informed, not a number I produced alone.
 
 **F2 — "What would you cut from that story if you had eight minutes instead of thirty?"** *(~60 words)*
 
@@ -442,8 +442,8 @@ The frame around everything else: the pitch, the level argument, the objection, 
 The panel compares notes. You have six pieces of evidence and four conversations, so lead with a different one each time and keep the rest in reserve:
 
 - Amazon psychophysics / $50M / patent
-- NASA uFMEA / MIL-STD-1472 / 30% and eliminated errors
-- Mercedes L2/L3 handover / 24%
+- NASA use-error analysis / MIL-STD-1472 / 30% and eliminated errors
+- Mercedes-Benz Level 2 and Level 3 handovers / 24%
 - Uber field studies / 5% retention
 - Sling criteria, reach envelopes, mechanical fit specs
 - *Principles for Agentic Trust* / CSCW 2026

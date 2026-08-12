@@ -13,36 +13,36 @@ Placeholders in `[brackets]` mark a specific fact only you can supply. Do not im
 
 ## 1. Two answer structures, not one
 
-You are scored on STAR/STARE only for behavioral and experience answers. Technical, methodological, and research-craft answers are scored on technical reasoning structure. Using the wrong structure is a Relevance penalty even when the content is right.
+You are scored on the Situation-Task-Action-Result format only for behavioral and experience answers. Technical, methodological, and research-craft answers are scored on how you reason, not on how you narrate. Using the wrong one is a relevance penalty even when the content is right.
 
-### Structure A — STARE+M (behavioral, experience, cross-functional friction)
+### Structure A — for behavioral, experience, and cross-functional questions
 
 | Beat | Words | What it must do |
 |---|---|---|
-| **S**ituation | 20–30 | One sentence. Org, stakes, why it was hard. |
-| **T**ask | 15–25 | Your specific charge, in first person. |
-| **A**ction | 90–120 | "I" not "we." The hardest moment is the centerpiece. Name what you decided against. |
-| **R**esult | 25–40 | Quantified where canonical. Attribution honest. |
-| **E**arned secret | 20–30 | The thing you know that most people in your role don't. |
-| **M**echanism (uplevel) | 20–30 | The standard, gate, or artifact you left behind so the problem doesn't recur. |
+| Situation | 20–30 | One sentence. The organization, the stakes, why it was hard. |
+| Task | 15–25 | Your specific charge, in first person. |
+| Action | 90–120 | "I," not "we." The hardest moment is the centerpiece. Name what you decided against. |
+| Result | 25–40 | Quantified where the evidence supports it. Attribution honest. |
+| Earned secret | 20–30 | The thing you know that most people in your role do not. |
+| Mechanism | 20–30 | The standard, review gate, or artifact you left behind so the problem does not recur. |
 
 Total: **200–265 words ≈ 90–110 seconds.**
 
-The **M** beat is the Senior→Lead/Staff gate. Without it you have described excellent execution, which is baseline. Say it as its own sentence and make it concrete: *"What I left behind was X, and Y still has to clear it."*
+The mechanism beat is the gate between Senior and Lead/Staff. Without it you have described excellent execution, which is the baseline expectation. Say it as its own sentence and make it concrete: *"What I left behind was X, and Y still has to clear it."*
 
-### Structure B — CMELT (technical, method, research craft)
+### Structure B — for technical, methodological, and research-craft questions
 
 | Beat | Words | What it must do |
 |---|---|---|
-| **C**laim | 20–30 | Lead with the recommendation or position. No windup. |
-| **M**ethod / mechanism | 40–60 | How you'd know, or how the effect actually works. |
-| **E**vidence + limits | 40–60 | Your canonical evidence, then its boundary — unprompted. |
-| **L**ine (threshold / decision) | 30–45 | The number, gate, or spec this drives. What changes on Monday. |
-| **T**urn (falsifier) | 20–35 | What result would change your mind, and how you'd detect it. |
+| The claim | 20–30 | Lead with the recommendation or the position. No windup. |
+| How you would know | 40–60 | The method, or how the effect actually works. |
+| Evidence, and where it stops | 40–60 | Your canonical evidence, then its boundary — before anyone asks. |
+| The decision it drives | 30–45 | The threshold, gate, or specification this produces. What changes on Monday. |
+| What would change your mind | 20–35 | The result that would overturn the claim, and how you would detect it. |
 
 Total: **160–230 words ≈ 65–90 seconds.**
 
-The **E-limits** and **T** beats are what separate you from a confident bluffer. Volunteering the boundary of your own evidence buys more credibility than any additional proof point.
+Naming the boundary of your own evidence, and saying what would change your mind, are what separate you from a confident bluffer. Volunteering the limit buys more credibility than any additional proof point.
 
 ---
 
@@ -80,17 +80,17 @@ Every strong answer makes at least one. A Strong Hire answer makes two or three.
 ## 4. Evidence boundaries — non-negotiable
 
 Assert freely (resume-canonical):
-- Amazon: multi-year psychophysics program replacing arbitrary latency targets, ~$50M operational value; US Patent US-12532040-B1; 2023 Amazon Inventor Award; fNIRS + eye-tracking cognitive-load framework; strategy influence across a portfolio reaching 75M+ customers
-- NASA Langley: Lunar Gateway clinical workstation HSI, uFMEA, NASA-STD-3001 and MIL-STD-1472, 30% task-time reduction, eliminated critical input errors
-- Mercedes-Benz: L2/L3 handover simulator studies, multimodal alerts, 24% improvement in safety and trust ratings
+- Amazon: multi-year psychophysics program replacing arbitrary latency targets, ~$50M operational value; US Patent US-12532040-B1; 2023 Amazon Inventor Award; objective cognitive-load framework using functional near-infrared spectroscopy and eye tracking; strategy influence across a portfolio reaching 75M+ customers
+- NASA Langley: Lunar Gateway clinical workstation human-systems integration, use-error analysis, NASA-STD-3001 and MIL-STD-1472, 30% task-time reduction, eliminated critical input errors
+- Mercedes-Benz: simulator studies of Level 2 and Level 3 automation handovers, multimodal alerts, 24% improvement in safety and trust ratings
 - Uber: urban field studies, mobile HMI and spatial navigation, 5% driver-retention increase
-- Brigham/Harvard: fMRI, ECG, telemetry processing for acute-stress research
-- Sling: organizational HF strategy across software/hardware/AI; reach-envelope modeling, anatomical safety, mechanical fit specs; latency/feedback/spatial-layout usability criteria; authored *Principles for Agentic Trust*, accepted ACM CSCW 2026 Industry Perspectives
+- Brigham/Harvard: functional magnetic resonance imaging, heart-rate, and telemetry processing for acute-stress research
+- Sling: organizational human factors strategy across software, hardware, and AI; reach-envelope modeling, anatomical safety, mechanical fit specifications; usability criteria for latency, feedback, and spatial layout; authored *Principles for Agentic Trust*, accepted ACM CSCW 2026 Industry Perspectives
 - Ph.D. Human Factors Psychology, ODU 2020; dissertation on working memory, spatial processing, and reaction time under high-stress task interruption
 
 Never assert:
-- fNIRS at Brigham/Harvard (fNIRS is Amazon; fMRI/ECG/telemetry is Brigham — never merge them)
-- Any head-to-head result showing fNIRS or ECG beat NASA-TLX
+- Functional near-infrared spectroscopy at Brigham or Harvard — that instrument belongs to Amazon; the imaging, heart-rate, and telemetry work belongs to Brigham. Never merge them
+- Any head-to-head result showing a biometric measure beat the NASA Task Load Index
 - Any deployment, adoption, or operational outcome for Calibrated Cognitive Friction — it is a thesis
 - Any Echo Show / Echo Hub metric beyond portfolio strategy influence at 75M+ customers
 - Any clearance status, classified detail, or Anduril-internal process, team, headcount, or program specifics
@@ -153,9 +153,9 @@ Before you drill, go through the printout with a pen and fill in every `[bracket
 
 | | Behavioral / experience | Technical / method |
 |---|---|---|
-| **Beats** | **S**ituation → **T**ask → **A**ction → **R**esult → **E**arned secret → **M**echanism | **C**laim → **M**ethod → **E**vidence + limits → **L**ine → **T**urn |
+| **Beats** | Situation → Task → Action → Result → Earned secret → Mechanism | The claim → how you would know → evidence and where it stops → the decision it drives → what would change your mind |
 | **Length** | 200–265 words · 90–110s | 160–230 words · 65–90s |
-| **Level gate** | The **M** beat — what you left behind | The **E-limits** and **T** beats |
+| **Level gate** | The mechanism beat — what you left behind | Naming your evidence's limits, and the falsifier |
 
 Follow-up: 45–90 words, 20–35 seconds. Answer the one thing asked and stop. Re-narrating the story on a follow-up costs you on both answers.
 
@@ -172,11 +172,11 @@ Decision first · Consequence link · Alternatives + conditions · Reusable mech
 
 ### Assert freely
 
-Amazon psychophysics / ~$50M / Patent US-12532040-B1 / fNIRS + eye tracking / 75M+ portfolio · NASA uFMEA / NASA-STD-3001 + MIL-STD-1472 / 30% task time / errors eliminated · Mercedes L2-L3 handover / 24% · Uber field / 5% retention · Brigham fMRI, ECG, telemetry · Sling HF strategy, reach envelopes, mechanical fit specs, *Principles for Agentic Trust* / CSCW 2026 · PhD ODU 2020
+Amazon psychophysics / ~$50M / Patent US-12532040-B1 / near-infrared spectroscopy + eye tracking / 75M+ portfolio · NASA use-error analysis / NASA-STD-3001 + MIL-STD-1472 / 30% task time / errors eliminated · Mercedes-Benz Level 2 and Level 3 handovers / 24% · Uber field studies / 5% retention · Brigham imaging, heart-rate, telemetry · Sling human factors strategy, reach envelopes, mechanical fit specifications, *Principles for Agentic Trust* / CSCW 2026 · Ph.D. Old Dominion University 2020
 
 ### Never say
 
-fNIRS at Brigham · any fNIRS-vs-TLX head-to-head · any deployment of Calibrated Cognitive Friction · any Echo metric beyond portfolio reach · any clearance status · any Anduril-internal process, team, or headcount · any prior contact with a panelist
+Near-infrared spectroscopy at Brigham · any head-to-head against the NASA Task Load Index · any deployment of Calibrated Cognitive Friction · any Echo metric beyond portfolio reach · any clearance status · any Anduril-internal process, team, or headcount · any prior contact with a panelist
 
 **Closed — never raise, never treat as a gap:** location · compensation · travel · clearance. **Level is the only open item, and it is argued from scope, never from title.**
 

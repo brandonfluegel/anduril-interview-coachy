@@ -2,25 +2,25 @@
 
 Ten pillars. The question, one model answer, all three follow-ups, and the Senior → Lead/Staff delta. One answer per question — however the interviewer words it.
 
-**Structure for this entire track: STARE+M** — Situation → Task → Action → Result → Earned secret → Mechanism. **Target: 200–265 words ≈ 90–110 seconds.** Follow-ups: 45–90 words ≈ 20–35 seconds.
+**Structure for this entire track.** Situation, task, action, result — then the two beats most candidates leave out: the insight you earned from it, and the mechanism you left behind so the problem does not recur. **Target: 200–265 words ≈ 90–110 seconds.** Follow-ups: 45–90 words ≈ 20–35 seconds.
 
 Three rules that decide this track:
 
 1. **"I," not "we."** Every hedge — *"I was involved in," "they let me," "I helped drive"* — caps you at a 2 on Tone & Authority regardless of the work.
-2. **The M beat is the level gate.** Result is Senior. What you left behind is Lead/Staff. Say it as its own sentence: *"What I left behind was X, and Y still has to clear it."*
+2. **The mechanism beat is the level gate.** Result is Senior. What you left behind is Lead/Staff. Say it as its own sentence: *"What I left behind was X, and Y still has to clear it."*
 3. **`[brackets]` are yours to fill.** Several pillars need a specific incident that only you can supply. Fill it in or cut the sentence — never improvise a number, a name, or an outcome.
 
 ---
 
 ## BQ01 — Warfare & Ethics
 
-**Structure:** Position + mechanism (not STARE — this is a stance question) · **Target:** ~95s
+**Structure:** a position and a mechanism, not a story — this one asks what you believe · **Target:** ~95s
 
-> **Base:** How do you think about the moral and ethical responsibility of designing UX for autonomous weapons and counter-drone C2 systems?
+> **Base:** How do you think about the moral and ethical responsibility of designing user experiences for autonomous weapons and counter-drone command and control systems?
 
 ### Model answer (~235 words / 95s)
 
-**Position.** I don't think the hard ethical question here is whether the system should exist. It's whether the human who authorizes its action is genuinely in a position to be accountable for it. Accountability without comprehension is a fiction — and a UX that manufactures that fiction is the real ethical failure, because it launders a machine's decision through a human signature.
+**Position.** I don't think the hard ethical question here is whether the system should exist. It's whether the human who authorizes its action is genuinely in a position to be accountable for it. Accountability without comprehension is a fiction — and an operator experience that manufactures that fiction is the real ethical failure, because it launders a machine's decision through a human signature.
 
 **So the responsibility is concrete.** Preserve the operator's capacity to form an independent judgment at the point of authorization, and tell the organization honestly when a design has stopped doing that.
 
@@ -54,7 +54,7 @@ Three rules that decide this track:
 
 ## BQ02 — Military Operators
 
-**Structure:** STARE+M, with an honest boundary up front · **Target:** ~105s
+**Structure:** the standard story structure, with an honest boundary up front · **Target:** ~105s
 
 > **Base:** Describe your experience working directly with military operators or high-stress domain experts in field conditions. How do you cut through operator bias or bravado to get true operational data?
 
@@ -98,7 +98,7 @@ Three rules that decide this track:
 
 ## BQ03 — Scrappiness vs. Rigor
 
-**Structure:** STARE+M · **Target:** ~100s
+**Target:** ~100s
 
 > **Base:** You hold a Ph.D. and have published in academic tracks like ACM CSCW. How do you balance scientific rigor with Anduril's requirement to ship functional tech in months, not years?
 
@@ -140,7 +140,7 @@ Three rules that decide this track:
 
 ## BQ04 — Cross-Functional Standoff
 
-**Structure:** STARE+M · **Target:** ~105s
+**Target:** ~105s
 
 > **Base:** Tell me about a time an Engineering Lead or PM strongly resisted your research recommendations or wanted to strip a safety feature for speed. How did you resolve it?
 
@@ -182,7 +182,7 @@ Three rules that decide this track:
 
 ## BQ05 — Startup Intensity & Field Tempo
 
-**Structure:** STARE+M · **Target:** ~95s
+**Target:** ~95s
 
 > **Base:** Defense tech requires high-intensity field testing and dynamic schedules. How do you stay effective and prevent burnout under high operational friction?
 
@@ -224,7 +224,7 @@ Three rules that decide this track:
 
 ## BQ06 — Extreme Ambiguity
 
-**Structure:** STARE+M · **Target:** ~100s
+**Target:** ~100s
 
 > **Base:** How do you design a research strategy when hardware/software requirements are completely undefined and the product team is changing direction weekly?
 
@@ -268,7 +268,7 @@ Three rules that decide this track:
 
 **Structure:** Protocol + example (the question asks for a protocol) · **Target:** ~95s
 
-> **Base:** What is your protocol when leadership or engineering acknowledges your research findings but decides to ship an unsafe or sub-optimal UX anyway?
+> **Base:** What is your protocol when leadership or engineering acknowledges your research findings but decides to ship an unsafe or sub-optimal operator experience anyway?
 
 ### Model answer (~235 words / 95s)
 
@@ -278,7 +278,7 @@ Three rules that decide this track:
 
 **For unsafe, the protocol is four steps.** One: restate it in the team's own risk language — severity, likelihood, and specifically whether there's an independent path to detect the error before consequence. Missing detectability is what makes something escalation-worthy, more than severity alone. Two: put it in writing, including what would change my assessment, so it's a risk statement rather than an objection. Three: ask for explicit acceptance by someone with the authority to accept it. Most of the time this step alone changes the outcome — accepting a named risk in writing is very different from approving a schedule. Four: escalate only on catastrophic severity with no independent detection path.
 
-**Grounding.** This comes out of applying uFMEA to Lunar Gateway clinical workstations at NASA against NASA-STD-3001 and MIL-STD-1472 — where "how would anyone catch this before it matters" was the question that actually drove design changes.
+**Grounding.** This comes out of applying use-error analysis to Lunar Gateway clinical workstations at NASA against NASA-STD-3001 and MIL-STD-1472 — where "how would anyone catch this before it matters" was the question that actually drove design changes.
 
 **Earned secret and mechanism.** The escalation you win is the one you negotiated before the incident. So the mechanism is a stop-ship criterion agreed in advance, in calm conditions — because a threshold argued for the first time under schedule pressure reads as obstruction no matter how right it is.
 
@@ -306,7 +306,7 @@ Three rules that decide this track:
 
 ## BQ08 — Failure & Course Correction
 
-**Structure:** STARE+M · **Target:** ~100s
+**Target:** ~100s
 
 > **Base:** Tell me about a research study or interface design of yours that completely failed during testing. What went wrong, and how did you recover?
 
@@ -350,7 +350,7 @@ Three rules that decide this track:
 
 ## BQ09 — Scaling Culture & Mentorship
 
-**Structure:** STARE+M · **Target:** ~100s
+**Target:** ~100s
 
 > **Base:** How do you scale research operations, build shared insight repositories, and mentor junior team members as a Lead/Staff engineer?
 
@@ -392,7 +392,7 @@ Three rules that decide this track:
 
 ## BQ10 — Competing Priorities
 
-**Structure:** STARE+M · **Target:** ~95s
+**Target:** ~95s
 
 > **Base:** When three different product managers are demanding urgent user research for different Air Defense platforms simultaneously, how do you triage and allocate your time?
 
@@ -442,7 +442,7 @@ Three rules that decide this track:
 | BQ04 | Cross-functional standoff | Amazon latency spec | F1 — what you conceded | |
 | BQ05 | Intensity & tempo | Uber / Mercedes / NASA field | F2 — the week it degraded | ✔ |
 | BQ06 | Extreme ambiguity | Sling standing start | F3 — obsolete research | ✔ |
-| BQ07 | Ignored insights | NASA uFMEA | F3 — escalated and wrong | ✔ |
+| BQ07 | Ignored insights | NASA use-error analysis | F3 — escalated and wrong | ✔ |
 | BQ08 | Failure | **none — you must supply** | F1 — your specific error | ✔✔ |
 | BQ09 | Scaling & mentorship | Sling criteria, CSCW | F1 — name a mentee | ✔✔ |
 | BQ10 | Competing priorities | Sling portfolio | F2 — what you stopped | ✔ |
@@ -451,7 +451,7 @@ Three rules that decide this track:
 
 **Three sentences that carry this entire track:**
 
-1. *"What I left behind was [the standard], and [who] still has to clear it."* — the M beat, every time.
+1. *"What I left behind was [the standard], and [who] still has to clear it."* — the mechanism beat, every time.
 2. *"Sub-optimal and unsafe are different, and I only fight one of them."* — credibility economics.
 3. *"I want to be precise rather than impressive here."* — deploy before any boundary admission. It converts a gap into evidence of judgment.
 

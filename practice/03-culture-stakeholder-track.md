@@ -4,7 +4,7 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 **Target: 170–220 words ≈ 75–90 seconds.** Shorter than behavioral. These questions reward a clear position plus one grounded proof point — not a full narrative.
 
-**Structure:** most are **Position → proof point → mechanism**. Where the question says "tell me about a time," switch to STARE+M.
+**Structure:** most are **a position, a proof point, then the mechanism you would build**. Where the question says "tell me about a time," switch to the story structure from the behavioral track.
 
 **Hard boundaries in this track.** Location, compensation, travel percentage, and clearance are closed — settled in the recruiter screen. Never raise them, never treat them as a gap, never state or imply a clearance status. Never assert Anduril's internal process, team structure, headcount, or program details; when a question edges there, say what you'd *want* and note you'd take direction. Level is the only open item, and it's argued from scope.
 
@@ -38,7 +38,7 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 **F3 — "What have you actually done to prepare for this domain beyond reading about it?"** *(~75 words)*
 
-> The honest answer is that the preparation is in the work, not in a course. I applied MIL-STD-1472 and NASA-STD-3001 to a safety-critical workstation and ran a uFMEA against it. I wrote an audit framework for non-deterministic agentic systems and put it through peer review at CSCW. And I've built a specific position on operator authority I can defend and falsify. What I haven't done is spend time with military operators, and that's the first thing I'd fix.
+> The honest answer is that the preparation is in the work, not in a course. I applied MIL-STD-1472 and NASA-STD-3001 to a safety-critical workstation and ran a use-error analysis against it. I wrote an audit framework for non-deterministic agentic systems and put it through peer review at CSCW. And I've built a specific position on operator authority I can defend and falsify. What I haven't done is spend time with military operators, and that's the first thing I'd fix.
 
 ### Senior → Lead/Staff
 
@@ -50,7 +50,7 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 ## CQ02 — Ownership With Little Oversight
 
-**Stakeholders:** Research leadership, product, program · **Structure:** STARE+M · **Target:** ~90s
+**Stakeholders:** Research leadership, product, program · **Structure:** tell it as a story · **Target:** ~90s
 
 > **Base:** This role expects you to work through ambiguity with little oversight. Tell me about a time nobody told you what to research and you had to decide.
 
@@ -342,7 +342,7 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 **F1 — "What is your track record handling sensitive or regulated research data, and what protocol did you follow?"** *(~70 words)*
 
-> At Brigham and Women's I processed neuroimaging, ECG, and telemetry data for acute-stress research under IRB and federal research compliance — de-identification, controlled access, documented chain of custody. At NASA the work was safety-critical and government-adjacent. The habit that carries over is treating handling rules as design constraints on the research itself rather than as paperwork after the fact — it changes what you collect, not just where you store it.
+> At Brigham and Women's I processed neuroimaging, heart-rate, and telemetry data for acute-stress research under institutional review board and federal research compliance — de-identification, controlled access, documented chain of custody. At NASA the work was safety-critical and government-adjacent. The habit that carries over is treating handling rules as design constraints on the research itself rather than as paperwork after the fact — it changes what you collect, not just where you store it.
 
 **F2 — "How do you separate what is genuinely restricted from what is just being hoarded?"** *(~70 words)*
 
