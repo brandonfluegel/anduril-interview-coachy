@@ -8,9 +8,8 @@
         "Staff Human Factors Engineer"
       ],
       "locations": [
-        "Irvine, CA",
-        "Seattle, WA",
-        "Colorado scope"
+        "Irvine, California, United States",
+        "Seattle, Washington, United States"
       ],
       "base_salary_usd": {
         "minimum": 166000,
@@ -32,24 +31,32 @@
     },
     "key_responsibilities": [
       "Shape Air Defense product and program strategy using rigorous data and user insights.",
-      "Apply service blueprints, contextual inquiry, in-field rapid ethnography, focus groups, observations, workshops, surveys, and usability testing.",
-      "Use storytelling to inspire and align partners and drive recommendations from actionable insights.",
-      "Build Research Operations by consolidating and sharing insights, maintaining research repositories, and creating cross-functional workflows.",
-      "Design end-to-end operator workflows and shape UX research best practices across Anduril."
+      "Conduct and lead UX research such as service blueprints, contextual inquiry, in-field rapid ethnography, focus groups, observations, workshops, surveys, and usability testing.",
+      "Use storytelling to inspire and align partners and key stakeholders.",
+      "Identify and drive forward ideas and recommendations to improve products based on actionable research insights.",
+      "Operationalize ways to consolidate and share research insights, communicate quickly and efficiently, synthesize insights into research repositories, and create workflows to work more powerfully with internal stakeholders.",
+      "Play an influential role in shaping the end-to-end experiences for critical operator workflows.",
+      "Help shape UX research best practices in Air Defense and share insights, process, and best practice across Anduril at large."
     ],
     "qualifications": {
       "required": [
-        "At least 5 years of experience working on digital products.",
-        "Ability to work through ambiguity with little oversight.",
-        "Eligibility for a Top Secret clearance."
+        "Bachelor's degree in Human-Computer Interaction, Human Factors, Psychology, Cognitive Science, Design, or an equivalent combination of education and experience.",
+        "5+ years of relevant user research experience working on digital products, able to work through ambiguity and help define research approaches that deliver impact based on actionable insights prioritizing the needs of the user and the business.",
+        "Research craft: can expertly design, plan, and execute research studies with clear objectives, goals, and timelines with little or no oversight.",
+        "Portfolio of work demonstrating research and insights that influenced both tactical and strategic product development work.",
+        "Strong communication skills in a fast-paced environment; ability to drive conversations with cross-functional partners with user data, helping bring user needs to the forefront while driving empathy through rigorous research findings.",
+        "Must be eligible to obtain and maintain a U.S. Top Secret clearance.",
+        "Expected travel is between 25-30%."
       ],
       "preferred": [
-        "M.S. or Ph.D. in Psychology, HCI, Anthropology, Statistics, or a related field.",
-        "Active Top Secret clearance.",
-        "Group facilitation and co-creation experience.",
-        "Ability to operate at startup speed.",
-        "Hardware and Human Factors experience, including ergonomics and military standards.",
-        "Quantitative research skills including scaled surveys, max-diff, and coding-based data analysis."
+        "M.S. or Ph.D. in Psychology, Human-Computer Interaction, Anthropology, Statistics, or other related area of study.",
+        "Active clearance: an active security clearance is helpful, but not required.",
+        "Group facilitation: can effectively lead co-creation, planning, and discovery workshops with cross-functional stakeholders.",
+        "Comfortable defining UX research capabilities in a fast-paced start-up environment, able to draw from a broad toolkit to integrate research into existing and future product roadmaps.",
+        "Programmatic support: opinionated about research operations and efforts to increase efficiency and improve decision making.",
+        "Is a good teammate: demonstrated proactiveness in helping to shape team culture and mentorship participation.",
+        "Hardware and/or Human Factors experience: development and research for hardware and service design, ergonomics, and/or support development of military standard systems.",
+        "Quantitative research skills: applying a variety of research methodologies to drive data-driven conversations and decision making, including scaled surveys, max-diff, and using programming languages to analyze data."
       ]
     },
     "interview_panel": [

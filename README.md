@@ -32,7 +32,9 @@ Public sharing is disabled by default. To request a temporary public Gradio URL,
 - `data/candidate_profile.json`: canonical resume evidence
 - `data/target_anduril_air_defense.json`: canonical role requirements
 - `data/storybank_6_pillars.json`: six approved interview stories
-- `data/behavioral_questions.json`: ten defense-tech behavioral pillars with persona adaptations
+- `data/behavioral_questions.json`: ten defense-tech behavioral pillars with persona adaptations, follow-up probes, and Lead/Staff bars
+- `data/technical_questions.json`: ten technical and research-craft pillars mapping every posted responsibility and qualification to resume evidence, with persona adaptations, follow-up probes, and Lead/Staff bars
+- `data/culture_questions.json`: ten Anduril culture, mission-fit, and stakeholder-collaboration pillars with named stakeholder groups, persona adaptations, follow-up probes, and Lead/Staff bars
 - `data/coaching_state.md`: active readiness and session context
 - `references/role-drills.md`: interviewer persona definitions
 - `references/rubrics-detailed.md`: detailed scoring anchors

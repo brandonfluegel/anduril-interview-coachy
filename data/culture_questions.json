@@ -1,0 +1,263 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Anduril culture, mission-fit, and stakeholder-collaboration question bank for the behavioral, leadership, and open turns of the Air Defense interview arc.",
+  "usage_policy": "Ground every question in the posted job description and the candidate's canonical resume. Never assert internal Anduril process, team structure, tooling, headcount, program details, or that the candidate has prior familiarity with anyone on the panel. Never state or imply the candidate's clearance status. Ask about one pillar at a time and escalate only with that pillar's follow_ups.",
+  "personas": [
+    "Dr. Daniella Kim",
+    "Systems / ML Engineering Lead",
+    "Product Manager",
+    "Design Lead"
+  ],
+  "questions": [
+    {
+      "id": "CQ01",
+      "pillar": "Mission Fit & Motivation",
+      "arc_stages": ["behavioral", "open"],
+      "stakeholders": ["Hiring manager", "Research leadership", "Panel at large"],
+      "question": "You have spent your career on consumer devices, spaceflight, and automotive systems. Why defense, why Air Defense, and why now?",
+      "resume_and_role_links": [
+        "Amazon Devices, NASA Langley, Mercedes-Benz, Uber, Sling career arc",
+        "Calibrated Cognitive Friction and Meaningful Human Control",
+        "JD: transform U.S. and allied military capabilities with advanced technology",
+        "JD: force protection for service members"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "What drew you from consumer and aerospace Human Factors to autonomous Air Defense, and what would make you walk away from this kind of work?",
+        "Systems / ML Engineering Lead": "Defense work means your recommendations can affect whether a system engages a threat. What changes about how you do research when that is the consequence?",
+        "Product Manager": "Why defense, and why now? I want to know what keeps you here when the schedule gets ugly and the mission gets uncomfortable.",
+        "Design Lead": "What about protecting service members changes the way you would approach an operator experience compared with a consumer device?"
+      },
+      "follow_ups": [
+        "What specifically about counter-drone and air defense pulled you, as opposed to any other defense program?",
+        "Where is your personal line on this work, and what would you refuse to design?",
+        "What have you actually done to prepare for this domain beyond reading about it?"
+      ],
+      "lead_staff_bar": "Senior gives a sincere personal motivation. Lead/Staff ties the motivation to a specific research position they intend to advance and the trade-offs they accept to hold it."
+    },
+    {
+      "id": "CQ02",
+      "pillar": "Ownership With Little Oversight",
+      "arc_stages": ["behavioral", "leadership"],
+      "stakeholders": ["Research leadership", "Product Manager", "Program stakeholders"],
+      "question": "This role expects you to work through ambiguity with little oversight. Tell me about a time nobody told you what to research and you had to decide.",
+      "resume_and_role_links": [
+        "Sling organizational Human Factors strategy ownership",
+        "Principles for Agentic Trust created without an external mandate",
+        "JD required: work through ambiguity with little oversight",
+        "JD required: design, plan, and execute studies with little or no oversight"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "With no assigned roadmap and no research precedent on this team, how would you choose your first study, and who would you tell before you started?",
+        "Systems / ML Engineering Lead": "If nobody asks you for Human Factors input, how do you insert yourself into a technical decision before the architecture is locked?",
+        "Product Manager": "Nobody is going to hand you a research brief here. Tell me about a time you defined the question yourself and were held to the outcome.",
+        "Design Lead": "How do you decide what to investigate when design, product, and engineering are all moving without waiting for you?"
+      },
+      "follow_ups": [
+        "How did you know it was the right thing to work on, and what did you deliberately ignore?",
+        "Who did you keep informed, and how did you avoid surprising them with your conclusion?",
+        "Tell me about a time you self-directed onto the wrong problem. How long did it take you to notice?"
+      ],
+      "lead_staff_bar": "Senior self-manages assigned scope. Lead/Staff sets the agenda for the function, publishes the rationale, and is accountable for the bets they chose."
+    },
+    {
+      "id": "CQ03",
+      "pillar": "Months, Not Years",
+      "arc_stages": ["behavioral", "leadership"],
+      "stakeholders": ["Product Manager", "Engineering Lead", "Program stakeholders"],
+      "question": "Anduril's stated bar is delivering capability to the military in months, not years. What does research look like at that cadence, and where does it break?",
+      "resume_and_role_links": [
+        "Amazon multi-year psychophysics program versus startup cadence",
+        "Uber and NASA field and simulator study timelines",
+        "JD: fast-paced start-up environment",
+        "JD: integrate research into existing and future product roadmaps"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "At a months-not-years cadence, which parts of your research process are non-negotiable and which are the first to be cut?",
+        "Systems / ML Engineering Lead": "We will not stop the build for a study. How do you get evidence into a decision that is already in flight?",
+        "Product Manager": "What does your research calendar look like in a quarter where we ship twice and field-test once?",
+        "Design Lead": "How do you keep research feeding design at sprint speed without turning into a rubber stamp on decisions already made?"
+      },
+      "follow_ups": [
+        "Give me the fastest study you have run that still changed a hardware or software decision. How many days?",
+        "What did you get wrong by moving that fast, and how did you catch it?",
+        "When would you tell a team to ship without research rather than wait for you?"
+      ],
+      "lead_staff_bar": "Senior compresses timelines on request. Lead/Staff designs the tiered evidence model that lets the organization move fast on purpose instead of by accident."
+    },
+    {
+      "id": "CQ04",
+      "pillar": "Engineering Partnership",
+      "arc_stages": ["behavioral", "open"],
+      "stakeholders": ["Systems engineers", "ML engineers", "Software engineers", "Test engineers"],
+      "question": "How do you embed with systems, ML, and software engineers so Human Factors evidence lands inside their workflow instead of arriving as a report?",
+      "resume_and_role_links": [
+        "Amazon latency thresholds negotiated with engineering",
+        "NASA uFMEA and standards-based validation artifacts",
+        "Sling design validation across software, hardware, and AI platforms",
+        "JD: drive conversations with cross-functional partners with user data"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How do you build the kind of engineering relationships that let research change an architecture rather than annotate it?",
+        "Systems / ML Engineering Lead": "What would you put in my backlog, my test plan, or my requirements doc so your findings are something I can actually action?",
+        "Product Manager": "How do you keep engineering from treating research as a review gate they have to survive?",
+        "Design Lead": "When engineering, design, and research disagree about an operator interaction, how do you keep that a technical debate instead of a turf fight?"
+      },
+      "follow_ups": [
+        "Name the artifact engineers actually read from you. Was it a deck, a ticket, a requirement, or a test case?",
+        "When did an engineer change their mind because of your evidence, and what specifically moved them?",
+        "How do you handle an engineer who says your sample size is too small to matter?"
+      ],
+      "lead_staff_bar": "Senior communicates findings clearly to engineers. Lead/Staff makes Human Factors traceable inside engineering's own requirement and verification artifacts."
+    },
+    {
+      "id": "CQ05",
+      "pillar": "Hardware & Field Test Collaboration",
+      "arc_stages": ["behavioral", "open"],
+      "stakeholders": ["Mechanical and industrial design", "Hardware engineers", "Field test teams", "Manufacturing"],
+      "question": "Hardware decisions get expensive fast. How do you work with mechanical, industrial design, and field test partners so ergonomic evidence arrives before a design freeze?",
+      "resume_and_role_links": [
+        "Sling reach-envelope modeling, anatomical safety, and mechanical fit specifications",
+        "Amazon Devices hardware programs",
+        "NASA simulated-microgravity workstation validation",
+        "JD preferred: hardware and service design, ergonomics, military standard systems"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How do you time physical Human Factors evidence to hardware milestones so it is still cheap to act on?",
+        "Systems / ML Engineering Lead": "What do you need from hardware and test partners to validate a physical interface before we build tooling?",
+        "Product Manager": "Hardware changes late are the most expensive thing we can do. How do you make sure your ergonomic finding shows up early enough to matter?",
+        "Design Lead": "How do you and industrial design divide the physical interaction problem so you are not duplicating or contradicting each other?"
+      },
+      "follow_ups": [
+        "Tell me about a time your evidence arrived too late to change the hardware. What did you do?",
+        "How do you get useful ergonomic data from a mock-up rather than a production unit?",
+        "How do you work with field test teams who see the system in real conditions before you do?"
+      ],
+      "lead_staff_bar": "Senior evaluates hardware when asked. Lead/Staff embeds Human Factors checkpoints into the hardware milestone cadence so the evidence is never late."
+    },
+    {
+      "id": "CQ06",
+      "pillar": "Product & Roadmap Partnership",
+      "arc_stages": ["behavioral", "leadership"],
+      "stakeholders": ["Product Managers", "Program leadership", "Business stakeholders"],
+      "question": "How do you integrate research into an existing roadmap without becoming either a bottleneck or a rubber stamp?",
+      "resume_and_role_links": [
+        "Amazon product strategy influence across Echo Show and Echo Hub",
+        "Sling portfolio-level Human Factors strategy",
+        "JD: identify and drive forward ideas and recommendations to improve products",
+        "JD: prioritize the needs of the user and the business"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How do you keep a research agenda intact while serving a roadmap that changes underneath you?",
+        "Systems / ML Engineering Lead": "When product priorities and safety evidence point different directions, what do you bring to that conversation besides an opinion?",
+        "Product Manager": "Walk me through how you would plug into my planning cycle. What do you need from me, and what do I get from you every sprint?",
+        "Design Lead": "How do you keep research shaping the roadmap upstream instead of validating decisions that are already designed?"
+      },
+      "follow_ups": [
+        "What is the intake process you would want, and what happens to requests that do not fit it?",
+        "Tell me about a time your evidence killed or materially changed a feature people wanted.",
+        "How do you represent business needs, not just user needs, in that recommendation?"
+      ],
+      "lead_staff_bar": "Senior services roadmap questions well. Lead/Staff shapes which questions the roadmap asks and makes the research intake and prioritization model explicit."
+    },
+    {
+      "id": "CQ07",
+      "pillar": "Design Partnership & Critique",
+      "arc_stages": ["behavioral", "open"],
+      "stakeholders": ["Design Lead", "Product designers", "Content and visualization partners"],
+      "question": "How do you partner with design so research is co-ownership of the operator experience rather than a verdict delivered after the fact?",
+      "resume_and_role_links": [
+        "Amazon multimodal interaction architecture work with design partners",
+        "Sling design validation across platforms",
+        "JD: play an influential role in shaping end-to-end experiences for critical operator workflows",
+        "JD: service blueprints and workshops"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How do you keep a productive boundary with design so research neither dictates solutions nor gets reduced to usability testing?",
+        "Systems / ML Engineering Lead": "When design and research reach different conclusions about an operator workflow, how does that get resolved before it hits my team?",
+        "Product Manager": "How do you and design present one recommendation to me instead of two competing ones?",
+        "Design Lead": "Be honest: where does a researcher's input stop being helpful and start being design by committee?"
+      },
+      "follow_ups": [
+        "Tell me about a time you were wrong in a design critique and a designer's instinct beat your data.",
+        "How do you deliver a finding that invalidates a design someone spent weeks on?",
+        "What do you do when design wants one consistent pattern and your evidence supports risk-proportional variation?"
+      ],
+      "lead_staff_bar": "Senior collaborates well with designers. Lead/Staff establishes the shared artifacts and critique norms that keep research and design converging by default."
+    },
+    {
+      "id": "CQ08",
+      "pillar": "Operator & Customer Access",
+      "arc_stages": ["behavioral", "open"],
+      "stakeholders": ["Military operators", "Government and program customers", "Field liaisons", "Training staff"],
+      "question": "Operator access is scarce and expensive. How do you build and protect a relationship with military end users across 25-30% travel?",
+      "resume_and_role_links": [
+        "Uber urban field studies with working drivers",
+        "NASA clinical workstation validation with domain experts",
+        "JD: in-field rapid ethnography, contextual inquiry, observations",
+        "JD required: expected travel is between 25-30%"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How would you build a sustainable operator research panel and cadence when access is limited and every visit is expensive?",
+        "Systems / ML Engineering Lead": "How do you make one field visit produce enough evidence to change a requirement, given we may not get back for months?",
+        "Product Manager": "How do you maximize the return on a trip when three teams all want their questions answered by the same operators?",
+        "Design Lead": "How do you keep operators engaged as partners across a program rather than treating each visit as a one-off test session?"
+      },
+      "follow_ups": [
+        "How do you earn credibility with an operator in the first ten minutes?",
+        "How do you share operator time with other teams without burning the relationship?",
+        "What do you send back to those operators afterward so they see their input mattered?"
+      ],
+      "lead_staff_bar": "Senior runs strong field visits. Lead/Staff builds the participant pipeline, cadence, and shared access model the whole organization draws on."
+    },
+    {
+      "id": "CQ09",
+      "pillar": "Security-Conscious Collaboration",
+      "arc_stages": ["behavioral", "leadership"],
+      "stakeholders": ["Security and compliance partners", "Program leadership", "Government stakeholders"],
+      "question": "Some of this work sits behind access restrictions. How do you run research operations and share insights when findings cannot travel freely?",
+      "resume_and_role_links": [
+        "IRB compliance and federal research standards at Brigham and Women's / Harvard",
+        "NASA safety-critical program work",
+        "JD required: must be eligible to obtain and maintain a U.S. Top Secret clearance",
+        "JD: consolidate and share insights and maintain research repositories"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How would you design a research repository and synthesis practice that works when some findings cannot be written into it?",
+        "Systems / ML Engineering Lead": "How do you keep requirements traceable to evidence when the evidence lives at a different access level than the requirement?",
+        "Product Manager": "How do you brief stakeholders who cannot see the underlying data but still have to make the call?",
+        "Design Lead": "How do you keep design partners aligned to operator reality when you cannot show them everything you saw?"
+      },
+      "follow_ups": [
+        "What is your track record handling sensitive or regulated research data, and what protocol did you follow?",
+        "How do you separate what is genuinely restricted from what is just being hoarded?",
+        "What do you do when a compartmented finding contradicts a widely held team assumption?"
+      ],
+      "lead_staff_bar": "Senior follows handling rules. Lead/Staff designs the two-tier synthesis and briefing practice that keeps decisions evidence-driven inside those constraints."
+    },
+    {
+      "id": "CQ10",
+      "pillar": "Teammate Behavior, Culture & Mentorship",
+      "arc_stages": ["behavioral", "leadership"],
+      "stakeholders": ["Research peers", "Junior researchers", "Cross-functional partners", "Recruiting"],
+      "question": "The posting asks for a good teammate who shapes team culture and mentors. What is the specific culture you would build here, and what would you refuse to tolerate?",
+      "resume_and_role_links": [
+        "Sling organizational Human Factors strategy and standard setting",
+        "Principles for Agentic Trust as shared team language",
+        "JD preferred: proactiveness in helping to shape team culture and mentorship participation",
+        "JD: share insights, process, and best practice across Anduril at large"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "As a senior researcher joining a small function, what culture and quality bar would you set, and how would you set it without being appointed to?",
+        "Systems / ML Engineering Lead": "How do you raise the Human Factors literacy of engineers who have never worked with a researcher before?",
+        "Product Manager": "What makes you a teammate people want on a hard program at two in the morning, rather than just a strong individual researcher?",
+        "Design Lead": "How do you give and take hard critique in a small team without it becoming personal or political?"
+      },
+      "follow_ups": [
+        "Name someone you mentored and the capability they had afterward that they did not have before.",
+        "What behavior have you actually confronted on a team, and how did that conversation go?",
+        "How do you shape culture when you have no direct reports and no formal authority?"
+      ],
+      "lead_staff_bar": "Senior is a strong individual contributor and informal mentor. Lead/Staff installs the rituals, quality bar, and growth path that raise the whole function's floor."
+    }
+  ]
+}

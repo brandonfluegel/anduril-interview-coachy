@@ -1,6 +1,7 @@
 {
   "schema_version": "1.0",
-  "purpose": "Defense-tech behavioral and fit question bank for Question 3 of the Anduril Air Defense interview arc.",
+  "purpose": "Defense-tech behavioral and fit question bank for the behavioral turn of the Anduril Air Defense interview arc.",
+  "usage_policy": "Select one pillar per session using the active persona's adaptation. Escalate with the pillar's follow_ups only when the candidate's answer leaves that specific gap open, and prefer a probe built from the candidate's own words. Judge every answer on STAR/STARE completeness, first-person ownership, real friction, and organizational impact.",
   "personas": [
     "Dr. Daniella Kim",
     "Systems / ML Engineering Lead",
@@ -23,7 +24,13 @@
         "Systems / ML Engineering Lead": "When a non-deterministic counter-drone system can act faster than an operator, what ethical constraints must become hard trust, intervention, and verification requirements?",
         "Product Manager": "How would you turn ethical concerns about autonomous weapons UX into product decisions that preserve mission value without becoming an open-ended reason not to ship?",
         "Design Lead": "Where should an Air Defense operator workflow introduce deliberate friction, confirmation, or control handoff so the physical-digital experience preserves meaningful human authority?"
-      }
+      },
+      "follow_ups": [
+        "Give me a concrete case where you personally declined to optimize something because of the ethical consequence, not the usability consequence.",
+        "Who decides when your ethical line becomes a shipping blocker, and what happens when they overrule you?",
+        "How do you keep an ethics position from becoming an open-ended veto that engineering learns to route around?"
+      ],
+      "lead_staff_bar": "Senior holds a personal ethical position. Lead/Staff converts it into a written principle, a review gate, or a control requirement the organization must satisfy."
     },
     {
       "id": "BQ02",
@@ -40,7 +47,13 @@
         "Systems / ML Engineering Lead": "How would you convert conflicting operator accounts from stressful field conditions into falsifiable system requirements instead of anecdotes engineering cannot implement?",
         "Product Manager": "When field operators demand mutually incompatible changes, how do you identify the highest-value operational truth quickly enough to influence the next release?",
         "Design Lead": "How would you observe an operator's full physical-digital C2 workflow and reconcile what they say with breakdowns visible in posture, reach, attention, and interaction sequence?"
-      }
+      },
+      "follow_ups": [
+        "Name the moment an operator or domain expert told you something that turned out to be wrong. How did you find out?",
+        "What did you change about your protocol after that, and does it still work when you only get one field visit?",
+        "How do you earn credibility with an operator who thinks a researcher with a Ph.D. cannot understand their job?"
+      ],
+      "lead_staff_bar": "Senior runs credible field sessions. Lead/Staff builds the elicitation protocol and access model that lets the whole team get truthful operator data."
     },
     {
       "id": "BQ03",
@@ -57,7 +70,13 @@
         "Systems / ML Engineering Lead": "What minimum evidence would you require before turning a psychophysics or trust finding into a latency threshold or verification test on a rapidly changing C2 system?",
         "Product Manager": "Give me an example of how you have traded methodological completeness for decision speed without making the resulting product recommendation intellectually dishonest.",
         "Design Lead": "How would you combine fast prototype testing and service-blueprint work with enough rigor to prevent a rushed C2 interaction pattern from becoming an unsafe design standard?"
-      }
+      },
+      "follow_ups": [
+        "Name the specific methodological compromise you made and the claim you refused to make because of it.",
+        "What is the smallest study you have ever run that still changed a real decision?",
+        "Where is the line between a fast study and a dishonest one, and have you ever been asked to cross it?"
+      ],
+      "lead_staff_bar": "Senior moves fast on request. Lead/Staff defines the evidentiary tiers the organization uses to decide how much rigor a given decision deserves."
     },
     {
       "id": "BQ04",
@@ -74,7 +93,13 @@
         "Systems / ML Engineering Lead": "Describe a technical standoff where engineering rejected your Human Factors threshold or safety control. What evidence, trade space, and verification criterion changed the decision?",
         "Product Manager": "Tell me about a time a PM wanted to remove a safety or usability control to hit a date. How did you frame the user risk, business cost, and reversible compromise?",
         "Design Lead": "Describe a conflict over an operator-workflow safeguard or physical-digital interaction. How did you keep research, design, product, and engineering aligned without diluting the safety intent?"
-      }
+      },
+      "follow_ups": [
+        "What exactly did the other person say, and what did you concede?",
+        "Did the decision go your way, and what did you do in the case where it did not?",
+        "What mechanism did you put in place so that argument never had to be relitigated?"
+      ],
+      "lead_staff_bar": "Senior wins an argument with data. Lead/Staff leaves behind a standard, threshold, or review gate that removes the need for the next argument."
     },
     {
       "id": "BQ05",
@@ -91,7 +116,13 @@
         "Systems / ML Engineering Lead": "During repeated field-test cycles with shifting hardware and software builds, what operating practices keep your judgment and technical handoffs reliable under fatigue?",
         "Product Manager": "How do you protect the highest-value work and communicate capacity when travel, field failures, and release pressure collide in the same week?",
         "Design Lead": "How do you maintain observational quality and collaborative design judgment during intensive field studies where physical conditions, travel, and rapid redesign cycles create fatigue?"
-      }
+      },
+      "follow_ups": [
+        "Twenty-five to thirty percent travel is the posted expectation. Walk me through what a heavy field month actually looks like for you.",
+        "Tell me about a week where the intensity degraded your work. What did you change afterward?",
+        "How do you protect a team's sustainability without becoming the person who slows the deployment down?"
+      ],
+      "lead_staff_bar": "Senior manages personal capacity. Lead/Staff builds field-rotation, handoff, and quality-control practices that keep a team's evidence reliable under tempo."
     },
     {
       "id": "BQ06",
@@ -108,7 +139,13 @@
         "Systems / ML Engineering Lead": "When hardware interfaces, autonomy behavior, and software architecture are all moving, how do you create Human Factors hypotheses that can still mature into testable specifications?",
         "Product Manager": "What research do you fund first when the roadmap changes weekly, and how do you prevent discovery work from becoming obsolete before it changes a decision?",
         "Design Lead": "How would you use service blueprints and workflow models as stable artifacts when screens, hardware controls, and operator roles are all still changing?"
-      }
+      },
+      "follow_ups": [
+        "What did you commit to in your first thirty days on an ambiguous program, and what did you deliberately leave undecided?",
+        "How do you tell the difference between productive ambiguity and a team that has no strategy?",
+        "What research did you fund that turned out to be obsolete before it landed, and what did that teach you?"
+      ],
+      "lead_staff_bar": "Senior copes with ambiguity. Lead/Staff imposes a research thesis and sequencing plan that gives other functions a stable frame to work against."
     },
     {
       "id": "BQ07",
@@ -125,7 +162,13 @@
         "Systems / ML Engineering Lead": "If engineering ships despite a validated Human Factors failure mode, what severity, detectability, verification, and stop-ship criteria govern your response?",
         "Product Manager": "How do you respond when a roadmap owner accepts your data but chooses to ship a sub-optimal or unsafe workflow for schedule or mission reasons?",
         "Design Lead": "If an unsafe interaction survives design review, how do you preserve the evidence in the service blueprint, negotiate mitigations, and keep the operator workflow from silently normalizing the risk?"
-      }
+      },
+      "follow_ups": [
+        "Give me the actual sequence: who did you go to first, what did you put in writing, and where did you stop?",
+        "What severity of consequence moves you from documenting the risk to formally escalating it?",
+        "Have you ever escalated and been wrong? What did that cost you with the team?"
+      ],
+      "lead_staff_bar": "Senior voices the concern. Lead/Staff has a pre-agreed escalation and stop-ship threshold that leadership accepted before the incident."
     },
     {
       "id": "BQ08",
@@ -142,7 +185,13 @@
         "Systems / ML Engineering Lead": "Describe a test where the interface or system behavior invalidated your Human Factors model. What technical evidence forced the course correction?",
         "Product Manager": "Tell me about research that failed to answer the roadmap question or arrived too late. How did you recover value and change your operating approach?",
         "Design Lead": "Describe an interaction design that broke under realistic workflow or ergonomic testing. What did you own, redesign, and validate next?"
-      }
+      },
+      "follow_ups": [
+        "What was your specific error, as opposed to the team's or the constraint's?",
+        "How much time and money did the failure cost, and who else absorbed it?",
+        "What practice do you now run every time because of that failure?"
+      ],
+      "lead_staff_bar": "Senior recovers a study. Lead/Staff turns the failure into a checklist, review step, or method standard that prevents the class of error team-wide."
     },
     {
       "id": "BQ09",
@@ -159,7 +208,13 @@
         "Systems / ML Engineering Lead": "How would you make Human Factors insights reusable by systems and ML teams through traceable requirements, failure modes, and verification artifacts while developing junior researchers?",
         "Product Manager": "How would you build research operations that help multiple product teams find prior evidence, understand decision impact, and avoid repeating low-value studies?",
         "Design Lead": "How would you connect shared insights, service blueprints, design patterns, and mentorship so operator-workflow knowledge compounds across Air Defense products?"
-      }
+      },
+      "follow_ups": [
+        "Name a person you developed and the specific capability they had after working with you that they did not have before.",
+        "What standard or artifact of yours is still being used by a team you have left?",
+        "How do you shape team culture when you have no direct reports and no formal authority?"
+      ],
+      "lead_staff_bar": "Senior mentors informally. Lead/Staff builds the repository, review ritual, and growth path that raises the whole function's floor."
     },
     {
       "id": "BQ10",
@@ -176,7 +231,13 @@
         "Systems / ML Engineering Lead": "How do you rank simultaneous research requests when one affects a safety-critical autonomy threshold, one blocks integration, and one improves operator efficiency?",
         "Product Manager": "Three PMs each claim their Air Defense study is urgent. Walk me through the decision framework, ROI evidence, and stakeholder conversation you use to allocate research capacity.",
         "Design Lead": "How would you triage competing workflow studies across platforms while preserving shared service-blueprint knowledge and avoiding fragmented operator experiences?"
-      }
+      },
+      "follow_ups": [
+        "Which request do you say no to first, and how do you say it so that PM still brings you the next problem?",
+        "What did you stop doing last time to make room for the highest-value work?",
+        "How do you tell a PM their question does not need research at all?"
+      ],
+      "lead_staff_bar": "Senior triages their own queue. Lead/Staff publishes the intake and prioritization framework that makes the trade-offs legible to every stakeholder."
     }
   ]
 }

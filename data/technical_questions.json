@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Technical, methodological, and research-craft question bank for the opening, pushback, and leadership turns of the Anduril Air Defense interview arc. Every pillar maps a posted Air Defense responsibility or qualification onto canonical resume evidence.",
+  "usage_policy": "Anchor live technical turns to one pillar at a time. Never read a follow_up verbatim when the candidate's own words offer a sharper version of the same probe. Never repeat a pillar already covered earlier in the transcript. Answers to this bank are judged on technical reasoning structure — claim, method or mechanism, evidence and its limits, the threshold or decision it drives, and what would change it — not on STAR/STARE, which is reserved for behavioral and experience answers.",
+  "personas": [
+    "Dr. Daniella Kim",
+    "Systems / ML Engineering Lead",
+    "Product Manager",
+    "Design Lead"
+  ],
+  "questions": [
+    {
+      "id": "TQ01",
+      "pillar": "Research Thesis & Falsifiability",
+      "arc_stages": ["opening", "leadership"],
+      "question": "State your Human Factors thesis for autonomous Air Defense in one sentence, and tell me what evidence would falsify it.",
+      "resume_and_role_links": [
+        "Calibrated Cognitive Friction thesis",
+        "Principles for Agentic Trust — Alignment, Execution, Control, Calibration",
+        "ACM CSCW 2026 Industry Perspectives",
+        "JD: shape Air Defense product and program strategy using rigorous data and user insights"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Give me your one-sentence thesis for Human Factors in autonomous Air Defense, and the single result that would force you to abandon it.",
+        "Systems / ML Engineering Lead": "Calibrated Cognitive Friction is a philosophy. What measurable claim inside it can I actually test on a counter-drone C2 build?",
+        "Product Manager": "In one sentence, what is your Human Factors bet for Air Defense, and what would it cost us if you are wrong?",
+        "Design Lead": "What is your thesis about operator authority in autonomous C2, and where would it visibly change an interaction, not just a research memo?"
+      },
+      "follow_ups": [
+        "Which of your four Agentic Trust dimensions fails first in a non-deterministic C2 system, and how would you detect that failure?",
+        "Name the specific study result that would falsify Calibrated Cognitive Friction rather than merely complicate it.",
+        "Where would adding friction make an Air Defense operator less safe, and how would you know you crossed that line?"
+      ],
+      "lead_staff_bar": "Senior states a defensible thesis. Lead/Staff states the falsifier, the measurement that would detect it, and the organizational decision the thesis governs."
+    },
+    {
+      "id": "TQ02",
+      "pillar": "Psychophysics to System Requirements",
+      "arc_stages": ["opening", "pushback"],
+      "question": "You replaced arbitrary engineering latency targets with human perceptual thresholds. Walk me from the psychophysics to the written specification.",
+      "resume_and_role_links": [
+        "Amazon $50M psychophysics latency program",
+        "US Patent US-12532040-B1 context-aware multimodal interaction architectures",
+        "Sling usability criteria for system latency, auditory and visual feedback, spatial layouts",
+        "JD: translate insights into decisions for autonomous counter-drone systems"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Take me through the psychophysical method behind your latency thresholds: stimuli, staircase or method of limits, sample, and how you defended the threshold estimate.",
+        "Systems / ML Engineering Lead": "Your threshold came from a population distribution. How do you turn that distribution into a single acceptance criterion I can verify in a test harness?",
+        "Product Manager": "How did the perceptual threshold work actually change what engineering shipped, and what was the dollar consequence of the old arbitrary target?",
+        "Design Lead": "Where does a perceptual latency threshold change the interaction itself — feedback timing, modality choice, or the moment we show uncertainty?"
+      },
+      "follow_ups": [
+        "Which percentile of the operator population did you specify to, and who did that choice exclude?",
+        "What measurement method produced that number, and what was its confidence interval?",
+        "If the hardware cannot hit your threshold, what is the fallback specification and what degrades?"
+      ],
+      "lead_staff_bar": "Senior reports a threshold. Lead/Staff shows the population-to-specification translation, the tail-risk decision, and the reusable method other teams inherited."
+    },
+    {
+      "id": "TQ03",
+      "pillar": "Objective Workload & Measure Selection",
+      "arc_stages": ["opening", "pushback"],
+      "question": "When is fNIRS, eye tracking, or ECG worth the cost over NASA-TLX and behavioral performance data for an Air Defense operator study?",
+      "resume_and_role_links": [
+        "Amazon fNIRS and eye-tracking objective cognitive load framework",
+        "Brigham and Women's / Harvard fMRI, ECG, and telemetry processing",
+        "Dissertation on working memory and reaction time under high-stress interruptions",
+        "JD: rigorous data and user insights under operational conditions"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Defend your measure selection: what decision would fNIRS or eye tracking support for Air Defense that NASA-TLX and task performance would not?",
+        "Systems / ML Engineering Lead": "Which of those signals could be instrumented in a fielded system, and which only survive in a lab? What do we lose in the field version?",
+        "Product Manager": "Why should I fund biometric telemetry instead of another round of operator workflow testing this quarter?",
+        "Design Lead": "What did eye tracking tell you about attention allocation that changed a layout, and how would that transfer to a dense 3D C2 display?"
+      },
+      "follow_ups": [
+        "Take fNIRS away. What is your next-best measure, and what claim can you no longer make?",
+        "What is your evidence that the biometric signal tracked the operational failure you cared about, not just arousal?",
+        "How do you handle motion, noise, and gloves degrading those signals during in-field testing?"
+      ],
+      "lead_staff_bar": "Senior selects a valid instrument. Lead/Staff states the decision the measure serves, the cheaper substitute, and when the measure becomes expensive theater."
+    },
+    {
+      "id": "TQ04",
+      "pillar": "Safety Analysis & Military Standards",
+      "arc_stages": ["opening", "pushback"],
+      "question": "Walk me through a uFMEA for an autonomous threat recommendation that arrives with uncertain confidence, and where MIL-STD-1472 stops being enough.",
+      "resume_and_role_links": [
+        "NASA Lunar Gateway clinical workstation uFMEA",
+        "NASA-STD-3001 and MIL-STD-1472 application",
+        "30% task-time reduction and eliminated critical input errors",
+        "JD preferred: support development of military standard systems"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How would you structure a use-error analysis for counter-drone authorization so it produces research priorities, not just a risk register?",
+        "Systems / ML Engineering Lead": "Give me severity, occurrence, and detectability for one high-consequence use error in an autonomous engagement flow, plus the control that closes it.",
+        "Product Manager": "How do you keep a uFMEA from becoming a compliance ritual that slows every release by two weeks?",
+        "Design Lead": "Which use-error modes are best mitigated by physical layout and control placement rather than by another confirmation dialog?"
+      },
+      "follow_ups": [
+        "MIL-STD-1472 gives guidance, not product truth. Where would you deviate, and what evidence justifies the deviation?",
+        "Your NASA work cut task time 30%. Was speed the safety metric, or did something else actually eliminate the critical errors?",
+        "What is your stop-ship criterion, and who at Anduril would you expect to overrule it?"
+      ],
+      "lead_staff_bar": "Senior applies the standard. Lead/Staff decides where the standard is wrong for this system and defines the evidence and escalation threshold that governs the deviation."
+    },
+    {
+      "id": "TQ05",
+      "pillar": "Non-Deterministic Autonomy & Trust Calibration",
+      "arc_stages": ["opening", "pushback", "leadership"],
+      "question": "What is the failure mode when the autonomy is correct but the operator's trust calibration is wrong, and how would you detect it before an incident?",
+      "resume_and_role_links": [
+        "Principles for Agentic Trust — Calibration and Control",
+        "Mercedes-Benz L2/L3 handover trust and safety ratings",
+        "Meaningful Human Control",
+        "JD: AI-powered Lattice OS command and control over autonomous counter-drone systems"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How do you measure trust calibration rather than trust, and what would over-trust look like in the telemetry before it looks like an incident?",
+        "Systems / ML Engineering Lead": "The model changes after deployment. Which parts of your Human Factors validation must run again, and what signals must stay observable in production?",
+        "Product Manager": "What would you measure after launch to decide whether to keep, remove, or increase a confirmation step?",
+        "Design Lead": "How should the interface expose model uncertainty so an operator neither rubber-stamps nor second-guesses every recommendation?"
+      },
+      "follow_ups": [
+        "Distinguish automation bias from complacency in your data. What separates them operationally?",
+        "What breaks when communications degrade, telemetry goes stale, or the operator is handling several simultaneous threats?",
+        "Your automotive handover evidence came from drivers, not warfighters. What transfers, and what absolutely does not?"
+      ],
+      "lead_staff_bar": "Senior names automation bias. Lead/Staff defines the observable production signal, the revalidation trigger after model change, and the control that survives degraded operations."
+    },
+    {
+      "id": "TQ06",
+      "pillar": "Operator Workflow & Interaction Architecture",
+      "arc_stages": ["opening", "leadership"],
+      "question": "Map an operator's attention across detection, assessment, authorization, and intervention. Where does a dense 3D C2 interface compete with the mission?",
+      "resume_and_role_links": [
+        "Uber urban field studies on information density under stress",
+        "Amazon multimodal interaction architecture and Echo Hub work",
+        "Mercedes-Benz multimodal alerting for control transfer",
+        "JD: play an influential role in shaping end-to-end experiences for critical operator workflows"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "What research would you run first to model the operator's end-to-end workflow, and what artifact would outlive the study?",
+        "Systems / ML Engineering Lead": "Which workflow states must the system expose as discrete, testable modes so we can verify the operator always knows who is in control?",
+        "Product Manager": "Which single stage of that operator workflow would you fix first for the largest operational return, and why that one?",
+        "Design Lead": "When does reducing information density hide the uncertainty the operator actually needs to see?"
+      },
+      "follow_ups": [
+        "You found that density must scale down under stress. What triggers the scale-down, and who authorizes it?",
+        "Several autonomous agents demand attention at once. How do you preserve situation awareness without serializing the operator?",
+        "What belongs visually, what belongs auditorily, and what belongs haptically in a loud, gloved, high-tempo environment?"
+      ],
+      "lead_staff_bar": "Senior improves a screen. Lead/Staff produces a reusable workflow model or service blueprint that constrains every downstream interaction decision."
+    },
+    {
+      "id": "TQ07",
+      "pillar": "Hardware Ergonomics & Physical-Digital Integration",
+      "arc_stages": ["opening", "pushback"],
+      "question": "Before touching screen design, what physical and anthropometric constraints would you investigate for a fielded Air Defense operator station?",
+      "resume_and_role_links": [
+        "Sling reach-envelope modeling, anatomical safety, and mechanical fit specifications",
+        "Amazon hardware and multimodal device work",
+        "MIL-STD-1472 anthropometrics",
+        "JD preferred: hardware and Human Factors experience, ergonomics, military standard systems"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "How do you generate physical-ergonomic evidence fast enough to influence hardware before the industrial design freezes?",
+        "Systems / ML Engineering Lead": "Turn a reach envelope or anthropometric finding into a hardware requirement with a pass/fail acceptance test.",
+        "Product Manager": "Hardware changes are expensive and late changes are worse. How do you time ergonomic research so it is cheap to act on?",
+        "Design Lead": "Where do physical constraints — gloves, vibration, sunlight, body armor, seated reach — override an otherwise clean interaction pattern?"
+      },
+      "follow_ups": [
+        "Which anthropometric percentile range did you design to, and what happens to the operators outside it?",
+        "What use error did you catch through physical mock-up that no software prototype would have surfaced?",
+        "How do you validate mechanical fit and anatomical safety without a full production unit?"
+      ],
+      "lead_staff_bar": "Senior runs an ergonomic evaluation. Lead/Staff writes the hard hardware specification and the acceptance test that hardware engineering must pass."
+    },
+    {
+      "id": "TQ08",
+      "pillar": "Quantitative Methods & Analysis",
+      "arc_stages": ["opening", "pushback"],
+      "question": "Walk me through how you would use scaled surveys, max-diff, and your own analysis code to prioritize competing Air Defense operator needs.",
+      "resume_and_role_links": [
+        "Psychophysics and cognitive load modeling",
+        "fMRI, ECG, and telemetry signal processing",
+        "Summative and formative testing",
+        "JD preferred: scaled surveys, max-diff, and using programming languages to analyze data"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "With a small, hard-to-reach operator population, how do you keep a scaled survey or max-diff study statistically honest?",
+        "Systems / ML Engineering Lead": "What sample size and effect size would you accept before I change a threshold in the system on your say-so?",
+        "Product Manager": "How do you get a defensible prioritization signal out of a dozen operators in under two weeks?",
+        "Design Lead": "How would max-diff results actually arbitrate between two competing interaction concepts without flattening the qualitative evidence?"
+      },
+      "follow_ups": [
+        "State your power analysis assumptions. What effect size were you willing to miss?",
+        "Where does max-diff mislead you, and what qualitative evidence do you pair with it?",
+        "Which analysis did you write code for, and what would break if someone else re-ran it?"
+      ],
+      "lead_staff_bar": "Senior runs the analysis. Lead/Staff defines the evidentiary bar the organization uses to accept a quantitative claim and makes the pipeline reproducible."
+    },
+    {
+      "id": "TQ09",
+      "pillar": "Field Craft, Facilitation & Service Blueprints",
+      "arc_stages": ["opening", "pushback"],
+      "question": "Design the first two weeks of rapid in-field ethnography with Air Defense operators. What do you run, and what artifact comes out?",
+      "resume_and_role_links": [
+        "Uber urban field studies in live operational conditions",
+        "NASA simulated-microgravity workstation validation",
+        "Mercedes-Benz high-fidelity simulator studies",
+        "JD: service blueprints, contextual inquiry, in-field rapid ethnography, focus groups, observations, workshops, surveys, usability testing"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "Lay out a two-week rapid ethnography and contextual inquiry plan with operators, including how you protect validity under field constraints.",
+        "Systems / ML Engineering Lead": "Field observation produces stories. What is your protocol for converting them into requirements engineering can implement and verify?",
+        "Product Manager": "You have one trip and limited operator access. What do you observe, what do you skip, and what decision does the trip unblock?",
+        "Design Lead": "How would you facilitate a co-creation workshop with operators and engineers without letting the loudest participant design the system?"
+      },
+      "follow_ups": [
+        "How do you cut through operator bravado or recall bias to get the true failure sequence?",
+        "What does your service blueprint capture that a journey map does not, and who consumes it downstream?",
+        "How do you run discovery and co-creation workshops when participants have unequal rank in the room?"
+      ],
+      "lead_staff_bar": "Senior collects excellent field data. Lead/Staff leaves behind a blueprint, protocol, or facilitation standard the team reuses without them."
+    },
+    {
+      "id": "TQ10",
+      "pillar": "Research Operations, Repositories & Storytelling",
+      "arc_stages": ["leadership"],
+      "question": "How would you operationalize Air Defense research so insights are found, reused, and actually change decisions across Anduril?",
+      "resume_and_role_links": [
+        "Sling organizational Human Factors strategy across software, hardware, and AI",
+        "Principles for Agentic Trust as a reusable audit framework",
+        "Amazon executive influence on product strategy",
+        "JD: consolidate and share insights, research repositories, cross-functional workflows, storytelling, and best practices across Anduril at large"
+      ],
+      "persona_adaptations": {
+        "Dr. Daniella Kim": "What operating system would you build for Air Defense research — repository, standards, intake, and quality bar — so it survives after you leave?",
+        "Systems / ML Engineering Lead": "How do you make Human Factors findings traceable into requirements and verification artifacts engineering already uses?",
+        "Product Manager": "How would you build research operations that stop three product teams from repeating the same low-value study?",
+        "Design Lead": "How do you connect insights, blueprints, and design patterns so operator knowledge compounds across Air Defense products?"
+      },
+      "follow_ups": [
+        "Storytelling aligns people once. What mechanism makes the insight stick after the room empties?",
+        "What is the single artifact you would ship in your first 90 days, and who is forced to use it?",
+        "How do you run research operations when some findings cannot be written down in a shared repository?"
+      ],
+      "lead_staff_bar": "Senior documents studies well. Lead/Staff defines intake, repository structure, quality bar, and the cross-functional workflow that makes evidence unavoidable in decisions."
+    }
+  ]
+}

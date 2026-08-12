@@ -88,7 +88,11 @@ Senior UXR baseline means expertly designing and executing studies that produce 
 
 This is one continuous spoken conversation, not a set of isolated prompts. Every question after the first must reference something the candidate actually said. Keep interviewer questions and pushback concise and voice-friendly for headphone listening. Treat prior resume claims as context to probe, not proof that a spoken answer demonstrated a competency. Preserve Meaningful Human Control, operational tempo, and evidence integrity throughout.
 
-For the third question, select a behavioral/fit pillar from the canonical behavioral question bank using the active persona's adaptation. Judge behavioral answers on STAR/STARE completeness, concrete ownership, interpersonal maturity, and Lead/Staff organizational impact.
+For the third question, select a behavioral/fit pillar from the canonical behavioral question bank using the active persona's adaptation. Judge behavioral answers on STAR/STARE completeness, concrete ownership, interpersonal maturity, and Lead/Staff organizational impact. STAR/STARE is the standard for behavioral and experience answers only. Do not impose it on technical, methodological, or research-craft answers; judge those on the claim, the method or mechanism, the evidence and its limits, the threshold or decision it drives, and what would change it.
+
+Anchor technical and research-craft turns to the canonical technical question bank, which maps every posted Air Defense responsibility and qualification onto the candidate's resume evidence: research thesis and falsifiability, psychophysics to system requirements, objective workload and measure selection, safety analysis and military standards, non-deterministic autonomy and trust calibration, operator workflow and interaction architecture, hardware ergonomics and physical-digital integration, quantitative methods including scaled surveys and max-diff, field craft and facilitation including service blueprints and co-creation workshops, and Research Operations including repositories and storytelling. Use each bank entry's follow-ups as the escalation ladder when an answer leaves that pillar's gap open, and never cover the same pillar twice in one session.
+
+A third canonical bank covers Anduril culture, mission fit, and collaboration with likely stakeholders: mission motivation, ownership with little oversight, months-not-years delivery cadence, engineering partnership, hardware and field-test collaboration, product and roadmap partnership, design partnership and critique, military operator and customer access, security-conscious collaboration under access restrictions, and teammate behavior, culture, and mentorship. Draw from it on the behavioral, leadership, and open turns. Keep every culture question grounded in the posted job description and canonical resume: never assert internal Anduril process, tooling, team structure, headcount, or program details, never imply the candidate has prior familiarity with anyone on the panel, and never state or imply the candidate's clearance status.
 """
 PERSONA_FOCUS = {
     "Dr. Daniella Kim": (
@@ -151,13 +155,55 @@ class BehavioralQuestion(BaseModel):
     question: str
     resume_and_role_links: list[str]
     persona_adaptations: dict[str, str]
+    follow_ups: list[str]
+    lead_staff_bar: str
 
 
 class BehavioralQuestionBank(BaseModel):
     schema_version: str
     purpose: str
+    usage_policy: str
     personas: list[str]
     questions: list[BehavioralQuestion]
+
+
+class TechnicalQuestion(BaseModel):
+    id: str
+    pillar: str
+    arc_stages: list[Literal["opening", "pushback", "leadership"]]
+    question: str
+    resume_and_role_links: list[str]
+    persona_adaptations: dict[str, str]
+    follow_ups: list[str]
+    lead_staff_bar: str
+
+
+class TechnicalQuestionBank(BaseModel):
+    schema_version: str
+    purpose: str
+    usage_policy: str
+    personas: list[str]
+    questions: list[TechnicalQuestion]
+
+
+class CultureQuestion(BaseModel):
+    id: str
+    pillar: str
+    arc_stages: list[Literal["behavioral", "leadership", "open"]]
+    stakeholders: list[str]
+    question: str
+    resume_and_role_links: list[str]
+    persona_adaptations: dict[str, str]
+    follow_ups: list[str]
+    lead_staff_bar: str
+
+
+class CultureQuestionBank(BaseModel):
+    schema_version: str
+    purpose: str
+    usage_policy: str
+    personas: list[str]
+    questions: list[CultureQuestion]
 
 
 class SessionRecord(BaseModel):
@@ -244,17 +290,107 @@ def load_behavioral_question_bank() -> BehavioralQuestionBank:
     for question in bank.questions:
         if set(question.persona_adaptations) != expected_personas:
             raise ValueError(f"{question.id} must define an adaptation for every interviewer persona.")
+        if not question.follow_ups:
+            raise ValueError(f"{question.id} must define at least one follow-up probe.")
+    return bank
+
+
+def load_technical_question_bank() -> TechnicalQuestionBank:
+    bank = TechnicalQuestionBank.model_validate_json(read_text("data/technical_questions.json"))
+    expected_personas = set(PERSONAS.values())
+    if len(bank.questions) != 10:
+        raise ValueError("The technical question bank must contain exactly 10 questions.")
+    if len({question.id for question in bank.questions}) != 10:
+        raise ValueError("Technical question IDs must be unique.")
+    if set(bank.personas) != expected_personas:
+        raise ValueError("The technical question bank must declare all four interviewer personas.")
+    covered_stages: set[str] = set()
+    for question in bank.questions:
+        if set(question.persona_adaptations) != expected_personas:
+            raise ValueError(f"{question.id} must define an adaptation for every interviewer persona.")
+        if not question.follow_ups:
+            raise ValueError(f"{question.id} must define at least one follow-up probe.")
+        if not question.arc_stages:
+            raise ValueError(f"{question.id} must map to at least one arc stage.")
+        covered_stages.update(question.arc_stages)
+    if covered_stages != {"opening", "pushback", "leadership"}:
+        raise ValueError("The technical question bank must cover the opening, pushback, and leadership stages.")
+    return bank
+
+
+def load_culture_question_bank() -> CultureQuestionBank:
+    bank = CultureQuestionBank.model_validate_json(read_text("data/culture_questions.json"))
+    expected_personas = set(PERSONAS.values())
+    if len(bank.questions) != 10:
+        raise ValueError("The culture and stakeholder question bank must contain exactly 10 questions.")
+    if len({question.id for question in bank.questions}) != 10:
+        raise ValueError("Culture question IDs must be unique.")
+    if set(bank.personas) != expected_personas:
+        raise ValueError("The culture question bank must declare all four interviewer personas.")
+    covered_stages: set[str] = set()
+    for question in bank.questions:
+        if set(question.persona_adaptations) != expected_personas:
+            raise ValueError(f"{question.id} must define an adaptation for every interviewer persona.")
+        if not question.follow_ups:
+            raise ValueError(f"{question.id} must define at least one follow-up probe.")
+        if not question.stakeholders:
+            raise ValueError(f"{question.id} must name at least one stakeholder group.")
+        if not question.arc_stages:
+            raise ValueError(f"{question.id} must map to at least one arc stage.")
+        covered_stages.update(question.arc_stages)
+    if covered_stages != {"behavioral", "leadership", "open"}:
+        raise ValueError("The culture question bank must cover the behavioral, leadership, and open stages.")
     return bank
 
 
 BEHAVIORAL_QUESTION_BANK = load_behavioral_question_bank()
+TECHNICAL_QUESTION_BANK = load_technical_question_bank()
+CULTURE_QUESTION_BANK = load_culture_question_bank()
 ResponseModel = TypeVar("ResponseModel", bound=BaseModel)
 
 
 def behavioral_question_options(persona: str) -> str:
     return "\n".join(
-        f"- {question.id} | {question.pillar}: {question.persona_adaptations[persona]}"
+        f"- {question.id} | {question.pillar}: {question.persona_adaptations[persona]}\n"
+        f"  Follow-ups: {' / '.join(question.follow_ups)}\n"
+        f"  Lead/Staff bar: {question.lead_staff_bar}"
         for question in BEHAVIORAL_QUESTION_BANK.questions
+    )
+
+
+def technical_question_options(persona: str, stage: str) -> str:
+    return "\n".join(
+        f"- {question.id} | {question.pillar}: {question.persona_adaptations[persona]}\n"
+        f"  Lead/Staff bar: {question.lead_staff_bar}"
+        for question in TECHNICAL_QUESTION_BANK.questions
+        if stage in question.arc_stages
+    )
+
+
+def technical_follow_up_probes(stage: str | None = None) -> str:
+    return "\n".join(
+        f"- {question.id} | {question.pillar}: {' / '.join(question.follow_ups)}"
+        for question in TECHNICAL_QUESTION_BANK.questions
+        if stage is None or stage in question.arc_stages
+    )
+
+
+def culture_question_options(persona: str, stage: str) -> str:
+    return "\n".join(
+        f"- {question.id} | {question.pillar} (stakeholders: {', '.join(question.stakeholders)}): "
+        f"{question.persona_adaptations[persona]}\n"
+        f"  Follow-ups: {' / '.join(question.follow_ups)}\n"
+        f"  Lead/Staff bar: {question.lead_staff_bar}"
+        for question in CULTURE_QUESTION_BANK.questions
+        if stage in question.arc_stages
+    )
+
+
+def culture_follow_up_probes(stage: str | None = None) -> str:
+    return "\n".join(
+        f"- {question.id} | {question.pillar}: {' / '.join(question.follow_ups)}"
+        for question in CULTURE_QUESTION_BANK.questions
+        if stage is None or stage in question.arc_stages
     )
 
 
@@ -265,6 +401,8 @@ def load_system_context() -> str:
         "CANONICAL AIR DEFENSE JOB REQUIREMENTS": read_text("data/target_anduril_air_defense.json"),
         "CANONICAL STORYBANK": read_text("data/storybank_6_pillars.json"),
         "BEHAVIORAL AND FIT QUESTION BANK": read_text("data/behavioral_questions.json"),
+        "TECHNICAL AND RESEARCH-CRAFT QUESTION BANK": read_text("data/technical_questions.json"),
+        "CULTURE AND STAKEHOLDER COLLABORATION QUESTION BANK": read_text("data/culture_questions.json"),
         "CURRENT COACHING STATE": read_text("data/coaching_state.md"),
         "INTERVIEW PERSONAS": read_text("references/role-drills.md"),
         "DETAILED RUBRIC": read_text("references/rubrics-detailed.md"),
@@ -591,6 +729,9 @@ Prior conversation: {prior_context}
 
 {HARD_EVIDENCE_ANCHORS}
 
+Anchor this opener to exactly one pillar from the canonical technical and research-craft bank below. Use the persona-adapted line as the spine of the question, tightened for speech, or a sharper variant that tests the same pillar. Do not blend pillars and do not read the Lead/Staff bar aloud.
+{technical_question_options(persona, "opening")}
+
 Ask exactly one concise, voice-friendly question in character. Make it answerable aloud. Set the stage in at most one short clause that signals who you are and what you own, then immediately probe one named claim from the Principles for Agentic Trust whitepaper or the canonical resume. Do not provide coaching, an answer, a score, or a question number. Do not invent candidate evidence or classified Anduril details.
 
 The spoken question must be one conversational sentence of at most {QUESTION_WORD_LIMIT} words, written for a listener on Bluetooth headphones. Lead with the challenge; avoid stacked clauses, lists, jargon preambles, and written-report language.
@@ -640,14 +781,30 @@ def continue_conversation(
     title, objective = conversation_stage(next_turn)
     stage_instruction = ""
     if next_turn == 2:
-        stage_instruction = """Find the single weakest link in the answer you just heard: the claim with no falsifiable metric, the causal leap, the borrowed team credit, the unstated assumption, or the number with no measurement method behind it. Attack exactly that weak link and demand the missing falsifiable evidence, in the style of "What falsifiable metric proved that latency threshold degraded operator trust?" Quote or paraphrase the candidate's own words so the question is unmistakably about what they just said."""
+        stage_instruction = f"""Find the single weakest link in the answer you just heard: the claim with no falsifiable metric, the causal leap, the borrowed team credit, the unstated assumption, or the number with no measurement method behind it. Attack exactly that weak link and demand the missing falsifiable evidence, in the style of "What falsifiable metric proved that latency threshold degraded operator trust?" Quote or paraphrase the candidate's own words so the question is unmistakably about what they just said.
+
+Escalate using the canonical probe library below when one of these probes targets the exact gap the candidate left open. Prefer a probe rebuilt from the candidate's own phrasing over a verbatim reading:
+{technical_follow_up_probes("pushback")}"""
     elif next_turn == 3:
-        stage_instruction = f"""Move the conversation to behavioral and cross-functional friction. Select the strongest non-duplicative pillar from the following persona-adapted behavioral bank, then frame it so it directly tests handling friction with a PM, an ML/software engineer, or a military operator under fast-paced startup constraints. Use the adapted question directly or tailor it to what the candidate just said, without changing the pillar's intent:
-{behavioral_question_options(persona)}"""
+        stage_instruction = f"""Move the conversation to behavioral and cross-functional friction. Select the strongest non-duplicative pillar from the following persona-adapted behavioral bank, then frame it so it directly tests handling friction with a PM, an ML/software engineer, or a military operator under fast-paced startup constraints. Use the adapted question directly or tailor it to what the candidate just said, without changing the pillar's intent. Hold that pillar's follow-ups in reserve for later turns and never read the Lead/Staff bar aloud:
+{behavioral_question_options(persona)}
+
+If the transcript already covered the friction the behavioral bank targets, you may instead take one non-duplicative pillar from the culture, mission-fit, and stakeholder-collaboration bank below. Keep it grounded in the posted job description and never assert internal Anduril process, team structure, program details, or the candidate's clearance status:
+{culture_question_options(persona, "behavioral")}"""
     elif next_turn == 4:
-        stage_instruction = """Test whether the candidate can set org-wide Human Factors standards, scale Research Operations beyond their own hands, and tie that to Anduril Air Defense's counter-drone Lattice OS mission. Build the question off a specific commitment or gap the candidate revealed earlier."""
+        stage_instruction = f"""Test whether the candidate can set org-wide Human Factors standards, scale Research Operations beyond their own hands, and tie that to Anduril Air Defense's counter-drone Lattice OS mission. Build the question off a specific commitment or gap the candidate revealed earlier. Anchor it to one non-duplicative pillar from this leadership-stage bank:
+{technical_question_options(persona, "leadership")}
+
+When the stronger gap is culture, ownership without oversight, delivery cadence, or collaboration with a specific stakeholder group, anchor to one of these instead:
+{culture_question_options(persona, "leadership")}"""
     else:
-        stage_instruction = """Stay in the flow of the live conversation. Hunt the thinnest evidence still standing across the whole transcript and press it, or follow a genuinely interesting thread the candidate just opened. Do not restart the interview, summarize it, or signal that it is ending."""
+        stage_instruction = f"""Stay in the flow of the live conversation. Hunt the thinnest evidence still standing across the whole transcript and press it, or follow a genuinely interesting thread the candidate just opened. Do not restart the interview, summarize it, or signal that it is ending.
+
+Draw from the full canonical probe libraries below, or from a behavioral pillar not yet covered, whenever it sharpens the hunt. Never repeat a pillar the transcript already covered.
+Technical and research-craft probes:
+{technical_follow_up_probes()}
+Culture and stakeholder-collaboration probes:
+{culture_follow_up_probes()}"""
 
     prompt = f"""You are {persona} in a live spoken interview. LIVE MODE only.
 
@@ -713,7 +870,7 @@ Persona lens used in the room: {PERSONA_FOCUS[persona]}
 Apply all five core dimensions once for the session, rate Tone & Authority once for the session, and apply every Lead/Staff criterion once for the session. Use null for a Lead/Staff score when the transcript provides no evidence for that criterion; missing evidence is not automatically poor performance.
 
 Grade the core dimensions with this calibration:
-- STRUCTURE: score STAR plus STARE across the transcript. Situation, Task, Action, Result, and an explicit Earned Secret, meaning a non-obvious lesson only someone who actually ran this work could state. Cap Structure at 3 when no answer delivered an Earned Secret. Penalize generic textbook process instead of specific lived sequences.
+- STRUCTURE: judge each answer by its type. Apply STAR plus STARE — Situation, Task, Action, Result, and an explicit Earned Secret — to behavioral, experience, and cross-functional friction answers only. Judge technical, methodological, and research-craft answers on technical reasoning structure instead: the claim or recommendation stated up front, the method or mechanism behind it, the evidence and its limits, the threshold or decision it drives, and the condition that would change it. Never mark a technical answer down for lacking a Situation and Task narrative, and never let a rambling technical answer pass because STAR did not apply. Across the whole session at least one answer of either type must deliver an Earned Secret, meaning a non-obvious lesson only someone who actually ran this work could state; cap Structure at 3 when none does. Penalize generic textbook process instead of specific lived sequences.
 - SUBSTANCE: audit for hard data across the session. {HARD_EVIDENCE_ANCHORS}
 - RELEVANCE: reward direct connection to Lattice OS, counter-drone command and control, 3D operator workflows, and startup execution speed. Abstract Human Factors theory with no Air Defense translation caps Relevance at 3.
 - CREDIBILITY: verify first-person ownership, plausible mechanism, and named method. Downgrade borrowed team credit and unverifiable causal leaps, especially claims that stayed unquantified after direct pushback.
@@ -734,7 +891,7 @@ For strongest_signal, name the single most convincing moment in the transcript a
 
 For senior_uxr_baseline_assessment, state plainly what across this session clears or misses the Senior baseline of expertly planned and executed studies with clear timelines and actionable tactical insights. For lead_staff_uplevel_assessment, state whether the session showed pre-regulation framework setting, latency-to-psychophysics bridging, HSI translated into hard system specs, Research Operations definition, or multi-million-dollar business impact, and name the one upgrade that would convert it. Cite specific evidence from the transcript and compare it with the canonical resume and Air Defense job requirements. Prior resume claims are context to probe, not proof that a spoken answer demonstrated the competency.
 
-Produce a comprehensive end_of_session_debrief covering how the candidate performed across all {turns_completed} turns, and a clear uplevel_verdict.
+Produce a comprehensive end_of_session_debrief covering how the candidate performed across all {turns_completed} turns, and a clear uplevel_verdict. In the debrief, name the technical, behavioral, and culture/stakeholder bank pillars this session actually probed, then name the highest-priority posted Air Defense requirement that went untested so the next session can target it.
 
 Full interview transcript:
 {render_transcript(prior_turns)}

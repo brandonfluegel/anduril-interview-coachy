@@ -29,6 +29,8 @@ Use these rubrics for every structured answer evaluation in the four-question in
 
 ## Structure (Narrative Clarity)
 
+STAR/STARE is the standard for behavioral, experience, and cross-functional friction answers. Score technical, methodological, and research-craft answers on technical reasoning structure instead: claim or recommendation first, then method or mechanism, evidence and its limits, the threshold or decision it drives, and the condition that would change it. Do not mark a technical answer down for skipping Situation and Task, and do not let a rambling technical answer pass because STAR did not apply. At least one answer somewhere in the session must still deliver an Earned Secret.
+
 | Score | Description | Example |
 |-------|-------------|---------|
 | 1 | Stream of consciousness, no clear point | Jumps between topics, listener lost |
