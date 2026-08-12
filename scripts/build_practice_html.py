@@ -70,17 +70,33 @@ a { color: #14507d; }
 strong { font-weight: 700; }
 
 @media print {
-  @page { margin: 16mm 15mm; }
-  body { background: #fff; font-size: 10.5pt; line-height: 1.5; padding: 0; }
-  main { max-width: none; box-shadow: none; padding: 0; }
-  h1 { font-size: 19pt; }
-  /* Each pillar starts on a fresh sheet. */
-  h2 { font-size: 15pt; page-break-before: always; border-top: none; padding-top: 0; margin-top: 0; }
-  h2:first-of-type { page-break-before: avoid; }
-  h3 { font-size: 12.5pt; }
-  h4 { font-size: 11pt; }
-  h1, h2, h3, h4 { page-break-after: avoid; page-break-inside: avoid; }
-  blockquote, table { page-break-inside: avoid; }
+  @page { size: letter; margin: 8mm 8mm; }
+  body { background: #fff; font-size: 9.3pt; line-height: 1.27; padding: 0; }
+  /* Two columns is what gets 28k words into ~30 sheets and keeps a readable measure. */
+  main {
+    max-width: none; box-shadow: none; padding: 0;
+    column-count: 2; column-gap: 7mm; column-fill: auto;
+  }
+  h1 {
+    font-size: 14pt; column-span: all; margin: 9pt 0 6pt;
+    padding-bottom: 3pt; border-bottom: 2pt solid #000;
+  }
+  h1:first-of-type { margin-top: 0; }
+  h2 {
+    font-size: 10.5pt; margin: 9pt 0 3pt; padding-top: 3pt;
+    border-top: 1.2pt solid #000; break-after: avoid; break-inside: avoid;
+  }
+  h3 { font-size: 9.2pt; margin: 6pt 0 2pt; break-after: avoid; }
+  h4 { font-size: 8.9pt; margin: 5pt 0 2pt; break-after: avoid; }
+  p { margin: 0 0 3.5pt; }
+  ul, ol { margin: 0 0 4pt; padding-left: 13pt; }
+  li { margin: 0 0 1.5pt; }
+  p, li, blockquote { orphans: 2; widows: 2; }
+  blockquote { margin: 3pt 0 4pt; padding: 0 0 0 5pt; border-left: 2pt solid #999; }
+  blockquote p { margin: 0 0 2pt; }
+  table { column-span: all; font-size: 7.6pt; margin: 5pt 0; }
+  th, td { padding: 2pt 4pt; }
+  code { background: none; font-size: .9em; }
   hr { display: none; }
   a { color: inherit; text-decoration: none; }
 }

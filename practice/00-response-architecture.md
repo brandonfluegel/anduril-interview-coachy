@@ -129,19 +129,11 @@ Closed topics — never raise, never treat as a gap: location, compensation, tra
 
 ## 7. Printing
 
-The markdown files are the source. The printable versions live in `practice/print/` as standalone HTML — no extension, no install, nothing to download.
+The markdown files are the source. Printable versions live in `practice/print/`.
 
-**To print:** open `practice/print/ALL-tracks.html` in your browser, `Ctrl+P`, and either send it to the printer or choose *Save as PDF*. Turn on **Background graphics** in the print dialog so the table shading and blockquote rules render. Each pillar starts on a fresh sheet, so you can pull a single question out of the stack and drill it standalone.
+**Fastest path:** open `practice/print/ALL-tracks.pdf` and print it. 30 pages, everything, two columns.
 
-Individual files are there too if you'd rather print one track at a time:
-
-| File | Print first? |
-|---|---|
-| `00-response-architecture.html` | Read once, then keep the cheat sheet page in front of you |
-| `04-positioning-close-track.html` | **Yes** — the pitch and the level argument are the highest-leverage pages |
-| `01-technical-track.html` | |
-| `02-behavioral-track.html` | |
-| `03-culture-stakeholder-track.html` | |
+**From HTML instead:** open `practice/print/ALL-tracks.html` in your browser and `Ctrl+P`. Turn on **Background graphics** so the table shading and blockquote rules render. Individual tracks are there as separate HTML files if you'd rather print one at a time.
 
 **If you edit the markdown**, regenerate before reprinting:
 

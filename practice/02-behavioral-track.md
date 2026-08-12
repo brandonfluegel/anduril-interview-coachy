@@ -1,8 +1,6 @@
 # 02 — Behavioral & Fit Track (BQ01–BQ10)
 
-Ten pillars. Base question, the four ways it may be phrased, one model answer, all three follow-ups, and the Senior → Lead/Staff delta.
-
-The **persona variants** are the same question worded four ways. They are there so you recognize the question, not so you tailor the answer. One answer per question, every time.
+Ten pillars. The question, one model answer, all three follow-ups, and the Senior → Lead/Staff delta. One answer per question — however the interviewer words it.
 
 **Structure for this entire track: STARE+M** — Situation → Task → Action → Result → Earned secret → Mechanism. **Target: 200–265 words ≈ 90–110 seconds.** Follow-ups: 45–90 words ≈ 20–35 seconds.
 
@@ -19,13 +17,6 @@ Three rules that decide this track:
 **Structure:** Position + mechanism (not STARE — this is a stance question) · **Target:** ~95s
 
 > **Base:** How do you think about the moral and ethical responsibility of designing UX for autonomous weapons and counter-drone C2 systems?
-
-**Persona variants**
-
-- **Kim:** "What research philosophy would you use to define and test the moral boundaries of UX for autonomous weapons and counter-drone C2 systems without slowing responsible Air Defense delivery?"
-- **Systems/ML:** "When a non-deterministic counter-drone system can act faster than an operator, what ethical constraints must become hard trust, intervention, and verification requirements?"
-- **Product:** "How would you turn ethical concerns about autonomous weapons UX into product decisions that preserve mission value without becoming an open-ended reason not to ship?"
-- **Design:** "Where should an Air Defense operator workflow introduce deliberate friction, confirmation, or control handoff so the physical-digital experience preserves meaningful human authority?"
 
 ### Model answer (~235 words / 95s)
 
@@ -66,13 +57,6 @@ Three rules that decide this track:
 **Structure:** STARE+M, with an honest boundary up front · **Target:** ~105s
 
 > **Base:** Describe your experience working directly with military operators or high-stress domain experts in field conditions. How do you cut through operator bias or bravado to get true operational data?
-
-**Persona variants**
-
-- **Kim:** "Using your NASA and field-research experience, how would you design rapid ethnography with Air Defense operators that separates genuine operational constraints from recall bias, status signaling, or bravado?"
-- **Systems/ML:** "How would you convert conflicting operator accounts from stressful field conditions into falsifiable system requirements instead of anecdotes engineering cannot implement?"
-- **Product:** "When field operators demand mutually incompatible changes, how do you identify the highest-value operational truth quickly enough to influence the next release?"
-- **Design:** "How would you observe an operator's full physical-digital C2 workflow and reconcile what they say with breakdowns visible in posture, reach, attention, and interaction sequence?"
 
 ### Model answer (~250 words / 100s)
 
@@ -118,13 +102,6 @@ Three rules that decide this track:
 
 > **Base:** You hold a Ph.D. and have published in academic tracks like ACM CSCW. How do you balance scientific rigor with Anduril's requirement to ship functional tech in months, not years?
 
-**Persona variants**
-
-- **Kim:** "Your Ph.D. and CSCW work show rigor; tell me how you would preserve validity while compressing an Air Defense research program into evidence that changes a decision in weeks, not years."
-- **Systems/ML:** "What minimum evidence would you require before turning a psychophysics or trust finding into a latency threshold or verification test on a rapidly changing C2 system?"
-- **Product:** "Give me an example of how you have traded methodological completeness for decision speed without making the resulting product recommendation intellectually dishonest."
-- **Design:** "How would you combine fast prototype testing and service-blueprint work with enough rigor to prevent a rushed C2 interaction pattern from becoming an unsafe design standard?"
-
 ### Model answer (~245 words / 98s)
 
 **Situation.** At Amazon I ran a multi-year psychophysics program, and it sounds like the least scrappy work imaginable. It was surrounded by product decisions that could not wait for it.
@@ -166,13 +143,6 @@ Three rules that decide this track:
 **Structure:** STARE+M · **Target:** ~105s
 
 > **Base:** Tell me about a time an Engineering Lead or PM strongly resisted your research recommendations or wanted to strip a safety feature for speed. How did you resolve it?
-
-**Persona variants**
-
-- **Kim:** "Tell me about a time you protected the integrity of a research or safety recommendation under executive pressure while still preserving trust and delivery velocity across the team."
-- **Systems/ML:** "Describe a technical standoff where engineering rejected your Human Factors threshold or safety control. What evidence, trade space, and verification criterion changed the decision?"
-- **Product:** "Tell me about a time a PM wanted to remove a safety or usability control to hit a date. How did you frame the user risk, business cost, and reversible compromise?"
-- **Design:** "Describe a conflict over an operator-workflow safeguard or physical-digital interaction. How did you keep research, design, product, and engineering aligned without diluting the safety intent?"
 
 ### Model answer (~250 words / 100s)
 
@@ -216,13 +186,6 @@ Three rules that decide this track:
 
 > **Base:** Defense tech requires high-intensity field testing and dynamic schedules. How do you stay effective and prevent burnout under high operational friction?
 
-**Persona variants**
-
-- **Kim:** "How would you build a high-performance research culture that can sustain field intensity and dynamic schedules without normalizing burnout or lowering evidence quality?"
-- **Systems/ML:** "During repeated field-test cycles with shifting hardware and software builds, what operating practices keep your judgment and technical handoffs reliable under fatigue?"
-- **Product:** "How do you protect the highest-value work and communicate capacity when travel, field failures, and release pressure collide in the same week?"
-- **Design:** "How do you maintain observational quality and collaborative design judgment during intensive field studies where physical conditions, travel, and rapid redesign cycles create fatigue?"
-
 ### Model answer (~235 words / 95s)
 
 **Situation.** My work has run on field and simulator cycles for most of a decade — live urban field studies at Uber, high-fidelity simulator programs at Mercedes, workstation validation at NASA. Compressed schedules, travel, and hardware that isn't ready when you arrive.
@@ -265,13 +228,6 @@ Three rules that decide this track:
 
 > **Base:** How do you design a research strategy when hardware/software requirements are completely undefined and the product team is changing direction weekly?
 
-**Persona variants**
-
-- **Kim:** "How would you establish a coherent Air Defense research thesis and repository when product direction changes weekly and no stable policy or requirements exist yet?"
-- **Systems/ML:** "When hardware interfaces, autonomy behavior, and software architecture are all moving, how do you create Human Factors hypotheses that can still mature into testable specifications?"
-- **Product:** "What research do you fund first when the roadmap changes weekly, and how do you prevent discovery work from becoming obsolete before it changes a decision?"
-- **Design:** "How would you use service blueprints and workflow models as stable artifacts when screens, hardware controls, and operator roles are all still changing?"
-
 ### Model answer (~245 words / 98s)
 
 **Situation.** I joined Sling as the Human Factors function — there wasn't one before me — across core software, hardware, and AI platforms simultaneously. No precedent, no standing requirements, and non-deterministic AI behavior that conventional usability checks weren't built to evaluate.
@@ -313,13 +269,6 @@ Three rules that decide this track:
 **Structure:** Protocol + example (the question asks for a protocol) · **Target:** ~95s
 
 > **Base:** What is your protocol when leadership or engineering acknowledges your research findings but decides to ship an unsafe or sub-optimal UX anyway?
-
-**Persona variants**
-
-- **Kim:** "When leaders accept your evidence but choose a riskier design anyway, how do you document uncertainty, define escalation thresholds, and preserve the research function's influence?"
-- **Systems/ML:** "If engineering ships despite a validated Human Factors failure mode, what severity, detectability, verification, and stop-ship criteria govern your response?"
-- **Product:** "How do you respond when a roadmap owner accepts your data but chooses to ship a sub-optimal or unsafe workflow for schedule or mission reasons?"
-- **Design:** "If an unsafe interaction survives design review, how do you preserve the evidence in the service blueprint, negotiate mitigations, and keep the operator workflow from silently normalizing the risk?"
 
 ### Model answer (~235 words / 95s)
 
@@ -405,13 +354,6 @@ Three rules that decide this track:
 
 > **Base:** How do you scale research operations, build shared insight repositories, and mentor junior team members as a Lead/Staff engineer?
 
-**Persona variants**
-
-- **Kim:** "What operating system would you build for Air Defense research so repositories, standards, mentorship, and research quality scale beyond your own studies?"
-- **Systems/ML:** "How would you make Human Factors insights reusable by systems and ML teams through traceable requirements, failure modes, and verification artifacts while developing junior researchers?"
-- **Product:** "How would you build research operations that help multiple product teams find prior evidence, understand decision impact, and avoid repeating low-value studies?"
-- **Design:** "How would you connect shared insights, service blueprints, design patterns, and mentorship so operator-workflow knowledge compounds across Air Defense products?"
-
 ### Model answer (~240 words / 96s)
 
 **Situation.** At Sling I lead organizational Human Factors strategy across core software, hardware, and AI platforms. The scaling problem there is the one I'd expect here: one practitioner, many teams, and demand that will always exceed capacity.
@@ -453,13 +395,6 @@ Three rules that decide this track:
 **Structure:** STARE+M · **Target:** ~95s
 
 > **Base:** When three different product managers are demanding urgent user research for different Air Defense platforms simultaneously, how do you triage and allocate your time?
-
-**Persona variants**
-
-- **Kim:** "How would you allocate scarce research capacity across three urgent Air Defense programs while protecting the long-term research agenda and team health?"
-- **Systems/ML:** "How do you rank simultaneous research requests when one affects a safety-critical autonomy threshold, one blocks integration, and one improves operator efficiency?"
-- **Product:** "Three PMs each claim their Air Defense study is urgent. Walk me through the decision framework, ROI evidence, and stakeholder conversation you use to allocate research capacity."
-- **Design:** "How would you triage competing workflow studies across platforms while preserving shared service-blueprint knowledge and avoiding fragmented operator experiences?"
 
 ### Model answer (~235 words / 95s)
 

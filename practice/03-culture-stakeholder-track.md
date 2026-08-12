@@ -16,13 +16,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 > **Base:** You have spent your career on consumer devices, spaceflight, and automotive systems. Why defense, why Air Defense, and why now?
 
-**Persona variants**
-
-- **Kim:** "What drew you from consumer and aerospace Human Factors to autonomous Air Defense, and what would make you walk away from this kind of work?"
-- **Systems/ML:** "Defense work means your recommendations can affect whether a system engages a threat. What changes about how you do research when that is the consequence?"
-- **Product:** "Why defense, and why now? I want to know what keeps you here when the schedule gets ugly and the mission gets uncomfortable."
-- **Design:** "What about protecting service members changes the way you would approach an operator experience compared with a consumer device?"
-
 ### Model answer (~210 words / 85s)
 
 **Position.** The through-line in my work isn't the industry, it's the consequence class. The work I've cared about has been the work where a use error costs something irreversible — Lunar Gateway clinical workstations at NASA, autonomous handovers at Mercedes where the failure mode is a crash. Consumer devices taught me scale and method; those two taught me what I actually want the method for.
@@ -60,13 +53,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 **Stakeholders:** Research leadership, product, program · **Structure:** STARE+M · **Target:** ~90s
 
 > **Base:** This role expects you to work through ambiguity with little oversight. Tell me about a time nobody told you what to research and you had to decide.
-
-**Persona variants**
-
-- **Kim:** "With no assigned roadmap and no research precedent on this team, how would you choose your first study, and who would you tell before you started?"
-- **Systems/ML:** "If nobody asks you for Human Factors input, how do you insert yourself into a technical decision before the architecture is locked?"
-- **Product:** "Nobody is going to hand you a research brief here. Tell me about a time you defined the question yourself and were held to the outcome."
-- **Design:** "How do you decide what to investigate when design, product, and engineering are all moving without waiting for you?"
 
 ### Model answer (~215 words / 86s)
 
@@ -110,13 +96,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 > **Base:** Anduril's stated bar is delivering capability to the military in months, not years. What does research look like at that cadence, and where does it break?
 
-**Persona variants**
-
-- **Kim:** "At a months-not-years cadence, which parts of your research process are non-negotiable and which are the first to be cut?"
-- **Systems/ML:** "We will not stop the build for a study. How do you get evidence into a decision that is already in flight?"
-- **Product:** "What does your research calendar look like in a quarter where we ship twice and field-test once?"
-- **Design:** "How do you keep research feeding design at sprint speed without turning into a rubber stamp on decisions already made?"
-
 ### Model answer (~205 words / 82s)
 
 **Position.** At that cadence research stops being a project format and becomes two different things: a standing constraint layer that's already in place before anyone asks, and very short studies aimed at single decisions.
@@ -157,13 +136,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 > **Base:** How do you embed with systems, ML, and software engineers so Human Factors evidence lands inside their workflow instead of arriving as a report?
 
-**Persona variants**
-
-- **Kim:** "How do you build the kind of engineering relationships that let research change an architecture rather than annotate it?"
-- **Systems/ML:** "What would you put in my backlog, my test plan, or my requirements doc so your findings are something I can actually action?"
-- **Product:** "How do you keep engineering from treating research as a review gate they have to survive?"
-- **Design:** "When engineering, design, and research disagree about an operator interaction, how do you keep that a technical debate instead of a turf fight?"
-
 ### Model answer (~205 words / 82s)
 
 **Position.** Findings don't land; requirements do. So my output into engineering is written in their artifact, not mine — a requirement with an acceptance test, a failure mode in the risk register, a test case. If the only place my evidence exists is a document I own, it will be read by my team and nobody else.
@@ -201,13 +173,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 **Stakeholders:** Mechanical and industrial design, hardware engineers, field test, manufacturing · **Target:** ~85s
 
 > **Base:** Hardware decisions get expensive fast. How do you work with mechanical, industrial design, and field test partners so ergonomic evidence arrives before a design freeze?
-
-**Persona variants**
-
-- **Kim:** "How do you time physical Human Factors evidence to hardware milestones so it is still cheap to act on?"
-- **Systems/ML:** "What do you need from hardware and test partners to validate a physical interface before we build tooling?"
-- **Product:** "Hardware changes late are the most expensive thing we can do. How do you make sure your ergonomic finding shows up early enough to matter?"
-- **Design:** "How do you and industrial design divide the physical interaction problem so you are not duplicating or contradicting each other?"
 
 ### Model answer (~200 words / 80s)
 
@@ -247,13 +212,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 > **Base:** How do you integrate research into an existing roadmap without becoming either a bottleneck or a rubber stamp?
 
-**Persona variants**
-
-- **Kim:** "How do you keep a research agenda intact while serving a roadmap that changes underneath you?"
-- **Systems/ML:** "When product priorities and safety evidence point different directions, what do you bring to that conversation besides an opinion?"
-- **Product:** "Walk me through how you would plug into my planning cycle. What do you need from me, and what do I get from you every sprint?"
-- **Design:** "How do you keep research shaping the roadmap upstream instead of validating decisions that are already designed?"
-
 ### Model answer (~200 words / 80s)
 
 **Position.** Bottleneck and rubber stamp are the same failure with different symptoms — both come from research being positioned as a checkpoint. The fix is placement, not effort: most of my output should be constraints that exist *before* the question is asked, so the roadmap moves through a floor rather than around a gate.
@@ -292,13 +250,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 > **Base:** How do you partner with design so research is co-ownership of the operator experience rather than a verdict delivered after the fact?
 
-**Persona variants**
-
-- **Kim:** "How do you keep a productive boundary with design so research neither dictates solutions nor gets reduced to usability testing?"
-- **Systems/ML:** "When design and research reach different conclusions about an operator workflow, how does that get resolved before it hits my team?"
-- **Product:** "How do you and design present one recommendation to me instead of two competing ones?"
-- **Design:** "Be honest: where does a researcher's input stop being helpful and start being design by committee?"
-
 ### Model answer (~200 words / 80s)
 
 **Position.** The boundary I hold is that I own the constraints and the evidence about what happens to people; design owns the solution space inside them. When I cross into specifying the solution, I'm doing a worse version of someone else's job, and I've watched that dynamic wreck research-design relationships more often than any disagreement about findings.
@@ -336,13 +287,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 **Stakeholders:** Military operators, government and program customers, field liaisons, training staff · **Target:** ~85s
 
 > **Base:** Operator access is scarce and expensive. How do you build and protect a working relationship with military end users across a program?
-
-**Persona variants**
-
-- **Kim:** "How would you build a sustainable operator research panel and cadence when access is limited and every visit is expensive?"
-- **Systems/ML:** "How do you make one field visit produce enough evidence to change a requirement, given we may not get back for months?"
-- **Product:** "How do you maximize the return on a trip when three teams all want their questions answered by the same operators?"
-- **Design:** "How do you keep operators engaged as partners across a program rather than treating each visit as a one-off test session?"
 
 ### Model answer (~205 words / 82s)
 
@@ -384,13 +328,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 
 > ⚠️ **Boundary:** never state or imply a clearance status, never assert Anduril's internal handling process, and never speculate about classified content. Speak to your handling track record, your proposed practice, and your willingness to take direction.
 
-**Persona variants**
-
-- **Kim:** "How would you design a research repository and synthesis practice that works when some findings cannot be written into it?"
-- **Systems/ML:** "How do you keep requirements traceable to evidence when the evidence lives at a different access level than the requirement?"
-- **Product:** "How do you brief stakeholders who cannot see the underlying data but still have to make the call?"
-- **Design:** "How do you keep design partners aligned to operator reality when you cannot show them everything you saw?"
-
 ### Model answer (~195 words / 78s)
 
 **Position.** The practice I'd want is two-tier synthesis. Most human-factors findings have a generalizable layer — the failure mode class, the perceptual or workload principle, the constraint — that is expressible without the specifics that make it restricted. That layer goes where the team can use it. The instance stays where it belongs, with a pointer recording that substantiating evidence exists and who can speak to it.
@@ -428,13 +365,6 @@ Ten pillars covering mission fit and every stakeholder group you'll face: resear
 **Stakeholders:** Research peers, junior researchers, cross-functional partners, recruiting · **Target:** ~85s
 
 > **Base:** The posting asks for a good teammate who shapes team culture and mentors. What is the specific culture you would build here, and what would you refuse to tolerate?
-
-**Persona variants**
-
-- **Kim:** "As a senior researcher joining a small function, what culture and quality bar would you set, and how would you set it without being appointed to?"
-- **Systems/ML:** "How do you raise the Human Factors literacy of engineers who have never worked with a researcher before?"
-- **Product:** "What makes you a teammate people want on a hard program at two in the morning, rather than just a strong individual researcher?"
-- **Design:** "How do you give and take hard critique in a small team without it becoming personal or political?"
 
 ### Model answer (~205 words / 82s)
 

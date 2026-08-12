@@ -14,13 +14,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 > **Base:** Walk me through your background. Ninety seconds.
 
-**Persona variants**
-
-- **Kim:** "Before we get into specifics, give me the ninety-second version of who you are as a researcher and what you want to be known for."
-- **Systems/ML:** "Give me the short version of your background, weighted toward the parts where your work turned into system requirements."
-- **Product:** "Ninety seconds: who are you, what have you shipped, and why are you sitting here?"
-- **Design:** "Give me the quick version of your background and where you sit between research, design, and hardware."
-
 ### Model answer — memorize this one verbatim (~215 words / 92s)
 
 > I'm a human factors engineer and researcher, and the work I've cared about is consistently the work where a use error is irreversible.
@@ -67,13 +60,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 > **Base:** You started at Sling in 2025 as a Staff Human Factors Engineer. Why leave, and why this role?
 
-**Persona variants**
-
-- **Kim:** "You are already Staff-titled at Sling. What does this role give you that your current one does not?"
-- **Systems/ML:** "Short tenure at your current company, and a posted role one rung below your current title. Help me understand the logic."
-- **Product:** "Why leave a Staff role after about a year? I want to understand what you are moving toward, not away from."
-- **Design:** "What kind of work do you want to be doing in three years that made you look at Air Defense?"
-
 ### Model answer (~175 words / 70s)
 
 **Direct on the awkward part first.** Short tenure and a posted title one step below mine are both real, and I'd rather address them than have you infer.
@@ -111,13 +97,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 **Arc:** midpoint, close · **Target:** ~80s
 
 > **Base:** Say you start next month. What are you doing in your first ninety days, and what have you shipped by day ninety?
-
-**Persona variants**
-
-- **Kim:** "Walk me through your first ninety days. What do you learn, what do you decide, and what artifact exists at the end of it?"
-- **Systems/ML:** "In your first quarter, what would you need from my team, and what would we get back that we could actually use?"
-- **Product:** "What does research produce in your first ninety days that changes something on my roadmap?"
-- **Design:** "In your first ninety days, how much of your time goes to learning the operator versus producing something the team can design against?"
 
 ### Model answer (~195 words / 78s)
 
@@ -159,13 +138,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 > **Base:** If you owned Human Factors research for Air Defense, what would you build that does not exist yet?
 
-**Persona variants**
-
-- **Kim:** "If this were your research agenda to set, what is the program you would build, and what does it make possible that we cannot do today?"
-- **Systems/ML:** "What Human Factors capability would you build that would change how we write requirements, not just how we evaluate screens?"
-- **Product:** "What would you build in research here that pays for itself, and how would you prove it did?"
-- **Design:** "What research capability would most change the quality of operator experiences we can design?"
-
 ### Model answer (~195 words / 78s)
 
 **What I'd build.** A trust-calibration measurement capability that runs continuously in production, not in studies. Concretely: log the recommendation, the displayed confidence, the operator's decision, the decision latency, and the outcome — so operator calibration becomes a computable quantity rather than something you infer after an incident.
@@ -205,13 +177,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 **Arc:** midpoint, close · **Target:** ~75s · **This is the one open item in the whole loop. Do not improvise it.**
 
 > **Base:** This requisition is posted at Senior. Make the case for the scope you actually intend to own.
-
-**Persona variants**
-
-- **Kim:** "Make the case for the level this work actually is, using what you would own rather than what you have been called."
-- **Systems/ML:** "What is the scope difference between a Senior and a Staff researcher on a program like this, in your view?"
-- **Product:** "What would you own that a Senior researcher on this team would not?"
-- **Design:** "What decisions do you expect to be in the room for, and which ones do you expect to own outright?"
 
 ### Model answer (~185 words / 75s)
 
@@ -255,12 +220,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 > **Base:** How do you want to be managed, and what do you need from a research leader to do your best work?
 
-**Persona variants**
-
-- **Kim:** "How do you want to be managed? Be specific about what support looks like and what would get in your way."
-- **Systems/ML:** "When you disagree with your own research leadership about a technical call, how does that go?"
-- **Product:** "How much direction do you want, and how do you signal when you are stuck?"
-- **Design:** "What does a good working relationship with your lead look like when the two of you disagree in front of the team?"
 
 ### Model answer (~175 words / 70s)
 
@@ -304,13 +263,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 > **Base:** You will say this to four different interviewers today. Give me the version of your thesis that an engineer, a PM, and a designer would each accept.
 
-**Persona variants**
-
-- **Kim:** "Say your thesis the way you would say it to an engineer, then the way you would say it to a PM. What has to stay identical?"
-- **Systems/ML:** "Give me the engineering version of your thesis, and tell me what the product version of it sounds like."
-- **Product:** "Translate your research position into the version I would repeat to a program lead who has three minutes."
-- **Design:** "Give me the version of your thesis that a designer can act on this week."
-
 ### Model answer (~185 words / 75s)
 
 **The invariant — this sentence does not change in any room:**
@@ -353,13 +305,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 > **Base:** Which two pieces of your work show that research changed both a tactical and a strategic decision, and why those two?
 
-**Persona variants**
-
-- **Kim:** "Which piece of your work shows tactical decision impact, and which shows strategic impact? Do not give me the same project twice."
-- **Systems/ML:** "Show me the project where your research became a specification, not a recommendation."
-- **Product:** "Which piece of your work would convince me that research changes decisions rather than documenting them?"
-- **Design:** "Which project best shows how you shaped an end-to-end experience rather than evaluating a screen?"
-
 ### Model answer (~190 words / 76s)
 
 **Tactical — NASA Langley.** Lunar Gateway clinical workstations. I ran a use-FMEA against NASA-STD-3001 and MIL-STD-1472 and it changed a specific design: physical layout and control-display placement. Task time down 30%, critical input errors eliminated. That's tactical in the sense that it changed one system — and the reason I lead with it here is the mechanism. The errors were eliminated by geometry, by putting distance and dissimilarity between controls whose consequences differed. Not by a confirmation dialog and not by speed.
@@ -398,37 +343,19 @@ The frame around everything else: the pitch, the level argument, the objection, 
 
 **The bar here:** a Lead/Staff question reveals a point of view and treats the answer as decision-relevant. Anything you could ask any company is a wasted turn. Ask two, not five — and follow up on the answer rather than moving to the next item on your list.
 
-### For Dr. Daniella Kim (Research)
+### Ask any of these
 
-> "Where does research authority actually sit when evidence and schedule conflict? Is there a decision a researcher holds outright here, or is the function advisory by design? Either is workable — I'd just want to know which, because it changes how I'd operate."
+> "Where does research authority actually sit when evidence and schedule conflict? Is there a decision a researcher holds outright here, or is the function advisory by design? Either is workable — I'd just want to know which."
 
-> "What research has this team decided *not* to do? I find that tells you more about a research culture's maturity than what it has done."
-
-> "What does the bar look like for you between publication-quality evidence and decision-grade evidence? I have a strong view on that and I'd want to know if it matches yours."
-
-### For the Systems / ML Engineering Lead
-
-> "What's the last human-factors constraint that actually changed your architecture — and what made that one land when others didn't?"
-
-> "What's observable today about operator decisions in production? I'm asking because the capability I'd want to build depends on what's already logged."
-
-> "Where do you think the human-factors work is currently slowest or least useful to you? I'd rather hear the complaint than the wish list."
-
-### For the Product Manager
+> "What research has this team decided *not* to do? That tells you more about a research culture's maturity than what it has done."
 
 > "Where does the team knowingly carry human-factors risk right now — the thing everyone accepts and nobody has time for?"
 
-> "What's the most expensive thing you've shipped and had to unwind? I'm trying to understand what a wrong call actually costs here."
+> "What's the last human-factors constraint that actually changed a design or an architecture here — and what made that one land?"
 
-> "How do you want to be told that research disagrees with a roadmap decision? Some people want it in the room, some want it before."
+> "What's the human-factors decision this team has made that you're least sure about?"
 
-### For the Design Lead
-
-> "Where do you want research to stop? I have a view on the boundary, and I'd rather calibrate to yours now than discover it in a critique."
-
-> "What's the operator interaction the team has argued about the longest, and what's the argument actually about?"
-
-> "How much of the operator experience is physical here versus on a screen? That changes what I'd prioritize in my first quarter."
+**One role-specific opener each, if you want it:** *Research* — "what's your bar between publication-quality and decision-grade evidence?" *Engineering* — "what's observable today about operator decisions in production?" *Product* — "what's the most expensive thing you've shipped and had to unwind?" *Design* — "where do you want research to stop?"
 
 ### Follow-ups
 
@@ -457,13 +384,6 @@ The frame around everything else: the pitch, the level argument, the objection, 
 **Arc:** midpoint, close · **Target:** 60s. **Shortest answer in the loop. Do not over-explain.**
 
 > **Base:** The strongest argument against hiring you is that you have never worked in defense. What is your answer?
-
-**Persona variants**
-
-- **Kim:** "Name the biggest gap between your background and this role, and tell me how you would close it in the first six months."
-- **Systems/ML:** "Everything you have worked on had a forgiving failure mode compared with this. Why should I trust your judgment here?"
-- **Product:** "Give me the honest case against hiring you, and then tell me why I should anyway."
-- **Design:** "What part of this domain do you genuinely not understand yet?"
 
 ### Model answer (~150 words / 60s)
 

@@ -1,8 +1,6 @@
 # 01 — Technical & Research-Craft Track (TQ01–TQ10)
 
-Ten pillars. Each has the base question, the four ways it may be phrased, one model answer, all three follow-ups with scoped answers, and the Senior → Lead/Staff delta.
-
-The **persona variants** are the same question worded four ways. They are there so you recognize the question, not so you tailor the answer. One answer per question, every time.
+Ten pillars. Each has the question, one model answer, all three follow-ups with scoped answers, and the Senior → Lead/Staff delta. One answer per question — however the interviewer words it.
 
 **Structure for this entire track: CMELT** — Claim → Method/mechanism → Evidence + limits → Line (threshold/decision) → Turn (falsifier). Do **not** use STAR here. STAR on a technical question is a Relevance penalty.
 
@@ -17,13 +15,6 @@ The **persona variants** are the same question worded four ways. They are there 
 **Arc:** opening, leadership · **Structure:** CMELT · **Target:** ~80s
 
 > **Base:** State your Human Factors thesis for autonomous Air Defense in one sentence, and tell me what evidence would falsify it.
-
-**Persona variants**
-
-- **Kim:** "Give me your one-sentence thesis for Human Factors in autonomous Air Defense, and the single result that would force you to abandon it."
-- **Systems/ML:** "Calibrated Cognitive Friction is a philosophy. What measurable claim inside it can I actually test on a counter-drone C2 build?"
-- **Product:** "In one sentence, what is your Human Factors bet for Air Defense, and what would it cost us if you are wrong?"
-- **Design:** "What is your thesis about operator authority in autonomous C2, and where would it visibly change an interaction, not just a research memo?"
 
 ### Model answer (~190 words / 78s)
 
@@ -65,13 +56,6 @@ The **persona variants** are the same question worded four ways. They are there 
 
 > **Base:** You replaced arbitrary engineering latency targets with human perceptual thresholds. Walk me from the psychophysics to the written specification.
 
-**Persona variants**
-
-- **Kim:** "Take me through the psychophysical method behind your latency thresholds: stimuli, staircase or method of limits, sample, and how you defended the threshold estimate."
-- **Systems/ML:** "Your threshold came from a population distribution. How do you turn that distribution into a single acceptance criterion I can verify in a test harness?"
-- **Product:** "How did the perceptual threshold work actually change what engineering shipped, and what was the dollar consequence of the old arbitrary target?"
-- **Design:** "Where does a perceptual latency threshold change the interaction itself — feedback timing, modality choice, or the moment we show uncertainty?"
-
 ### Model answer (~210 words / 84s)
 
 **Claim.** A latency target is a perceptual claim, so it should be written as a threshold with a stated population percentile and a defined degradation behavior — not as a round number someone liked.
@@ -111,13 +95,6 @@ The **persona variants** are the same question worded four ways. They are there 
 **Arc:** opening, pushback · **Structure:** CMELT · **Target:** ~80s
 
 > **Base:** When is fNIRS, eye tracking, or ECG worth the cost over NASA-TLX and behavioral performance data for an Air Defense operator study?
-
-**Persona variants**
-
-- **Kim:** "Defend your measure selection: what decision would fNIRS or eye tracking support for Air Defense that NASA-TLX and task performance would not?"
-- **Systems/ML:** "Which of those signals could be instrumented in a fielded system, and which only survive in a lab? What do we lose in the field version?"
-- **Product:** "Why should I fund biometric telemetry instead of another round of operator workflow testing this quarter?"
-- **Design:** "What did eye tracking tell you about attention allocation that changed a layout, and how would that transfer to a dense 3D C2 display?"
 
 ### Model answer (~195 words / 78s)
 
@@ -159,13 +136,6 @@ The **persona variants** are the same question worded four ways. They are there 
 
 > **Base:** Walk me through a uFMEA for an autonomous threat recommendation that arrives with uncertain confidence, and where MIL-STD-1472 stops being enough.
 
-**Persona variants**
-
-- **Kim:** "How would you structure a use-error analysis for counter-drone authorization so it produces research priorities, not just a risk register?"
-- **Systems/ML:** "Give me severity, occurrence, and detectability for one high-consequence use error in an autonomous engagement flow, plus the control that closes it."
-- **Product:** "How do you keep a uFMEA from becoming a compliance ritual that slows every release by two weeks?"
-- **Design:** "Which use-error modes are best mitigated by physical layout and control placement rather than by another confirmation dialog?"
-
 ### Model answer (~205 words / 82s)
 
 **Claim.** MIL-STD-1472 governs the interface — control spacing, legibility, reach, labeling. It has essentially nothing to say about a *probabilistic recommendation*. That's the gap: the standard protects you from a mislabeled switch, not from a well-labeled switch attached to an inference the operator can't evaluate.
@@ -205,13 +175,6 @@ The **persona variants** are the same question worded four ways. They are there 
 **Arc:** opening, pushback, leadership · **Structure:** CMELT · **Target:** ~85s
 
 > **Base:** What is the failure mode when the autonomy is correct but the operator's trust calibration is wrong, and how would you detect it before an incident?
-
-**Persona variants**
-
-- **Kim:** "How do you measure trust calibration rather than trust, and what would over-trust look like in the telemetry before it looks like an incident?"
-- **Systems/ML:** "The model changes after deployment. Which parts of your Human Factors validation must run again, and what signals must stay observable in production?"
-- **Product:** "What would you measure after launch to decide whether to keep, remove, or increase a confirmation step?"
-- **Design:** "How should the interface expose model uncertainty so an operator neither rubber-stamps nor second-guesses every recommendation?"
 
 ### Model answer (~200 words / 80s)
 
@@ -253,13 +216,6 @@ The **persona variants** are the same question worded four ways. They are there 
 
 > **Base:** Map an operator's attention across detection, assessment, authorization, and intervention. Where does a dense 3D C2 interface compete with the mission?
 
-**Persona variants**
-
-- **Kim:** "What research would you run first to model the operator's end-to-end workflow, and what artifact would outlive the study?"
-- **Systems/ML:** "Which workflow states must the system expose as discrete, testable modes so we can verify the operator always knows who is in control?"
-- **Product:** "Which single stage of that operator workflow would you fix first for the largest operational return, and why that one?"
-- **Design:** "When does reducing information density hide the uncertainty the operator actually needs to see?"
-
 ### Model answer (~195 words / 78s)
 
 **Claim.** Attention is the scarce resource, and it is most expensive at the *transitions* between stages, not inside them. Dense interfaces don't usually fail by showing too much; they fail by making the transition — from monitoring to deciding, from supervising to intervening — indistinguishable from steady state.
@@ -299,13 +255,6 @@ The **persona variants** are the same question worded four ways. They are there 
 **Arc:** opening, pushback · **Structure:** CMELT · **Target:** ~80s
 
 > **Base:** Before touching screen design, what physical and anthropometric constraints would you investigate for a fielded Air Defense operator station?
-
-**Persona variants**
-
-- **Kim:** "How do you generate physical-ergonomic evidence fast enough to influence hardware before the industrial design freezes?"
-- **Systems/ML:** "Turn a reach envelope or anthropometric finding into a hardware requirement with a pass/fail acceptance test."
-- **Product:** "Hardware changes are expensive and late changes are worse. How do you time ergonomic research so it is cheap to act on?"
-- **Design:** "Where do physical constraints — gloves, vibration, sunlight, body armor, seated reach — override an otherwise clean interaction pattern?"
 
 ### Model answer (~195 words / 78s)
 
@@ -347,13 +296,6 @@ The **persona variants** are the same question worded four ways. They are there 
 
 > **Base:** Walk me through how you would use scaled surveys, max-diff, and your own analysis code to prioritize competing Air Defense operator needs.
 
-**Persona variants**
-
-- **Kim:** "With a small, hard-to-reach operator population, how do you keep a scaled survey or max-diff study statistically honest?"
-- **Systems/ML:** "What sample size and effect size would you accept before I change a threshold in the system on your say-so?"
-- **Product:** "How do you get a defensible prioritization signal out of a dozen operators in under two weeks?"
-- **Design:** "How would max-diff results actually arbitrate between two competing interaction concepts without flattening the qualitative evidence?"
-
 ### Model answer (~200 words / 80s)
 
 **Claim.** With a small, hard-to-reach population the honest move is to change the estimand, not to fake the power. I'm not trying to estimate a population parameter from twelve operators — I'm trying to recover a stable *preference structure*, and that's a question small samples can actually answer.
@@ -394,13 +336,6 @@ The **persona variants** are the same question worded four ways. They are there 
 
 > **Base:** Design the first two weeks of rapid in-field ethnography with Air Defense operators. What do you run, and what artifact comes out?
 
-**Persona variants**
-
-- **Kim:** "Lay out a two-week rapid ethnography and contextual inquiry plan with operators, including how you protect validity under field constraints."
-- **Systems/ML:** "Field observation produces stories. What is your protocol for converting them into requirements engineering can implement and verify?"
-- **Product:** "You have one trip and limited operator access. What do you observe, what do you skip, and what decision does the trip unblock?"
-- **Design:** "How would you facilitate a co-creation workshop with operators and engineers without letting the loudest participant design the system?"
-
 ### Model answer (~200 words / 80s)
 
 **Claim.** Two weeks buys exactly one thing reliably: the true task sequence and where it breaks. I would not spend that access collecting opinions about features — opinions are cheap to get later and expensive to get right in the field.
@@ -440,13 +375,6 @@ The **persona variants** are the same question worded four ways. They are there 
 **Arc:** leadership · **Structure:** CMELT · **Target:** ~80s
 
 > **Base:** How would you operationalize Air Defense research so insights are found, reused, and actually change decisions across Anduril?
-
-**Persona variants**
-
-- **Kim:** "What operating system would you build for Air Defense research — repository, standards, intake, and quality bar — so it survives after you leave?"
-- **Systems/ML:** "How do you make Human Factors findings traceable into requirements and verification artifacts engineering already uses?"
-- **Product:** "How would you build research operations that stop three product teams from repeating the same low-value study?"
-- **Design:** "How do you connect insights, blueprints, and design patterns so operator knowledge compounds across Air Defense products?"
 
 ### Model answer (~195 words / 78s)
 
