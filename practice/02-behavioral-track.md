@@ -1,22 +1,3 @@
-<style>
-@media print {
-  @page { margin: 18mm 16mm; }
-  html, body { font-size: 10.5pt; line-height: 1.5; font-family: Georgia, "Times New Roman", serif; }
-  h1 { font-size: 19pt; margin-bottom: 4pt; }
-  h2 { font-size: 15pt; page-break-before: always; margin-top: 0; }
-  h2:first-of-type { page-break-before: avoid; }
-  h3 { font-size: 12.5pt; margin-bottom: 4pt; }
-  h4 { font-size: 11pt; margin-bottom: 3pt; }
-  h1, h2, h3, h4 { page-break-after: avoid; page-break-inside: avoid; font-family: Helvetica, Arial, sans-serif; }
-  p, li { orphans: 3; widows: 3; }
-  blockquote { page-break-inside: avoid; border-left: 3px solid #666; padding-left: 11px; margin-left: 0; }
-  table { page-break-inside: avoid; width: 100%; font-size: 9.5pt; border-collapse: collapse; }
-  th, td { border: 1px solid #999; padding: 4px 6px; }
-  hr { display: none; }
-  a { color: inherit; text-decoration: none; }
-}
-</style>
-
 # 02 — Behavioral & Fit Track (BQ01–BQ10)
 
 Ten pillars. Base question, the four ways it may be phrased, one model answer, all three follow-ups, and the Senior → Lead/Staff delta.

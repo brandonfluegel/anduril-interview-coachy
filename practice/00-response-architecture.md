@@ -1,22 +1,3 @@
-<style>
-@media print {
-  @page { margin: 18mm 16mm; }
-  html, body { font-size: 10.5pt; line-height: 1.5; font-family: Georgia, "Times New Roman", serif; }
-  h1 { font-size: 19pt; margin-bottom: 4pt; }
-  h2 { font-size: 15pt; page-break-before: always; margin-top: 0; }
-  h2:first-of-type { page-break-before: avoid; }
-  h3 { font-size: 12.5pt; margin-bottom: 4pt; }
-  h4 { font-size: 11pt; margin-bottom: 3pt; }
-  h1, h2, h3, h4 { page-break-after: avoid; page-break-inside: avoid; font-family: Helvetica, Arial, sans-serif; }
-  p, li { orphans: 3; widows: 3; }
-  blockquote { page-break-inside: avoid; border-left: 3px solid #666; padding-left: 11px; margin-left: 0; }
-  table { page-break-inside: avoid; width: 100%; font-size: 9.5pt; border-collapse: collapse; }
-  th, td { border: 1px solid #999; padding: 4px 6px; }
-  hr { display: none; }
-  a { color: inherit; text-decoration: none; }
-}
-</style>
-
 # Response Architecture — How to Answer, Before What to Answer
 
 Master index for the practice set. Read this once, then drill the four track files.
@@ -148,21 +129,27 @@ Closed topics — never raise, never treat as a gap: location, compensation, tra
 
 ## 7. Printing
 
-These files carry a print stylesheet. Each pillar starts on a fresh page, so you can pull a single question out of the stack and drill it standalone.
+The markdown files are the source. The printable versions live in `practice/print/` as standalone HTML — no extension, no install, nothing to download.
 
-**Recommended:** VS Code with the *Markdown PDF* extension — right-click the file, **Markdown PDF: Export (pdf)**. It honors the stylesheet.
+**To print:** open `practice/print/ALL-tracks.html` in your browser, `Ctrl+P`, and either send it to the printer or choose *Save as PDF*. Turn on **Background graphics** in the print dialog so the table shading and blockquote rules render. Each pillar starts on a fresh sheet, so you can pull a single question out of the stack and drill it standalone.
 
-**Alternative:** open the Markdown preview, print to PDF from the browser, and enable **Background graphics** so the blockquote rules render.
+Individual files are there too if you'd rather print one track at a time:
 
-Print all five. Suggested order in the binder:
+| File | Print first? |
+|---|---|
+| `00-response-architecture.html` | Read once, then keep the cheat sheet page in front of you |
+| `04-positioning-close-track.html` | **Yes** — the pitch and the level argument are the highest-leverage pages |
+| `01-technical-track.html` | |
+| `02-behavioral-track.html` | |
+| `03-culture-stakeholder-track.html` | |
 
-1. `00` — this file, read once, then keep the cheat sheet page in front of you
-2. `04` — positioning; the pitch and the level argument are the highest-leverage pages
-3. `01` — technical
-4. `02` — behavioral
-5. `03` — culture and stakeholder
+**If you edit the markdown**, regenerate before reprinting:
 
-Before you drill, go through with a pen and fill in every `[bracket]`. Twelve of them need a fact only you have, and the drill sheet at the end of each file flags which rows they're in.
+```
+python scripts/build_practice_html.py
+```
+
+Before you drill, go through the printout with a pen and fill in every `[bracket]`. Twelve of them need a fact only you have, and the drill sheet at the end of each track flags which rows they're in.
 
 ---
 
