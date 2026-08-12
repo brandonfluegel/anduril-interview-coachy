@@ -70,32 +70,32 @@ a { color: #14507d; }
 strong { font-weight: 700; }
 
 @media print {
-  @page { size: letter; margin: 8mm 8mm; }
-  body { background: #fff; font-size: 9.3pt; line-height: 1.27; padding: 0; }
+  @page { size: letter; margin: 11mm 10mm; }
+  body { background: #fff; font-size: 10.5pt; line-height: 1.36; padding: 0; }
   /* Two columns is what gets 28k words into ~30 sheets and keeps a readable measure. */
   main {
     max-width: none; box-shadow: none; padding: 0;
     column-count: 2; column-gap: 7mm; column-fill: auto;
   }
   h1 {
-    font-size: 14pt; column-span: all; margin: 9pt 0 6pt;
+    font-size: 16pt; column-span: all; margin: 11pt 0 7pt;
     padding-bottom: 3pt; border-bottom: 2pt solid #000;
   }
   h1:first-of-type { margin-top: 0; }
   h2 {
-    font-size: 10.5pt; margin: 9pt 0 3pt; padding-top: 3pt;
+    font-size: 12pt; margin: 12pt 0 4pt; padding-top: 4pt;
     border-top: 1.2pt solid #000; break-after: avoid; break-inside: avoid;
   }
-  h3 { font-size: 9.2pt; margin: 6pt 0 2pt; break-after: avoid; }
-  h4 { font-size: 8.9pt; margin: 5pt 0 2pt; break-after: avoid; }
-  p { margin: 0 0 3.5pt; }
-  ul, ol { margin: 0 0 4pt; padding-left: 13pt; }
-  li { margin: 0 0 1.5pt; }
+  h3 { font-size: 10.6pt; margin: 8pt 0 3pt; break-after: avoid; }
+  h4 { font-size: 10.2pt; margin: 7pt 0 2pt; break-after: avoid; }
+  p { margin: 0 0 5pt; }
+  ul, ol { margin: 0 0 5pt; padding-left: 14pt; }
+  li { margin: 0 0 2pt; }
   p, li, blockquote { orphans: 2; widows: 2; }
-  blockquote { margin: 3pt 0 4pt; padding: 0 0 0 5pt; border-left: 2pt solid #999; }
-  blockquote p { margin: 0 0 2pt; }
-  table { column-span: all; font-size: 7.6pt; margin: 5pt 0; }
-  th, td { padding: 2pt 4pt; }
+  blockquote { margin: 4pt 0 6pt; padding: 0 0 0 7pt; border-left: 2pt solid #999; }
+  blockquote p { margin: 0 0 3pt; }
+  table { column-span: all; font-size: 8.8pt; margin: 7pt 0; }
+  th, td { padding: 3pt 5pt; }
   code { background: none; font-size: .9em; }
   hr { display: none; }
   a { color: inherit; text-decoration: none; }

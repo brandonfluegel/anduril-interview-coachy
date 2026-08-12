@@ -131,7 +131,7 @@ Closed topics — never raise, never treat as a gap: location, compensation, tra
 
 The markdown files are the source. Printable versions live in `practice/print/`.
 
-**Fastest path:** open `practice/print/ALL-tracks.pdf` and print it. 30 pages, everything, two columns.
+**Fastest path:** open `practice/print/ALL-tracks.pdf` and print it. 41 pages, everything, two columns at 10.5pt.
 
 **From HTML instead:** open `practice/print/ALL-tracks.html` in your browser and `Ctrl+P`. Turn on **Background graphics** so the table shading and blockquote rules render. Individual tracks are there as separate HTML files if you'd rather print one at a time.
 
