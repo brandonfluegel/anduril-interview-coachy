@@ -89,9 +89,17 @@ def main() -> int:
     new_timestamp: str | None = None
 
     try:
-        indicator, interviewer, _, turn, history, answer_box = app.start_interview(
-            PERSONA_LABEL, app.AUTO_PILLAR
-        )
+        (
+            indicator,
+            interviewer,
+            _,
+            turn,
+            history,
+            answer_box,
+            claims,
+            pillars,
+            active_persona,
+        ) = app.start_interview(PERSONA_LABEL, app.AUTO_PILLAR)
         question = strip_spoken(interviewer)
         print(f"[Q1] {question}")
         print(f"     words={words(question)} turn_state={turn} answer_box_cleared={answer_box == ''}\n")
@@ -99,8 +107,18 @@ def main() -> int:
             failures.append(f"Q1 spoken length {words(question)} exceeds the 45-word voice budget")
 
         for index, candidate_answer in enumerate(ANSWERS, start=1):
-            indicator, interviewer, scorecard, turn, history, answer_box = app.continue_conversation(
-                candidate_answer, PERSONA_LABEL, index, history
+            (
+                indicator,
+                interviewer,
+                scorecard,
+                turn,
+                history,
+                answer_box,
+                claims,
+                pillars,
+                active_persona,
+            ) = app.continue_conversation(
+                candidate_answer, index, history, claims, pillars, active_persona
             )
             spoken = strip_spoken(interviewer)
 
@@ -122,12 +140,24 @@ def main() -> int:
                     failures.append(f"Turn {index} interviewer output leaked grading text '{leaked}'")
             if app.completed_turns(history) != index:
                 failures.append(f"Turn {index} transcript recorded {app.completed_turns(history)} answers")
+            if len(claims) != index:
+                failures.append(f"Turn {index} claim ledger holds {len(claims)} entries, expected {index}")
+            print(f"  claim ledger: {claims[-1] if claims else '—'}")
+            print(f"  pillars covered: {', '.join(pillars) or '—'}")
             print()
 
         print("--- FINALIZATION ---")
-        indicator, interviewer, scorecard, turn, history, answer_box = app.finalize_session(
-            PERSONA_LABEL, turn, history
-        )
+        (
+            indicator,
+            interviewer,
+            scorecard,
+            turn,
+            history,
+            answer_box,
+            claims,
+            pillars,
+            active_persona,
+        ) = app.finalize_session(turn, history, claims, pillars, active_persona)
         print(f"  indicator: {indicator}")
         print(f"  turn_state reset: {turn == 0}")
         print(f"  scorecard has holistic debrief: {'End of Session Debrief' in scorecard}")
@@ -139,6 +169,8 @@ def main() -> int:
             failures.append("Finalization omitted Tone & Authority")
         if f"**Turns completed:** {len(ANSWERS)}" not in scorecard:
             failures.append("Finalization did not report the completed turn count")
+        if "## Transcript Review" not in scorecard:
+            failures.append("Finalization did not append the transcript review")
         if turn != 0:
             failures.append("Finalization did not reset the turn state")
         print()

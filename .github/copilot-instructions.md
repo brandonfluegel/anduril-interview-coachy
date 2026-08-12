@@ -27,6 +27,8 @@ Never invent metrics, outcomes, clearance status, classified details, team struc
 - Anchor the opening, pushback, and leadership turns to the technical bank, and use each bank entry's follow-ups as the escalation ladder. Keep both banks at exactly ten pillars with all four persona adaptations, follow-ups, and a Lead/Staff bar.
 - Offer the culture and stakeholder-collaboration bank on the behavioral, leadership, and open turns. Keep it at exactly ten pillars and keep every question grounded in the posted job description: never assert internal Anduril process, team structure, or program details, and never state or imply clearance status.
 - Keep one continuous interview arc driven entirely by the four interviewer personas. There are no session-format modes; the persona plus the optional target-pillar drill selects the ground the session covers.
+- Give live turns the full transcript plus the running claim ledger and covered-pillar list. Never truncate live context, never repeat a covered pillar except when deliberately holding the same ground, and re-probe rather than advance when an answer is thin.
+- Lock the interviewer persona for the duration of a session and keep it in state, not read from the radio each turn.
 - The recruiter screen is complete. Location, compensation, travel, and clearance are settled: never ask about them, never treat them as gaps, and never assert a compensation number or an active clearance status.
 - Persist the covered pillar IDs with every finalized session, and keep the Pillar Coverage matrix on the progress dashboard derived from those records.
 - Keep questions and pushback concise and voice-friendly.

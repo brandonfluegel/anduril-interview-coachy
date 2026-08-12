@@ -67,7 +67,22 @@ def main() -> None:
     assert "End of Session Debrief" in card
     assert "### Tone & Authority" in card
     assert "**Turns completed:** 7" in card
-    print("OK  holistic scorecard renders with Tone & Authority and the turn count")
+    review = app.render_transcript_review(transcript)
+    assert "## Transcript Review" in review and "Answer 7." in review
+    print("OK  holistic scorecard renders with Tone & Authority, the turn count, and a transcript review")
+
+    ledger = app.render_claims_ledger(["latency threshold - staircase - 120ms - owned"])
+    assert "Turn 1:" in ledger
+    assert app.render_covered_pillars(["TQ02"]).startswith("TQ02 (")
+    assert app.merge_pillars(["TQ02"], "bq04 | whatever") == ["TQ02", "BQ04"]
+    assert app.merge_pillars(["TQ02"], "TQ02") == ["TQ02"], "covered pillars must not duplicate"
+    assert app.merge_pillars([], "ZZ99") == []
+    assert "0 words" in app.answer_meter("")
+    assert "cut in" in app.answer_meter(" ".join(["word"] * 400))
+    assert "sweet spot" in app.answer_meter(" ".join(["word"] * 250))
+    assert "interjection" in app.turn_indicator(3, interjection=True)
+    assert "same ground" in app.turn_indicator(3, held=True)
+    print("OK  claim ledger, coverage merge, answer meter, and turn states behave")
 
     with tempfile.TemporaryDirectory() as tmp:
         sandbox = Path(tmp) / "coaching_state.md"
@@ -76,7 +91,7 @@ def main() -> None:
         app.COACHING_STATE_PATH = sandbox
         try:
             before = len(app.load_session_records())
-            record = app.persist_session("Dr. Daniella Kim", evaluation, turns)
+            record = app.persist_session("Dr. Daniella Kim", evaluation, turns, ["TQ02", "BQ04", "PQ01"])
             records = app.load_session_records()
             assert len(records) == before + 1
             assert records[-1].timestamp == record.timestamp

@@ -23,9 +23,9 @@ TTS_MODEL = "tts-1"
 AUDIO_RETENTION_SECONDS = 3600.0
 OPENAI_TIMEOUT_SECONDS = 45.0
 SESSION_LOG_END = "<!-- FOUR_TURN_SESSION_LOG_END -->"
+SPEAKING_WORDS_PER_MINUTE = 150
 SESSION_RECORD_PATTERN = re.compile(r"<!-- FOUR_TURN_SESSION_JSON (.+?) -->")
 SPRINT_PROGRESS_PATTERN = re.compile(r"<!-- SPRINT_CHECKLIST_JSON (.*?) -->")
-LIVE_CONTEXT_MESSAGES = 12
 SESSION_WRITE_LOCK = threading.Lock()
 CORE_DIMENSIONS = (
     "Substance",
@@ -88,7 +88,7 @@ Cross-examine canonical resume evidence against the posted Senior User Experienc
 
 Senior UXR baseline means expertly designing and executing studies that produce actionable insights. Lead/Staff signal means setting reusable standards, bridging human perception to engineering requirements, establishing frameworks before policy exists, defining Research Operations, influencing decisions across functions, and translating HSI evidence into hard hardware/software specifications.
 
-This is one continuous spoken conversation, not a set of isolated prompts. Every question after the first must reference something the candidate actually said. Keep interviewer questions and pushback concise and voice-friendly for headphone listening. Treat prior resume claims as context to probe, not proof that a spoken answer demonstrated a competency. Preserve Meaningful Human Control, operational tempo, and evidence integrity throughout.
+This is one continuous spoken conversation, not a set of isolated prompts. Every question after the first must reference something the candidate actually said. You are given the full transcript and a running claim ledger on every live turn: hold later answers against earlier ones and name contradictions, walked-back numbers, and retold stories. Keep interviewer questions and pushback concise and voice-friendly for headphone listening. Treat prior resume claims as context to probe, not proof that a spoken answer demonstrated a competency. Preserve Meaningful Human Control, operational tempo, and evidence integrity throughout.
 
 For the third question, select a behavioral/fit pillar from the canonical behavioral question bank using the active persona's adaptation. Judge behavioral answers on STAR/STARE completeness, concrete ownership, interpersonal maturity, and Lead/Staff organizational impact. STAR/STARE is the standard for behavioral and experience answers only. Do not impose it on technical, methodological, or research-craft answers; judge those on the claim, the method or mechanism, the evidence and its limits, the threshold or decision it drives, and what would change it.
 
@@ -148,11 +148,16 @@ OPEN_STAGE = (
 
 class InterviewQuestion(BaseModel):
     question: str
+    pillar_id: str
 
 
 class InterviewerTurn(BaseModel):
     reaction: str
     question: str
+    pillar_id: str
+    claim_ledger_entry: str
+    interjection: bool
+    held_same_pillar: bool
 
 
 class BehavioralQuestion(BaseModel):
@@ -606,6 +611,7 @@ def persist_session(
     persona: str,
     evaluation: Evaluation,
     turns_completed: int,
+    pillars_covered: list[str] | None = None,
 ) -> SessionRecord:
     timestamp = datetime.now().astimezone()
     passed_uplevel = evaluation.uplevel_verdict in {"Lead", "Lead/Staff Borderline", "Staff"}
@@ -617,7 +623,9 @@ def persist_session(
         persona=persona,
         turns_completed=turns_completed,
         core_averages=calculate_core_averages(evaluation),
-        pillars_covered=known_pillars(evaluation.pillars_covered),
+        pillars_covered=known_pillars(
+            pillars_covered if pillars_covered is not None else evaluation.pillars_covered
+        ),
         uplevel_rating="Pass" if passed_uplevel else "Strategic Upgrade Needed",
         readiness_rating="Lead/Staff Upleveled" if passed_uplevel else "Senior UXR Baseline",
         primary_bottleneck=primary_bottleneck,
@@ -839,9 +847,24 @@ def conversation_stage(turn: int) -> tuple[str, str]:
     return INTERVIEW_ARC.get(turn, OPEN_STAGE)
 
 
-def turn_indicator(turn: int) -> str:
+def turn_indicator(turn: int, interjection: bool = False, held: bool = False) -> str:
     title, _ = conversation_stage(turn)
+    if interjection:
+        title = f"{title} — interjection"
+    elif held:
+        title = f"{title} — same ground, sharper"
     return f"**Question {turn}: {title}** — keep going or wrap up whenever you are ready."
+
+
+def render_transcript_review(history: list[dict[str, str]]) -> str:
+    if not history:
+        return ""
+    lines = []
+    for message in history:
+        speaker = "**Interviewer**" if message["role"] == "assistant" else "**You**"
+        lines.append(f"{speaker}: {message['content']}")
+    body = "\n\n".join(lines)
+    return f"\n\n---\n\n## Transcript Review\n\nRead your own phrasing back against the critique above.\n\n{body}\n"
 
 
 def require_api_key() -> str:
@@ -924,15 +947,62 @@ def completed_turns(history: list[dict[str, str]]) -> int:
     return sum(1 for message in history if message["role"] == "user")
 
 
+def render_claims_ledger(claims: list[str]) -> str:
+    if not claims:
+        return "No claims recorded yet."
+    return "\n".join(f"- Turn {index}: {claim}" for index, claim in enumerate(claims, start=1))
+
+
+def render_covered_pillars(pillars: list[str]) -> str:
+    if not pillars:
+        return "None yet."
+    return ", ".join(
+        f"{pillar} ({PILLAR_REGISTRY[pillar][1].pillar})" if pillar in PILLAR_REGISTRY else pillar
+        for pillar in pillars
+    )
+
+
+def answer_meter(text: str) -> str:
+    words = len((text or "").split())
+    if not words:
+        return "0 words — a strong spoken answer runs about 200-300 words, or 90-120 seconds."
+    seconds = round(words / SPEAKING_WORDS_PER_MINUTE * 60)
+    if seconds < 45:
+        verdict = "too short to carry evidence"
+    elif seconds <= 130:
+        verdict = "in the spoken sweet spot"
+    else:
+        verdict = "long — an interviewer would cut in"
+    return f"**{words} words · about {seconds}s spoken** — {verdict}."
+
+
+def merge_pillars(covered: list[str], pillar_id: str) -> list[str]:
+    cleaned = (pillar_id or "").split("|", 1)[0].strip().upper()
+    if cleaned in PILLAR_REGISTRY and cleaned not in covered:
+        return [*covered, cleaned]
+    return list(covered)
+
+
+LIVE_MEMORY_RULES = """You have the complete transcript and a running ledger of every concrete claim the candidate has made. Use them. Hold their later answers against their earlier ones and name any contradiction, walked-back number, retold story, or claim that shrank under pressure.
+
+Answer-quality rule: if the answer you just heard was short, hedged, or carried no mechanism, no number, and no first-person ownership, do NOT advance the interview. Stay on the same ground and ask the narrower version of the same question. Set held_same_pillar to true when you do this. Real interviewers do not move on just because the candidate spoke.
+
+Interjection rule: when the answer hinged on an unsupported causal leap or a number with no method behind it, cut in instead of asking a full question. An interjection is a reaction of at most 10 words naming the flaw plus a question of at most 12 words demanding the missing piece. Set interjection to true. Use this sparingly, at most once every three turns.
+
+Return pillar_id as the canonical bank ID this turn tested, such as TQ02, BQ04, CQ07, or PQ05, or an empty string when the turn tests no specific bank pillar.
+
+Return claim_ledger_entry as one short line recording what the candidate just claimed, in the form "claim - mechanism or method - number or outcome - ownership". Write "no substantive claim" when the answer contained none."""
+
+
 def generate_question(
     persona_label: str,
     turn: int,
     history: list[dict[str, str]],
     pillar_choice: str,
-) -> str:
+) -> tuple[str, str]:
     persona = PERSONAS[persona_label]
     title, objective = conversation_stage(turn)
-    prior_context = render_transcript(history, LIVE_CONTEXT_MESSAGES)
+    prior_context = render_transcript(history)
     pillar_id = selected_pillar_id(pillar_choice)
     if pillar_id:
         anchor = pillar_brief(pillar_id, persona)
@@ -955,9 +1025,11 @@ Ask exactly one concise, voice-friendly question in character. Make it answerabl
 The spoken question must be one conversational sentence of at most {QUESTION_WORD_LIMIT} words, written for a listener on Bluetooth headphones. Lead with the challenge; avoid stacked clauses, lists, jargon preambles, and written-report language.
 
 Cross-examine a concrete claim from the canonical resume against a concrete Air Defense responsibility or qualification. Do not ask a generic interview question. Distinguish evidence that merely meets the Senior UXR baseline from evidence that could prove Lead/Staff scope.
+
+Return pillar_id as the canonical bank ID this question tests, such as TQ02 or PQ01.
 """
     result = parse_openai_response(prompt, InterviewQuestion, temperature=0.3, max_output_tokens=350)
-    return result.question.strip()
+    return result.question.strip(), result.pillar_id.strip()
 
 
 def render_interviewer(persona: str, question: str, reaction: str = "") -> str:
@@ -968,8 +1040,8 @@ def render_interviewer(persona: str, question: str, reaction: str = "") -> str:
 def start_interview(
     persona_label: str,
     pillar_choice: str,
-) -> tuple[str, str, str, int, list[dict[str, str]], str]:
-    question = generate_question(persona_label, 1, [], pillar_choice)
+) -> tuple[str, str, str, int, list[dict[str, str]], str, list[str], list[str], str]:
+    question, pillar_id = generate_question(persona_label, 1, [], pillar_choice)
     history = [{"role": "assistant", "content": question}]
     return (
         turn_indicator(1),
@@ -978,24 +1050,31 @@ def start_interview(
         1,
         history,
         "",
+        [],
+        merge_pillars([], pillar_id),
+        persona_label,
     )
 
 
 def continue_conversation(
     answer: str,
-    persona_label: str,
     turn: int,
     history: list[dict[str, str]] | None,
-) -> tuple[str, str, str, int, list[dict[str, str]], str]:
+    claims: list[str] | None,
+    covered: list[str] | None,
+    active_persona: str,
+) -> tuple[str, str, str, int, list[dict[str, str]], str, list[str], list[str], str]:
     answer = answer.strip()
     if not answer:
         raise gr.Error("Dictate or paste an answer first.")
 
     prior_turns = history or []
-    if turn < 1 or not prior_turns:
+    if turn < 1 or not prior_turns or not active_persona:
         raise gr.Error("Start a new interview before submitting an answer.")
 
-    persona = PERSONAS[persona_label]
+    persona = PERSONAS[active_persona]
+    claims_ledger = list(claims or [])
+    covered_pillars = list(covered or [])
     next_turn = turn + 1
     title, objective = conversation_stage(next_turn)
     stage_directive = stage_instruction(next_turn, persona)
@@ -1007,57 +1086,83 @@ Conversation stage: {title}
 Stage objective: {objective}
 Persona lens: {PERSONA_FOCUS[persona]}
 
+{LIVE_MEMORY_RULES}
+
+Claim ledger so far:
+{render_claims_ledger(claims_ledger)}
+
+Pillars already covered this session — do not repeat one unless you are deliberately holding the same ground because the last answer was thin:
+{render_covered_pillars(covered_pillars)}
+
 {stage_directive}
 
 {HARD_EVIDENCE_ANCHORS}
 
-Return two fields and nothing else.
-- reaction: your immediate in-character reaction to what the candidate just said, at most {PUSHBACK_WORD_LIMIT} words across at most two short sentences. Name the specific thing you are pushing on, or acknowledge the strongest concrete detail in one clause. It may be empty only if the follow-up question carries the pushback on its own.
-- question: exactly one concise, voice-friendly follow-up question of at most {QUESTION_WORD_LIMIT} words, in character, that builds on what the candidate actually just said so the interview reads as one continuous conversation.
+Return the fields below and nothing else.
+- reaction: your immediate in-character reaction to what the candidate just said, at most {PUSHBACK_WORD_LIMIT} words across at most two short sentences, or at most 10 words when this is an interjection. Name the specific thing you are pushing on, or acknowledge the strongest concrete detail in one clause. It may be empty only if the follow-up question carries the pushback on its own.
+- question: exactly one concise, voice-friendly follow-up question of at most {QUESTION_WORD_LIMIT} words, or at most 12 words when this is an interjection, in character, that builds on what the candidate actually just said so the interview reads as one continuous conversation.
+- pillar_id, claim_ledger_entry, interjection, and held_same_pillar per the memory rules above.
 
-Absolute rules for LIVE MODE: never score, never grade, never mention rubrics, dimensions, STAR, Senior versus Lead/Staff calibration, or coaching advice. Never praise generically. Never announce how many questions remain or that the interview is over. Never invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions. Write both fields to be heard through headphones, not read on a page.
+Absolute rules for LIVE MODE: never score, never grade, never mention rubrics, dimensions, STAR, Senior versus Lead/Staff calibration, or coaching advice. Never praise generically. Never announce how many questions remain or that the interview is over. Never invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions. Write the spoken fields to be heard through headphones, not read on a page.
 
-Conversation so far:
-{render_transcript(prior_turns, LIVE_CONTEXT_MESSAGES)}
+Full conversation so far:
+{render_transcript(prior_turns)}
 
 Candidate's newest answer:
 {answer}
 """
 
-    result = parse_openai_response(prompt, InterviewerTurn, temperature=0.5, max_output_tokens=400)
+    result = parse_openai_response(prompt, InterviewerTurn, temperature=0.5, max_output_tokens=500)
     question = result.question.strip()
     if not question:
         raise gr.Error("The interviewer returned no follow-up question. Please submit again.")
     reaction = result.reaction.strip()
+    entry = result.claim_ledger_entry.strip()
+    if entry:
+        claims_ledger.append(entry)
 
     updated_history = [*prior_turns, {"role": "user", "content": answer}]
     if reaction:
         updated_history.append({"role": "assistant", "content": reaction})
     updated_history.append({"role": "assistant", "content": question})
     return (
-        turn_indicator(next_turn),
+        turn_indicator(next_turn, interjection=result.interjection, held=result.held_same_pillar),
         render_interviewer(persona, question, reaction),
         SCORECARD_PLACEHOLDER,
         next_turn,
         updated_history,
         "",
+        claims_ledger,
+        merge_pillars(covered_pillars, result.pillar_id),
+        active_persona,
     )
 
 
 def finalize_session(
-    persona_label: str,
     turn: int,
     history: list[dict[str, str]] | None,
-) -> tuple[str, str, str, int, list[dict[str, str]], str]:
+    claims: list[str] | None,
+    covered: list[str] | None,
+    active_persona: str,
+) -> tuple[str, str, str, int, list[dict[str, str]], str, list[str], list[str], str]:
     prior_turns = history or []
     turns_completed = completed_turns(prior_turns)
     if turns_completed < 1:
         raise gr.Error("Answer at least one question before wrapping up the session.")
+    if not active_persona:
+        raise gr.Error("Start a new interview before wrapping up a session.")
 
-    persona = PERSONAS[persona_label]
+    persona = PERSONAS[active_persona]
+    claims_ledger = list(claims or [])
+    covered_pillars = list(covered or [])
     prompt = f"""DEBRIEF MODE. Drop the persona and act as the independent coach.
 
 The candidate just ended a live interview with {persona} after {turns_completed} answered turns. Evaluate the ENTIRE transcript holistically as one performance, not turn by turn. Weigh the whole arc: how the candidate opened, how they held up under pushback, whether they escalated their evidence when pressed, and where they ended.
+
+Running claim ledger captured live during the session:
+{render_claims_ledger(claims_ledger)}
+
+Bank pillars the interviewer recorded as covered: {render_covered_pillars(covered_pillars)}
 
 Persona lens used in the room: {PERSONA_FOCUS[persona]}
 
@@ -1095,23 +1200,29 @@ Full interview transcript:
 
     evaluation = parse_openai_response(prompt, Evaluation, temperature=0.2, max_output_tokens=2600)
     validate_evaluation(evaluation)
+    session_pillars = covered_pillars + [
+        pillar for pillar in known_pillars(evaluation.pillars_covered) if pillar not in covered_pillars
+    ]
 
     try:
-        persist_session(persona, evaluation, turns_completed)
+        persist_session(persona, evaluation, turns_completed, session_pillars)
     except OSError as exc:
         gr.Warning(f"Interview completed, but progress could not be saved: {exc}")
 
     return (
         f"**Session complete — {turns_completed} turns with {persona}**",
         f"## {persona}\n\nThat is where we will stop. Thanks for the conversation.",
-        render_scorecard(evaluation, turns_completed),
+        render_scorecard(evaluation, turns_completed) + render_transcript_review(prior_turns),
         0,
         prior_turns,
         "",
+        claims_ledger,
+        session_pillars,
+        active_persona,
     )
 
 
-def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], str]:
+def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], str, list[str], list[str], str]:
     return (
         "**No interview in progress**",
         "Select an interviewer and start a new interview.",
@@ -1119,7 +1230,18 @@ def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], str]:
         0,
         [],
         "",
+        [],
+        [],
+        "",
     )
+
+
+def lock_setup() -> tuple[gr.Accordion, gr.Radio]:
+    return gr.Accordion(open=False), gr.Radio(interactive=False)
+
+
+def unlock_setup() -> tuple[gr.Accordion, gr.Radio]:
+    return gr.Accordion(open=True), gr.Radio(interactive=True)
 
 
 HEAD = r"""
@@ -1254,6 +1376,17 @@ ul.options li:hover span {
 #shell label.selected:has(input[type='radio']) { background: #ebe7dd !important; border-color: var(--signal) !important; }
 #answer textarea { min-height: 190px; max-height: 60vh; font-size: 1.05rem; line-height: 1.55; overflow-y: auto; overflow-x: hidden; }
 #turn-indicator { border-left: 5px solid var(--steel); background: #ebe7dd; padding: 7px 14px; }
+#answer-meter { padding: 2px 2px 6px; font-size: 0.9rem; }
+#answer-meter * { color: #475569 !important; }
+#setup-panel,
+#setup-panel .label-wrap,
+#setup-panel .label-wrap span,
+#setup-panel button.label-wrap {
+  background: #ebe7dd !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+#setup-panel .label-wrap span { font-weight: 700 !important; }
 #pushback { border-left: 5px solid var(--signal); background: #fffdf7; padding: 8px 16px; min-height: 126px; }
 #scorecard { border-top: 3px solid var(--steel); background: rgba(255, 253, 247, 0.86); padding: 10px 16px; min-height: 360px; overflow-x: auto; }
 #scorecard table { display: block; max-width: 100%; overflow-x: auto; }
@@ -1354,6 +1487,9 @@ initial_dashboard, initial_history = load_progress_dashboard()
 with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
     turn_state = gr.State(0)
     conversation_history = gr.State([])
+    claims_state = gr.State([])
+    pillars_state = gr.State([])
+    active_persona = gr.State("")
     with gr.Column(elem_id="shell"):
         gr.HTML(
             """
@@ -1371,25 +1507,25 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     "**Wrap Up & Finalize Session**.",
                     elem_id="mobile-note",
                 )
-                persona = gr.Radio(
-                    choices=list(PERSONAS),
-                    value="Dr. Daniella Kim — Research Head",
-                    label="Interviewer",
-                )
-                target_pillar = gr.Dropdown(
-                    choices=PILLAR_CHOICES,
-                    value=AUTO_PILLAR,
-                    label="Target pillar (optional drill)",
-                    filterable=True,
-                    elem_id="target-pillar",
-                )
-                start_button = gr.Button("Start New Interview")
+                with gr.Accordion("Session setup", open=True, elem_id="setup-panel") as setup_panel:
+                    persona = gr.Radio(
+                        choices=list(PERSONAS),
+                        value="Dr. Daniella Kim — Research Head",
+                        label="Interviewer",
+                    )
+                    target_pillar = gr.Dropdown(
+                        choices=PILLAR_CHOICES,
+                        value=AUTO_PILLAR,
+                        label="Target pillar (optional drill)",
+                        filterable=True,
+                        elem_id="target-pillar",
+                    )
+                    start_button = gr.Button("Start New Interview", variant="primary")
                 indicator = gr.Markdown("**No interview in progress**", elem_id="turn-indicator")
                 interviewer = gr.Markdown(
                     "Select an interviewer and start a new interview.",
                     elem_id="pushback",
                 )
-                listen_button = gr.Button("🔊 Replay Question")
                 interviewer_audio = gr.Audio(
                     label="Interviewer Audio",
                     autoplay=True,
@@ -1406,12 +1542,13 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     autofocus=True,
                     elem_id="answer",
                 )
+                answer_readout = gr.Markdown(answer_meter(""), elem_id="answer-meter")
+                continue_button = gr.Button(
+                    "Submit Answer / Continue Conversation", variant="primary", elem_id="evaluate"
+                )
                 with gr.Row():
-                    continue_button = gr.Button(
-                        "Submit Answer / Continue Conversation", variant="primary", elem_id="evaluate"
-                    )
                     finalize_button = gr.Button("Wrap Up & Finalize Session")
-                    clear_button = gr.Button("Clear Session")
+                    clear_button = gr.Button("Clear Session", variant="stop")
                 scorecard = gr.Markdown(SCORECARD_PLACEHOLDER, elem_id="scorecard")
 
             with gr.Tab("📈 Progress & 1-Week Sprint Tracker"):
@@ -1445,25 +1582,38 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     elem_id="history-table",
                 )
 
-    session_outputs = [indicator, interviewer, scorecard, turn_state, conversation_history, answer]
-    speak_inputs = [interviewer, persona]
+    session_outputs = [
+        indicator,
+        interviewer,
+        scorecard,
+        turn_state,
+        conversation_history,
+        answer,
+        claims_state,
+        pillars_state,
+        active_persona,
+    ]
+    setup_outputs = [setup_panel, persona]
+    speak_inputs = [interviewer, active_persona]
+    submit_inputs = [answer, turn_state, conversation_history, claims_state, pillars_state, active_persona]
+    finalize_inputs = [turn_state, conversation_history, claims_state, pillars_state, active_persona]
+
     start_event = start_button.click(
         start_interview, inputs=[persona, target_pillar], outputs=session_outputs
     )
+    start_event.then(lock_setup, outputs=setup_outputs, queue=False)
     start_event.then(speak_interviewer, speak_inputs, interviewer_audio)
-    listen_button.click(speak_interviewer, speak_inputs, interviewer_audio)
-    submit_inputs = [answer, persona, turn_state, conversation_history]
     continue_event = continue_button.click(continue_conversation, submit_inputs, session_outputs)
     continue_event.then(speak_interviewer, speak_inputs, interviewer_audio)
     submit_event = answer.submit(continue_conversation, submit_inputs, session_outputs)
     submit_event.then(speak_interviewer, speak_inputs, interviewer_audio)
-    finalize_event = finalize_button.click(
-        finalize_session, [persona, turn_state, conversation_history], session_outputs
-    )
-    finalize_event.then(speak_interviewer, speak_inputs, interviewer_audio)
+    finalize_event = finalize_button.click(finalize_session, finalize_inputs, session_outputs)
+    finalize_event.then(unlock_setup, outputs=setup_outputs, queue=False)
     finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
     clear_event = clear_button.click(clear_session, outputs=session_outputs)
+    clear_event.then(unlock_setup, outputs=setup_outputs, queue=False)
     clear_event.then(lambda: None, outputs=interviewer_audio, queue=False)
+    answer.change(answer_meter, inputs=answer, outputs=answer_readout, queue=False)
     refresh_dashboard.click(load_progress_dashboard, outputs=[dashboard, session_history])
     sprint_checklist.change(save_sprint_progress, inputs=sprint_checklist, outputs=None)
 
