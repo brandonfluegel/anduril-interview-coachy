@@ -259,4 +259,16 @@ Completed interview sessions are appended here by the Progress Tracker.
 - **Actionable fix:** Rehearse specific examples with clear metrics and outcomes related to Air Defense applications.
 <!-- FOUR_TURN_SESSION_JSON {"timestamp":"2026-08-12T13:15:28-06:00","date":"2026-08-12","persona":"Dr. Daniella Kim","turns_completed":3,"core_averages":{"Substance":2.0,"Structure":2.0,"Relevance":2.0,"Credibility":2.0,"Differentiation":2.0},"uplevel_rating":"Strategic Upgrade Needed","readiness_rating":"Senior UXR Baseline","primary_bottleneck":"Lack of specific, actionable insights and metrics in responses.","actionable_fix":"Rehearse specific examples with clear metrics and outcomes related to Air Defense applications."} -->
 
+
+
+### Mock Session — 2026-08-12T13:45:17-06:00
+- **Date:** 2026-08-12
+- **Interviewer:** Design Lead
+- **Turns completed:** 4
+- **Core averages:** Substance: 2.00; Structure: 2.00; Relevance: 2.00; Credibility: 2.00; Differentiation: 2.00
+- **Lead/Staff upleveling:** Strategic Upgrade Needed
+- **Primary bottleneck:** Lack of specific, actionable insights and metrics related to Air Defense applications.
+- **Actionable fix:** Rehearse specific examples with clear metrics and outcomes related to Air Defense applications.
+<!-- FOUR_TURN_SESSION_JSON {"timestamp":"2026-08-12T13:45:17-06:00","date":"2026-08-12","persona":"Design Lead","turns_completed":4,"core_averages":{"Substance":2.0,"Structure":2.0,"Relevance":2.0,"Credibility":2.0,"Differentiation":2.0},"uplevel_rating":"Strategic Upgrade Needed","readiness_rating":"Senior UXR Baseline","primary_bottleneck":"Lack of specific, actionable insights and metrics related to Air Defense applications.","actionable_fix":"Rehearse specific examples with clear metrics and outcomes related to Air Defense applications."} -->
+
 <!-- FOUR_TURN_SESSION_LOG_END -->

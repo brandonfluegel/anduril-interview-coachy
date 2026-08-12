@@ -19,6 +19,7 @@ venv/
 
 # Runtime and editor artifacts
 .gradio/
+temp_audio/
 .vscode/
 .idea/
 .DS_Store

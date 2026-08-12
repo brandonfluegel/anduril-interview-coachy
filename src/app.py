@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import os
 import re
+import tempfile
 import threading
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Literal, TypeVar
@@ -14,7 +16,10 @@ from pydantic import BaseModel, Field, ValidationError
 
 ROOT = Path(__file__).resolve().parents[1]
 COACHING_STATE_PATH = ROOT / "data" / "coaching_state.md"
+TEMP_AUDIO_DIR = ROOT / "temp_audio"
 MODEL = "gpt-4o"
+TTS_MODEL = "tts-1"
+AUDIO_RETENTION_SECONDS = 3600.0
 OPENAI_TIMEOUT_SECONDS = 45.0
 SESSION_LOG_END = "<!-- FOUR_TURN_SESSION_LOG_END -->"
 SESSION_RECORD_PATTERN = re.compile(r"<!-- FOUR_TURN_SESSION_JSON (.+?) -->")
@@ -62,6 +67,13 @@ PERSONAS = {
     "Product Manager": "Product Manager",
     "Design Lead": "Design Lead",
 }
+PERSONA_VOICES = {
+    "Dr. Daniella Kim": "nova",
+    "Systems / ML Engineering Lead": "onyx",
+    "Product Manager": "alloy",
+    "Design Lead": "fable",
+}
+DEFAULT_TTS_VOICE = "nova"
 SYSTEM_PROMPT = """You are the evidence-grounded Anduril Air Defense Voice Interview Coach for Brandon Fluegel, PhD.
 
 You operate in two separate modes and never mix them in a single response.
@@ -489,6 +501,64 @@ def require_api_key() -> str:
     return api_key
 
 
+def strip_markdown(text: str) -> str:
+    lines = [
+        re.sub(r"^\s*(?:[-+*]|\d+\.)\s+", "", line)
+        for line in str(text or "").splitlines()
+        if not line.lstrip().startswith("#")
+    ]
+    spoken = " ".join(lines)
+    spoken = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", spoken)
+    spoken = re.sub(r"[*_`>|~]+", " ", spoken)
+    return re.sub(r"\s+", " ", spoken).strip()
+
+
+def resolve_voice(persona: str) -> str:
+    name = PERSONAS.get(persona, persona)
+    return PERSONA_VOICES.get(name, DEFAULT_TTS_VOICE)
+
+
+def prune_temp_audio() -> None:
+    cutoff = time.time() - AUDIO_RETENTION_SECONDS
+    for stale in TEMP_AUDIO_DIR.glob("*.mp3"):
+        try:
+            if stale.stat().st_mtime < cutoff:
+                stale.unlink()
+        except OSError:
+            continue
+
+
+def generate_interviewer_audio(text: str, persona: str) -> str:
+    spoken = strip_markdown(text)
+    if not spoken:
+        return ""
+
+    TEMP_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+    prune_temp_audio()
+    try:
+        response = OpenAI(
+            api_key=require_api_key(),
+            timeout=OPENAI_TIMEOUT_SECONDS,
+            max_retries=1,
+        ).audio.speech.create(
+            model=TTS_MODEL,
+            voice=resolve_voice(persona),
+            input=spoken,
+        )
+        with tempfile.NamedTemporaryFile(
+            suffix=".mp3", dir=TEMP_AUDIO_DIR, delete=False
+        ) as handle:
+            handle.write(response.read())
+            return handle.name
+    except (APITimeoutError, TimeoutError, APIConnectionError, RateLimitError, APIStatusError, OSError) as exc:
+        gr.Warning(f"Interviewer audio unavailable: {exc}")
+        return ""
+
+
+def speak_interviewer(markdown_text: str, persona_label: str) -> str | None:
+    return generate_interviewer_audio(markdown_text, persona_label) or None
+
+
 def render_transcript(history: list[dict[str, str]], limit: int | None = None) -> str:
     messages = history[-limit:] if limit else history
     if not messages:
@@ -703,60 +773,7 @@ HEAD = r"""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>
-(function () {
-  var synth = window.speechSynthesis;
-  var state = { unlocked: false, last: "" };
-
-  // iOS only allows speech that traces back to a user gesture, so claim that
-  // permission on the first tap and reuse it for every later auto-spoken turn.
-  function unlock() {
-    if (state.unlocked || !synth) { return; }
-    state.unlocked = true;
-    var warmup = new SpeechSynthesisUtterance(" ");
-    warmup.volume = 0;
-    synth.speak(warmup);
-  }
-
-  ["pointerdown", "touchend", "keydown"].forEach(function (name) {
-    document.addEventListener(name, unlock, { capture: true });
-  });
-
-  function toSpoken(markdown) {
-    return String(markdown == null ? "" : markdown)
-      .split("\n")
-      .filter(function (line) { return line.trim().charAt(0) !== "#"; })
-      .join(" ")
-      .replace(/\*/g, "")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  window.interviewerVoice = {
-    speak: function (markdown, force) {
-      if (!synth) { return; }
-      var spoken = toSpoken(markdown);
-      if (!spoken || (!force && spoken === state.last)) { return; }
-      state.last = spoken;
-      unlock();
-      synth.cancel();
-      var line = new SpeechSynthesisUtterance(spoken);
-      line.rate = 0.96;
-      // Safari drops an utterance queued in the same tick as cancel().
-      setTimeout(function () { synth.speak(line); }, 90);
-    },
-    stop: function () {
-      state.last = "";
-      if (synth) { synth.cancel(); }
-    }
-  };
-})();
-</script>
 """
-
-AUTO_SPEAK_JS = "(text) => { if (window.interviewerVoice) { window.interviewerVoice.speak(text); } }"
-REPLAY_SPEAK_JS = "(text) => { if (window.interviewerVoice) { window.interviewerVoice.speak(text, true); } }"
-STOP_SPEAK_JS = "() => { if (window.interviewerVoice) { window.interviewerVoice.stop(); } }"
 
 SPRINT_CHECKLIST = [
     "Day 1: Foundational STAR Calibration — Pillars 1 & 2: Agentic Trust and Amazon $50M",
@@ -840,7 +857,74 @@ html, body { max-width: 100%; overflow-x: hidden; }
 #scorecard table { display: block; max-width: 100%; overflow-x: auto; }
 #scorecard pre, #scorecard code, #pushback pre, #pushback code { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
 #history-table { max-width: 100%; overflow-x: auto; }
+#shell .block > .label-wrap span,
+#shell .block > label > span,
+#shell h1, #shell h2, #shell h3, #shell h4, #shell h5, #shell h6,
+#shell p, #shell li, #shell strong, #shell em { color: #0f172a !important; }
+#progress-dashboard,
+#progress-dashboard *,
+#mobile-note,
+#mobile-note * { color: #0f172a !important; }
+#progress-dashboard h1,
+#progress-dashboard h2,
+#progress-dashboard h3,
+#progress-dashboard h4 { color: #0f172a !important; font-weight: 700 !important; }
+#shell table { border-collapse: collapse !important; width: 100%; }
+#shell table th,
+#shell table th * {
+  color: #0f172a !important;
+  background: #e6e2d8 !important;
+  font-weight: 700 !important;
+}
+#shell table td,
+#shell table td * { color: #1e293b !important; }
+#shell table th,
+#shell table td { border: 1px solid #94a3b8 !important; padding: 6px 9px !important; }
+#history-table table,
+#history-table th,
+#history-table td,
+#history-table span,
+#history-table .cell-wrap,
+#history-table input,
+#history-table textarea {
+  color: #0f172a !important;
+  background-color: #fffdf7 !important;
+  -webkit-text-fill-color: #0f172a !important;
+  opacity: 1 !important;
+}
+#history-table th,
+#history-table th span {
+  background-color: #e6e2d8 !important;
+  font-weight: 700 !important;
+}
 #sprint-checklist label { align-items: flex-start; }
+#sprint-checklist,
+#sprint-checklist span,
+#sprint-checklist label,
+#sprint-checklist label span,
+#sprint-checklist .label-wrap span,
+#sprint-checklist [data-testid='block-info'] {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+#sprint-checklist label {
+  background: #fffdf7 !important;
+  border: 1px solid var(--line) !important;
+  line-height: 1.45;
+}
+#sprint-checklist label.selected,
+#sprint-checklist label:has(input:checked) {
+  background: #35505a !important;
+  border-color: #35505a !important;
+}
+#sprint-checklist label.selected,
+#sprint-checklist label.selected span,
+#sprint-checklist label:has(input:checked),
+#sprint-checklist label:has(input:checked) span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+#sprint-checklist input[type='checkbox'] { accent-color: var(--signal) !important; }
 #pushback *, #scorecard * { color: var(--ink) !important; }
 #evaluate { background: var(--signal); border-color: var(--signal); color: white; font-weight: 700; }
 #evaluate:hover { background: #b92e24; border-color: #b92e24; }
@@ -897,6 +981,14 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     elem_id="pushback",
                 )
                 listen_button = gr.Button("🔊 Replay Question")
+                interviewer_audio = gr.Audio(
+                    label="Interviewer Audio",
+                    autoplay=True,
+                    visible=True,
+                    interactive=False,
+                    type="filepath",
+                    elem_id="interviewer-audio",
+                )
                 answer = gr.Textbox(
                     label="Candidate answer",
                     placeholder="Place the cursor here, dictate with Superwhisper, then submit.",
@@ -944,24 +1036,33 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                 )
 
     session_outputs = [indicator, interviewer, scorecard, turn_state, conversation_history, answer]
+    speak_inputs = [interviewer, persona]
     start_event = start_button.click(start_interview, inputs=[persona], outputs=session_outputs)
-    start_event.then(fn=None, inputs=[interviewer], js=AUTO_SPEAK_JS, queue=False)
-    listen_button.click(fn=None, inputs=[interviewer], js=REPLAY_SPEAK_JS, queue=False)
+    start_event.then(speak_interviewer, speak_inputs, interviewer_audio)
+    listen_button.click(speak_interviewer, speak_inputs, interviewer_audio)
     submit_inputs = [answer, persona, turn_state, conversation_history]
     continue_event = continue_button.click(continue_conversation, submit_inputs, session_outputs)
-    continue_event.then(fn=None, inputs=[interviewer], js=AUTO_SPEAK_JS, queue=False)
+    continue_event.then(speak_interviewer, speak_inputs, interviewer_audio)
     submit_event = answer.submit(continue_conversation, submit_inputs, session_outputs)
-    submit_event.then(fn=None, inputs=[interviewer], js=AUTO_SPEAK_JS, queue=False)
+    submit_event.then(speak_interviewer, speak_inputs, interviewer_audio)
     finalize_event = finalize_button.click(
         finalize_session, [persona, turn_state, conversation_history], session_outputs
     )
-    finalize_event.then(fn=None, inputs=[interviewer], js=AUTO_SPEAK_JS, queue=False)
+    finalize_event.then(speak_interviewer, speak_inputs, interviewer_audio)
     finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
     clear_event = clear_button.click(clear_session, outputs=session_outputs)
-    clear_event.then(fn=None, js=STOP_SPEAK_JS, queue=False)
+    clear_event.then(lambda: None, outputs=interviewer_audio, queue=False)
     refresh_dashboard.click(load_progress_dashboard, outputs=[dashboard, session_history])
 
 
 if __name__ == "__main__":
     share_enabled = os.getenv("GRADIO_SHARE", "false").lower() == "true"
-    demo.launch(server_name="0.0.0.0", server_port=7860, share=share_enabled, css=CSS, head=HEAD)
+    TEMP_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=7860,
+        share=share_enabled,
+        css=CSS,
+        head=HEAD,
+        allowed_paths=[str(TEMP_AUDIO_DIR)],
+    )
