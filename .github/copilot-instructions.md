@@ -14,6 +14,7 @@ This repository is a single-purpose interview system for Brandon Fluegel, PhD, t
 - `data/culture_questions.json`: ten Anduril culture, mission-fit, and stakeholder-collaboration pillars with stakeholder groups, persona adaptations, follow-up probes, and Lead/Staff bars
 - `data/positioning_questions.json`: ten positioning, scope, and close pillars for the hiring manager conversation and the end of any session
 - `data/coaching_state.md`: mutable interview readiness and session state
+- `practice/00-response-architecture.md`: the answer-structure beats, length targets, and evidence boundaries the candidate rehearses and the debrief grades against
 - `references/rubrics-detailed.md`: scoring anchors
 - `references/role-drills.md`: four interviewer personas
 
@@ -31,7 +32,11 @@ Never invent metrics, outcomes, clearance status, classified details, team struc
 - Lock the interviewer persona for the duration of a session and keep it in state, not read from the radio each turn.
 - The recruiter screen is complete. Location, compensation, travel, and clearance are settled: never ask about them, never treat them as gaps, and never assert a compensation number or an active clearance status.
 - Persist the covered pillar IDs with every finalized session, and keep the Pillar Coverage matrix on the progress dashboard derived from those records.
-- Keep questions and pushback concise and voice-friendly.
+- Keep questions and pushback concise and voice-friendly, and equally clear whether they are heard aloud or read on screen. The session is a spoken back-and-forth on headphones or a phone speaker: keep playback half-duplex so interviewer audio stops the moment the candidate touches the answer field, and keep the session usable with audio switched off.
+- Keep each bank question's and follow-up's construct and demand intact in live turns so the wording stays recognizable against the practice set. Vary framing through persona speech style and the rotating probe stance, never by substituting a different probe.
+- Grade Structure against the beats and length targets in `practice/00-response-architecture.md`, and name the missing beats.
+- Capture candidate answers in-app: record, transcribe verbatim through the OpenAI API, and stamp the measured spoken duration on the answer so pacing and register are graded from real speech rather than an estimate. Never reintroduce a third-party dictation dependency.
+- Require every debrief score to quote verbatim transcript text and name the rubric band it matches, and never let the five core dimensions collapse to one undefended value.
 - Maintain all five core scores: Substance, Structure, Relevance, Credibility, and Differentiation.
 - Maintain separate Lead/Staff criteria and explicit Senior UXR versus Lead/Staff calibration.
 - Treat `N/E` as not evidenced; do not convert missing evidence into a low score.

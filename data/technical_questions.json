@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "purpose": "Technical, methodological, and research-craft question bank for the opening, pushback, and leadership turns of the Anduril Air Defense interview arc. Every pillar maps a posted Air Defense responsibility or qualification onto canonical resume evidence.",
-  "usage_policy": "Anchor live technical turns to one pillar at a time. Never read a follow_up verbatim when the candidate's own words offer a sharper version of the same probe. Never repeat a pillar already covered earlier in the transcript. Answers to this bank are judged on technical reasoning structure — claim, method or mechanism, evidence and its limits, the threshold or decision it drives, and what would change it — not on STAR/STARE, which is reserved for behavioral and experience answers.",
+  "usage_policy": "Anchor live technical turns to one pillar at a time. Keep each question's and follow-up's construct and demand intact so the wording stays recognizable against the practice set; re-point it at the candidate's own phrasing and vary the framing rather than substituting a different probe. Never repeat a pillar already covered earlier in the transcript. Answers to this bank are judged on technical reasoning structure — claim, method or mechanism, evidence and its limits, the threshold or decision it drives, and what would change it — not on STAR/STARE, which is reserved for behavioral and experience answers.",
   "personas": [
     "Dr. Daniella Kim",
     "Systems / ML Engineering Lead",

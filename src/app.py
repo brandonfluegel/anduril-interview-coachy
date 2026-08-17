@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import contextlib
 import json
 import os
+import random
 import re
 import tempfile
 import threading
 import time
+import wave
 from datetime import datetime
 from pathlib import Path
 from typing import Literal, TypeVar
@@ -18,10 +21,21 @@ from pydantic import BaseModel, Field, ValidationError
 ROOT = Path(__file__).resolve().parents[1]
 COACHING_STATE_PATH = ROOT / "data" / "coaching_state.md"
 TEMP_AUDIO_DIR = ROOT / "temp_audio"
-MODEL = "gpt-4o"
-TTS_MODEL = "tts-1"
+LIVE_MODEL = "gpt-5.4-mini"
+DEBRIEF_MODEL = "gpt-5.4"
+LIVE_REASONING_EFFORT = "low"
+DEBRIEF_REASONING_EFFORT = "high"
+TTS_MODEL = "gpt-4o-mini-tts"
+TRANSCRIBE_MODEL = "gpt-4o-transcribe"
+TRANSCRIPTION_HINT = (
+    "Human factors interview answer. Likely terms: psychophysics, perceptual threshold, staircase, psychometric "
+    "function, fNIRS, NASA-TLX, uFMEA, MIL-STD-1472, NASA-STD-3001, Lattice OS, counter-drone, command and control, "
+    "Meaningful Human Control, Calibrated Cognitive Friction, Principles for Agentic Trust, Anduril, Mercedes-Benz, "
+    "Lunar Gateway, Sling, Brigham, CSCW."
+)
 AUDIO_RETENTION_SECONDS = 3600.0
 OPENAI_TIMEOUT_SECONDS = 45.0
+DEBRIEF_TIMEOUT_SECONDS = 300.0
 OPENAI_MAX_RETRIES = 3
 SESSION_LOG_END = "<!-- FOUR_TURN_SESSION_LOG_END -->"
 SPEAKING_WORDS_PER_MINUTE = 150
@@ -61,6 +75,15 @@ HARD_EVIDENCE_ANCHORS = """Canonical hard-evidence anchors the answer may legiti
 - US Patent US-12532040-B1 for context-aware multimodal interaction architectures
 - Calibrated Cognitive Friction thesis and Meaningful Human Control
 Credit an anchor only when the spoken answer actually invokes and uses it. Never invent an anchor, a new number, or an outcome that is not in the canonical record."""
+SPOKEN_STYLE_RULES = """Spoken-delivery rules: expand an acronym the way it would be said aloud the first time it appears — functional near-infrared spectroscopy, the NASA Task Load Index, military standard 1472, use-error failure modes and effects analysis. Make exactly one demand per turn; never stack two questions."""
+PROBE_STANCES = (
+    "Cold open — lead with the demand, no preamble.",
+    "Quote-back — open by repeating the candidate's own words, then press on them.",
+    "Scenario — put the demand inside one concrete Air Defense moment.",
+    "Inversion — ask for the case where their own position fails.",
+    "Narrow demand — ask for one number, one threshold, or one named method.",
+    "Forced choice — make them choose between their approach and the cheaper alternative.",
+)
 UPLEVEL_BAR = """Senior UXR signal: expertly plans and executes research studies with clear timelines and actionable tactical insights.
 Lead/Staff upleveling signal: establishes company-wide AI safety and trust frameworks before regulations exist, bridges engineering latency targets with human psychophysics, translates complex Human Systems Integration findings into hard hardware and software specifications, defines Research Operations, and drives multi-million-dollar business impact.
 Executing an excellent study is the Senior baseline, not the uplevel. Reserve Lead/Staff signal for durable, reusable, organization-scale mechanisms."""
@@ -76,7 +99,14 @@ PERSONA_VOICES = {
     "Product Manager": "alloy",
     "Design Lead": "fable",
 }
+PERSONA_SPEECH = {
+    "Dr. Daniella Kim": "Senior research director. Measured, precise, unhurried. Curious rather than warm, and completely unimpressed by fluency.",
+    "Systems / ML Engineering Lead": "Blunt engineer. Clipped, fast, slightly impatient. Flat affect, no pleasantries, lands hard on the operative noun.",
+    "Product Manager": "Brisk product lead. Direct and time-pressured, conversational but pointed, as if a meeting starts in five minutes.",
+    "Design Lead": "Thoughtful design lead. Warmer and more collaborative, but pressing — asks the awkward question in a friendly tone.",
+}
 DEFAULT_TTS_VOICE = "nova"
+DEFAULT_TTS_STYLE = "Professional interviewer. Direct and conversational."
 SYSTEM_PROMPT = """You are the evidence-grounded Anduril Air Defense Voice Interview Coach for Brandon Fluegel, PhD.
 
 You operate in two separate modes and never mix them in a single response.
@@ -89,7 +119,7 @@ Cross-examine canonical resume evidence against the posted Senior User Experienc
 
 Senior UXR baseline means expertly designing and executing studies that produce actionable insights. Lead/Staff signal means setting reusable standards, bridging human perception to engineering requirements, establishing frameworks before policy exists, defining Research Operations, influencing decisions across functions, and translating HSI evidence into hard hardware/software specifications.
 
-This is one continuous spoken conversation, not a set of isolated prompts. Every question after the first must reference something the candidate actually said. You are given the full transcript and a running claim ledger on every live turn: hold later answers against earlier ones and name contradictions, walked-back numbers, and retold stories. Keep interviewer questions and pushback concise and voice-friendly for headphone listening. Treat prior resume claims as context to probe, not proof that a spoken answer demonstrated a competency. Preserve Meaningful Human Control, operational tempo, and evidence integrity throughout.
+This is one continuous spoken conversation, not a set of isolated prompts. Every question after the first must reference something the candidate actually said. You are given the full transcript and a running claim ledger on every live turn: hold later answers against earlier ones and name contradictions, walked-back numbers, and retold stories. Keep interviewer questions and pushback concise and voice-friendly, and equally clear whether the candidate hears them aloud or reads them on screen. Treat prior resume claims as context to probe, not proof that a spoken answer demonstrated a competency. Preserve Meaningful Human Control, operational tempo, and evidence integrity throughout.
 
 For the third question, select a behavioral/fit pillar from the canonical behavioral question bank using the active persona's adaptation. Judge behavioral answers on STAR/STARE completeness, concrete ownership, interpersonal maturity, and Lead/Staff organizational impact. STAR/STARE is the standard for behavioral and experience answers only. Do not impose it on technical, methodological, or research-craft answers; judge those on the claim, the method or mechanism, the evidence and its limits, the threshold or decision it drives, and what would change it.
 
@@ -120,6 +150,24 @@ PERSONA_FOCUS = {
         "Cross-examine how Brandon's Echo Hub and multimodal architecture work, reach-envelope modeling, physical ergonomics, "
         "and hardware/software validation translate into high-stress 3D C2 tactical operator workflows, information density, "
         "interaction architecture, and physical fit."
+    ),
+}
+PERSONA_STYLE = {
+    "Dr. Daniella Kim": (
+        "Speaks in method vocabulary and wants the falsifier and the boundary of the evidence. "
+        "Refuses abstract framing that carries no testable claim."
+    ),
+    "Systems / ML Engineering Lead": (
+        "Blunt and requirements-shaped, wants thresholds, failure modes, and observable signals. "
+        "Refuses any recommendation that cannot be verified in a test harness."
+    ),
+    "Product Manager": (
+        "Speaks in cost, tempo, and consequence, and wants the decision that changed and the price of being wrong. "
+        "Refuses answers that sound like a gate on shipping."
+    ),
+    "Design Lead": (
+        "Speaks in workflow states, modality, and information density, and wants the point where the interaction itself changes. "
+        "Refuses verdicts handed down instead of co-ownership."
     ),
 }
 INTERVIEW_ARC = {
@@ -259,7 +307,9 @@ class CoreScore(BaseModel):
         "Differentiation",
     ]
     score: int = Field(ge=1, le=5)
-    evidence: str
+    evidence: str = Field(
+        description="Quote at least one verbatim phrase from the transcript and name the rubric band it matches."
+    )
 
 
 class UplevelScore(BaseModel):
@@ -284,7 +334,9 @@ class ToneAuthority(BaseModel):
         "Emerging Lead",
         "Standard-Setting Lead/Staff",
     ]
-    evidence: str
+    evidence: str = Field(
+        description="Quote the verbatim phrasing, including any hedges, that drove the register call."
+    )
 
 
 class Evaluation(BaseModel):
@@ -432,6 +484,7 @@ def behavioral_question_options(persona: str) -> str:
 def technical_question_options(persona: str, stage: str) -> str:
     return "\n".join(
         f"- {question.id} | {question.pillar}: {question.persona_adaptations[persona]}\n"
+        f"  Follow-ups: {' / '.join(question.follow_ups)}\n"
         f"  Lead/Staff bar: {question.lead_staff_bar}"
         for question in TECHNICAL_QUESTION_BANK.questions
         if stage in question.arc_stages
@@ -500,10 +553,16 @@ def pillar_brief(pillar_id: str, persona: str) -> str:
     )
 
 
+def probe_stance() -> str:
+    """Varies surface framing per turn so the rehearsed pillar spine can stay fixed."""
+    return random.choice(PROBE_STANCES)
+
+
 OPENING_ANCHOR = (
     "Anchor this opener to exactly one pillar from the canonical banks below. Use the persona-adapted line as the spine of the "
-    "question, tightened for speech, or a sharper variant that tests the same pillar. Do not blend pillars and do not read the "
-    "Lead/Staff bar aloud."
+    "question and keep it recognizable: preserve the construct it names and the thing it demands, tightened for speech. You may "
+    "change the framing, the order, and the words around it, but never swap in a different construct or a different demand. Do not "
+    "blend pillars and do not read the Lead/Staff bar aloud."
 )
 
 
@@ -520,7 +579,7 @@ def stage_instruction(next_turn: int, persona: str) -> str:
     instructions = {
         2: f"""Find the single weakest link in the answer you just heard: the claim with no falsifiable metric, the causal leap, the borrowed team credit, the unstated assumption, or the number with no measurement method behind it. Attack exactly that weak link and demand the missing falsifiable evidence, in the style of "What falsifiable metric proved that latency threshold degraded operator trust?" Quote or paraphrase the candidate's own words so the question is unmistakably about what they just said.
 
-Escalate using the canonical probe library below when one of these probes targets the exact gap the candidate left open. Prefer a probe rebuilt from the candidate's own phrasing over a verbatim reading:
+Escalate using the canonical probe library below when one of these probes targets the exact gap the candidate left open. Keep the probe's construct and its demand intact and re-point it at the candidate's own phrasing rather than replacing it:
 {technical_follow_up_probes("pushback")}""",
         3: f"""Move the conversation to behavioral and cross-functional friction. Select the strongest non-duplicative pillar from the following persona-adapted behavioral bank, then frame it so it directly tests handling friction with a PM, an ML/software engineer, or a military operator under fast-paced startup constraints. Use the adapted question directly or tailor it to what the candidate just said, without changing the pillar's intent. Hold that pillar's follow-ups in reserve for later turns and never read the Lead/Staff bar aloud:
 {behavioral_question_options(persona)}
@@ -566,6 +625,7 @@ def load_debrief_context() -> str:
         "CANONICAL AIR DEFENSE JOB REQUIREMENTS": read_text("data/target_anduril_air_defense.json"),
         "CANONICAL STORYBANK AND EVIDENCE TIERS": read_text("data/storybank_6_pillars.json"),
         "CANONICAL PILLAR INDEX": pillar_index(),
+        "CANONICAL RESPONSE ARCHITECTURE": read_text("practice/00-response-architecture.md"),
         "CURRENT COACHING STATE": read_text("data/coaching_state.md"),
         "INTERVIEW PERSONAS": read_text("references/role-drills.md"),
         "DETAILED RUBRIC": read_text("references/rubrics-detailed.md"),
@@ -576,21 +636,23 @@ def load_debrief_context() -> str:
 def parse_openai_response(
     prompt: str,
     response_format: type[ResponseModel],
-    temperature: float,
     max_output_tokens: int,
     instructions: str,
+    model: str = LIVE_MODEL,
+    reasoning_effort: str = LIVE_REASONING_EFFORT,
+    timeout: float = OPENAI_TIMEOUT_SECONDS,
 ) -> ResponseModel:
     try:
         response = OpenAI(
             api_key=require_api_key(),
-            timeout=OPENAI_TIMEOUT_SECONDS,
+            timeout=timeout,
             max_retries=OPENAI_MAX_RETRIES,
         ).responses.parse(
-            model=MODEL,
+            model=model,
             instructions=instructions,
             input=prompt,
             text_format=response_format,
-            temperature=temperature,
+            reasoning={"effort": reasoning_effort},
             max_output_tokens=max_output_tokens,
         )
     except (APITimeoutError, TimeoutError) as exc:
@@ -613,6 +675,8 @@ def parse_openai_response(
 
     parsed = response.output_parsed
     if parsed is None:
+        if getattr(response, "status", "") == "incomplete":
+            raise gr.Error("The model ran out of output budget before finishing. Please submit again.")
         raise gr.Error("The model returned no structured response. Please try again.")
     return parsed
 
@@ -915,6 +979,11 @@ def resolve_voice(persona: str) -> str:
     return PERSONA_VOICES.get(name, DEFAULT_TTS_VOICE)
 
 
+def resolve_speech_style(persona: str) -> str:
+    name = PERSONAS.get(persona, persona)
+    return PERSONA_SPEECH.get(name, DEFAULT_TTS_STYLE)
+
+
 def prune_temp_audio() -> None:
     cutoff = time.time() - AUDIO_RETENTION_SECONDS
     for stale in TEMP_AUDIO_DIR.glob("*.mp3"):
@@ -940,6 +1009,7 @@ def generate_interviewer_audio(text: str, persona: str) -> str:
         ).audio.speech.create(
             model=TTS_MODEL,
             voice=resolve_voice(persona),
+            instructions=resolve_speech_style(persona),
             input=spoken,
         )
         with tempfile.NamedTemporaryFile(
@@ -952,7 +1022,16 @@ def generate_interviewer_audio(text: str, persona: str) -> str:
         return ""
 
 
-def speak_interviewer(markdown_text: str, persona_label: str) -> str:
+def speak_interviewer(markdown_text: str, persona_label: str, audio_enabled: bool = True) -> str:
+    if not audio_enabled:
+        return ""
+    return generate_interviewer_audio(markdown_text, persona_label)
+
+
+def replay_interviewer(markdown_text: str, persona_label: str, existing_path: str) -> str:
+    """Plays on demand even when auto-play is off, so silent sessions can still hear a question."""
+    if existing_path and Path(existing_path).exists():
+        return existing_path
     return generate_interviewer_audio(markdown_text, persona_label)
 
 
@@ -986,18 +1065,78 @@ def render_covered_pillars(pillars: list[str]) -> str:
     )
 
 
-def answer_meter(text: str) -> str:
+def audio_duration_seconds(audio_path: str) -> float:
+    """Header frame counts can be wrong on streamed clips, so trust whichever length is shorter."""
+    try:
+        with contextlib.closing(wave.open(audio_path)) as clip:
+            frame_size = clip.getnchannels() * clip.getsampwidth()
+            payload_frames = max(Path(audio_path).stat().st_size - 44, 0) / frame_size
+            return round(min(clip.getnframes(), payload_frames) / clip.getframerate(), 1)
+    except (OSError, wave.Error, ZeroDivisionError):
+        return 0.0
+
+
+def transcribe_answer(audio_path: str | None) -> tuple[str, float]:
+    """Verbatim transcription: hedges and filler survive because the register call depends on them."""
+    if not audio_path:
+        return "", 0.0
+    try:
+        with open(audio_path, "rb") as clip:
+            result = OpenAI(
+                api_key=require_api_key(),
+                timeout=OPENAI_TIMEOUT_SECONDS,
+                max_retries=OPENAI_MAX_RETRIES,
+            ).audio.transcriptions.create(
+                model=TRANSCRIBE_MODEL,
+                file=clip,
+                prompt=TRANSCRIPTION_HINT,
+            )
+    except (APITimeoutError, TimeoutError) as exc:
+        raise gr.Error("Transcription timed out. The recording is still there — press stop and try again.") from exc
+    except APIConnectionError as exc:
+        raise gr.Error("Transcription is unreachable. Check your connection and try again.") from exc
+    except (RateLimitError, APIStatusError) as exc:
+        raise gr.Error(f"Transcription failed ({exc.__class__.__name__}). Record again or type your answer.") from exc
+    except OSError as exc:
+        raise gr.Error("The recording could not be read. Please record again.") from exc
+    return result.text.strip(), audio_duration_seconds(audio_path)
+
+
+def render_pacing_log(history: list[dict[str, str]]) -> str:
+    answers = [message for message in history if message["role"] == "user"]
+    if not answers:
+        return "No answers recorded."
+    lines = []
+    for index, message in enumerate(answers, start=1):
+        spoken_words = len(message["content"].split())
+        measured = float(message.get("seconds") or 0)
+        timing = (
+            f"{measured:.0f}s measured"
+            if measured
+            else f"~{round(spoken_words / SPEAKING_WORDS_PER_MINUTE * 60)}s estimated from word count"
+        )
+        lines.append(f"- Answer {index}: {spoken_words} words, {timing}")
+    return "\n".join(lines)
+
+
+def answer_meter(text: str, spoken_seconds: float = 0.0) -> str:
     words = len((text or "").split())
     if not words:
-        return "0 words — a strong spoken answer runs about 200-300 words, or 90-120 seconds."
-    seconds = round(words / SPEAKING_WORDS_PER_MINUTE * 60)
-    if seconds < 45:
-        verdict = "too short to carry evidence"
-    elif seconds <= 130:
-        verdict = "in the spoken sweet spot"
+        return "0 words — technical answers run 160-230 words, behavioral 200-265, follow-up probes 45-90."
+    measured = float(spoken_seconds or 0)
+    seconds = round(measured) if measured else round(words / SPEAKING_WORDS_PER_MINUTE * 60)
+    source = "spoken" if measured else "estimated"
+    if seconds < 20:
+        verdict = "too short to carry evidence, even for a follow-up"
+    elif seconds <= 35:
+        verdict = "follow-up length — right for a scalpel answer, short for a main answer"
+    elif seconds <= 90:
+        verdict = "technical main-answer range"
+    elif seconds <= 110:
+        verdict = "behavioral main-answer range — long for a technical answer"
     else:
-        verdict = "long — an interviewer would cut in"
-    return f"**{words} words · about {seconds}s spoken** — {verdict}."
+        verdict = "past the hard ceiling — an interviewer would cut in"
+    return f"**{words} words · {seconds}s {source}** — {verdict}."
 
 
 def merge_pillars(covered: list[str], pillar_id: str) -> list[str]:
@@ -1038,15 +1177,19 @@ def generate_question(
 Arc stage: {title}
 Stage objective: {objective}
 Persona lens: {PERSONA_FOCUS[persona]}
+Persona speech style: {PERSONA_STYLE[persona]}
+Framing stance for this turn (vary the wording, never the pillar): {probe_stance()}
 Prior conversation: {prior_context}
 
 {HARD_EVIDENCE_ANCHORS}
 
 {anchor}
 
+{SPOKEN_STYLE_RULES}
+
 Ask exactly one concise, voice-friendly question in character. Make it answerable aloud. Set the stage in at most one short clause that signals who you are and what you own, then immediately probe one named claim from the Principles for Agentic Trust whitepaper or the canonical resume. Do not provide coaching, an answer, a score, or a question number. Do not invent candidate evidence or classified Anduril details.
 
-The spoken question must be one conversational sentence of at most {QUESTION_WORD_LIMIT} words, written for a listener on Bluetooth headphones. Lead with the challenge; avoid stacked clauses, lists, jargon preambles, and written-report language.
+The spoken question must be one conversational sentence of at most {QUESTION_WORD_LIMIT} words that lands in a single pass, whether it is heard aloud or read on screen. Lead with the challenge; avoid stacked clauses, lists, jargon preambles, and written-report language.
 
 Cross-examine a concrete claim from the canonical resume against a concrete Air Defense responsibility or qualification. Do not ask a generic interview question. Distinguish evidence that merely meets the Senior UXR baseline from evidence that could prove Lead/Staff scope.
 
@@ -1055,8 +1198,7 @@ Return pillar_id as the canonical bank ID this question tests, such as TQ02 or P
     result = parse_openai_response(
         prompt,
         InterviewQuestion,
-        temperature=0.3,
-        max_output_tokens=350,
+        max_output_tokens=1600,
         instructions=load_live_context(),
     )
     return result.question.strip(), result.pillar_id.strip()
@@ -1093,10 +1235,11 @@ def continue_conversation(
     claims: list[str] | None,
     covered: list[str] | None,
     active_persona: str,
+    spoken_seconds: float = 0.0,
 ) -> tuple[str, str, str, int, list[dict[str, str]], str, list[str], list[str], str]:
     answer = answer.strip()
     if not answer:
-        raise gr.Error("Dictate or paste an answer first.")
+        raise gr.Error("Record or type an answer first.")
 
     prior_turns = history or []
     if turn < 1 or not prior_turns or not active_persona:
@@ -1115,6 +1258,8 @@ This is your response to the candidate's answer to Question {turn}. Your next qu
 Conversation stage: {title}
 Stage objective: {objective}
 Persona lens: {PERSONA_FOCUS[persona]}
+Persona speech style: {PERSONA_STYLE[persona]}
+Framing stance for this turn (vary the wording, never the pillar): {probe_stance()}
 
 {LIVE_MEMORY_RULES}
 
@@ -1128,12 +1273,14 @@ Pillars already covered this session — do not repeat one unless you are delibe
 
 {HARD_EVIDENCE_ANCHORS}
 
+{SPOKEN_STYLE_RULES}
+
 Return the fields below and nothing else.
 - reaction: your immediate in-character reaction to what the candidate just said, at most {PUSHBACK_WORD_LIMIT} words across at most two short sentences, or at most 10 words when this is an interjection. Name the specific thing you are pushing on, or acknowledge the strongest concrete detail in one clause. It may be empty only if the follow-up question carries the pushback on its own.
 - question: exactly one concise, voice-friendly follow-up question of at most {QUESTION_WORD_LIMIT} words, or at most 12 words when this is an interjection, in character, that builds on what the candidate actually just said so the interview reads as one continuous conversation.
 - pillar_id, claim_ledger_entry, interjection, and held_same_pillar per the memory rules above.
 
-Absolute rules for LIVE MODE: never score, never grade, never mention rubrics, dimensions, STAR, Senior versus Lead/Staff calibration, or coaching advice. Never praise generically. Never announce how many questions remain or that the interview is over. Never invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions. Write the spoken fields to be heard through headphones, not read on a page.
+Absolute rules for LIVE MODE: never score, never grade, never mention rubrics, dimensions, STAR, Senior versus Lead/Staff calibration, or coaching advice. Never praise generically. Never announce how many questions remain or that the interview is over. Never invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions. Write the spoken fields as speech that also reads cleanly on screen: no markdown, no bullet lists, no headings, and no parenthetical asides.
 
 Full conversation so far:
 {render_transcript(prior_turns)}
@@ -1145,8 +1292,7 @@ Candidate's newest answer:
     result = parse_openai_response(
         prompt,
         InterviewerTurn,
-        temperature=0.5,
-        max_output_tokens=500,
+        max_output_tokens=2000,
         instructions=load_live_context(),
     )
     question = result.question.strip()
@@ -1157,7 +1303,10 @@ Candidate's newest answer:
     if entry:
         claims_ledger.append(entry)
 
-    updated_history = [*prior_turns, {"role": "user", "content": answer}]
+    updated_history = [
+        *prior_turns,
+        {"role": "user", "content": answer, "seconds": f"{float(spoken_seconds or 0):.0f}"},
+    ]
     if reaction:
         updated_history.append({"role": "assistant", "content": reaction})
     updated_history.append({"role": "assistant", "content": question})
@@ -1200,15 +1349,26 @@ Running claim ledger captured live during the session:
 
 Bank pillars the interviewer recorded as covered: {render_covered_pillars(covered_pillars)}
 
+Measured pacing, one line per answer. "measured" is the real spoken length of a dictated answer; "estimated" is derived from word count for a typed answer. Grade pacing on the measured numbers where they exist:
+{render_pacing_log(prior_turns)}
+
 Persona lens used in the room: {PERSONA_FOCUS[persona]}
 
 Apply all five core dimensions once for the session, rate Tone & Authority once for the session, and apply every Lead/Staff criterion once for the session. Use null for a Lead/Staff score when the transcript provides no evidence for that criterion; missing evidence is not automatically poor performance.
 
-Grade the core dimensions with this calibration:
-- STRUCTURE: judge each answer by its type. Apply STAR plus STARE — Situation, Task, Action, Result, and an explicit Earned Secret — to behavioral, experience, and cross-functional friction answers only. Judge technical, methodological, and research-craft answers on technical reasoning structure instead: the claim or recommendation stated up front, the method or mechanism behind it, the evidence and its limits, the threshold or decision it drives, and the condition that would change it. Never mark a technical answer down for lacking a Situation and Task narrative, and never let a rambling technical answer pass because STAR did not apply. Across the whole session at least one answer of either type must deliver an Earned Secret, meaning a non-obvious lesson only someone who actually ran this work could state; cap Structure at 3 when none does. Penalize generic textbook process instead of specific lived sequences.
+Scoring discipline, which overrides any instinct to be even-handed:
+- Every core score, the Tone & Authority score, and every non-null Lead/Staff score must quote at least one verbatim phrase from the transcript in its evidence field and name the rubric band that phrase matches. An evidence field with no quotation is invalid.
+- Score each dimension independently against its own rubric row. A weak dimension must not drag an unrelated one down, and a strong one must not lift the rest.
+- Use the full 1-5 range. When the transcript contains concrete support at the 4 or 5 band for one dimension, award it even if every other dimension is weak.
+- If all five core scores land on the same value, state explicitly in end_of_session_debrief why the session was genuinely uniform on every dimension. Identical scores are a finding that must be defended, never a default.
+- The transcript is verbatim spoken text, including hedges and filler. Quote hedges such as "sort of", "we", "I was involved in", or "they let me" directly when they drive the Tone & Authority register call.
+
+Grade the core dimensions with this calibration. The CANONICAL RESPONSE ARCHITECTURE section in your instructions is the structure and length contract the candidate is rehearsing against; grade to it.
+- STRUCTURE: judge each answer by its type. Apply STAR plus STARE — Situation, Task, Action, Result, and an explicit Earned Secret — to behavioral, experience, and cross-functional friction answers only. Judge technical, methodological, and research-craft answers on technical reasoning structure instead: the claim or recommendation stated up front, the method or mechanism behind it, the evidence and its limits, the threshold or decision it drives, and the condition that would change it. Name which of the five technical beats or six behavioral beats were missing, using those beat names. Never mark a technical answer down for lacking a Situation and Task narrative, and never let a rambling technical answer pass because STAR did not apply. Across the whole session at least one answer of either type must deliver an Earned Secret, meaning a non-obvious lesson only someone who actually ran this work could state; cap Structure at 3 when none does. Penalize generic textbook process instead of specific lived sequences.
+- PACING AND FOLLOW-UP DISCIPLINE, scored inside STRUCTURE: use the measured pacing lines above rather than your own estimate. Main technical answers should land at 160-230 words and 65-90 seconds, behavioral at 200-265 words and 90-110 seconds, culture and stakeholder at 170-220 words, and answers to a narrow follow-up probe at 45-90 words and 20-35 seconds. Flag any answer past its ceiling and any follow-up that re-narrated the original story instead of answering the one thing asked; re-narration on a follow-up is a Structure and Relevance penalty on both answers.
 - SUBSTANCE: audit for hard data across the session. {HARD_EVIDENCE_ANCHORS}
 - RELEVANCE: reward direct connection to Lattice OS, counter-drone command and control, 3D operator workflows, and startup execution speed. Abstract Human Factors theory with no Air Defense translation caps Relevance at 3.
-- CREDIBILITY: verify first-person ownership, plausible mechanism, and named method. Downgrade borrowed team credit and unverifiable causal leaps, especially claims that stayed unquantified after direct pushback.
+- CREDIBILITY: verify first-person ownership, plausible mechanism, and named method. Downgrade borrowed team credit and unverifiable causal leaps, especially claims that stayed unquantified after direct pushback. Reward volunteering the boundary of the evidence before being asked. Treat these as hard boundary violations and name any that occurred: attributing functional near-infrared spectroscopy to Brigham or Harvard rather than Amazon, claiming any head-to-head result where a biometric measure beat the NASA Task Load Index, or describing Calibrated Cognitive Friction as deployed rather than as an untested thesis.
 - DIFFERENTIATION: award the top band only for seamless, load-bearing use of the Calibrated Cognitive Friction thesis or the Principles for Agentic Trust framework. Name-dropping either without applying it is a 2.
 
 If the transcript contains a behavioral or cross-functional friction answer, judge it explicitly on STAR/STARE completeness, concrete first-person ownership, real friction rather than smooth agreement, interpersonal maturity, and whether it produced organizational impact such as a reusable standard, escalation protocol, research-ops mechanism, mentoring system, or durable culture change. If the answer describes agreement rather than a concrete disagreement with a PM, an ML or software engineer, or a military operator, cap Substance and Differentiation at 3 and say so.
@@ -1237,9 +1397,11 @@ Full interview transcript:
     evaluation = parse_openai_response(
         prompt,
         Evaluation,
-        temperature=0.2,
-        max_output_tokens=2600,
+        max_output_tokens=16000,
         instructions=load_debrief_context(),
+        model=DEBRIEF_MODEL,
+        reasoning_effort=DEBRIEF_REASONING_EFFORT,
+        timeout=DEBRIEF_TIMEOUT_SECONDS,
     )
     validate_evaluation(evaluation)
     session_pillars = covered_pillars + [
@@ -1280,6 +1442,10 @@ def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], str, list
 
 def lock_setup() -> tuple[gr.Accordion, gr.Radio]:
     return gr.Accordion(open=False), gr.Radio(interactive=False)
+
+
+def reset_capture() -> tuple[None, float]:
+    return None, 0.0
 
 
 def unlock_setup() -> tuple[gr.Accordion, gr.Radio]:
@@ -1344,13 +1510,23 @@ HEAD = r"""
     element.play().catch(function () {});
   };
 
-  window.replayInterviewer = function () {
-    if (!lastUrl) { return; }
-    var element = ensurePlayer();
-    if (element.src.indexOf(lastUrl) === -1) { element.src = lastUrl; }
-    element.currentTime = 0;
-    element.play().catch(function () {});
-  };
+  // Half-duplex: touching the answer field cuts the interviewer off, so a
+  // phone speaker never bleeds into the mic while dictating.
+  function stopInterviewer() {
+    if (!player || player.paused) { return; }
+    player.pause();
+  }
+
+  function inAnswerField(target) {
+    var box = document.getElementById("answer");
+    return !!(box && target && box.contains(target));
+  }
+
+  ["pointerdown", "focusin", "keydown"].forEach(function (name) {
+    document.addEventListener(name, function (event) {
+      if (inAnswerField(event.target)) { stopInterviewer(); }
+    }, { capture: true });
+  });
 
   // After each turn, drop the iOS keyboard and bring the new question into view.
   window.focusInterviewer = function () {
@@ -1369,7 +1545,6 @@ HEAD = r"""
 
 FOCUS_INTERVIEWER_JS = "() => { if (window.focusInterviewer) { window.focusInterviewer(); } }"
 PLAY_AUDIO_JS = "(path) => { if (window.playInterviewer) { window.playInterviewer(path); } }"
-REPLAY_AUDIO_JS = "() => { if (window.replayInterviewer) { window.replayInterviewer(); } }"
 
 SPRINT_CHECKLIST = [
     "Block 1: Dr. Kim — positioning and thesis (PQ01, PQ02, TQ01)",
@@ -1693,12 +1868,13 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
     claims_state = gr.State([])
     pillars_state = gr.State([])
     active_persona = gr.State("")
+    spoken_seconds = gr.State(0.0)
     with gr.Column(elem_id="shell"):
         gr.HTML(
             """
             <header id="masthead">
               <h1>HUMAN FACTORS // AIR DEFENSE</h1>
-              <p>Lead/Staff interview pressure testing for Dr. Brandon Fluegel. Pick an interviewer, optionally target a specific pillar, dictate through Superwhisper, then finalize for one holistic scorecard.</p>
+              <p>Lead/Staff interview pressure testing for Dr. Brandon Fluegel. Pick an interviewer, optionally target a specific pillar, answer out loud, then finalize for one holistic scorecard.</p>
             </header>
             """
         )
@@ -1728,10 +1904,23 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     elem_id="pushback",
                 )
                 audio_path = gr.Textbox(visible=False, elem_id="audio-path")
-                replay_button = gr.Button("🔊 Replay question", elem_id="replay")
+                with gr.Row():
+                    replay_button = gr.Button("🔊 Play question", elem_id="replay")
+                    audio_enabled = gr.Checkbox(
+                        value=True,
+                        label="Speak questions aloud",
+                        info="On for a spoken back-and-forth on headphones or speaker. Tapping the answer box cuts the audio so your mic never hears the interviewer.",
+                        elem_id="audio-toggle",
+                    )
+                answer_recorder = gr.Audio(
+                    sources=["microphone"],
+                    type="filepath",
+                    label="Answer out loud",
+                    elem_id="recorder",
+                )
                 answer = gr.Textbox(
                     label="Candidate answer",
-                    placeholder="Tap here, dictate with Superwhisper, then submit.",
+                    placeholder="Record your answer above, or type it here.",
                     lines=10,
                     max_lines=30,
                     elem_id="answer",
@@ -1788,32 +1977,54 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
         active_persona,
     ]
     setup_outputs = [setup_panel, persona]
-    speak_inputs = [interviewer, active_persona]
-    submit_inputs = [answer, turn_state, conversation_history, claims_state, pillars_state, active_persona]
+    capture_outputs = [answer_recorder, spoken_seconds]
+    speak_inputs = [interviewer, active_persona, audio_enabled]
+    submit_inputs = [
+        answer,
+        turn_state,
+        conversation_history,
+        claims_state,
+        pillars_state,
+        active_persona,
+        spoken_seconds,
+    ]
     finalize_inputs = [turn_state, conversation_history, claims_state, pillars_state, active_persona]
 
     start_event = start_button.click(
         start_interview, inputs=[persona, target_pillar], outputs=session_outputs
     )
     start_event.then(lock_setup, outputs=setup_outputs, queue=False)
+    start_event.then(reset_capture, outputs=capture_outputs, queue=False)
     start_speak = start_event.then(speak_interviewer, speak_inputs, audio_path)
     start_speak.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
     start_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
     continue_event = continue_button.click(continue_conversation, submit_inputs, session_outputs)
+    continue_event.then(reset_capture, outputs=capture_outputs, queue=False)
     continue_speak = continue_event.then(speak_interviewer, speak_inputs, audio_path)
     continue_speak.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
     continue_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
     submit_event = answer.submit(continue_conversation, submit_inputs, session_outputs)
+    submit_event.then(reset_capture, outputs=capture_outputs, queue=False)
     submit_speak = submit_event.then(speak_interviewer, speak_inputs, audio_path)
     submit_speak.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
     submit_event.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
-    replay_button.click(fn=None, js=REPLAY_AUDIO_JS, queue=False)
+    replay_event = replay_button.click(
+        replay_interviewer, [interviewer, active_persona, audio_path], audio_path
+    )
+    replay_event.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
     finalize_event = finalize_button.click(finalize_session, finalize_inputs, session_outputs)
     finalize_event.then(unlock_setup, outputs=setup_outputs, queue=False)
     finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
     clear_event = clear_button.click(clear_session, outputs=session_outputs)
     clear_event.then(unlock_setup, outputs=setup_outputs, queue=False)
-    answer.change(answer_meter, inputs=answer, outputs=answer_readout, queue=False)
+    clear_event.then(reset_capture, outputs=capture_outputs, queue=False)
+    transcribe_event = answer_recorder.stop_recording(
+        transcribe_answer, inputs=answer_recorder, outputs=[answer, spoken_seconds]
+    )
+    transcribe_event.then(
+        answer_meter, inputs=[answer, spoken_seconds], outputs=answer_readout, queue=False
+    )
+    answer.change(answer_meter, inputs=[answer, spoken_seconds], outputs=answer_readout, queue=False)
     refresh_dashboard.click(load_progress_dashboard, outputs=[dashboard, session_history])
     sprint_checklist.change(save_sprint_progress, inputs=sprint_checklist, outputs=None)
 

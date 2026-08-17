@@ -79,7 +79,9 @@ def main() -> None:
     assert app.merge_pillars([], "ZZ99") == []
     assert "0 words" in app.answer_meter("")
     assert "cut in" in app.answer_meter(" ".join(["word"] * 400))
-    assert "sweet spot" in app.answer_meter(" ".join(["word"] * 250))
+    assert "technical main-answer range" in app.answer_meter(" ".join(["word"] * 200))
+    assert "behavioral main-answer range" in app.answer_meter(" ".join(["word"] * 250))
+    assert "follow-up length" in app.answer_meter(" ".join(["word"] * 70))
     assert "interjection" in app.turn_indicator(3, interjection=True)
     assert "same ground" in app.turn_indicator(3, held=True)
     print("OK  claim ledger, coverage merge, answer meter, and turn states behave")

@@ -1,6 +1,6 @@
 # Anduril Voice Interview Coach
 
-A continuous multi-turn interview simulator for Brandon Fluegel, PhD, targeting Anduril Industries' Air Defense team. The Gradio interface supports Superwhisper dictation, browser speech playback, four interviewer personas, and a holistic Senior-versus-Lead/Staff debrief at the end of the session.
+A continuous multi-turn interview simulator for Brandon Fluegel, PhD, targeting Anduril Industries' Air Defense team. The Gradio interface records your spoken answer, transcribes it verbatim through the OpenAI API, plays the interviewer's questions back in each persona's own voice, and produces a holistic Senior-versus-Lead/Staff debrief at the end of the session. No third-party dictation tool is involved: everything runs on `OPENAI_API_KEY`.
 
 The interviewer stays fully in character for every live turn. The conversation runs for as many turns as you want, and **no grading appears until you finalize the session** — the persona probes, pushes back, and re-probes thin answers instead of scoring them in the moment.
 
@@ -15,7 +15,7 @@ The first four turns follow an arc used as stage direction, not as a hard cutoff
 
 The persona is locked for the duration of a session and held in state. An optional target-pillar drill narrows the ground the session covers. Every live turn receives the full transcript plus the running claim ledger and covered-pillar list, so a covered pillar is never repeated except when the interviewer is deliberately holding the same ground.
 
-On finalize, the session is scored on **Substance, Structure, Relevance, Credibility, and Differentiation**, plus separate Lead/Staff criteria where evidenced. `N/E` means not evidenced and is never converted into a low score. STAR/STARE is applied to behavioral and experience answers only; technical and research-craft answers are judged on claim, method, evidence and limits, threshold or decision, and what would change it.
+On finalize, the session is scored on **Substance, Structure, Relevance, Credibility, and Differentiation**, plus separate Lead/Staff criteria where evidenced. `N/E` means not evidenced and is never converted into a low score. STAR/STARE is applied to behavioral and experience answers only; technical and research-craft answers are judged on claim, method, evidence and limits, threshold or decision, and what would change it. Structure is graded against the beats and length targets in `practice/00-response-architecture.md`, including follow-up answers that re-narrate the original story.
 
 ## Setup
 
@@ -33,7 +33,11 @@ Public sharing is disabled by default. To request a temporary public Gradio URL,
 
 ## Tabs
 
-- **🛡️ Interview Simulator** — persona and optional pillar selection, question playback, dictated or typed answers, *Submit Answer / Continue Conversation*, and *Wrap Up & Finalize Session*.
+- **🛡️ Interview Simulator** — persona and optional pillar selection, spoken question playback, **Answer out loud** recording, *Submit Answer / Continue Conversation*, and *Wrap Up & Finalize Session*. Playback works on headphones or a phone speaker: touching the answer field cuts the interviewer off mid-sentence so the mic never picks up the question while you speak. *Play question* repeats the current one, and **Speak questions aloud** can be switched off at any point to run silently.
+
+Stopping the recording transcribes it verbatim into the answer box, where it can be edited before submitting, and stamps the real spoken duration on that answer. Typed answers still work; their length is estimated at 150 words per minute instead of measured.
+
+> **On a phone, use the share URL.** Browsers only grant microphone access in a secure context. `https://…gradio.live` (via `GRADIO_SHARE`) and `localhost` qualify; a plain `http://192.168.…` LAN address does not, and the recorder will silently fail to start.
 - **📈 Progress & 1-Week Sprint Tracker** — mock-session averages, upleveling readiness, bottlenecks, next actions, the Pillar Coverage matrix derived from persisted pillar IDs, recent-session history, and the seven-day intensive sprint checklist.
 
 Finalized session summaries, including the turn count and the covered pillar IDs, persist to `data/coaching_state.md`.
@@ -54,8 +58,9 @@ Finalized session summaries, including the turn count and the covered pillar IDs
 | `data/coaching_state.md` | Mutable readiness and session state |
 | `references/role-drills.md` | The four interviewer persona definitions |
 | `references/rubrics-detailed.md` | Detailed scoring anchors |
+| `practice/00-response-architecture.md` | Answer-structure beats and length discipline the debrief grades against |
 
-Every question bank carries persona adaptations, follow-up probes, and a Lead/Staff bar for each pillar.
+Every question bank carries persona adaptations, follow-up probes, and a Lead/Staff bar for each pillar. Live turns keep each bank question's construct and demand intact so the wording stays recognizable against the practice set; framing varies by persona style and a rotating probe stance rather than by rewriting the pillar.
 
 ### Evidence boundaries
 
@@ -97,6 +102,15 @@ python scripts\live_integration_test.py    # live multi-turn run against the rea
 
 ## Notes
 
-The application requires `OPENAI_API_KEY` for question generation and answer evaluation. Browser speech playback uses the Web Speech API; `pyttsx3` remains available for local or offline speech extensions.
+The application requires `OPENAI_API_KEY` for question generation, transcription, speech, and evaluation.
+
+| Purpose | Model | Settings |
+|---|---|---|
+| Live interviewer turns | `gpt-5.4-mini` | reasoning effort `low` — about 1.5s per turn |
+| End-of-session debrief | `gpt-5.4` | reasoning effort `high`, 5-minute timeout |
+| Answer transcription | `gpt-4o-transcribe` | domain-term prompt, verbatim output |
+| Interviewer speech | `gpt-4o-mini-tts` | per-persona voice and delivery instruction |
+
+Question framing is varied deliberately rather than randomly: each persona carries a speech style, and one of six probe stances is drawn per turn. The pillar's construct and demand stay fixed so the wording remains recognizable against the practice set.
 
 OpenAI requests use structured responses with complete score-set validation, run under a bounded timeout, and preserve in-browser session state when a timeout, connection failure, rate limit, or API error occurs.

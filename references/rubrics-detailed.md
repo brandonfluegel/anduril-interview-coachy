@@ -2,15 +2,17 @@
 
 Use these rubrics for every structured answer evaluation in the four-question interview arc.
 
+The 3, 4, and 5 anchors are calibrated to this candidate's canonical evidence, so the top of each scale is concrete and reachable. Score against these anchors, not against generic consumer-UX expectations. A 5 is not reserved for a hypothetical perfect answer: when a spoken answer matches the 5 anchor, award the 5.
+
 ## Substance (Evidence Quality)
 
 | Score | Description | Example |
 |-------|-------------|---------|
-| 1 | Generic platitude, no evidence | "I'm a great collaborator" |
-| 2 | Vague claim with weak support | "I improved the process and people liked it" |
-| 3 | Specific claim, missing quantification | "I redesigned the onboarding flow and reduced drop-off" |
-| 4 | Quantified with context, missing alternatives considered | "I redesigned onboarding, reducing drop-off from 40% to 25%" |
-| 5 | Quantified + alternatives weighed + decision rationale + outcome | "I redesigned onboarding after testing 3 approaches. We chose progressive disclosure over a wizard because our data showed users abandoned at step 3. Drop-off fell from 40% to 25%, validated over 10K users." |
+| 1 | Generic platitude, no evidence | "I care a lot about operator trust" |
+| 2 | Vague claim with weak support | "I ran research that improved the interface and people liked it" |
+| 3 | Specific claim, no quantification or named method | "I ran psychophysics studies that changed our latency targets" |
+| 4 | Quantified with context, method or alternatives missing | "The psychophysics program replaced arbitrary engineering latency targets with perceptual thresholds and informed about $50M in operational value" |
+| 5 | Quantified + method named + alternatives weighed + limits stated | "We converged on the threshold with an adaptive procedure, fit the psychometric function, and carried the confidence interval into the spec at a stated percentile — and I wrote down which operators that percentile excludes. It informed about $50M. The number doesn't port to a gloved, auditory-loaded command and control station; the method does." |
 
 **Coaching notes:**
 - Push for numbers even when "hard to measure" — approximations with caveats are better than none
@@ -34,10 +36,10 @@ STAR/STARE is the standard for behavioral, experience, and cross-functional fric
 | Score | Description | Example |
 |-------|-------------|---------|
 | 1 | Stream of consciousness, no clear point | Jumps between topics, listener lost |
-| 2 | Central idea unclear until the end | Buries the lead, meanders to point |
-| 3 | Clear structure but missing transitions | Good STAR but choppy between sections |
-| 4 | Well-structured with smooth flow, minor tangents | Clean arc with one or two detours |
-| 5 | Crisp structure: setup → conflict → resolution → impact | Every sentence advances the story, lands with clear takeaway |
+| 2 | Central idea unclear until the end | Buries the claim under two minutes of method before saying what he recommends |
+| 3 | Right beats, wrong order or choppy transitions | Technical answer that reaches the claim only after the full study narrative |
+| 4 | All beats present, one detour | Claim, method, evidence, decision — but the limit of the evidence arrives only after the interviewer asks for it |
+| 5 | Every beat lands and the limit is volunteered unprompted | Claim → how I would know → evidence and where it stops → the decision it drives → what would change my mind, inside 90 seconds, with the boundary stated before anyone asks |
 
 **Coaching notes:**
 - Best answers front-load the headline: "The key learning was X. Here's how we got there..."
@@ -57,11 +59,11 @@ STAR/STARE is the standard for behavioral, experience, and cross-functional fric
 
 | Score | Description | Example |
 |-------|-------------|---------|
-| 1 | Doesn't address the question asked | Asked about conflict, answers about a successful launch |
-| 2 | Tangentially related, misses core of question | Asked about failure, talks about a challenge they overcame easily |
-| 3 | Addresses question but includes irrelevant details | Right story but 40% of answer is background noise |
-| 4 | Directly addresses question with minor drift | Solid answer with one unnecessary tangent |
-| 5 | Laser-focused, every sentence serves the answer | Could not remove a single sentence without losing value |
+| 1 | Doesn't address the question asked | Asked for the falsifier, describes the framework's four dimensions |
+| 2 | Tangentially related, misses the core | Asked where friction makes an operator less safe, describes why friction is valuable |
+| 3 | Addresses the question through heavy consumer context | Answers a counter-drone command and control question almost entirely through Echo Hub and driver handovers, with the Air Defense translation left implicit |
+| 4 | Directly addresses it with minor drift | Air Defense translation is explicit; one unnecessary detour into dissertation methodology |
+| 5 | Every sentence serves the question and lands in the operational domain | Ports the method to Lattice OS, counter-drone command and control, or the 3D operator workflow, and names precisely why the number does not port |
 
 **Coaching notes:**
 - Restate the question before answering to ensure alignment
@@ -81,11 +83,11 @@ STAR/STARE is the standard for behavioral, experience, and cross-functional fric
 
 | Score | Description | Example |
 |-------|-------------|---------|
-| 1 | Claims with no support or obvious exaggeration | "I single-handedly transformed the company culture" |
-| 2 | Support is vague or generic | "I increased efficiency" (how? by how much?) |
-| 3 | Specific details but missing numbers or outcomes | "I built a dashboard the team used daily" (impact?) |
-| 4 | Quantified with context, could use stronger proof points | "Dashboard reduced reporting time by 50%" (validated how?) |
-| 5 | Numbers + artifacts + validation from others + realistic constraints | "Dashboard cut reporting from 4 hours to 2 (verified by team survey). CEO mentioned it in all-hands. Took 3 weeks to build with one engineer." |
+| 1 | Claims with no support, or a boundary violation | Claims a deployment result for Calibrated Cognitive Friction, or puts near-infrared spectroscopy at Brigham |
+| 2 | Support is vague or generic | "I improved trust in the handover" |
+| 3 | Specific detail, but ownership or method unclear | "We used multimodal alerts and trust ratings went up" — whose decision, measured how? |
+| 4 | Quantified and owned, validation or limit thin | "Multimodal alerts improved safety and trust ratings 24% in the Level 2 and Level 3 simulator studies" |
+| 5 | Owned + method + artifact + limit volunteered | "I set the perceptual-threshold spec that latency budgets had to clear; the architecture is in US Patent US-12532040-B1. And the limit is real — those were drivers, not warfighters, with no adversary and no lethal consequence." |
 
 **Coaching notes:**
 - Credibility increases when candidate acknowledges constraints and trade-offs
@@ -106,11 +108,11 @@ STAR/STARE is the standard for behavioral, experience, and cross-functional fric
 
 | Score | Description | Example |
 |-------|-------------|---------|
-| 1 | Generic answer any prepared candidate could give | "I used data to make better decisions" — could be anyone |
-| 2 | Some specificity but relies on common frameworks | "I applied the RICE framework to prioritize" — correct but undifferentiated |
-| 3 | Real details present but no earned insight or defensible POV | "I built a dashboard that saved 10 hours/week" — specific but not distinctive |
-| 4 | Includes earned secrets or a spiky POV; sounds like a specific person | "I learned that the fastest way to kill a feature is to let it succeed at small scale — it becomes politically unkillable before you have real data" |
-| 5 | Unmistakably this candidate — earned secrets + defensible stance + unique framing | "After launching 12 features in 2 years, I developed a 'kill threshold' system. If a feature doesn't hit 40% adoption in 6 weeks, I kill it regardless of stakeholder enthusiasm. Three of those kills freed resources for our actual breakout product. Most PMs can't do this because they optimize for shipping, not for pruning." |
+| 1 | Generic answer any prepared candidate could give | "I use data to drive design decisions" |
+| 2 | Some specificity but leans on standard frameworks | Recites NASA-TLX and heuristic evaluation correctly, with no position of his own |
+| 3 | Real detail, no earned insight | Describes the latency program as executed work: what was run, what came out |
+| 4 | Earned secret or spiky point of view, defensible | "A faster system is not automatically a better human system. The economically correct requirement is the perceptual boundary where additional speed stops changing human performance — past that you are paying for performance no operator can detect." |
+| 5 | The thesis is load-bearing in the answer, with its falsifier attached | Uses Calibrated Cognitive Friction to decide which confirmations are mandatory versus advisory, tiered by reversibility, then names the result that would overturn it: no reduction in erroneous authorization at equal or worse time-to-decide |
 
 **Coaching notes:**
 - Differentiation is what separates a Hire from a Strong Hire in competitive processes
