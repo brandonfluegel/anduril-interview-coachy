@@ -6,6 +6,7 @@ Master index for the practice set. Read this once, then drill the four track fil
 - `02-behavioral-track.md` — BQ01–BQ10, behavioral / fit
 - `03-culture-stakeholder-track.md` — CQ01–CQ10, culture / stakeholder collaboration
 - `04-positioning-close-track.md` — PQ01–PQ10, positioning / scope / close
+- `05-nasa-case-study.md` — NC01–NC08, the single NASA case study for the hiring manager call
 
 Placeholders in `[brackets]` mark a specific fact only you can supply. Do not improvise a number there. Fill them in before you drill, and if you cannot fill one in, delete the sentence rather than soften it.
 
