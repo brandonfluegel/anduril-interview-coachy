@@ -75,7 +75,14 @@ HARD_EVIDENCE_ANCHORS = """Canonical hard-evidence anchors the answer may legiti
 - US Patent US-12532040-B1 for context-aware multimodal interaction architectures
 - Calibrated Cognitive Friction thesis and Meaningful Human Control
 Credit an anchor only when the spoken answer actually invokes and uses it. Never invent an anchor, a new number, or an outcome that is not in the canonical record."""
-SPOKEN_STYLE_RULES = """Spoken-delivery rules: expand an acronym the way it would be said aloud the first time it appears — functional near-infrared spectroscopy, the NASA Task Load Index, military standard 1472, use-error failure modes and effects analysis. Make exactly one demand per turn; never stack two questions."""
+SPOKEN_STYLE_RULES = """Say it like a person, not like a written question read out loud. This is a conversation.
+- Plain, everyday language. Contractions. Short words over long ones. One idea per sentence.
+- Ask for one thing. A single walkthrough with a couple of named parts is fine; two separate questions in one breath is not. No lists, no "and also", no parentheses, no semicolons.
+- Say instrument and standard names the way they are said aloud: functional near-infrared spectroscopy, the NASA Task Load Index, military standard 1472, use-error failure modes and effects analysis. Acronyms people genuinely say out loud in this world are fine as they are: C2, AI, ML, PM, UX. Never speak a citation, a patent number, or a pillar code.
+- Write numbers, money, and units the way they are spoken: fifty million dollars, not $50M; twenty-four percent, not 24%; a hundred and twenty milliseconds, not 120ms.
+- Never use written-report verbs: articulate, delineate, elucidate, expound, enumerate, leverage, utilize, operationalize. Say tell me, walk me through, how did you, what made you, where does that break, who decided that.
+- Real interviewers open like people: "Okay, so...", "Hang on.", "Let me push on that one." Use at most a few words of that, and not on every turn.
+- Plain language changes the wording only. The thing you are asking for stays exactly what the bank specifies."""
 PROBE_STANCES = (
     "Cold open — lead with the demand, no preamble.",
     "Quote-back — open by repeating the candidate's own words, then press on them.",
@@ -100,10 +107,10 @@ PERSONA_VOICES = {
     "Design Lead": "fable",
 }
 PERSONA_SPEECH = {
-    "Dr. Daniella Kim": "Senior research director. Measured, precise, unhurried. Curious rather than warm, and completely unimpressed by fluency.",
-    "Systems / ML Engineering Lead": "Blunt engineer. Clipped, fast, slightly impatient. Flat affect, no pleasantries, lands hard on the operative noun.",
-    "Product Manager": "Brisk product lead. Direct and time-pressured, conversational but pointed, as if a meeting starts in five minutes.",
-    "Design Lead": "Thoughtful design lead. Warmer and more collaborative, but pressing — asks the awkward question in a friendly tone.",
+    "Dr. Daniella Kim": "Senior research director talking across a table, not reading. Measured, precise, unhurried. Curious rather than warm, and completely unimpressed by fluency.",
+    "Systems / ML Engineering Lead": "Blunt engineer in a real conversation. Clipped, fast, a little impatient. Flat affect, no pleasantries, lands hard on the word that matters.",
+    "Product Manager": "Brisk product lead thinking out loud. Direct and time-pressured, conversational but pointed, like a meeting starts in five minutes.",
+    "Design Lead": "Thoughtful design lead in an easy back-and-forth. Warmer and collaborative, but pressing — asks the awkward question in a friendly tone.",
 }
 DEFAULT_TTS_VOICE = "nova"
 DEFAULT_TTS_STYLE = "Professional interviewer. Direct and conversational."
@@ -559,10 +566,10 @@ def probe_stance() -> str:
 
 
 OPENING_ANCHOR = (
-    "Anchor this opener to exactly one pillar from the canonical banks below. Use the persona-adapted line as the spine of the "
-    "question and keep it recognizable: preserve the construct it names and the thing it demands, tightened for speech. You may "
-    "change the framing, the order, and the words around it, but never swap in a different construct or a different demand. Do not "
-    "blend pillars and do not read the Lead/Staff bar aloud."
+    "Anchor this opener to exactly one pillar from the canonical banks below. The persona-adapted line gives you the substance: "
+    "the thing it names and the thing it asks for both have to survive. Say that substance in your own plain spoken words rather "
+    "than reading the line — the bank wording is written, and you are talking. Never swap in a different subject or a different "
+    "ask. Do not blend pillars and do not read the Lead/Staff bar aloud."
 )
 
 
@@ -579,7 +586,7 @@ def stage_instruction(next_turn: int, persona: str) -> str:
     instructions = {
         2: f"""Find the single weakest link in the answer you just heard: the claim with no falsifiable metric, the causal leap, the borrowed team credit, the unstated assumption, or the number with no measurement method behind it. Attack exactly that weak link and demand the missing falsifiable evidence, in the style of "What falsifiable metric proved that latency threshold degraded operator trust?" Quote or paraphrase the candidate's own words so the question is unmistakably about what they just said.
 
-Escalate using the canonical probe library below when one of these probes targets the exact gap the candidate left open. Keep the probe's construct and its demand intact and re-point it at the candidate's own phrasing rather than replacing it:
+Escalate using the canonical probe library below when one of these probes targets the exact gap the candidate left open. Keep what the probe asks for, but say it in your own plain spoken words and point it at what the candidate actually said. Never read a probe out as written:
 {technical_follow_up_probes("pushback")}""",
         3: f"""Move the conversation to behavioral and cross-functional friction. Select the strongest non-duplicative pillar from the following persona-adapted behavioral bank, then frame it so it directly tests handling friction with a PM, an ML/software engineer, or a military operator under fast-paced startup constraints. Use the adapted question directly or tailor it to what the candidate just said, without changing the pillar's intent. Hold that pillar's follow-ups in reserve for later turns and never read the Lead/Staff bar aloud:
 {behavioral_question_options(persona)}
@@ -1189,7 +1196,7 @@ Prior conversation: {prior_context}
 
 Ask exactly one concise, voice-friendly question in character. Make it answerable aloud. Set the stage in at most one short clause that signals who you are and what you own, then immediately probe one named claim from the Principles for Agentic Trust whitepaper or the canonical resume. Do not provide coaching, an answer, a score, or a question number. Do not invent candidate evidence or classified Anduril details.
 
-The spoken question must be one conversational sentence of at most {QUESTION_WORD_LIMIT} words that lands in a single pass, whether it is heard aloud or read on screen. Lead with the challenge; avoid stacked clauses, lists, jargon preambles, and written-report language.
+The spoken question must be one conversational sentence of at most {QUESTION_WORD_LIMIT} words that lands in a single pass, whether it is heard aloud or read on screen. Lead with the challenge, in plain words a person would actually say out loud.
 
 Cross-examine a concrete claim from the canonical resume against a concrete Air Defense responsibility or qualification. Do not ask a generic interview question. Distinguish evidence that merely meets the Senior UXR baseline from evidence that could prove Lead/Staff scope.
 
@@ -1276,8 +1283,8 @@ Pillars already covered this session — do not repeat one unless you are delibe
 {SPOKEN_STYLE_RULES}
 
 Return the fields below and nothing else.
-- reaction: your immediate in-character reaction to what the candidate just said, at most {PUSHBACK_WORD_LIMIT} words across at most two short sentences, or at most 10 words when this is an interjection. Name the specific thing you are pushing on, or acknowledge the strongest concrete detail in one clause. It may be empty only if the follow-up question carries the pushback on its own.
-- question: exactly one concise, voice-friendly follow-up question of at most {QUESTION_WORD_LIMIT} words, or at most 12 words when this is an interjection, in character, that builds on what the candidate actually just said so the interview reads as one continuous conversation.
+- reaction: your immediate in-character reaction to what the candidate just said, at most {PUSHBACK_WORD_LIMIT} words across at most two short sentences, or at most 10 words when this is an interjection. Say it the way a person reacts out loud. Name the specific thing you are pushing on, or acknowledge the strongest concrete detail in one clause. It may be empty only if the follow-up question carries the pushback on its own.
+- question: exactly one concise, plain-spoken follow-up question of at most {QUESTION_WORD_LIMIT} words, or at most 12 words when this is an interjection, in character, that builds on what the candidate actually just said so the interview reads as one continuous conversation.
 - pillar_id, claim_ledger_entry, interjection, and held_same_pillar per the memory rules above.
 
 Absolute rules for LIVE MODE: never score, never grade, never mention rubrics, dimensions, STAR, Senior versus Lead/Staff calibration, or coaching advice. Never praise generically. Never announce how many questions remain or that the interview is over. Never invent facts about Anduril, Dr. Kim, the candidate, classified systems, study outcomes, or prior interactions. Write the spoken fields as speech that also reads cleanly on screen: no markdown, no bullet lists, no headings, and no parenthetical asides.
@@ -1461,6 +1468,18 @@ HEAD = r"""
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
+// iOS follows the system theme unless the app pins it, and the palette here is light-only.
+(function () {
+  try {
+    var url = new URL(window.location.href);
+    if (url.searchParams.get("__theme") !== "light") {
+      url.searchParams.set("__theme", "light");
+      window.location.replace(url.toString());
+    }
+  } catch (error) { /* older browsers keep the system theme */ }
+})();
+</script>
+<script>
 (function () {
   // A 0.05s silent WAV. iOS grants an element permission to play audible media
   // only after a real, audible-capable play() inside a user gesture; a muted
@@ -1507,8 +1526,101 @@ HEAD = r"""
     var element = ensurePlayer();
     element.src = lastUrl;
     element.currentTime = 0;
+    element.onended = function () { window.setTimeout(openMic, 400); };
     element.play().catch(function () {});
   };
+
+  // Turn-taking. The recorder is one toggle button whose label flips
+  // between Record and Stop, so the label is the state.
+  function recorderButton(label) {
+    var host = document.getElementById("recorder");
+    if (!host) { return null; }
+    var buttons = host.querySelectorAll("button");
+    for (var index = 0; index < buttons.length; index += 1) {
+      if (buttons[index].textContent.trim() === label && !buttons[index].disabled) {
+        return buttons[index];
+      }
+    }
+    return null;
+  }
+
+  function handsFree() {
+    var box = document.querySelector("#handsfree input[type='checkbox']");
+    return !!(box && box.checked);
+  }
+
+  function openMic() {
+    if (!handsFree()) { return; }
+    var indicator = document.getElementById("turn-indicator");
+    if (!indicator || indicator.textContent.indexOf("Question ") === -1) { return; }
+    var button = recorderButton("Record");
+    if (button) { button.click(); }
+  }
+
+  function closeMic() {
+    var button = recorderButton("Stop");
+    if (button) { button.click(); }
+  }
+
+  // Voice activity detection. Wrapping getUserMedia lets the meter read the
+  // very stream the recorder is using, instead of opening a second mic.
+  var SPEECH_RMS = 0.018;
+  var MIN_SPEECH_MS = 700;
+  var TRAILING_SILENCE_MS = 2200;
+
+  function watchLevels(stream) {
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) { return; }
+    var context = new Ctx();
+    var analyser = context.createAnalyser();
+    analyser.fftSize = 1024;
+    context.createMediaStreamSource(stream).connect(analyser);
+    var samples = new Float32Array(analyser.fftSize);
+    var spokeAt = 0;
+    var quietSince = 0;
+    var started = Date.now();
+
+    function tick() {
+      var track = stream.getAudioTracks()[0];
+      if (!track || track.readyState !== "live") {
+        context.close().catch(function () {});
+        return;
+      }
+      analyser.getFloatTimeDomainData(samples);
+      var sum = 0;
+      for (var index = 0; index < samples.length; index += 1) {
+        sum += samples[index] * samples[index];
+      }
+      var rms = Math.sqrt(sum / samples.length);
+      var now = Date.now();
+      if (rms > SPEECH_RMS) {
+        if (!spokeAt) { spokeAt = now; }
+        quietSince = 0;
+      } else if (spokeAt && now - spokeAt > MIN_SPEECH_MS) {
+        if (!quietSince) { quietSince = now; }
+        if (handsFree() && now - quietSince > TRAILING_SILENCE_MS && now - started > 3000) {
+          closeMic();
+          context.close().catch(function () {});
+          return;
+        }
+      }
+      window.requestAnimationFrame(tick);
+    }
+    window.requestAnimationFrame(tick);
+  }
+
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    var openStream = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+    navigator.mediaDevices.getUserMedia = function (constraints) {
+      return openStream(constraints).then(function (stream) {
+        if (constraints && constraints.audio && stream.getAudioTracks().length) {
+          stopInterviewer();
+          try { watchLevels(stream); } catch (error) { /* level metering is optional */ }
+        }
+        return stream;
+      });
+    };
+  }
 
   // Half-duplex: touching the answer field cuts the interviewer off, so a
   // phone speaker never bleeds into the mic while dictating.
@@ -1573,6 +1685,13 @@ CSS = """
   --signal: #d43b2f;
   --steel: #35505a;
   --line: #c9c3b7;
+  color-scheme: light;
+}
+
+html,
+html.dark {
+  background: var(--paper) !important;
+  color-scheme: light;
 }
 
 body,
@@ -1727,6 +1846,69 @@ ul.options input {
   background: #ebe7dd !important;
   border-color: var(--line) !important;
 }
+#recorder {
+  background: #fffdf7 !important;
+  border: 1px solid var(--line) !important;
+}
+#recorder,
+#recorder span,
+#recorder button,
+#recorder select,
+#recorder option,
+#recorder .label-wrap span,
+#recorder [data-testid='block-info'] {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+#recorder button {
+  min-height: 46px !important;
+  background: #ebe7dd !important;
+  border: 1px solid var(--line) !important;
+}
+#handsfree {
+  background: #ebe7dd !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+#handsfree,
+#handsfree span,
+#handsfree label,
+#handsfree label span,
+#handsfree [data-testid='block-info'] {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+#audio-row { flex-wrap: wrap; }
+#recorder .label-wrap span,
+#recorder > .block > span {
+  font-weight: 700 !important;
+}
+#answer-panel,
+#audio-panel {
+  background: #ebe7dd !important;
+  border: 1px solid var(--line) !important;
+}
+#answer-panel .label-wrap span,
+#audio-panel .label-wrap span,
+#answer-panel button.label-wrap,
+#audio-panel button.label-wrap {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  font-size: 0.9rem;
+}
+#finalize {
+  background: var(--steel) !important;
+  border-color: var(--steel) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  min-height: 46px !important;
+}
+#clear { min-height: 40px !important; font-size: 0.85rem; opacity: 0.85; }
+@media (max-width: 560px) {
+  #audio-row { flex-direction: column; align-items: stretch; }
+  #audio-row > * { min-width: 100% !important; }
+}
 @media (prefers-reduced-motion: reduce) {
   #shell *, #shell *::before, #shell *::after {
     animation-duration: 0.01ms !important;
@@ -1824,19 +2006,24 @@ ul.options input {
 footer { display: none !important; }
 @media (max-width: 700px) {
   #shell { padding: 8px 8px calc(28px + env(safe-area-inset-bottom)); }
-  #answer textarea { min-height: 34dvh; }
+  #answer textarea { min-height: 26dvh; }
   /* Reclaim the fold: the masthead blurb and practice note are read once, not every turn. */
   #masthead { padding: 8px 0 10px; margin-bottom: 10px; border-top-width: 5px; }
   #masthead p { display: none; }
   #mobile-note { font-size: 0.78rem; opacity: 0.75; margin: 0; }
   #shell button { white-space: normal; }
   #shell .tab-container { display: flex; overflow-x: visible; }
+  #shell [role='tab'] { font-size: 0.82rem; padding: 8px 4px; }
   #shell .gap,
   #shell .column,
   #shell .row { gap: 10px !important; }
   #shell .block { padding: 10px !important; }
   #mobile-note { padding: 0 !important; }
   ul.options { max-height: 38dvh !important; }
+  /* The recorder is the only control that matters mid-session, so give it the thumb zone. */
+  #recorder button { min-height: 54px !important; font-size: 1rem !important; flex: 1 1 auto; }
+  #recorder select { max-width: 45% !important; }
+  #pushback { font-size: 1.05rem; }
   /* Keep Submit reachable with one thumb while the keyboard is up. */
   #evaluate {
     position: sticky;
@@ -1881,7 +2068,7 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
         with gr.Tabs():
             with gr.Tab("🛡️ Interview Simulator"):
                 gr.Markdown(
-                    "📱 Keep Safari in the foreground until you finalize — iOS reloads background tabs.",
+                    "📱 Keep this tab in the foreground — iOS reloads background tabs.",
                     elem_id="mobile-note",
                 )
                 with gr.Accordion("Session setup", open=True, elem_id="setup-panel") as setup_panel:
@@ -1904,34 +2091,40 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                     elem_id="pushback",
                 )
                 audio_path = gr.Textbox(visible=False, elem_id="audio-path")
-                with gr.Row():
-                    replay_button = gr.Button("🔊 Play question", elem_id="replay")
-                    audio_enabled = gr.Checkbox(
-                        value=True,
-                        label="Speak questions aloud",
-                        info="On for a spoken back-and-forth on headphones or speaker. Tapping the answer box cuts the audio so your mic never hears the interviewer.",
-                        elem_id="audio-toggle",
-                    )
                 answer_recorder = gr.Audio(
                     sources=["microphone"],
                     type="filepath",
-                    label="Answer out loud",
+                    label="Your turn — speak",
                     elem_id="recorder",
                 )
-                answer = gr.Textbox(
-                    label="Candidate answer",
-                    placeholder="Record your answer above, or type it here.",
-                    lines=10,
-                    max_lines=30,
-                    elem_id="answer",
-                )
                 answer_readout = gr.Markdown(answer_meter(""), elem_id="answer-meter")
-                continue_button = gr.Button(
-                    "Submit Answer / Continue Conversation", variant="primary", elem_id="evaluate"
-                )
-                with gr.Row():
-                    finalize_button = gr.Button("Wrap Up & Finalize Session")
-                    clear_button = gr.Button("Clear Session", variant="stop")
+                with gr.Accordion("Transcript · type instead", open=False, elem_id="answer-panel"):
+                    answer = gr.Textbox(
+                        label="Candidate answer",
+                        placeholder="Your spoken answer lands here. You can also type one.",
+                        lines=8,
+                        max_lines=30,
+                        elem_id="answer",
+                    )
+                    continue_button = gr.Button(
+                        "Submit typed answer", variant="secondary", elem_id="evaluate"
+                    )
+                with gr.Accordion("Audio & turn taking", open=False, elem_id="audio-panel"):
+                    replay_button = gr.Button("🔊 Play question again", elem_id="replay")
+                    hands_free = gr.Checkbox(
+                        value=True,
+                        label="Hands-free turn taking",
+                        info="The mic opens when the interviewer stops talking and closes when you stop.",
+                        elem_id="handsfree",
+                    )
+                    audio_enabled = gr.Checkbox(
+                        value=True,
+                        label="Speak questions aloud",
+                        info="Turn off to run silently. Touching the transcript always cuts the interviewer off.",
+                        elem_id="audio-toggle",
+                    )
+                finalize_button = gr.Button("Wrap Up & Finalize Session", elem_id="finalize")
+                clear_button = gr.Button("Clear Session", variant="stop", elem_id="clear")
                 scorecard = gr.Markdown(SCORECARD_PLACEHOLDER, elem_id="scorecard")
 
             with gr.Tab("📈 Progress & 1-Week Sprint Tracker"):
@@ -2021,12 +2214,23 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
     transcribe_event = answer_recorder.stop_recording(
         transcribe_answer, inputs=answer_recorder, outputs=[answer, spoken_seconds]
     )
-    transcribe_event.then(
-        answer_meter, inputs=[answer, spoken_seconds], outputs=answer_readout, queue=False
-    )
+    spoken_turn = transcribe_event.then(continue_conversation, submit_inputs, session_outputs)
+    spoken_turn.then(reset_capture, outputs=capture_outputs, queue=False)
+    spoken_speak = spoken_turn.then(speak_interviewer, speak_inputs, audio_path)
+    spoken_speak.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
+    spoken_turn.then(fn=None, js=FOCUS_INTERVIEWER_JS, queue=False)
     answer.change(answer_meter, inputs=[answer, spoken_seconds], outputs=answer_readout, queue=False)
     refresh_dashboard.click(load_progress_dashboard, outputs=[dashboard, session_history])
     sprint_checklist.change(save_sprint_progress, inputs=sprint_checklist, outputs=None)
+
+
+def tunnel_auth() -> tuple[str, str] | None:
+    """A tunnelled URL is public, so gate it with COACH_AUTH='user:password' before exposing the API key."""
+    credentials = os.getenv("COACH_AUTH", "")
+    if ":" not in credentials:
+        return None
+    user, _, password = credentials.partition(":")
+    return (user.strip(), password) if user.strip() and password else None
 
 
 if __name__ == "__main__":
@@ -2036,6 +2240,7 @@ if __name__ == "__main__":
         server_name="0.0.0.0",
         server_port=7860,
         share=share_enabled,
+        auth=tunnel_auth(),
         css=CSS,
         head=HEAD,
         allowed_paths=[str(TEMP_AUDIO_DIR)],
