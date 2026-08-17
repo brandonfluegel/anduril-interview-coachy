@@ -21,6 +21,7 @@ from pydantic import BaseModel, Field, ValidationError
 ROOT = Path(__file__).resolve().parents[1]
 COACHING_STATE_PATH = ROOT / "data" / "coaching_state.md"
 TEMP_AUDIO_DIR = ROOT / "temp_audio"
+EXPORT_DIR = ROOT / "exports"
 LIVE_MODEL = "gpt-5.4-mini"
 DEBRIEF_MODEL = "gpt-5.4"
 LIVE_REASONING_EFFORT = "low"
@@ -1447,6 +1448,31 @@ def clear_session() -> tuple[str, str, str, int, list[dict[str, str]], str, list
     )
 
 
+def export_session(scorecard_markdown: str, history: list[dict[str, str]] | None, persona_label: str):
+    """Writes the debrief to a file so grades survive a host that does not keep a disk."""
+    turns = history or []
+    if not scorecard_markdown or scorecard_markdown == SCORECARD_PLACEHOLDER or not turns:
+        return gr.DownloadButton(visible=False)
+    persona = PERSONAS.get(persona_label, persona_label or "Interviewer")
+    stamp = datetime.now().strftime("%Y-%m-%d_%H%M")
+    slug = re.sub(r"[^a-z0-9]+", "-", persona.lower()).strip("-")
+    EXPORT_DIR.mkdir(parents=True, exist_ok=True)
+    path = EXPORT_DIR / f"session_{stamp}_{slug}.md"
+    body = "\n".join(
+        [
+            f"# Mock Interview Debrief — {persona}",
+            f"_{datetime.now().strftime('%Y-%m-%d %H:%M')} · {completed_turns(turns)} turns_",
+            "",
+            "## Pacing",
+            render_pacing_log(turns),
+            "",
+            scorecard_markdown,
+        ]
+    )
+    path.write_text(body, encoding="utf-8")
+    return gr.DownloadButton(value=str(path), visible=True)
+
+
 def lock_setup() -> tuple[gr.Accordion, gr.Radio]:
     return gr.Accordion(open=False), gr.Radio(interactive=False)
 
@@ -2124,6 +2150,9 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
                         elem_id="audio-toggle",
                     )
                 finalize_button = gr.Button("Wrap Up & Finalize Session", elem_id="finalize")
+                download_button = gr.DownloadButton(
+                    "⬇︎ Download grades & feedback", visible=False, elem_id="download"
+                )
                 clear_button = gr.Button("Clear Session", variant="stop", elem_id="clear")
                 scorecard = gr.Markdown(SCORECARD_PLACEHOLDER, elem_id="scorecard")
 
@@ -2207,10 +2236,17 @@ with gr.Blocks(title="Anduril Human Factors Interview System") as demo:
     replay_event.then(fn=None, inputs=audio_path, js=PLAY_AUDIO_JS, queue=False)
     finalize_event = finalize_button.click(finalize_session, finalize_inputs, session_outputs)
     finalize_event.then(unlock_setup, outputs=setup_outputs, queue=False)
+    finalize_event.then(
+        export_session,
+        inputs=[scorecard, conversation_history, active_persona],
+        outputs=download_button,
+        queue=False,
+    )
     finalize_event.then(load_progress_dashboard, outputs=[dashboard, session_history])
     clear_event = clear_button.click(clear_session, outputs=session_outputs)
     clear_event.then(unlock_setup, outputs=setup_outputs, queue=False)
     clear_event.then(reset_capture, outputs=capture_outputs, queue=False)
+    clear_event.then(lambda: gr.DownloadButton(visible=False), outputs=download_button, queue=False)
     transcribe_event = answer_recorder.stop_recording(
         transcribe_answer, inputs=answer_recorder, outputs=[answer, spoken_seconds]
     )
@@ -2236,12 +2272,13 @@ def tunnel_auth() -> tuple[str, str] | None:
 if __name__ == "__main__":
     share_enabled = os.getenv("GRADIO_SHARE", "false").lower() == "true"
     TEMP_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+    EXPORT_DIR.mkdir(parents=True, exist_ok=True)
     demo.launch(
         server_name="0.0.0.0",
-        server_port=7860,
+        server_port=int(os.getenv("PORT", "7860")),
         share=share_enabled,
         auth=tunnel_auth(),
         css=CSS,
         head=HEAD,
-        allowed_paths=[str(TEMP_AUDIO_DIR)],
+        allowed_paths=[str(TEMP_AUDIO_DIR), str(EXPORT_DIR)],
     )

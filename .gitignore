@@ -20,6 +20,7 @@ venv/
 # Runtime and editor artifacts
 .gradio/
 temp_audio/
+exports/
 practice/print/
 .vscode/
 .idea/

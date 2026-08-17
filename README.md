@@ -1,3 +1,15 @@
+---
+title: Anduril Human Factors Interview Coach
+emoji: 🛡️
+colorFrom: gray
+colorTo: red
+sdk: gradio
+sdk_version: 6.22.0
+app_file: src/app.py
+pinned: false
+short_description: Lead/Staff interview pressure testing for Air Defense Human Factors
+---
+
 # Anduril Voice Interview Coach
 
 A continuous multi-turn interview simulator for Brandon Fluegel, PhD, targeting Anduril Industries' Air Defense team. The Gradio interface records your spoken answer, transcribes it verbatim through the OpenAI API, plays the interviewer's questions back in each persona's own voice, and produces a holistic Senior-versus-Lead/Staff debrief at the end of the session. No third-party dictation tool is involved: everything runs on `OPENAI_API_KEY`.
@@ -33,14 +45,26 @@ Public sharing is disabled by default. To request a temporary public Gradio URL,
 
 ## Tabs
 
-- **🛡️ Interview Simulator** — persona and optional pillar selection, spoken question playback, **Answer out loud** recording, *Submit Answer / Continue Conversation*, and *Wrap Up & Finalize Session*. Playback works on headphones or a phone speaker: touching the answer field cuts the interviewer off mid-sentence so the mic never picks up the question while you speak. *Play question* repeats the current one, and **Speak questions aloud** can be switched off at any point to run silently.
+- **🛡️ Interview Simulator** — persona and optional pillar selection, spoken question playback, the recorder, and *Wrap Up & Finalize Session*. Playback works on headphones or a phone speaker: touching the transcript cuts the interviewer off mid-sentence so the mic never picks up the question while you speak. The transcript, the typed-answer submit, and the audio controls sit in collapsed panels so the question and the recorder own the screen.
 
 Stopping the recording submits it: the answer is transcribed verbatim, stamped with its real spoken duration, and sent straight to the interviewer. With **Hands-free turn taking** on, the mic opens on its own when the interviewer finishes speaking and closes after about two seconds of silence, so a whole session runs without touching a button. The first recording of a session still needs one manual press to grant microphone permission. Typed answers use *Submit typed answer* and have their length estimated at 150 words per minute instead of measured.
 
 > **On a phone, use the share URL.** Browsers only grant microphone access in a secure context. `https://…gradio.live` (via `GRADIO_SHARE`) and `localhost` qualify; a plain `http://192.168.…` LAN address does not, and the recorder will silently fail to start.
 - **📈 Progress & 1-Week Sprint Tracker** — mock-session averages, upleveling readiness, bottlenecks, next actions, the Pillar Coverage matrix derived from persisted pillar IDs, recent-session history, and the seven-day intensive sprint checklist.
 
-Finalized session summaries, including the turn count and the covered pillar IDs, persist to `data/coaching_state.md`.
+Finalized session summaries, including the turn count and the covered pillar IDs, persist to `data/coaching_state.md`. **⬇︎ Download grades & feedback** appears after you finalize and saves the full debrief — scores, quoted evidence, pacing, and the Lead/Staff read — as a markdown file. Keep those files to track performance over time; they are the record that survives a host with no persistent disk.
+
+## Running It Without a PC
+
+The repo is configured as a Gradio Space (see the front matter at the top of this file).
+
+1. Create a **private** Space on Hugging Face with the Gradio SDK.
+2. Push this repo to it.
+3. In *Settings → Variables and secrets*, add `OPENAI_API_KEY`.
+
+The Space serves real HTTPS, so Safari grants microphone access, and being private means your Hugging Face login is the only way in. Note that a free Space has an ephemeral filesystem: interviews and grading work normally, but `data/coaching_state.md` resets when the Space rebuilds — which is what the download button is for.
+
+To run it from your own machine instead, `python src\app.py` and reach it at `http://localhost:7860`. For phone access from a local run you need an HTTPS tunnel, since browsers block the microphone on plain `http://` LAN addresses.
 
 ## Runtime Context
 
