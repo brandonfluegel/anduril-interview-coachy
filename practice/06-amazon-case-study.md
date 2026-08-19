@@ -48,7 +48,7 @@ Say those eight aloud in order until you can do it in fifteen seconds. Once the 
 | 30 min | The five core layers below, cold, one at a time. Stop each at 90 seconds. |
 | 20 min | AC03 F1 and F2 — the two rigor attacks. These are the likeliest hard questions. |
 | 20 min | AC07, the off-case four. Short answers, each naming its own limit. |
-| 15 min | The tier ladder in AC04, and the level ask in AC06. |
+| 15 min | The tier ladder in AC04, and the level guidance in AC06. |
 | 10 min | Pick your two questions from AC11. Write them on a card. |
 | 20 min | One full mock end to end. Then stop preparing. |
 
@@ -69,7 +69,7 @@ The confidentiality box · AC04 cadence and gates · AC05 stakeholder answers ·
 
 ### If you only have two hours total
 
-The eight triggers. Layer 5. The AC10 "never assert" list. The level ask in AC06. That combination still gets you a strong Senior signal and keeps the uplevel argument alive.
+The eight triggers. Layer 5. The AC10 "never assert" list. the level guidance in AC06. That combination still gets you a strong Senior signal and keeps the uplevel argument alive.
 
 ---
 
@@ -417,25 +417,41 @@ Kim's own stated bar is *"how would you build a research function whose standard
 
 > "The scope I'm arguing for is the one where I own the criteria the organization designs against — which is what I did at Amazon, and it's the difference between running excellent studies and setting the bar those studies get measured against."
 
-### Making the ask
+### The level question — say nothing, and let the scope do it
 
-**Kim cannot uplevel you because she's impressed.** She has to go argue it — rewrite the requisition, clear the compensation band, and defend it to a panel who haven't met you. So being impressive isn't enough. You have to hand her something she can repeat in a room you're not in.
+**Default: do not ask for an uplevel in this conversation.** The recruiter already knows you're targeting up, so an explicit ask adds risk without adding information. Worse, it changes the bar mid-conversation — right now she's asking "is this a strong Senior," which you clear comfortably. Say "I'm Staff scope" and she starts measuring you against a Staff bar using 45 minutes and one case, where your real gaps carry more weight than they should. And she can't act on it anyway; level gets decided after the loop, on panel evidence.
 
-**Say this near the end, after she's asked if you have anything else.** Not before minute 38. It only works once you've earned it.
+**Hiring managers uplevel when they hear themselves think *"we'd be underusing this person."*** That thought is produced by three habits, not by a request.
 
-> One thing I'd rather say than hint at. The role is posted at Senior. What I'm doing now is Staff scope — I own the function, not a project. I'm not asking you to decide that today. What I'd ask is that the onsite gets to test it, and if the panel comes back saying the scope isn't there, I'd genuinely rather hear that than have it go unsaid.
+1. **Talk in criteria, not findings.** "The spec engineering builds against," never "the study I ran."
+2. **Present tense about Sling.** *"I own the function."* Not "I owned a program four years ago." Present-tense scope is your loudest level signal and it costs nothing to use.
+3. **Answer what you'd own, not what you did.** On the first-ninety-days question, describe the standard you'd install and who else runs it.
 
-*(~65 words. Say it, then stop talking. Let her respond.)*
+Do those three and she raises level herself \u2014 which is far stronger than you raising it, because then it's her conclusion and she'll defend it in calibration.
 
-**Why this works and a demand doesn't.** It gives her an action instead of a decision, it costs her nothing to agree to, and the last clause removes her risk — you've said out loud that you'll accept a no. Hiring managers advocate for people who won't make it awkward if the answer is no.
+### If she opens the door
 
-**The three things she needs to defend it.** Make sure at least two of these have landed before you make the ask:
+Only these count as an opening: she mentions the posted level, asks what you're looking for, asks about title, or asks whether Senior is a fit. Then answer once, briefly, and move on.
+
+> Honestly, I'm optimizing for the problem rather than the label. What I'd say is that the work I do now is function-level \u2014 I own the standards, not a project \u2014 and I'd rather the loop test whether that scope is real than have either of us guess at it. If the panel says it isn't there, that's useful information and I'd want to hear it.
+
+*(~60 words. Say it, stop, let her steer.)*
+
+**Why this version is safe:** it declines to make a demand, hands the decision to the process rather than to her, and removes her risk by saying out loud that you'll accept a no. It reads as confidence rather than negotiation.
+
+### If she never opens the door
+
+Say nothing about level at all. Use the third question in AC11 instead \u2014 *"what would have to be true in a year for you to say this hire cleared the bar you were hoping for rather than the one you posted?"* That raises the whole subject without you ever using the word, and it invites her to describe the higher bar in her own words. If she does, you've won the argument without making it.
+
+### The three things she needs to defend an uplevel without you
+
+She has to argue it to people who never met you. Make sure at least two of these have landed:
 
 1. **A criterion other people use without you.** The spec, or the evidence ladder.
 2. **Something that changed and stayed changed.** The metric rename.
-3. **A function you built from nothing.** Sling. This is the one that most directly says "Staff," and it's the one you're most likely to forget.
+3. **A function you built from nothing.** Sling. This one most directly says "Staff," and it's the one you're most likely to forget.
 
-**What kills it.** Arguing from title, from years of experience, or from the patent. All three are inputs. Level is decided on scope, and scope means what someone else has to clear because you defined it.
+**What kills it.** Arguing from title, from years, or from the patent. All three are inputs. Level is decided on scope \u2014 what someone else has to clear because you defined it.
 
 ---
 
