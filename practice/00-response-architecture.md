@@ -6,10 +6,10 @@ Master index for the practice set. Read this once, then drill the four track fil
 - `02-behavioral-track.md` — BQ01–BQ10, behavioral / fit
 - `03-culture-stakeholder-track.md` — CQ01–CQ10, culture / stakeholder collaboration
 - `04-positioning-close-track.md` — PQ01–PQ10, positioning / scope / close
-- `05-nasa-case-study.md` — NC01–NC08, the NASA case as the 45-second safety-critical module and the onsite deep-dive
-- `06-amazon-case-study.md` — AC01–AC10, **the primary case for the 45-minute hiring manager conversation**
+- `05-nasa-case-study.md` — NC01–NC08, the NASA case as the 55-second safety-critical module and the onsite deep-dive
+- `06-amazon-case-study.md` — AC01–AC11, **the primary case for the 45-minute hiring manager conversation**
 
-The hiring manager conversation with Dr. Kim is one case study, probed in depth, and it gates the onsite loop. Amazon is that case. NASA is deployed inside it as a 45-second module. Read `06` first.
+The hiring manager conversation with Dr. Kim is one case study, probed in depth, and it gates the onsite loop. Amazon is that case. NASA is deployed inside it as a 55-second module. Read `06` first.
 
 **Source artifacts now live in `references/`** — the latency research report, the interface cognitive-load report, the patent, and your written response to Dr. Kim's Learners Conference questions. Two of those are former-employer confidential documents. See §4.
 

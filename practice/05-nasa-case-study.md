@@ -1,6 +1,6 @@
 # 05 — NASA Case Study Track (NC01–NC08)
 
-> **Positioning changed.** For the 45-minute hiring manager conversation with Dr. Kim, the primary case is Amazon — see [06-amazon-case-study.md](practice/06-amazon-case-study.md). NASA is deployed inside it as a 45-second module (AC08) that you volunteer around minute 25 to pre-empt the consumer-technology objection.
+> **Positioning changed.** For the 45-minute hiring manager conversation with Dr. Kim, the primary case is Amazon — see [06-amazon-case-study.md](practice/06-amazon-case-study.md). NASA is deployed inside it as a 55-second module (AC09) that you volunteer around minute 25 to pre-empt the consumer-technology objection.
 >
 > **This file remains the deep-dive** for the onsite loop, where the Systems/ML Engineering Lead and the Design Lead will value hardware, thresholds, and physical-digital coherence far more than a Head of Research will. Drill NC01 for that room, and NC02 as the compression you actually use with Kim.
 

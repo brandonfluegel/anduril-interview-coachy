@@ -100,11 +100,13 @@ The remaining loop is a **45-minute conversation with Dr. Daniella Kim built aro
 
 `practice/` holds the written answer bank — 40 question pillars with one model answer each, all follow-ups answered at follow-up length, and the Senior → Lead/Staff delta per pillar — plus two case-study files built for the single-case hiring-manager conversation.
 
+**Which file is for which conversation.** The hiring-manager screen is one case study probed in depth, so `06` carries it and `05` supplies a 55-second module inside it. The four question tracks are the onsite material: the loop only happens if Friday goes well, and the banks cover ground the case study deliberately doesn't — field craft, facilitation, quantitative breadth, service blueprints, mentorship.
+
 - `00-response-architecture.md` — the two answer structures, length discipline, uplevel moves, evidence boundaries, drill protocol, and a one-page cheat sheet
-- `01-technical-track.md` — TQ01–TQ10
-- `02-behavioral-track.md` — BQ01–BQ10
-- `03-culture-stakeholder-track.md` — CQ01–CQ10
-- `04-positioning-close-track.md` — PQ01–PQ10
+- `01-technical-track.md` — TQ01–TQ10 · onsite
+- `02-behavioral-track.md` — BQ01–BQ10 · onsite
+- `03-culture-stakeholder-track.md` — CQ01–CQ10 · onsite
+- `04-positioning-close-track.md` — PQ01–PQ10 · onsite and the close of any conversation
 - `05-nasa-case-study.md` — NC01–NC08, the NASA Langley case: a 55-second module inside the hiring-manager conversation, and the full deep-dive for the onsite loop
 - `06-amazon-case-study.md` — AC01–AC11, **the primary case for the 45-minute hiring-manager conversation.** A counted three-minute presentation, five drilled deep-dive layers, the rigor follow-ups, the evidence-tier ladder, the off-case answers for when she leaves the case, and a minute-by-minute run sheet
 
