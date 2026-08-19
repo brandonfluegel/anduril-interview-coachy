@@ -2,9 +2,11 @@
 
 **This is the primary case for the 45-minute hiring manager conversation with Dr. Daniella Kim.** NASA moves to second position — a 45-second module you deploy yourself, covered in AC08.
 
-**Why this case wins with Kim.** Her scorecard is empirical rigor, research velocity judgment, thesis-setting, standards that survive your departure, and executive influence. The latency program scores on all five, you owned it, and it has enough layers to survive forty minutes of probing without hitting the floor. The role record's definition of Lead/Staff — *"bridges engineering latency with human perception... translates HSI findings into hard specifications"* — is this program restated.
+**Why this case, and not NASA.** Kim is judging five things: is your work rigorous, do you move fast enough, do you set the direction or follow it, does what you build outlast you, and can you move people who outrank you. The latency program hits all five. You ran it. And it has enough depth to survive forty minutes of questions without running dry. The job posting describes Lead/Staff as someone who *"bridges engineering latency with human perception"* and *"translates findings into hard specifications."* That is a description of this program.
 
-**Targets:** presentation 380–420 words ≈ 2:35–2:50 · deep-dive answers 160–230 words ≈ 90s · follow-ups 45–90 words.
+**Targets:** presentation 400–430 words ≈ 2:45–2:55 · deep-dive answers 160–230 words ≈ 90s · follow-ups 45–90 words.
+
+**How to say all of it.** Short sentences. One idea each. When you use a technical term, define it in the next breath in words a product manager would understand — that habit is itself a seniority signal, because it shows you've had to sell this work to people who don't share your training. Never use two clauses where one will do. If a sentence needs a comma and a dash, cut it in half.
 
 ---
 
@@ -34,49 +36,76 @@
 
 | # | Beat | Words | Time | The one job it does |
 |---|---|---|---|---|
-| 1 | **Claim first** | 40–50 | ~19s | The org was optimizing the wrong variable. State it flat. |
-| 2 | **Ambiguity, not setup** | 45–55 | ~21s | Nobody could say what "fast enough" meant. That's the real problem. |
-| 3 | **Your charge** | 25–35 | ~13s | First person. Thresholds engineering can hold as requirements. |
-| 4 | **Method + the velocity call** | 100–120 | ~46s | Psychophysics design, and the sample-size decision you defend. |
-| 5 | **The finding, including the counterintuitive one** | 60–70 | ~27s | Intent-dependence, and the floor. |
-| 6 | **Earned secret** | 30–40 | ~15s | Latency isn't a quantity. It's an expectation violation. |
-| 7 | **Mechanism** | 55–65 | ~25s | Thresholds became spec; ~$50M attributed; the metric got renamed. Level gate. |
-| 8 | **Transfer + boundary** | 40–50 | ~19s | Air Defense, and where consumer evidence stops. |
+| 1 | **The claim** | 45–55 | ~20s | The company was chasing the wrong goal. Say it flat. |
+| 2 | **Why it was hard** | 40–50 | ~19s | Nobody could define "fast enough." That was the real problem. |
+| 3 | **Your job** | 25–35 | ~13s | First person. Numbers engineering would treat as requirements. |
+| 4 | **What you did** | 140–155 | ~58s | The plain method, and the fancier one you turned down. |
+| 5 | **What you found** | 60–70 | ~27s | It depends on the task — and there's a speed limit in both directions. |
+| 6 | **What you handed over** | 55–65 | ~24s | Never one number. This is the beat that shows the level. |
+| 7 | **What you left behind** | 55–65 | ~25s | The spec, the ~$50M, the renamed metric. |
+| 8 | **What it means here** | 45–55 | ~20s | Air Defense, and the one thing your evidence can't cover. |
 
-Total **~415 words ≈ 2:50**.
+Total **~430 words ≈ 2:52**. The ceiling is real. **If you are running long, cut beat [2] to one sentence** — never beat [4] or [6].
 
-### Model script (~415 words / 2:50)
+### Model script (~430 words / 2:52)
 
-> **[1]** The short version is that a large engineering organization was optimizing the wrong variable, and my job turned out to be proving that. Everyone was treating response latency as a number to drive down forever. What the research established is that there is no single acceptable latency — acceptable latency is a property of *what the user asked for*, and past a certain point, faster stops helping and starts hurting.
+> **[1]** The short version is that a very large engineering organization was chasing the wrong goal, and my job turned into proving that. Everyone treated response delay as a number to push toward zero. What I found is that there is no single right answer. The right delay depends on what the person just asked for. And past a certain point, getting faster stops helping and starts doing harm.
 >
-> **[2]** The ambiguity was the actual problem. The guidance in use predated the current hardware generation by years, and nobody could say what "fast enough" meant for any specific interaction. So latency targets were being set by engineering feasibility and argued about in reviews, and there was no evidentiary basis to settle any of it.
+> **[2]** The hard part was that nobody could define "fast enough." The guidance in use was years old and written for older hardware. So targets got set by what engineering could build, and the same argument came back every review, because there was nothing solid to settle it with.
 >
-> **[3]** My charge was to produce perceptual thresholds defensible enough that an engineering organization would hold them as requirements rather than treat them as research opinion.
+> **[3]** My job was to produce numbers strong enough that engineering would treat them as requirements instead of as a researcher's opinion.
 >
-> **[4]** I ran it as psychophysics. Thirty participants, twelve high-priority interaction types, six latency levels from 500 milliseconds to three seconds, spanning everything from human conversational pace to the slow tail of what customers actually experienced. Around two thousand trials. The instrumentation mattered: I had a Wizard-of-Oz rig on a modified device that detected utterance termination and let me set the response delay per trial with millisecond control, so latency was a manipulated variable rather than an observed one. And I used a three-point scale — not slow, somewhat slow, too slow — instead of a seven-point Likert, because people don't perceive speed. They only notice slowness. Measuring the thing customers actually experience is what made the numbers behave.
+> **[4]** I used the simplest method in psychophysics. It's called the method of constant stimuli, and all it means is this: pick a fixed set of delays, play them in random order, and ask the person to judge each one. Do that enough times and you can draw the curve that connects delay to how people react.
 >
-> **[5]** Two findings. First, thresholds are interaction-dependent, not global — anything with a physical real-world analogue, a light switch, a notepad, has to land near half a second or it feels broken, while retrieval tasks got roughly twice the budget. Second, and this is the one I didn't expect: for conversational responses I had to recommend a *floor*. Faster than human conversational latency reads as unsettling rather than responsive.
+> My grid was twelve kinds of interaction crossed with six delays, from half a second up to three seconds. Random order, so nobody could see what was coming. A couple hundred trials per person.
 >
-> **[6]** The earned secret is that latency isn't a quantity, it's an expectation violation — and "faster is better" is false at both ends of the scale.
+> I asked one question after every trial, with three answers: not slow, somewhat slow, too slow. Not a seven-point scale. People don't notice speed. They only notice slowness. So I measured the thing that actually exists.
 >
-> **[7]** The mechanism is what I'd point at. Two thresholds per interaction type became the acceptance criteria the org designed against — roughly fifty million dollars in projected operational value was attributed to the program — and I got the internal metric renamed, because the old name conflated the objective interval with the subjective perception and that conflation was causing bad decisions. Both the criteria and the definition outlived my involvement.
+> There's a faster method called a staircase, and I turned it down on purpose. It finds one point on the curve quickly. I needed the whole curve.
 >
-> **[8]** Transfer to Air Defense is direct — a threshold is a threshold. Where it stops: my population was consumers, not trained operators under load, and the consequence of a violated expectation was annoyance, not an engagement.
+> **[5]** Two findings. The right delay depends on the task. Anything with a real-world equivalent — a light switch, a notepad — has to land near half a second, or it feels broken. Anything that looks like looking something up gets about twice as long. And I had to set a speed limit in the other direction too. When a spoken answer comes back faster than a human would answer, it stops feeling responsive and starts feeling wrong.
+>
+> **[6]** The part I'd most want you to push on is what I actually handed over. Never a single number. Every spec went out with four things attached: the delay, how confident I was in it, how steep the curve was at that point, and which mode and workload it applied to. The steepness is what engineering cared about most. On a steep stretch, a hundred milliseconds is the difference between fine and not fine. On a flat stretch it's noise. That tells you where the money should go.
+>
+> **[7]** What I left behind is the part I'd point at. Two numbers per interaction became the criteria the organization designed against — about fifty million dollars in operational value was attributed to the program. And I got a company metric renamed, because its name assumed that the real delay and the felt delay were the same thing, and my data showed they aren't. Both of those outlived me.
+>
+> **[8]** It carries over here directly. A threshold is a threshold. Where it stops: my people were customers, not trained operators, and I held workload steady instead of varying it. The version that matters here has to treat workload as something you turn up and down. That's the study I'd want to run.
 
 ### What each beat is buying you
 
 - **[1]** *Decision first* + it opens on a claim Kim can disagree with, which is what makes her lean in.
 - **[2]** **Ambiguity.** This beat exists because the JD asks for someone who can "work through ambiguity." Show the problem was undefined before you defined it.
-- **[4]** *Alternatives + conditions* and instrumentation depth. The three-point-scale justification is a small detail that signals real method thinking.
+- **[4]** The rigor beat, and the register beat. Using the plainest method available and *saying you chose it over the fancier one* is a confidence signal. Junior researchers reach for exotic procedures; senior ones reach for the simplest design that answers the question.
 - **[5]** The floor is your best single moment. It is *Calibrated Cognitive Friction with data behind it* — see AC07.
+- **[6]** **Say this even if it costs you time.** Almost nobody ships a spec as a distribution with a slope. Inviting her to push on it is a confidence signal, and it sets up AC02 Layer 5.
 - **[7]** *Reusable mechanism.* Renaming an organizational metric is a Staff-level act. Do not leave it out.
-- **[8]** *Evidence hygiene.* Name the population gap before she does.
+- **[8]** *Evidence hygiene.* Name the workload boundary before she does — and it doubles as your proposal.
 
-### Senior → Lead/Staff
+### What Kim has to be able to say about you afterwards
 
-- **Senior:** describes a well-designed study and reports thresholds.
-- **Lead/Staff:** reframes what the organization was measuring, defends a velocity tradeoff explicitly, produces a counterintuitive result that changes the design philosophy, and leaves behind both a specification and a corrected metric definition.
-- **Structural test:** delete beat [7]. If the answer still feels finished, you told it as a Senior.
+**This is the real test, and it is not the one you think you're taking.** She will not replay your case study to the panel. She will compress the whole 45 minutes into two or three sentences, from memory, days later. Those sentences *are* the output of this conversation. So decide what they should be and make every answer produce them.
+
+**The three you want:**
+
+1. *"He turns human limits into numbers engineers can actually build to — and he ships them with error bars instead of opinions."*
+2. *"He killed a company-wide assumption and got the metric definition changed. That's still there and he isn't."*
+3. *"He told me where his own evidence runs out before I had to ask."*
+
+Each one maps to a beat. The first is [6]. The second is [7]. The third is [8]. That's why those three beats never get cut.
+
+**The sentence that means you failed:** *"Strong researcher. Ran a big study, got a good result."* That is a completely positive review and it is a Senior review. It means you described excellent execution, which is the baseline expectation, and never showed her anything that outlived you.
+
+### Senior vs. Lead/Staff, in plain terms
+
+| | What Senior sounds like | What Lead/Staff sounds like |
+|---|---|---|
+| **The finding** | "We found the acceptable delay is X." | "We found the question was wrong. There isn't one delay." |
+| **The delivery** | "I recommended a target." | "I shipped a criterion with error bars, and engineering budgets against the conservative edge." |
+| **The method** | "Here's the design I ran." | "Here's the design I ran and the better-sounding one I turned down, and why." |
+| **The legacy** | "The team adopted my recommendation." | "The definition changed and stayed changed after I left." |
+| **The limits** | Answers honestly when asked. | Says it first, unprompted, and turns it into the next study. |
+
+**Structural test:** delete beat [7]. If the story still feels finished, you told it as a Senior.
 
 ---
 
@@ -86,65 +115,180 @@ Three minutes is the presentation. The other forty are these. **Each layer is a 
 
 ### Layer 1 — Why psychophysics rather than analytics
 
-> The organization already had behavioral telemetry at enormous scale, and telemetry can tell you what happened after a slow response. It cannot tell you where the perceptual boundary is, because the boundary isn't in the log data — it's in the person. Psychophysics is the method built exactly for that: manipulate the stimulus systematically, capture the subjective response, find the point where the judgment flips. Analytics gives you correlation at scale; psychophysics gives you a threshold you can write into a requirement. I needed the second thing.
+> The company already had behavior data at enormous scale. That data tells you what happened after a slow response. It can't tell you where the line is, because the line isn't in the logs. It's in the person. Psychophysics is the method built for exactly that: change one thing on purpose, ask people to judge it, and find the point where the judgment flips. Analytics gives you a pattern across millions of people. Psychophysics gives you a number you can put in a requirement. I needed the second one.
 
-### Layer 2 — The sample size, and the velocity call
+### Layer 2 — Why the simplest method, and why not the fancier one
 
-**This is the answer Kim is most likely to press on. Have it word-perfect.**
+**This is the confidence answer. Say it without a hint of apology.**
 
-> Thirty participants, roughly two thousand trials, ninety percent confidence with a margin of error that ranged by interaction type. I costed the alternative: getting to a five-percent margin across every interaction type needed on the order of three hundred participants, which was six to twelve months and several hundred thousand dollars. I recommended against it, in writing. The reason is that the decision the research had to serve was "which interaction types do we prioritize, and to what target" — and the effect sizes that mattered for that decision were large. Tightening the interval would have changed the error bars and changed no decision. So the honest framing is that I bought a decision, not a publication, and I said out loud which one I was buying.
+> I used the oldest, plainest tool in the box, and that was a choice, not a default.
+>
+> The efficient alternative is called a staircase. It moves the delay based on what you said last time, so it homes in on your threshold in far fewer trials. I looked at it and turned it down for three reasons.
+>
+> It finds one point on the curve, and I needed two — a "good enough" line and a "genuinely good" line. It's accurate about where the line is but poor at telling you how steep the curve is there, and the steepness was half of what I owed people. And it's harder to explain to the engineers who have to accept the number, which matters more than it should.
+>
+> So I spent more trials and got the whole curve back. That let me read off whatever line the spec needed — including ones nobody had asked for yet.
 
-### Layer 3 — The intent-dependence finding
+**The line to land it:**
 
-> The result that reorganized the program was that acceptable latency isn't a system property, it's a property of the user's intent. Anything with a physical real-world analogue — flipping a switch, jotting on a notepad — has to complete near half a second, because the customer is benchmarking against the object, not against the software. Retrieval tasks got roughly double the budget. Participants said this directly and unprompted: if it isn't faster than the physical thing, the device isn't worth using. That killed the idea of one global latency SLA and replaced it with a per-intent specification, which is a very different engineering roadmap.
+> I'd rather use the simplest method that answers the question and put the effort into what I do with the results. The clever part shouldn't be the procedure.
 
-### Layer 4 — The floor, and non-monotonicity
+### Layer 3 — Why thirty people is enough
+
+**The other question she's most likely to ask. Have it word-perfect.**
+
+> The precision comes from the trials, not the headcount. Everybody saw every delay, so each person acts as their own comparison, and a couple hundred trials each is what makes the curve steady. The thirty people set how much the threshold varies from person to person — and that variation is exactly what I reported, rather than hiding it.
+>
+> I also priced the alternative and argued against it in writing. Tightening that range meant roughly ten times the people, six to twelve months, and several hundred thousand dollars. The decision I had to serve was which interactions to fix first and how far. The differences driving that were big. A tighter range would have moved the error bars and changed nothing about what we did.
+>
+> I bought a decision, not a publication. And I said out loud which one I was buying.
+
+### Layer 4 — Mode and workload
+
+> Two things I controlled instead of letting them drift.
+>
+> First, the mode. A spoken response and a response you see on screen have different thresholds. Average them together and you get a number that's wrong for both. So every threshold I published named the mode it applied to.
+>
+> Second, workload. I ran the judgments while people were doing something else at a fixed level of difficulty, not sitting there with nothing to do. A threshold measured by someone at rest isn't the threshold that applies in real use. I used a standard workload questionnaire to confirm the load actually landed where I'd aimed it — that's what it's for, checking that the setup worked, not as the result itself.
+>
+> The honest limit is that I held workload steady rather than turning it up and down. So I have the threshold at one setting, not across the range. That's the next study, and it's the one that matters when the person is an operator.
+
+**Why this layer is load-bearing:** it is your cleanest bridge to Air Defense, because operators under load *is* the domain. Naming that you controlled workload, and that the obvious next step is to vary it, turns a limitation into a proposal.
+
+### Layer 5 — Why you never ship one number
+
+**Deploy when she asks what you actually delivered, or how research turns into a requirement.**
+
+> I stopped handing over single numbers, because a single number just starts an argument about the number.
+>
+> Every spec went out with four things: the line itself, how confident I was in it, how steep the curve was at that point, and which mode and workload it applied to.
+>
+> Two things changed because of that. Because there was a confidence range, I could tell engineering to build against the cautious end rather than the middle — which is what you do when being wrong in one direction costs more than the other. And because there was a steepness number, they could see where the cliffs were. Steep stretch: a hundred milliseconds is the difference between fine and not fine, and that's worth real engineering money. Flat stretch: it's noise, spend it somewhere else.
+>
+> That's the habit I'd bring here. One number tells you where the line is. A line plus a range plus a slope tells you what it costs to miss it — which is the question anyone working to a schedule is actually asking.
+
+### Layer 6 — Why the answer depends on the task
+
+> The result that reorganized the whole program was that the right delay isn't a property of the system. It's a property of what the person just asked for. Anything with a real-world equivalent — flipping a switch, writing on a notepad — has to finish near half a second, because people are comparing it to the object, not to the software. Several people said it outright: if it isn't faster than the physical thing, why own the device. Anything that looks like looking something up got about twice as long. That killed the idea of one company-wide speed target and replaced it with a separate number per interaction, which is a completely different engineering roadmap.
+
+### Layer 7 — The speed limit in the other direction
 
 **Your most valuable thirty seconds. See AC07 for how to spend it.**
 
-> For conversational question-answering I recommended a lower bound as well as an upper one — responses should not be faster than roughly human conversational latency, because at that point the system stops reading as responsive and starts reading as uncanny. That's the finding that made me stop believing "faster is better." The response curve isn't monotonic. There's a band, and both edges are real, and if you only ever optimize one direction you will walk off the other edge without instrumentation to tell you.
+> For spoken answers I had to set a lower limit as well as an upper one. A response that comes back faster than a person would answer stops feeling responsive and starts feeling wrong. That's the finding that made me stop believing faster is always better.
+>
+> The curve has two edges, not one. Both are real. If you only ever optimize in one direction, you'll walk off the far edge and have nothing measuring to tell you that you did.
 
-### Layer 5 — The metric rename
+### Layer 8 — Getting the metric renamed
 
-> The organization used a metric name that described an objective time interval but was worded as though it described the customer's perception. That sounds like pedantry. It wasn't — it meant every conversation about the metric carried an embedded assumption that objective time and perceived time were the same quantity, which is precisely the assumption my data falsified. I recommended renaming it to describe the interval it actually measured, and separating perception into its own construct with its own thresholds. Getting a metric definition changed is slower than getting a study funded, and it's worth more, because the definition constrains every future argument.
+> The company had a metric whose name described a real measured interval but was worded as if it described what the customer felt. That sounds like a quibble. It wasn't. It meant every conversation about that metric silently assumed the measured delay and the felt delay were the same thing — which is precisely the assumption my data disproved.
+>
+> So I pushed to rename it to describe what it actually measured, and to make perception a separate thing with its own numbers. Changing a metric definition is slower and less fun than getting a study funded, and it's worth more, because the definition shapes every argument that happens afterwards.
 
-### Layer 6 — Triangulation and the evidence gate
+### Layer 9 — Two methods that fail differently
 
-> There was a parallel economic model estimating downstream impact of slow responses, built by a partner team. Its estimates were large enough that people privately doubted it. My research was independent of it — different method, different data, no shared assumptions — and it corroborated the core claim that customers are genuinely sensitive to these differences. That's the useful structure: an observational model and a controlled perceptual study that fail in different directions. When they agree, the agreement is informative. I'd rather have two weak methods that fail independently than one strong method with a blind spot, and that's how I'd want to build an evidence base here.
+> A partner team had built an economic model estimating what slow responses cost downstream. Its numbers were big enough that people quietly doubted it. My work was completely independent — different method, different data, no shared assumptions — and it backed up the core claim that people really are sensitive to these differences.
+>
+> That's the structure I want in an evidence base. One model built on observed behavior, one controlled study built on judgments. They fail in different directions. So when they agree, the agreement actually means something. I'd rather have two imperfect methods that break differently than one strong method with a blind spot.
 
-### Layer 7 — The cognitive load framework
+### Layer 10 — Measuring mental effort directly
 
-> Separately I co-established an objective cognitive-load capability using functional near-infrared spectroscopy and eye tracking. The application I'd describe is interface evaluation: we had participants view a set of comparable interfaces while measuring prefrontal activation associated with mental effort, alongside gaze. We found activation differences between interfaces that tracked the subjective complexity and density ratings, and gaze patterns that showed which regions of a layout were systematically never looked at. The value isn't that the neural measure is better than asking. It's that it's *non-reactive* — it doesn't require the person to introspect on effort while they're expending it, and it doesn't move when you change the wording of your question.
+> Separately I helped build a way to measure mental effort without asking. We used a brain-imaging technique that reads blood flow in the front of the head, plus eye tracking, while people looked at a set of comparable interfaces. We saw differences in effort between interfaces that lined up with how cluttered people said those interfaces were, and gaze patterns showing whole regions of a layout that nobody ever looked at.
+>
+> The value isn't that the brain measure beats asking people. It's that it doesn't interrupt. You don't have to make someone stop and rate their own effort while they're spending it, and the measure doesn't shift when you reword your question.
 
 **Boundary — say it before she asks:** you have no head-to-head result showing the neural measure outperformed the NASA Task Load Index. Never imply one. The defensible claim is convergence and non-reactivity, not superiority.
 
-### Layer 8 — The patent
+### Layer 11 — The patent
 
-> The patent came out of a different thread: context-based control inputs. The idea is that the same physical actuation maps to different control inputs depending on what the system is currently displaying and where the user is within it — the input is interpreted against context rather than fixed at the hardware. I'd describe it as the same intellectual move as the latency work. In both cases the meaning of a signal isn't a property of the signal; it's a property of the state the system and the human are in.
+> The patent came from a different thread — context-based control inputs. The idea is that pressing the same button does different things depending on what's on screen and where you are in it. The meaning is worked out by the system in the moment rather than fixed in the hardware.
+>
+> It's the same move as the latency work, which is why I mention it. In both cases, what a signal means isn't a property of the signal. It's a property of the situation the system and the person are in.
 
 ---
 
 ## AC03 — Kim Follow-Ups: Rigor and Velocity
 
-**F1 — "Thirty people. Convince me that's not just a number you could afford."** *(~85 words)*
+**F1 — "Constant stimuli and a three-point scale. That's a fairly basic design for a multi-year program."** *(~85 words)*
 
-> It's a number I chose and costed, which isn't the same thing. The design carries the power, not the headcount: within-subjects, six latency levels, twelve interaction types, about two thousand trials — every participant is their own control, which is what makes small samples defensible in psychophysics and is exactly why the method exists. And I ran the counterfactual explicitly: three hundred participants, six to twelve months, high six figures, for a tighter interval on a decision that was already unambiguous. I recommend against studies that can't change a decision.
+> It is, and that's on purpose. The design is simple. What I did with the results isn't. I drew the full curve for every condition, published lines with confidence ranges and steepness rather than bare numbers, and named the mode and workload each one applied to.
+>
+> The fancier designs I looked at would have been faster and given me less. A staircase finds one point well and tells you little about the shape around it, and I needed two points and the shape. I'd rather be plain in the procedure and demanding in the analysis than the other way round.
 
-**F2 — "What's the weakest part of that study? Not the limitation section — the part that actually worries you."** *(~90 words)*
+**F2 — "Thirty people. Convince me that's not just a number you could afford."** *(~80 words)*
 
-> The controlled setting. I isolated verbal response latency and stripped out everything that co-occurs with it in the real environment — the light ring, the earcons, ambient noise, the fact that people are usually doing something else. Those aren't nuisance variables, they're probably moderators, and my thresholds are almost certainly conservative in one direction and I can't tell you which. The second worry is that I measured a judgment, not behavior. People can report a response as acceptable and still disengage from the product, and my design cannot detect that gap.
+> The estimate doesn't rest on thirty. It rests on a couple hundred trials each, with everyone seeing every delay, so each person is their own comparison. That's what makes the curve steady, and it's why this method works at these numbers.
+>
+> What the thirty buys me is how much the line moves from person to person — and I published that spread rather than burying it. I also priced the alternative: about ten times the people, six to twelve months, several hundred thousand dollars, for a tighter range on a decision that was already clear. I argue against studies that can't change a decision.
 
-**F3 — "If you re-ran it today with no constraints, what changes?"** *(~75 words)*
+**F3 — "What's the weakest part of that study? Not the limitation section — the part that actually worries you."** *(~90 words)*
 
-> I'd add the affordances back in as manipulated factors rather than removing them, because I now think the interaction between visual feedback and perceived latency is where the remaining budget is. I'd add a secondary task, so I'm measuring under load rather than at rest — that's much closer to the operational case and it's the version relevant here. And I'd pair the subjective threshold with a behavioral one, so I'm not relying on a single response class.
+> The controlled setting. I stripped out everything that happens alongside delay in real life — the light ring, the sounds, background noise, the fact that people are usually busy doing something else. Those aren't nuisances, they probably change the answer. So my numbers are almost certainly off in one direction and I can't tell you which one.
+>
+> The second thing that bothers me is that I measured a judgment, not a behavior. Someone can tell me a response was fine and still quietly use the product less. My design can't see that gap.
 
-**F4 — "What did you get wrong?"** *(~70 words)*
+**F4 — "If you re-ran it today with no constraints, what changes?"** *(~75 words)*
+
+> I'd make workload a factor instead of a control, so I get the threshold as a function of load rather than at one point on it — that's the version that applies to an operator. I'd add the visual and auditory affordances back in as manipulated factors, because I now think the interaction between feedback and perceived latency is where the remaining budget sits. And I'd pair the subjective threshold with a behavioral one, so the spec doesn't rest on a single response class.
+
+**F5 — "What did you get wrong?"** *(~70 words)*
 
 > I framed the first version of the deliverable as a single global threshold, because that's what I'd been asked for and it's what would have been easiest to adopt. The data didn't support it and I had to go back and restructure the whole recommendation around interaction type. The lesson I took is that the shape of the deliverable is a research decision — I'd pre-committed to an answer format before I knew the answer's shape.
 
 ---
 
-## AC04 — Ambiguity and Evidence Gates
+## AC04 — Evidence Tiers, Cadence, and Ambiguity
+
+### The evidence ladder
+
+**This is the most portable thing you own, and it's your answer to "how would you actually work here."** It solves the problem every fast company has: research is either quick and not trustworthy, or trustworthy and too late. Tiering fixes that by putting the strength of the claim on the artifact itself, so moving fast never costs you credibility later.
+
+| Tier | Time | What it is | What it's allowed to decide | What it's never allowed to decide |
+|---|---|---|---|---|
+| **Directional** | Days | A rough read — a few people, existing research, a quick check. A best guess, no precision claimed | Which way to lean, what to prototype, what to stop building | A spec, a freeze, or a number anyone quotes in a review |
+| **Threshold-grade** | Weeks | The real curve for a condition, with a confidence range and a steepness, named to a mode and a workload | A design target, a budget, a roadmap priority | A release gate by itself |
+| **Decision-grade** | Longer, and rare | Threshold-grade, repeated in the real operating setup, with a stated way it could be proven wrong and a plan to watch it in the field | Acceptance criteria and sign-off | Anything outside what it was measured on — the scope is part of the claim |
+
+**Two rules that make this real instead of decorative:**
+
+1. **The tier is written on the artifact, not remembered.** A rough number that loses its label turns into a hard number in about two weeks. Nobody lies. It just happens.
+2. **Rough findings expire.** Each one carries a date and the tier it's waiting for. If nothing replaces it, it gets reopened or thrown out. It never quietly becomes fact.
+
+### Saying it out loud (~120 words)
+
+> The way I keep research fast without it becoming unreliable is that I sort it into three tiers and write the tier on the thing itself.
+>
+> Rough is days. A few people, a quick read, enough to tell you which way to lean or what not to build — and explicitly not allowed to set a spec.
+>
+> Threshold-grade is weeks. A real curve with a confidence range and a steepness, named to a mode and a workload. That can carry a design target.
+>
+> Decision-grade is what gates a freeze. It has to hold up in the real operating setup, and I have to say in advance what result would prove me wrong.
+>
+> The discipline isn't the three tiers. It's that the label travels with the number. What actually rots an evidence base is a rough finding quietly getting promoted while nobody's watching.
+
+### Cadence — how directional specs got made along the way
+
+**"How do you deliver something useful before the rigorous answer exists?"** *(~105 words)*
+
+> By shipping the rough version on a schedule and being loud about the fact that it's rough. On the latency program, engineering needed a target long before I had a defensible curve. So I gave them a provisional band, with the tier written on it and a plain statement that it would move.
+>
+> It did move. And because the label was on it, that was an update rather than a retraction. That's the whole difference.
+>
+> The schedule matters as much as the label. Something lands every couple of weeks. If research goes quiet for a quarter and then reappears with the truth, the roadmap has already worked around you, and your truth shows up as an obstacle.
+
+**The sentence to land it:**
+
+> A wrong number that's labeled provisional is a working agreement. A wrong number that's labeled final is a credibility event. The label is doing more work than the number.
+
+### What you'd install here (~90 words)
+
+**Deploy when she asks about your first ninety days or how you'd operate.**
+
+> The first thing I'd set up is the tier language, because it's cheap and it changes behavior straight away. Every research artifact says what it's allowed to decide and what it isn't, and every one names what it was measured on — which mode, which workload, which kind of operator. Then I'd organize the repository by tier instead of by project, so anyone hunting for a number sees how much weight it can carry in the same glance. That's about a week of work, and it's what lets research move at engineering speed without getting caught out a year later.
+
+---
+
+### Ambiguity and the gates
 
 **"How do you decide what research not to do?"** *(~95 words)*
 
@@ -186,13 +330,15 @@ Three minutes is the presentation. The other forty are these. **Each layer is a 
 
 ## AC06 — The Level Move: The Mechanisms
 
-Kim's own stated bar is *"how would you build a research function whose standards survive after you leave?"* You have three real answers. **Pick the two that fit the question — never recite all three as a list.**
+Kim's own stated bar is *"how would you build a research function whose standards survive after you leave?"* You have four real answers. **Pick the two that fit the question. Never recite all four as a list.**
 
-> **The specification.** "Two thresholds per interaction type, with defined pass criteria — not a recommended target, an acceptance band with a test. That's the artifact engineering designs against, and it works without me in the room."
+> **The spec.** "Two numbers per interaction, each with a pass test attached — not a suggested target, a line the hardware has to clear. That's what engineering builds against, and it works with me out of the room."
 
-> **The metric definition.** "I got an organizational metric renamed because its name encoded an assumption my data had falsified. That's the one I'm proudest of, and it's the least impressive-sounding. A definition constrains every argument that comes after it."
+> **The definition.** "I got a company metric renamed, because its name assumed something my data had disproved. It's the least impressive-sounding thing I've done and the one I'm proudest of. A definition shapes every argument that comes after it."
 
-> **The measurement capability.** "The cognitive-load setup was built as a capability, not a study — an instrumented method other researchers could run on their own questions. The point was to leave behind an instrument, not a result."
+> **The instrument.** "The mental-effort setup was built as a capability, not a study — something other researchers could point at their own questions. The point was to leave behind a tool, not a result."
+
+> **The evidence ladder.** "Every artifact says what it's allowed to decide and what it was measured on, so a rough read can't quietly turn into a spec. That's the one I'd set up here first. It costs a week, and it's what lets research move fast without getting caught out later."
 
 ### The sentence that must be said out loud
 
@@ -254,8 +400,10 @@ Kim's own stated bar is *"how would you build a research function whose standard
 ### Assert freely
 
 - Multi-year psychophysics program at Amazon Devices replacing arbitrary engineering latency targets with human perception-derived thresholds; ~$50M in projected operational value
-- Method: within-subjects psychophysics, thirty participants, twelve high-priority interaction types, six latency levels from 500ms to 3000ms, ~2,000 trials, Wizard-of-Oz instrumentation with per-trial millisecond control, three-point slowness rating scale
-- Two-tier threshold structure (acceptable band and high-satisfaction band) defined per interaction type, with stated pass criteria
+- Method: within-subjects psychophysics using method of constant stimuli — twelve interaction types crossed with six latency levels from 500ms to 3000ms, randomized presentation, repeated cells sufficient to fit a psychometric function, a couple hundred trials per participant, thirty participants, Wizard-of-Oz instrumentation with per-trial millisecond control, three-point slowness rating scale
+- The deliberate rejection of an adaptive staircase, for the three stated reasons: two criteria needed, slope needed, and explicability to the engineers who had to accept the number
+- Reporting structure: criterion, threshold estimate, confidence interval, and slope, scoped to a stated modality at a held-constant workload verified by a manipulation check
+- Two-tier threshold structure (acceptable band and high-satisfaction band) defined per condition, with stated pass criteria
 - Findings: thresholds are intent-dependent; interactions with physical real-world analogues require ~500ms; the response curve is non-monotonic and conversational responses need a lower bound as well as an upper one
 - The sample-size counterfactual you costed and recommended against
 - The organizational metric rename separating objective interval from subjective perception
@@ -297,7 +445,8 @@ When she asks where the number comes from, answer with **derivation, not size** 
 
 | Bracket | Where | What's needed |
 |---|---|---|
-| Trial count | AC01 beat [4] | "Around two thousand" is safe. Confirm the exact figure you're comfortable saying |
+| Repetitions per cell | AC01 beat [4] | Twelve types × six levels is 72 cells; the trial count follows from how many times each cell repeated. Confirm the number you'll say, and check the session-length math holds — 200 trials is roughly a 45–50 minute session |
+| The secondary task | AC02 Layer 4 | What you actually used to hold workload constant, and what instrument verified it landed |
 | Program duration | AC05 | The honest span of the latency program in years, and how many distinct phases |
 | Team composition | AC05 | Who you partnered with, described by function only — never by internal org name |
 | The disagreement | AC05 | The concrete instance behind "research should describe, not constrain." Have one real example |
@@ -334,10 +483,11 @@ The third one raises level without ever saying the word. That is the correct way
 |---|---|---|
 | 1 | AC01 cold, recorded, no notes | Under 3:00, all eight beats, no internal codename spoken |
 | 2 | Each AC02 layer, cold, isolated | Under 90s each, no re-narration of the case |
-| 3 | AC03 F1 word-perfect | The sample-size defense with the costed counterfactual, under 40s |
-| 4 | Confidentiality audit | Replay every recording; every dollar figure, codename, and competitor mention gets marked. Only ~$50M survives, and it is never hedged with "at least" or "publicly" |
-| 5 | The AC08 pivot | Delivered unprompted, 45s, with the intern caveat intact |
-| 6 | AC07 without flattery | Say the bridge without the words "your talk was interesting." Agenda, not admiration |
-| 7 | Mechanism check | Answer any three questions in a row; at least two must land a mechanism, not a finding |
+| 3 | AC03 F1 and F2 word-perfect | The method-choice defense and the trials-not-headcount defense, each under 40s |
+| 4 | The tier ladder cold | AC04 in under 40s, all three tiers with what each may and may not authorize |
+| 5 | Confidentiality audit | Replay every recording; every dollar figure, codename, and competitor mention gets marked. Only ~$50M survives, and it is never hedged with "at least" or "publicly" |
+| 6 | The AC08 pivot | Delivered unprompted, 45s, with the intern caveat intact |
+| 7 | AC07 without flattery | Say the bridge without the words "your talk was interesting." Agenda, not admiration |
+| 8 | Mechanism check | Answer any three questions in a row; at least two must land a mechanism, not a finding |
 
 **The two failure modes on playback:** stacking layers — answering one question with three of AC02 at once, which reads as rehearsed and burns the material you'd need at minute 30 — and slipping a confidential figure in under pressure, which you will not notice yourself. That's what drill 4 is for.
