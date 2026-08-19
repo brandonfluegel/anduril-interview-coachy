@@ -1,6 +1,6 @@
 # 06 — Amazon Latency Case Study (AC01–AC10)
 
-**This is the primary case for the 45-minute hiring manager conversation with Dr. Daniella Kim.** NASA moves to second position — a 45-second module you deploy yourself, covered in AC08.
+**This is the primary case for the 45-minute hiring manager conversation with Dr. Daniella Kim.** NASA moves to second position — a 45-second module you deploy yourself, covered in AC09.
 
 **Why this case, and not NASA.** Kim is judging five things: is your work rigorous, do you move fast enough, do you set the direction or follow it, does what you build outlast you, and can you move people who outrank you. The latency program hits all five. You ran it. And it has enough depth to survive forty minutes of questions without running dry. The job posting describes Lead/Staff as someone who *"bridges engineering latency with human perception"* and *"translates findings into hard specifications."* That is a description of this program.
 
@@ -69,14 +69,14 @@ Total **~430 words ≈ 2:52**. The ceiling is real. **If you are running long, c
 >
 > **[7]** What I left behind is the part I'd point at. Two numbers per interaction became the criteria the organization designed against — about fifty million dollars in operational value was attributed to the program. And I got a company metric renamed, because its name assumed that the real delay and the felt delay were the same thing, and my data showed they aren't. Both of those outlived me.
 >
-> **[8]** It carries over here directly. A threshold is a threshold. Where it stops: my people were customers, not trained operators, and I held workload steady instead of varying it. The version that matters here has to treat workload as something you turn up and down. That's the study I'd want to run.
+> **[8]** It carries over here directly. A threshold is a threshold. Where it stops: my people were customers, not trained operators, and I held workload steady instead of varying it. The version that matters here has to treat workload as something you turn up and down. And the reason I want that problem is the time constant — counter-drone squeezes the decision until you have to settle in advance what the human is actually for. It stops being a procedure you write and becomes something you build in. That's the study I'd want to run.
 
 ### What each beat is buying you
 
 - **[1]** *Decision first* + it opens on a claim Kim can disagree with, which is what makes her lean in.
 - **[2]** **Ambiguity.** This beat exists because the JD asks for someone who can "work through ambiguity." Show the problem was undefined before you defined it.
 - **[4]** The rigor beat, and the register beat. Using the plainest method available and *saying you chose it over the fancier one* is a confidence signal. Junior researchers reach for exotic procedures; senior ones reach for the simplest design that answers the question.
-- **[5]** The floor is your best single moment. It is *Calibrated Cognitive Friction with data behind it* — see AC07.
+- **[5]** The floor is your best single moment. It is *Calibrated Cognitive Friction with data behind it* — see AC08.
 - **[6]** **Say this even if it costs you time.** Almost nobody ships a spec as a distribution with a slope. Inviting her to push on it is a confidence signal, and it sets up AC02 Layer 5.
 - **[7]** *Reusable mechanism.* Renaming an organizational metric is a Staff-level act. Do not leave it out.
 - **[8]** *Evidence hygiene.* Name the workload boundary before she does — and it doubles as your proposal.
@@ -173,7 +173,7 @@ Three minutes is the presentation. The other forty are these. **Each layer is a 
 
 ### Layer 7 — The speed limit in the other direction
 
-**Your most valuable thirty seconds. See AC07 for how to spend it.**
+**Your most valuable thirty seconds. See AC08 for how to spend it.**
 
 > For spoken answers I had to set a lower limit as well as an upper one. A response that comes back faster than a person would answer stops feeling responsive and starts feeling wrong. That's the finding that made me stop believing faster is always better.
 >
@@ -340,6 +340,10 @@ Kim's own stated bar is *"how would you build a research function whose standard
 
 > **The evidence ladder.** "Every artifact says what it's allowed to decide and what it was measured on, so a rough read can't quietly turn into a spec. That's the one I'd set up here first. It costs a week, and it's what lets research move fast without getting caught out later."
 
+**One more, and don't forget it's available.** Amazon is where you did the work. **Sling is where you have the scope right now**, and it's the strongest level evidence you own — you are Staff there today, you built the human factors function from nothing, and you own specs across software, hardware, and AI. Use it whenever the question is about scope rather than craft:
+
+> "At Amazon I owned a program. At Sling I own the function — I built it from a standing start, and I write the specs across software, hardware, and AI. That's the scope I'm arguing for here, and it's the one I'm doing now rather than the one I did four years ago."
+
 ### The sentence that must be said out loud
 
 > "The thing I'd want to be judged on isn't the thresholds. It's that the org's definition of the metric changed, and it stayed changed after I left."
@@ -350,9 +354,63 @@ Kim's own stated bar is *"how would you build a research function whose standard
 
 ---
 
-## AC07 — The Bridge: Kim's Three Questions
+## AC07 — When She Leaves the Case Study
 
-> **This section changed based on `references/Human Factors Response to Autonomous System Design`.** You wrote a four-page research response to three questions Dr. Kim posed publicly at the Learners Conference in San Francisco in May 2026. That document is the strongest asset you have for this specific conversation, and the previous guidance in this repo — which told you never to reference a panelist's talk — was written before it existed. See AC09 for the narrowed rule.
+**She will not spend forty-five minutes on Amazon.** Somewhere around minute 25 she'll test whether you're a one-case candidate. These are the four questions most likely to come, and the Amazon work cannot answer any of them. Each answer here is short on purpose — 45 to 90 seconds, then stop.
+
+**The rule for all four: bridge honestly, answer from the right job, and name the boundary.** Reaching for Amazon when Amazon doesn't apply is the single worst thing you can do in this stretch, because it's the tell of someone with one story.
+
+### 1. Autonomy and misplaced trust — her home ground
+
+> **Likely:** "How would you tell that an operator is trusting the system more than they should — before something goes wrong?"
+
+> I'd watch how often they approve, sorted by how confident the system said it was. If people accept the low-confidence recommendations at the same rate as the high-confidence ones, they've stopped reading the confidence and they're just clearing the queue. That's measurable continuously, and it doesn't need an incident to show up.
+>
+> The second thing I'd insist on is rechecking it after every model update. Trust gets calibrated to how the system used to behave, and it carries over even when the behavior changes underneath it. That's the moment I'd expect the gap to open.
+
+**Boundary, say it:** *"That's a prediction. I've written the framework — it's a thesis, not something I've deployed."*
+
+### 2. Hardware and the physical operator — answer from Sling, not Amazon
+
+> **Likely:** "What would you want measured on an operator station before anyone designs a screen?"
+
+> Reach and posture, with the operator wearing what they'll actually be wearing. Gloves, vest, seated, possibly moving. That gives you the box the controls have to live in, and it's a physical answer, not a preference.
+>
+> I'd do that before anyone touches the display, because otherwise you design the screen and then discover the person can't hold that position for four hours. That's the work I do now at Sling — reach envelopes, anatomical safety, mechanical fit specs, written so hardware has to clear them.
+
+### 3. Field work with operators — lead with the gap
+
+> **Likely:** "How would you spend two weeks with operators?"
+
+> Straight answer first: most of my work has been lab and simulator, not in the field. That's a real gap and I'd rather say it than dress it up.
+>
+> What I'd run: week one is watching, with nothing but a question list I've agreed with engineering and product in advance — because operator access is scarce, and one visit should answer three teams' questions rather than mine. Week two is structured tasks against what I actually saw, not what I assumed.
+>
+> The thing I'd bring back isn't a report. It's a workflow model with the failure points marked, so the next person doesn't have to go back to get the same picture.
+
+**Why this works:** naming the gap first is worth more than the protocol. It's the third debrief sentence in action.
+
+### 4. Growing other people — the honest version
+
+> **Likely:** "How do you raise the level of the people around you?"
+
+> Mostly by making the standard visible. At Sling I built the function from nothing, so the useful thing wasn't advice, it was a review ritual — every spec gets checked against a stated criterion instead of against taste. That raises the floor for everyone including me, and it works whether or not I'm in the room.
+>
+> The honest boundary: I've mentored inside teams. I haven't managed a research bench. If part of this role is growing one, I'd want to be clear that's a step I'm ready for rather than one I've already taken.
+
+**Do not skip the last sentence.** Claiming management experience you don't have is the fastest way to lose a Head of Research, and volunteering the limit is exactly the move that has been earning you credit all conversation.
+
+### The bridge sentence back to the case
+
+When you've answered one of these and want the ground back:
+
+> "That's the part I'd have to learn here. The part I'd bring on day one is the habit of turning a human limit into a number somebody can build against."
+
+---
+
+## AC08 — The Bridge: Kim's Three Questions
+
+> **This section changed based on `references/Human Factors Response to Autonomous System Design`.** You wrote a four-page research response to three questions Dr. Kim posed publicly at the Learners Conference in San Francisco in May 2026. That document is the strongest asset you have for this specific conversation, and the previous guidance in this repo — which told you never to reference a panelist's talk — was written before it existed. See AC10 for the narrowed rule.
 
 **How to use it: as a research agenda, not as flattery.** Never open with "I saw your talk." Deploy it when she asks what you'd work on, what you'd want to study, or why this role.
 
@@ -383,7 +441,7 @@ Kim's own stated bar is *"how would you build a research function whose standard
 
 ---
 
-## AC08 — The NASA Module (45 seconds)
+## AC09 — The NASA Module (45 seconds)
 
 **Deploy this yourself, around minute 25, before she raises it.** The objection you are pre-empting is that everything above is consumer technology with recoverable consequences.
 
@@ -395,7 +453,7 @@ Kim's own stated bar is *"how would you build a research function whose standard
 
 ---
 
-## AC09 — Evidence Boundaries for This Case
+## AC10 — Evidence Boundaries for This Case
 
 ### Assert freely
 
@@ -453,18 +511,18 @@ When she asks where the number comes from, answer with **derivation, not size** 
 
 ---
 
-## AC10 — The 45-Minute Run Sheet
+## AC11 — The 45-Minute Run Sheet
 
 You do not control the agenda. You do control what you have ready and what you volunteer. This is a plan for *your* half of it.
 
 | Minutes | What's happening | What you're doing |
 |---|---|---|
-| 0–4 | Warm-up, then the case | Discretion line early. Then AC01, 2:45, and stop talking |
-| 4–22 | Her probing | AC02 layers on demand. One layer per question. Never chain two |
+| 0–4 | Warm-up, then the case | Discretion line early. Then AC01, 2:50, and stop talking |
+| 4–22 | Her probing on the case | AC02 layers on demand. One layer per question. Never chain two |
 | ~22 | The likely rigor attack | AC03 F1 and F2. Volunteer the weakness before she isolates it |
-| ~25 | **Your move** | AC08 NASA module, unprompted, as the answer to the consumer-tech objection |
-| 25–33 | Scope, stakeholders, mechanisms | AC05 and AC06. This is where level is actually decided |
-| 33–40 | Why here, what you'd work on | AC07. The three questions, as an agenda |
+| ~25 | **Your move** | AC09 NASA module, unprompted, as the answer to the consumer-tech objection |
+| 25–33 | **She leaves the case** | **AC07.** Autonomy, hardware, field work, people. Answer from Sling and the thesis, not from Amazon |
+| 33–40 | Scope, mechanisms, what you'd work on | AC05, AC06, then AC08. This is where level is decided |
 | 40–45 | Your questions | Below |
 
 ### Three questions to ask her
@@ -485,9 +543,11 @@ The third one raises level without ever saying the word. That is the correct way
 | 2 | Each AC02 layer, cold, isolated | Under 90s each, no re-narration of the case |
 | 3 | AC03 F1 and F2 word-perfect | The method-choice defense and the trials-not-headcount defense, each under 40s |
 | 4 | The tier ladder cold | AC04 in under 40s, all three tiers with what each may and may not authorize |
-| 5 | Confidentiality audit | Replay every recording; every dollar figure, codename, and competitor mention gets marked. Only ~$50M survives, and it is never hedged with "at least" or "publicly" |
-| 6 | The AC08 pivot | Delivered unprompted, 45s, with the intern caveat intact |
-| 7 | AC07 without flattery | Say the bridge without the words "your talk was interesting." Agenda, not admiration |
-| 8 | Mechanism check | Answer any three questions in a row; at least two must land a mechanism, not a finding |
+| 5 | **The off-case four** | AC07, all four cold, in any order. Each must name its own boundary. Zero reaches back to Amazon |
+| 6 | Confidentiality audit | Replay every recording; every dollar figure, codename, and competitor mention gets marked. Only ~$50M survives, and it is never hedged with "at least" or "publicly" |
+| 7 | The NASA pivot | AC09 delivered unprompted, 45s, with the intern caveat intact |
+| 8 | AC08 without flattery | Say the bridge without the words "your talk was interesting." Agenda, not admiration |
+| 9 | Mechanism check | Answer any three questions in a row; at least two must land a mechanism, not a finding |
+| 10 | Sling check | Across a full mock, Sling comes up at least twice unprompted. If the only job you talk about is one you left in 2024, the level argument is being made from the wrong place |
 
-**The two failure modes on playback:** stacking layers — answering one question with three of AC02 at once, which reads as rehearsed and burns the material you'd need at minute 30 — and slipping a confidential figure in under pressure, which you will not notice yourself. That's what drill 4 is for.
+**The three failure modes on playback:** stacking layers — answering one question with three of AC02 at once, which reads as rehearsed and burns the material you'd need at minute 30; slipping a confidential figure in under pressure, which you will not notice yourself; and reaching back to Amazon during the AC07 stretch, which is the tell of a one-case candidate. Drills 5 and 6 exist for the last two.
