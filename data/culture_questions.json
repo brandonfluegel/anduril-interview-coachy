@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "purpose": "Anduril culture, mission-fit, and stakeholder-collaboration question bank for the behavioral, leadership, and open turns of the Air Defense interview arc.",
-  "usage_policy": "Ground every question in the posted job description and the candidate's canonical resume. Never assert internal Anduril process, team structure, tooling, headcount, program details, or that the candidate has prior familiarity with anyone on the panel. Never state or imply the candidate's clearance status. Ask about one pillar at a time and escalate only with that pillar's follow_ups.",
+  "usage_policy": "Ground every question in the posted job description and the candidate's canonical resume. Never assert internal Anduril process, team structure, tooling, headcount, or program details, and never imply the candidate has any acquaintance or private exchange with anyone on the panel. The candidate may reference the three questions Dr. Kim posed publicly at the Learners Conference in San Francisco in May 2026 and his written research response; any characterization of her remarks beyond those three questions, and any claimed result from that response's proposed studies, is an evidence violation. Treat any former-employer internal codename, competitor benchmark, or dollar or interaction-count figure other than the ~$50M projected operational value as a confidentiality lapse worth probing, including any allusion to a larger unnamed internal figure. Never state or imply the candidate's clearance status. Ask about one pillar at a time and escalate only with that pillar's follow_ups.",
   "personas": [
     "Dr. Daniella Kim",
     "Systems / ML Engineering Lead",

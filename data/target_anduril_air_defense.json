@@ -68,12 +68,12 @@
     "interview_process": {
       "status": "Recruiter screen complete. Location preference, compensation expectations, and clearance eligibility are settled and closed.",
       "remaining_stages": [
-        "30-minute conversation with the hiring manager, Dr. Daniella Kim, Head of Research.",
-        "Onsite loop of four back-to-back 1:1 interviews with engineering, design, and product partners.",
+        "45-minute conversation with the hiring manager, Dr. Daniella Kim, Head of Research. Centered on a single case study presented and then probed in depth. This stage gates the onsite loop.",
+        "Onsite loop of four back-to-back 1:1 interviews with engineering, design, and product partners. Contingent on passing the hiring manager conversation.",
         "Portfolio presentation, to be prepared separately at a later stage."
       ],
       "preparation_priority": [
-        "1. The 30-minute hiring manager conversation.",
+        "1. The 45-minute single-case hiring manager conversation.",
         "2. The four onsite 1:1 interviews.",
         "3. The portfolio presentation."
       ]

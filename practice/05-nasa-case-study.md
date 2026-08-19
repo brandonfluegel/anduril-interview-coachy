@@ -1,8 +1,12 @@
 # 05 — NASA Case Study Track (NC01–NC08)
 
-The hiring manager conversation is built around **one** case study. This file is that case study: NASA Langley, Lunar Gateway clinical workstations, human-systems integration under simulated microgravity.
+> **Positioning changed.** For the 45-minute hiring manager conversation with Dr. Kim, the primary case is Amazon — see [06-amazon-case-study.md](practice/06-amazon-case-study.md). NASA is deployed inside it as a 45-second module (AC08) that you volunteer around minute 25 to pre-empt the consumer-technology objection.
+>
+> **This file remains the deep-dive** for the onsite loop, where the Systems/ML Engineering Lead and the Design Lead will value hardware, thresholds, and physical-digital coherence far more than a Head of Research will. Drill NC01 for that room, and NC02 as the compression you actually use with Kim.
 
-**Why this one and not Amazon.** The Amazon psychophysics program is the bigger number. It is the wrong case for this room. Air Defense hires against *irreversible use error in a constrained environment governed by standards* — and NASA is the only story on your resume where all four of those are true at once. The $50M belongs in the pitch and in follow-ups, not as the spine.
+NASA Langley, Lunar Gateway clinical workstations, human-systems integration under simulated microgravity.
+
+**Why not the spine for Kim.** You were a Ph.D. intern, for seven months, in 2018. Level is the only open item in this process, and a case where the honest claim is "one contributor inside a Langley team" forces the entire Lead/Staff argument into the subjunctive. It also has no research-velocity, repository, or stakeholder-influence content, which is four fifths of her scorecard. And it will not survive forty minutes of depth — count the brackets in NC08.
 
 **Targets:** full presentation **380–420 words ≈ 2:35–2:50**. Hard ceiling 3:00. Compression version 150–160 words ≈ 60s. Follow-ups 45–90 words.
 

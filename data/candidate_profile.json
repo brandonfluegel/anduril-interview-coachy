@@ -52,9 +52,12 @@
       "dates": "Jun 2020 - Nov 2024",
       "role": "Human Factors Design Engineer & Researcher",
       "evidence": [
-        "Named inventor on US Patent US-12532040-B1 for context-aware multimodal interaction architectures and received a 2023 Amazon Inventor Award.",
+        "Named inventor on US Patent US-12532040-B1 for context-aware multimodal interaction architectures and received a 2023 Amazon Inventor Award. The patent covers control inputs resolved against system context: the same physical actuation maps to different control inputs depending on the interface presented and the user's position within it.",
         "Led a multi-year psychophysics program that replaced arbitrary engineering latency targets with human perceptual thresholds and produced $50M in operational value.",
-        "Created an objective cognitive load framework using fNIRS neuroimaging and eye-tracking.",
+        "Latency program method: within-subjects design, 30 participants, 12 high-priority interaction types, six latency levels from 500ms to 3000ms, roughly 2000 trials, Wizard-of-Oz instrumentation giving per-trial millisecond control of response delay, and a three-point slowness rating scale chosen over a Likert scale because users perceive slowness rather than speed.",
+        "Latency program output: a two-tier threshold specification per interaction type with defined pass criteria; the finding that acceptable latency is intent-dependent rather than global, with real-world-analogue interactions requiring roughly 500ms; and the finding that the response curve is non-monotonic, requiring a lower bound as well as an upper bound for conversational responses.",
+        "Recommended and obtained an organizational metric rename separating the objective response interval from the subjective perception of latency, because the prior name encoded an assumption the research falsified.",
+        "Created an objective cognitive load framework using fNIRS neuroimaging and eye-tracking, showing prefrontal activation differences across comparable interfaces that converge with subjective visual complexity and density ratings, plus gaze evidence of systematically unattended layout regions.",
         "Influenced product strategy for Echo Show and Echo Hub products serving more than 75M customers."
       ]
     },
@@ -122,6 +125,35 @@
       "Level: the requisition is posted at Senior; the candidate targets Lead/Staff. This is argued from scope in the interviews, not settled."
     ]
   },
+  "reference_artifacts": {
+    "location": "references/",
+    "note": "Source documents supplied by the candidate. Two are former-employer confidential research reports and are the basis for the confidentiality rule below.",
+    "items": [
+      {
+        "file": "Research on Alexa Latency and Customer Experience.docx",
+        "kind": "former_employer_confidential",
+        "establishes": "The latency program's design, threshold structure, intent-dependence finding, non-monotonicity and conversational floor, sample-size velocity rationale, and the metric rename.",
+        "handling": "Method, structure, and sanitized magnitude may be discussed. Internal codenames, percentile dashboards, competitor benchmarking, and the internal economic model output must never be spoken."
+      },
+      {
+        "file": "[UXR Report] Customer Perceptions of UI Attractiveness on TV Experiences (2).docx",
+        "kind": "former_employer_confidential",
+        "establishes": "The fNIRS and eye-tracking cognitive-load capability, prefrontal activation differences across interfaces, and gaze evidence of unattended layout regions.",
+        "handling": "Describe the capability and the convergence with subjective ratings. Never name the specific commercial interfaces compared, and never claim a head-to-head win over NASA-TLX."
+      },
+      {
+        "file": "Human Factors Response to Autonomous System Design - Brandon Fluegel.pdf",
+        "kind": "candidate_authored_proposal",
+        "establishes": "A written research response to three questions Dr. Daniella Kim posed publicly at the Learners Conference in San Francisco in May 2026: the responsibility gap, the friction paradox, and the moral crumple zone at scale. Contains hypotheses and proposed methods only.",
+        "handling": "May be referenced as a research agenda. Every hypothesis is proposed, not run: say 'I would predict', never 'we found'. No acquaintance or private exchange with Dr. Kim may be claimed, and nothing she said beyond those three questions may be characterized."
+      },
+      {
+        "file": "US12532040B1 - Context-based control inputs for a device - Google Patents.pdf",
+        "kind": "public",
+        "establishes": "The granted patent claims. Public document, freely discussable."
+      }
+    ]
+  },
   "technical_skills": {
     "interaction_and_systems": [
       "Human-Robot Interaction (HRI)",
@@ -146,7 +178,8 @@
     ]
   },
   "evidence_policy": {
-    "source": "Resume facts supplied for this repository update",
-    "rule": "Treat these details as canonical candidate evidence. Do not invent additional metrics, study outcomes, team sizes, publications, clearances, or operational claims. Everything in logistics_settled is closed: never re-open it and never assert a compensation number or an active clearance status."
+    "source": "Resume facts and candidate-supplied source artifacts for this repository update",
+    "rule": "Treat these details as canonical candidate evidence. Do not invent additional metrics, study outcomes, team sizes, publications, clearances, or operational claims. Everything in logistics_settled is closed: never re-open it and never assert a compensation number or an active clearance status.",
+    "confidentiality_rule": "The reference artifacts marked former_employer_confidential may inform method-level and structural discussion only. Never surface an internal codename, dashboard, percentile table, or competitor benchmarking result, and never state any dollar or interaction-count figure other than the ~$50M projected operational value on the resume. The larger internal modeling figures must not be quoted and must not be alluded to. If magnitude is pressed, the correct move is to answer with derivation and attribution — the economic modeling belonged to a partner team, and the defensible contribution is the threshold structure — never with a larger number. Treat a confidentiality lapse, or any inflation of the figure under pressure, as a scoring failure, since the hiring manager is assessing whether the candidate would be careful with her own data."
   }
 }

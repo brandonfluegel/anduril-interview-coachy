@@ -6,7 +6,12 @@ Master index for the practice set. Read this once, then drill the four track fil
 - `02-behavioral-track.md` — BQ01–BQ10, behavioral / fit
 - `03-culture-stakeholder-track.md` — CQ01–CQ10, culture / stakeholder collaboration
 - `04-positioning-close-track.md` — PQ01–PQ10, positioning / scope / close
-- `05-nasa-case-study.md` — NC01–NC08, the single NASA case study for the hiring manager call
+- `05-nasa-case-study.md` — NC01–NC08, the NASA case as the 45-second safety-critical module and the onsite deep-dive
+- `06-amazon-case-study.md` — AC01–AC10, **the primary case for the 45-minute hiring manager conversation**
+
+The hiring manager conversation with Dr. Kim is one case study, probed in depth, and it gates the onsite loop. Amazon is that case. NASA is deployed inside it as a 45-second module. Read `06` first.
+
+**Source artifacts now live in `references/`** — the latency research report, the interface cognitive-load report, the patent, and your written response to Dr. Kim's Learners Conference questions. Two of those are former-employer confidential documents. See §4.
 
 Placeholders in `[brackets]` mark a specific fact only you can supply. Do not improvise a number there. Fill them in before you drill, and if you cannot fill one in, delete the sentence rather than soften it.
 
@@ -81,21 +86,24 @@ Every strong answer makes at least one. A Strong Hire answer makes two or three.
 ## 4. Evidence boundaries — non-negotiable
 
 Assert freely (resume-canonical):
-- Amazon: multi-year psychophysics program replacing arbitrary latency targets, ~$50M operational value; US Patent US-12532040-B1; 2023 Amazon Inventor Award; objective cognitive-load framework using functional near-infrared spectroscopy and eye tracking; strategy influence across a portfolio reaching 75M+ customers
-- NASA Langley: Lunar Gateway clinical workstation human-systems integration, use-error analysis, NASA-STD-3001 and MIL-STD-1472, 30% task-time reduction, eliminated critical input errors
+- Amazon: multi-year psychophysics program replacing arbitrary latency targets, ~$50M operational value; within-subjects design, 30 participants, 12 interaction types, six latency levels from 500ms to 3s, Wizard-of-Oz per-trial control, three-point slowness scale; two-tier threshold specification per interaction type; intent-dependent thresholds and a non-monotonic response curve requiring a floor as well as a ceiling; the organizational metric rename separating objective interval from perceived latency; US Patent US-12532040-B1; 2023 Amazon Inventor Award; objective cognitive-load capability using functional near-infrared spectroscopy and eye tracking, showing prefrontal activation differences across comparable interfaces that converge with subjective complexity ratings; strategy influence across a portfolio reaching 75M+ customers
+- NASA Langley: Lunar Gateway clinical workstation human-systems integration, use-error analysis, NASA-STD-3001 and MIL-STD-1472, 30% task-time reduction, eliminated critical input errors — as a Ph.D. intern contributor
 - Mercedes-Benz: simulator studies of Level 2 and Level 3 automation handovers, multimodal alerts, 24% improvement in safety and trust ratings
 - Uber: urban field studies, mobile HMI and spatial navigation, 5% driver-retention increase
 - Brigham/Harvard: functional magnetic resonance imaging, heart-rate, and telemetry processing for acute-stress research
 - Sling: organizational human factors strategy across software, hardware, and AI; reach-envelope modeling, anatomical safety, mechanical fit specifications; usability criteria for latency, feedback, and spatial layout; authored *Principles for Agentic Trust*, accepted ACM CSCW 2026 Industry Perspectives
 - Ph.D. Human Factors Psychology, ODU 2020; dissertation on working memory, spatial processing, and reaction time under high-stress task interruption
 
+**Confidentiality — this is a scoring dimension, not just an ethics rule.** The reports in `references/` are former-employer confidential. Never speak an internal codename, dashboard, percentile table, competitor benchmarking result, or any dollar or interaction-count figure other than the ~$50M on your resume. Do not quote the larger internal modeling figures and **do not allude to them** — no "the real number was higher." $50M is also the more persuasive number: big enough to establish scope, small enough to stay believable, and a researcher claiming a ten-figure impact invites an audit instead of a conversation. If asked where it comes from, answer with derivation and attribution, not size. Say the discretion out loud once, early — a Head of Research is evaluating whether you would be careful with *her* data.
+
 Never assert:
 - Functional near-infrared spectroscopy at Brigham or Harvard — that instrument belongs to Amazon; the imaging, heart-rate, and telemetry work belongs to Brigham. Never merge them
 - Any head-to-head result showing a biometric measure beat the NASA Task Load Index
 - Any deployment, adoption, or operational outcome for Calibrated Cognitive Friction — it is a thesis
+- Any result from the three autonomous-systems hypotheses in your Learners Conference response — they are proposed studies. Say "I'd predict," never "we found"
 - Any Echo Show / Echo Hub metric beyond portfolio strategy influence at 75M+ customers
 - Any clearance status, classified detail, or Anduril-internal process, team, headcount, or program specifics
-- Any prior interaction with, or knowledge of the content of, any panelist's talks
+- Any acquaintance, private correspondence, or exchange with a panelist. **Narrowed rule:** you *may* state that Dr. Kim posed three questions publicly at the Learners Conference in San Francisco in May 2026 and that you wrote a research response to them. You may not characterize anything she said beyond those three questions
 
 Closed topics — never raise, never treat as a gap: location, compensation, travel percentage, clearance. The recruiter screen settled them. **Level is the only open item**, and it is argued from scope, never from title.
 
@@ -177,7 +185,7 @@ Amazon psychophysics / ~$50M / Patent US-12532040-B1 / near-infrared spectroscop
 
 ### Never say
 
-Near-infrared spectroscopy at Brigham · any head-to-head against the NASA Task Load Index · any deployment of Calibrated Cognitive Friction · any Echo metric beyond portfolio reach · any clearance status · any Anduril-internal process, team, or headcount · any prior contact with a panelist
+Near-infrared spectroscopy at Brigham · any head-to-head against the NASA Task Load Index · any deployment of Calibrated Cognitive Friction · any result from the three proposed autonomous-systems studies · any Echo metric beyond portfolio reach · any clearance status · any Anduril-internal process, team, or headcount · any internal codename, competitor benchmark, or dollar figure other than ~$50M · any private exchange with a panelist
 
 **Closed — never raise, never treat as a gap:** location · compensation · travel · clearance. **Level is the only open item, and it is argued from scope, never from title.**
 

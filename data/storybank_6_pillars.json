@@ -10,7 +10,9 @@
   "do_not_claim": [
     "fNIRS use at Brigham and Women's Hospital or Harvard Medical School — the resume places fNIRS at Amazon only",
     "Any head-to-head result showing fNIRS or ECG outperformed NASA-TLX — no such comparison is on the resume",
-    "The content of any Dr. Daniella Kim keynote, or any prior interaction with her",
+    "Any acquaintance, private correspondence, or exchange with Dr. Daniella Kim, or any characterization of her remarks beyond the three questions she posed publicly at the Learners Conference in San Francisco in May 2026, to which the candidate wrote a research response held in references/",
+    "Any result, finding, or outcome from the three autonomous-systems hypotheses in that response — they are proposed studies, not completed research",
+    "Any former-employer internal codename, dashboard, percentile table, competitor benchmarking result, or dollar or interaction-count figure other than the ~$50M projected operational value stated on the resume. The larger internal modeling figures must never be quoted and never alluded to, and the figure must never be inflated under pressure",
     "Any operational deployment, adoption, or outcome for Calibrated Cognitive Friction",
     "Any Echo Hub or Echo Show metric beyond shaping strategy for a portfolio reaching 75M+ customers",
     "Any clearance status, classified program detail, or Anduril-internal process, team, or headcount detail"
