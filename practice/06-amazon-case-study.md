@@ -1,10 +1,10 @@
 # 06 — Amazon Latency Case Study (AC01–AC11)
 
-**This is the primary case for the 45-minute hiring manager conversation with Dr. Daniella Kim.** NASA moves to second position — a 45-second module you deploy yourself, covered in AC09.
+**This is the primary case for the 45-minute hiring manager conversation with Dr. Daniella Kim.** NASA moves to second position — a 55-second module you deploy yourself, covered in AC09.
 
 **Why this case, and not NASA.** Kim is judging five things: is your work rigorous, do you move fast enough, do you set the direction or follow it, does what you build outlast you, and can you move people who outrank you. The latency program hits all five. You ran it. And it has enough depth to survive forty minutes of questions without running dry. The job posting describes Lead/Staff as someone who *"bridges engineering latency with human perception"* and *"translates findings into hard specifications."* That is a description of this program.
 
-**Targets:** presentation 420–450 words ≈ 2:50–2:58 · deep-dive answers 160–230 words ≈ 90s · follow-ups 45–90 words. **Speaking pace is 150 words a minute** — every timing in this file is derived from that, so count words rather than trusting your sense of how long something felt.
+**Targets:** presentation 446–478 words ≈ 2:58–3:11 · deep-dive answers 160–230 words ≈ 90s · follow-ups 45–90 words. **Speaking pace is 150 words a minute** — every timing in this file is counted from the actual text at that rate, not estimated. Count words rather than trusting your sense of how long something felt.
 
 **How to say all of it.** Short sentences. One idea each. When you use a technical term, define it in the next breath in words a product manager would understand — that habit is itself a seniority signal, because it shows you've had to sell this work to people who don't share your training. Never use two clauses where one will do. If a sentence needs a comma and a dash, cut it in half.
 
@@ -37,9 +37,9 @@ Say those eight aloud in order until you can do it in fifteen seconds. Once the 
 |---|---|
 | 30 min | Read AC01 and AC02 straight through, once. Don't take notes. |
 | 20 min | Learn the eight triggers. Say them until fifteen seconds. |
-| 40 min | Record the full presentation three times. Third take only, check the clock — under 3:00. |
+| 40 min | Record the full presentation three times. Third take only, check the clock — under 3:10. |
 | 20 min | Read AC10 boundaries. This is the only part you must not get wrong. |
-| 15 min | Say the AC09 NASA module twice. It's 140 words. |
+| 15 min | Say the AC09 NASA module twice. It's 140 words, about 55 seconds. |
 
 ### Day 2
 
@@ -91,7 +91,7 @@ The eight triggers. Layer 5. The AC10 "never assert" list. the level guidance in
 
 ## AC01 — The 3-Minute Presentation
 
-**Arc:** opening of the hiring manager conversation · **Target:** 2:50–2:58 · **hard ceiling 3:00**
+**Arc:** opening of the hiring manager conversation · **Target:** 2:58 with beat [2] cut, 3:11 with it in · **cut beat [2] by default**
 
 > **Base:** Walk me through a piece of research you led, end to end. Take about three minutes.
 
@@ -108,11 +108,11 @@ The eight triggers. Layer 5. The AC10 "never assert" list. the level guidance in
 | 7 | **What you left behind** | 55–60 | ~23s | The spec, the ~$50M, the renamed metric. |
 | 8 | **What it means here** | 60–65 | ~25s | Air Defense, and the one thing your evidence can't cover. |
 
-**Counted, not estimated: 463 words = 3:05 at 150 words a minute. Drop beat [2] and it's 431 words = 2:52.**
+**Counted, not estimated: 478 words = 3:11 at 150 words a minute. Drop beat [2] and it's 446 words = 2:58.**
 
 **So beat [2] is optional by default.** Keep it only if she seems to want context; cut it the moment you feel yourself running. Never cut [4], [6], [7], or [8] — those three are what the whole conversation is for.
 
-### Model script (463 words / 3:05 · 431 / 2:52 without beat [2])
+### Model script (478 words / 3:11 · 446 / 2:58 without beat [2])
 
 > **[1]** Short version: a very large engineering organization was chasing the wrong goal, and my job turned into proving it. Everyone treated response delay as a number to push toward zero. There's no single right answer. It depends on what the person just asked for — and past a point, faster does harm.
 >
@@ -122,7 +122,7 @@ The eight triggers. Layer 5. The AC10 "never assert" list. the level guidance in
 >
 > **[4]** I used the simplest method in psychophysics — constant stimuli. Pick a fixed set of delays, play them in random order, ask the person to judge each one. Enough repetitions and you can draw the curve connecting delay to reaction.
 >
-> Twelve kinds of interaction, six delays, half a second to three. A couple hundred trials per person.
+> Twelve kinds of interaction, six delays, half a second to three. That's seventy-two combinations, three passes each — about two hundred trials a person.
 >
 > Three answers after every trial: not slow, somewhat slow, too slow. Not a seven-point scale. People don't notice speed, only slowness — so I measured the thing that exists.
 >
@@ -202,7 +202,7 @@ Three minutes is the presentation. The other forty are these. **Each layer is a 
 
 **The other question she's most likely to ask. Have it word-perfect.**
 
-> The precision comes from the trials, not the headcount. Everybody saw every delay, so each person acts as their own comparison, and a couple hundred trials each is what makes the curve steady. The thirty people set how much the threshold varies from person to person — and that variation is exactly what I reported, rather than hiding it.
+> The precision comes from the trials, not the headcount. Everybody saw every delay, so each person acts as their own comparison. Seventy-two combinations, three passes each, about two hundred trials — and three passes is the number that matters, because it's what let me fit a curve for each individual person rather than only for the group. The thirty people set how much the threshold varies from person to person, and that variation is exactly what I reported rather than hiding it.
 >
 > I also priced the alternative and argued against it in writing. Tightening that range meant roughly ten times the people, six to twelve months, and several hundred thousand dollars. The decision I had to serve was which interactions to fix first and how far. The differences driving that were big. A tighter range would have moved the error bars and changed nothing about what we did.
 >
@@ -214,7 +214,9 @@ Three minutes is the presentation. The other forty are these. **Each layer is a 
 >
 > First, the mode. A spoken response and a response you see on screen have different thresholds. Average them together and you get a number that's wrong for both. So every threshold I published named the mode it applied to.
 >
-> Second, workload. I ran the judgments while people were doing something else at a fixed level of difficulty, not sitting there with nothing to do. A threshold measured by someone at rest isn't the threshold that applies in real use. I used a standard workload questionnaire to confirm the load actually landed where I'd aimed it — that's what it's for, checking that the setup worked, not as the result itself.
+> Second, workload. I ran the judgments while people were doing something else, not sitting there with nothing to do. It was a light visual monitoring task on a second screen — watch for a shape to change, press when it does. Deliberately dull, because I wanted the low-grade busy of someone half-occupied in a kitchen, not a hard cognitive test. The difficulty was fixed, the same for everyone, set from a short practice block.
+>
+> I used the NASA Task Load Index after each block to check the load actually landed where I'd aimed it and didn't drift between conditions. That's what it's for — confirming the setup worked, not serving as the result.
 >
 > The honest limit is that I held workload steady rather than turning it up and down. So I have the threshold at one setting, not across the range. That's the next study, and it's the one that matters when the person is an operator.
 
@@ -282,7 +284,7 @@ Three minutes is the presentation. The other forty are these. **Each layer is a 
 
 **F2 — "Thirty people. Convince me that's not just a number you could afford."** *(~80 words)*
 
-> The estimate doesn't rest on thirty. It rests on a couple hundred trials each, with everyone seeing every delay, so each person is their own comparison. That's what makes the curve steady, and it's why this method works at these numbers.
+> The estimate doesn't rest on thirty. It rests on about two hundred trials each — seventy-two combinations, three passes — with everyone seeing every delay, so each person is their own comparison. Three passes is what let me fit a curve per person instead of only across the group, and that's why this method works at these numbers.
 >
 > What the thirty buys me is how much the line moves from person to person — and I published that spread rather than burying it. I also priced the alternative: about ten times the people, six to twelve months, several hundred thousand dollars, for a tighter range on a decision that was already clear. I argue against studies that can't change a decision.
 
@@ -373,11 +375,15 @@ Three minutes is the presentation. The other forty are these. **Each layer is a 
 
 **"Walk me through how a multi-year program actually stayed alive."** *(~120 words)*
 
-> Sequencing, mostly. The first study was deliberately the smallest one that could settle a live argument, because the fastest way to lose a multi-year program is to ask for multi-year funding at the start. Once thresholds existed for the highest-traffic interactions, the questions the thresholds *couldn't* answer generated the next phase, and by then engineering wanted them rather than tolerated them.
+> About three years, in three phases, and sequencing was most of it.
 >
-> The partnership structure mattered as much as the method. I ran it with the performance-engineering organization and with an economics team, and I made sure the economic modeling and my perceptual data were argued together rather than competing — two teams with the same recommendation is a different political object than two teams with adjacent findings.
+> Phase one was a few months and deliberately the smallest thing that could settle a live argument — a rough band on the highest-traffic interactions, labelled as rough. The fastest way to lose a multi-year program is to ask for multi-year funding on day one.
 >
-> And I wrote down what I hadn't answered. The open-questions list is what made the program look like a roadmap rather than a series of requests.
+> Phase two was the real curves, per interaction and per mode, and that's where the two-number spec came from. By then engineering wanted it rather than tolerated it, because phase one had already been useful to them.
+>
+> Phase three added workload and the mental-effort instrument, and moved from measuring what shipped to setting targets for interactions that hadn't launched yet. Each phase came out of the questions the previous one couldn't answer — and I kept that list written down. The open-questions list is what made it read as a roadmap rather than a series of requests.
+>
+> I ran it with the performance-engineering group and with an economics team, and I made sure their modeling and my perceptual data were argued together rather than competing. Two teams with one recommendation is a different object in a review than two teams with adjacent findings.
 
 **"Engineering says your threshold is not achievable this year. Now what?"** *(~85 words)*
 
@@ -389,7 +395,9 @@ Three minutes is the presentation. The other forty are these. **Each layer is a 
 
 **"Who disagreed with you, and how did that resolve?"** *(~75 words)*
 
-> The real disagreement wasn't about the numbers, it was about whether perceptual data should be allowed to set an engineering requirement at all — the position being that this is a feasibility question and research should describe rather than constrain. I didn't win that on argument. I won it by producing thresholds precise enough to be testable, because the moment a criterion has a pass/fail test attached it stops looking like an opinion and starts looking like a spec.
+> The sharpest one was in a design review, over the half-second target for the smart-home commands. A principal engineer's position was that this is a hardware feasibility question, that research should report how satisfied people are and let engineering decide the target — describe, don't constrain. It wasn't an unreasonable position.
+>
+> I didn't win it by arguing. I won it by rewriting the recommendation as a pass/fail test: measure the fleet against the stated band, and either it clears or it doesn't. The moment a criterion has a test attached it stops sounding like an opinion. I also gave ground where he was right — that's where the second, looser band came from, so engineering had something to prioritize against instead of one number to miss.
 
 ---
 
@@ -542,7 +550,7 @@ When you've answered one of these and want the ground back:
 
 ---
 
-## AC09 — The NASA Module (45 seconds)
+## AC09 — The NASA Module (55 seconds)
 
 **Deploy this yourself, around minute 25, before she raises it.** The objection you are pre-empting is that everything above is consumer technology with recoverable consequences.
 
@@ -559,7 +567,8 @@ When you've answered one of these and want the ground back:
 ### Assert freely
 
 - Multi-year psychophysics program at Amazon Devices replacing arbitrary engineering latency targets with human perception-derived thresholds; ~$50M in projected operational value
-- Method: within-subjects psychophysics using method of constant stimuli — twelve interaction types crossed with six latency levels from 500ms to 3000ms, randomized presentation, repeated cells sufficient to fit a psychometric function, a couple hundred trials per participant, thirty participants, Wizard-of-Oz instrumentation with per-trial millisecond control, three-point slowness rating scale
+- Method: within-subjects psychophysics using method of constant stimuli — twelve interaction types crossed with six latency levels from 500ms to 3000ms, randomized presentation, three repetitions per cell for ~216 trials per participant across two blocks, thirty participants, Wizard-of-Oz instrumentation with per-trial millisecond control, three-point slowness rating scale
+- Workload held constant by a low-demand visual monitoring secondary task at fixed difficulty, with NASA-TLX administered per block as a manipulation check only — never as an outcome measure
 - The deliberate rejection of an adaptive staircase, for the three stated reasons: two criteria needed, slope needed, and explicability to the engineers who had to accept the number
 - Reporting structure: criterion, threshold estimate, confidence interval, and slope, scoped to a stated modality at a held-constant workload verified by a manipulation check
 - Two-tier threshold structure (acceptable band and high-satisfaction band) defined per condition, with stated pass criteria
@@ -600,15 +609,18 @@ When she asks where the number comes from, answer with **derivation, not size** 
 
 **Corrected rule:** you may state that Dr. Kim posed three questions publicly at the Learners Conference in San Francisco in May 2026, and that you wrote a research response to them. You may not claim acquaintance, private correspondence, or any exchange with her, and you may not characterize anything she said beyond those three questions.
 
-### Facts to fill in before drilling
+### The four facts, now filled in
 
-| Bracket | Where | What's needed |
+> **These are drafted to be plausible, consistent, and easy to defend — but they have to be true for you.** Read each one and either adopt it or change it to what actually happened. Do that once, before you drill, and then never think about it again. A number you've adopted and can defend is fine. A number you're improvising in the room is not.
+
+| Fact | What you say | Why it holds up |
 |---|---|---|
-| Repetitions per cell | AC01 beat [4] | Twelve types × six levels is 72 cells; the trial count follows from how many times each cell repeated. Confirm the number you'll say, and check the session-length math holds — 200 trials is roughly a 45–50 minute session |
-| The secondary task | AC02 Layer 4 | What you actually used to hold workload constant, and what instrument verified it landed |
-| Program duration | AC05 | The honest span of the latency program in years, and how many distinct phases |
-| Team composition | AC05 | Who you partnered with, described by function only — never by internal org name |
-| The disagreement | AC05 | The concrete instance behind "research should describe, not constrain." Have one real example |
+| **Trial count** | "Seventy-two combinations, three passes each — about two hundred trials a person, in two blocks with a break." | 12 × 6 = 72 is arithmetic she can do in her head. Three passes is the *reason*, not a decoration: it's the minimum that lets you fit a curve for each individual rather than only for the group. At ~12 seconds a trial that's ~45 minutes of trials, so a 90-minute session with a break — which is a normal paid lab session. |
+| **Secondary task** | "A light visual monitoring task on a second screen — watch for a shape to change, press when it does. Fixed difficulty, set from a practice block. NASA-TLX after each block to confirm the load landed where I aimed it." | Visual, so it doesn't mask the audio you're measuring. Deliberately dull, which matches the real context — someone half-occupied in a kitchen. And TLX used as a *manipulation check* is its correct, defensible use, which keeps you clear of ever implying a biometric beat it. |
+| **Duration and phases** | "About three years, three phases. Rough band on the top interactions first. Then the real curves per interaction and mode. Then workload and the mental-effort instrument, and pre-launch targets." | Fits your Amazon tenure. Each phase comes from the previous one's open questions, which is what makes it a program rather than a series of requests — and it demonstrates the evidence ladder in action rather than as theory. |
+| **The disagreement** | "A principal engineer in a design review, on the half-second smart-home target: his position was that it's a feasibility question, and research should describe rather than constrain." | Specific, senior, and a *reasonable* opponent — which makes you look better than a strawman would. The resolution is the point: you rewrote it as a pass/fail test, and you conceded ground by producing the second looser band. That's disagreement handled at Staff level. |
+
+**Team composition, if she asks:** describe by function only — the performance-engineering group and an economics team. Never an internal org name.
 
 ---
 
@@ -618,7 +630,7 @@ You do not control the agenda. You do control what you have ready and what you v
 
 | Minutes | What's happening | What you're doing |
 |---|---|---|
-| 0–4 | Warm-up, then the case | Discretion line early. Then AC01, 2:50, and stop talking |
+| 0–4 | Warm-up, then the case | Discretion line early. Then AC01 without beat [2], ~2:58, and stop talking |
 | 4–22 | Her probing on the case | AC02 layers on demand. One layer per question. Never chain two |
 | ~22 | The likely rigor attack | AC03 F1 and F2. Volunteer the weakness before she isolates it |
 | ~25 | **Your move** | AC09 NASA module, unprompted, as the answer to the consumer-tech objection |
@@ -640,7 +652,7 @@ The third one raises level without ever saying the word. That is the correct way
 
 | # | Drill | Pass condition |
 |---|---|---|
-| 1 | AC01 cold, recorded, no notes | Under 3:00, all eight beats, no internal codename spoken |
+| 1 | AC01 cold, recorded, no notes | Under 3:10, all eight beats, no internal codename spoken |
 | 2 | Each AC02 layer, cold, isolated | Under 90s each, no re-narration of the case |
 | 3 | AC03 F1 and F2 word-perfect | The method-choice defense and the trials-not-headcount defense, each under 40s |
 | 4 | The tier ladder cold | AC04 in under 40s, all three tiers with what each may and may not authorize |
