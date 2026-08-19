@@ -1,12 +1,75 @@
-# 06 — Amazon Latency Case Study (AC01–AC10)
+# 06 — Amazon Latency Case Study (AC01–AC11)
 
 **This is the primary case for the 45-minute hiring manager conversation with Dr. Daniella Kim.** NASA moves to second position — a 45-second module you deploy yourself, covered in AC09.
 
 **Why this case, and not NASA.** Kim is judging five things: is your work rigorous, do you move fast enough, do you set the direction or follow it, does what you build outlast you, and can you move people who outrank you. The latency program hits all five. You ran it. And it has enough depth to survive forty minutes of questions without running dry. The job posting describes Lead/Staff as someone who *"bridges engineering latency with human perception"* and *"translates findings into hard specifications."* That is a description of this program.
 
-**Targets:** presentation 400–430 words ≈ 2:45–2:55 · deep-dive answers 160–230 words ≈ 90s · follow-ups 45–90 words.
+**Targets:** presentation 420–450 words ≈ 2:50–2:58 · deep-dive answers 160–230 words ≈ 90s · follow-ups 45–90 words. **Speaking pace is 150 words a minute** — every timing in this file is derived from that, so count words rather than trusting your sense of how long something felt.
 
 **How to say all of it.** Short sentences. One idea each. When you use a technical term, define it in the next breath in words a product manager would understand — that habit is itself a seniority signal, because it shows you've had to sell this work to people who don't share your training. Never use two clauses where one will do. If a sentence needs a comma and a dash, cut it in half.
+
+---
+
+## START HERE — The Two-Day Plan
+
+**This file is long because it's a reference. You are not meant to learn all of it.** Most of it exists so that when she asks something specific, you've already thought about it once. Thinking about it once is enough for most of this.
+
+**There is exactly one thing to memorize: eight trigger words.** Everything else you either know already or only need to have read.
+
+### The eight-word spine — this is the whole presentation
+
+| # | Trigger | What comes out |
+|---|---|---|
+| 1 | **Wrong goal** | Everyone pushed delay toward zero. There's no single right answer. |
+| 2 | **Nobody could define it** | "Fast enough" was undefined, so the same argument recurred. |
+| 3 | **Numbers, not opinions** | My job: thresholds engineering treats as requirements. |
+| 4 | **Simplest method** | Constant stimuli. Twelve interactions, six delays, three-point scale. Turned the staircase down. |
+| 5 | **Depends — both ways** | Real-world equivalent needs half a second. And a floor: too fast feels wrong. |
+| 6 | **Four things** | Never one number: delay, confidence, steepness, mode + workload. |
+| 7 | **Renamed it** | The spec, the ~$50M, the metric definition that outlived me. |
+| 8 | **Workload** | Consumers not operators, load held steady. That's the study I'd want here. |
+
+Say those eight aloud in order until you can do it in fifteen seconds. Once the order is automatic, the words fill themselves in — you already know this work, you're only learning the running order. **Do not memorize the script sentence by sentence.** A memorized paragraph sounds memorized, and she'll hear it.
+
+### Day 1
+
+| Time | Do this |
+|---|---|
+| 30 min | Read AC01 and AC02 straight through, once. Don't take notes. |
+| 20 min | Learn the eight triggers. Say them until fifteen seconds. |
+| 40 min | Record the full presentation three times. Third take only, check the clock — under 3:00. |
+| 20 min | Read AC10 boundaries. This is the only part you must not get wrong. |
+| 15 min | Say the AC09 NASA module twice. It's 140 words. |
+
+### Day 2
+
+| Time | Do this |
+|---|---|
+| 30 min | The five core layers below, cold, one at a time. Stop each at 90 seconds. |
+| 20 min | AC03 F1 and F2 — the two rigor attacks. These are the likeliest hard questions. |
+| 20 min | AC07, the off-case four. Short answers, each naming its own limit. |
+| 15 min | The tier ladder in AC04, and the level ask in AC06. |
+| 10 min | Pick your two questions from AC11. Write them on a card. |
+| 20 min | One full mock end to end. Then stop preparing. |
+
+### Learn these five layers. Skip the rest until after the screen.
+
+**Core — drill these:**
+- **Layer 2** — why the simple method, and the staircase you turned down
+- **Layer 3** — why thirty people is enough
+- **Layer 4** — mode and workload *(your bridge to Air Defense)*
+- **Layer 5** — why you never ship one number *(your strongest single answer)*
+- **Layer 7** — the speed limit in the other direction *(your thesis, with data)*
+
+**Reserve — read once, don't drill.** Layers 1, 6, 8, 9, 10, 11. You know this material; you just need to have decided how you'd say it. If one comes up, you'll find the words.
+
+### Read once, never memorize
+
+The confidentiality box · AC04 cadence and gates · AC05 stakeholder answers · AC08 Kim's three questions · AC10 boundaries. These are judgment, not lines. Reading them once changes what you say without you having to recall anything.
+
+### If you only have two hours total
+
+The eight triggers. Layer 5. The AC10 "never assert" list. The level ask in AC06. That combination still gets you a strong Senior signal and keeps the uplevel argument alive.
 
 ---
 
@@ -28,7 +91,7 @@
 
 ## AC01 — The 3-Minute Presentation
 
-**Arc:** opening of the hiring manager conversation · **Target:** 2:35–2:50
+**Arc:** opening of the hiring manager conversation · **Target:** 2:50–2:58 · **hard ceiling 3:00**
 
 > **Base:** Walk me through a piece of research you led, end to end. Take about three minutes.
 
@@ -37,39 +100,41 @@
 | # | Beat | Words | Time | The one job it does |
 |---|---|---|---|---|
 | 1 | **The claim** | 45–55 | ~20s | The company was chasing the wrong goal. Say it flat. |
-| 2 | **Why it was hard** | 40–50 | ~19s | Nobody could define "fast enough." That was the real problem. |
-| 3 | **Your job** | 25–35 | ~13s | First person. Numbers engineering would treat as requirements. |
-| 4 | **What you did** | 140–155 | ~58s | The plain method, and the fancier one you turned down. |
-| 5 | **What you found** | 60–70 | ~27s | It depends on the task — and there's a speed limit in both directions. |
-| 6 | **What you handed over** | 55–65 | ~24s | Never one number. This is the beat that shows the level. |
-| 7 | **What you left behind** | 55–65 | ~25s | The spec, the ~$50M, the renamed metric. |
-| 8 | **What it means here** | 45–55 | ~20s | Air Defense, and the one thing your evidence can't cover. |
+| 2 | **Why it was hard** | 30–35 | ~13s | Nobody could define "fast enough." Cut this one first. |
+| 3 | **Your job** | 20–25 | ~9s | First person. Numbers engineering would treat as requirements. |
+| 4 | **What you did** | 105–115 | ~44s | The plain method, and the fancier one you turned down. |
+| 5 | **What you found** | 60–65 | ~25s | It depends on the task — and there's a speed limit in both directions. |
+| 6 | **What you handed over** | 60–65 | ~25s | Never one number. This is the beat that shows the level. |
+| 7 | **What you left behind** | 55–60 | ~23s | The spec, the ~$50M, the renamed metric. |
+| 8 | **What it means here** | 60–65 | ~25s | Air Defense, and the one thing your evidence can't cover. |
 
-Total **~430 words ≈ 2:52**. The ceiling is real. **If you are running long, cut beat [2] to one sentence** — never beat [4] or [6].
+**Counted, not estimated: 463 words = 3:05 at 150 words a minute. Drop beat [2] and it's 431 words = 2:52.**
 
-### Model script (~430 words / 2:52)
+**So beat [2] is optional by default.** Keep it only if she seems to want context; cut it the moment you feel yourself running. Never cut [4], [6], [7], or [8] — those three are what the whole conversation is for.
 
-> **[1]** The short version is that a very large engineering organization was chasing the wrong goal, and my job turned into proving that. Everyone treated response delay as a number to push toward zero. What I found is that there is no single right answer. The right delay depends on what the person just asked for. And past a certain point, getting faster stops helping and starts doing harm.
+### Model script (463 words / 3:05 · 431 / 2:52 without beat [2])
+
+> **[1]** Short version: a very large engineering organization was chasing the wrong goal, and my job turned into proving it. Everyone treated response delay as a number to push toward zero. There's no single right answer. It depends on what the person just asked for — and past a point, faster does harm.
 >
-> **[2]** The hard part was that nobody could define "fast enough." The guidance in use was years old and written for older hardware. So targets got set by what engineering could build, and the same argument came back every review, because there was nothing solid to settle it with.
+> **[2]** The hard part was that nobody could define "fast enough." So targets got set by whatever engineering could build, and the same argument came back every review with nothing to settle it.
 >
-> **[3]** My job was to produce numbers strong enough that engineering would treat them as requirements instead of as a researcher's opinion.
+> **[3]** My job was to produce numbers strong enough that engineering would treat them as requirements rather than a researcher's opinion.
 >
-> **[4]** I used the simplest method in psychophysics. It's called the method of constant stimuli, and all it means is this: pick a fixed set of delays, play them in random order, and ask the person to judge each one. Do that enough times and you can draw the curve that connects delay to how people react.
+> **[4]** I used the simplest method in psychophysics — constant stimuli. Pick a fixed set of delays, play them in random order, ask the person to judge each one. Enough repetitions and you can draw the curve connecting delay to reaction.
 >
-> My grid was twelve kinds of interaction crossed with six delays, from half a second up to three seconds. Random order, so nobody could see what was coming. A couple hundred trials per person.
+> Twelve kinds of interaction, six delays, half a second to three. A couple hundred trials per person.
 >
-> I asked one question after every trial, with three answers: not slow, somewhat slow, too slow. Not a seven-point scale. People don't notice speed. They only notice slowness. So I measured the thing that actually exists.
+> Three answers after every trial: not slow, somewhat slow, too slow. Not a seven-point scale. People don't notice speed, only slowness — so I measured the thing that exists.
 >
-> There's a faster method called a staircase, and I turned it down on purpose. It finds one point on the curve quickly. I needed the whole curve.
+> There's a faster method called a staircase. I turned it down. It finds one point on the curve. I needed the whole curve.
 >
-> **[5]** Two findings. The right delay depends on the task. Anything with a real-world equivalent — a light switch, a notepad — has to land near half a second, or it feels broken. Anything that looks like looking something up gets about twice as long. And I had to set a speed limit in the other direction too. When a spoken answer comes back faster than a human would answer, it stops feeling responsive and starts feeling wrong.
+> **[5]** Two findings. The right delay depends on the task. Anything with a real-world equivalent — a light switch, a notepad — has to land near half a second or it feels broken. Looking something up gets twice as long. And I set a limit the other way: when a spoken answer beats a human's, it stops feeling responsive and starts feeling wrong.
 >
-> **[6]** The part I'd most want you to push on is what I actually handed over. Never a single number. Every spec went out with four things attached: the delay, how confident I was in it, how steep the curve was at that point, and which mode and workload it applied to. The steepness is what engineering cared about most. On a steep stretch, a hundred milliseconds is the difference between fine and not fine. On a flat stretch it's noise. That tells you where the money should go.
+> **[6]** The part I'd want you to push on is what I handed over. Never a single number. Every spec carried four things: the delay, my confidence in it, how steep the curve was there, and which mode and workload it applied to. On a steep stretch, a hundred milliseconds decides fine versus not fine. On a flat stretch it's noise. That tells you where the money goes.
 >
-> **[7]** What I left behind is the part I'd point at. Two numbers per interaction became the criteria the organization designed against — about fifty million dollars in operational value was attributed to the program. And I got a company metric renamed, because its name assumed that the real delay and the felt delay were the same thing, and my data showed they aren't. Both of those outlived me.
+> **[7]** What I left behind is the part I'd point at. Two numbers per interaction became the criteria the organization designed against, and about fifty million dollars in operational value was attributed to the program. I also got a company metric renamed, because its name assumed the real delay and the felt delay were the same thing. Both outlived me.
 >
-> **[8]** It carries over here directly. A threshold is a threshold. Where it stops: my people were customers, not trained operators, and I held workload steady instead of varying it. The version that matters here has to treat workload as something you turn up and down. And the reason I want that problem is the time constant — counter-drone squeezes the decision until you have to settle in advance what the human is actually for. It stops being a procedure you write and becomes something you build in. That's the study I'd want to run.
+> **[8]** It carries over directly — a threshold is a threshold. Where it stops: my people were customers, not trained operators, and I held workload steady instead of varying it. The version that matters here turns workload up and down. That's the study I'd want, and it's why counter-drone is the problem I want. The timeline squeezes until you have to decide in advance what the human is for.
 
 ### What each beat is buying you
 
@@ -352,6 +417,26 @@ Kim's own stated bar is *"how would you build a research function whose standard
 
 > "The scope I'm arguing for is the one where I own the criteria the organization designs against — which is what I did at Amazon, and it's the difference between running excellent studies and setting the bar those studies get measured against."
 
+### Making the ask
+
+**Kim cannot uplevel you because she's impressed.** She has to go argue it — rewrite the requisition, clear the compensation band, and defend it to a panel who haven't met you. So being impressive isn't enough. You have to hand her something she can repeat in a room you're not in.
+
+**Say this near the end, after she's asked if you have anything else.** Not before minute 38. It only works once you've earned it.
+
+> One thing I'd rather say than hint at. The role is posted at Senior. What I'm doing now is Staff scope — I own the function, not a project. I'm not asking you to decide that today. What I'd ask is that the onsite gets to test it, and if the panel comes back saying the scope isn't there, I'd genuinely rather hear that than have it go unsaid.
+
+*(~65 words. Say it, then stop talking. Let her respond.)*
+
+**Why this works and a demand doesn't.** It gives her an action instead of a decision, it costs her nothing to agree to, and the last clause removes her risk — you've said out loud that you'll accept a no. Hiring managers advocate for people who won't make it awkward if the answer is no.
+
+**The three things she needs to defend it.** Make sure at least two of these have landed before you make the ask:
+
+1. **A criterion other people use without you.** The spec, or the evidence ladder.
+2. **Something that changed and stayed changed.** The metric rename.
+3. **A function you built from nothing.** Sling. This is the one that most directly says "Staff," and it's the one you're most likely to forget.
+
+**What kills it.** Arguing from title, from years of experience, or from the patent. All three are inputs. Level is decided on scope, and scope means what someone else has to clear because you defined it.
+
 ---
 
 ## AC07 — When She Leaves the Case Study
@@ -447,7 +532,7 @@ When you've answered one of these and want the ground back:
 
 > The obvious hole in what I've described is that nothing in it was irreversible. Let me give you the version where it was. At NASA Langley I did human-systems integration for Lunar Gateway clinical workstations in simulated microgravity — a use-error analysis against NASA-STD-3001 and MIL-STD-1472 rather than a usability study, because the failures that matter there are rare and high-consequence and won't appear in any sample you can get. Enumerate the error modes, rank by consequence rather than frequency, redesign the physical layout so the irreversible action isn't adjacent to the routine one. Task time dropped thirty percent and the critical input errors were eliminated — and the layout is what eliminated them, not the speed. I was a Ph.D. intern on that, so the analysis and the redesign recommendation are the honest claim, not the program.
 
-**~155 words ≈ 45 seconds.** Say it and stop. If she wants more, the full material is in [05-nasa-case-study.md](practice/05-nasa-case-study.md).
+**~140 words ≈ 55 seconds.** Say it and stop. If she wants more, the full material is in [05-nasa-case-study.md](practice/05-nasa-case-study.md).
 
 **Why it works here:** it supplies safety-criticality and military-standard fluency, it pre-empts the consumer-tech objection, and volunteering the intern caveat unprompted buys more credibility than the story costs.
 
