@@ -12,7 +12,7 @@
 
 ## Two-Day Plan
 
-**Memorise one thing: the eight triggers in the AC01 table.** Say them in order until you can do it in fifteen seconds — the words then fill themselves in, because you already know this work and are only learning the running order. **Never memorise the script sentence by sentence;** a memorised paragraph sounds memorised.
+**Memorize one thing: the eight triggers in the AC01 table.** Say them in order until you can do it in fifteen seconds — the words then fill themselves in, because you already know this work and are only learning the running order. **Never memorize the script sentence by sentence;** a memorized paragraph sounds memorized.
 
 **Day 1** — read AC01–AC02 once, no notes (30 min) · learn the eight triggers (20) · record the presentation three times, check the clock (40) · read the AC10 boundaries (20) · say the NASA module twice (15).
 
@@ -28,7 +28,7 @@
 
 > **Base:** Walk me through a piece of research you led, end to end. Take about three minutes.
 
-### The eight triggers — memorise this column, not the script
+### The eight triggers — memorize this column, not the script
 
 | # | Trigger | The job it does | ≈ |
 |---|---|---|---|
