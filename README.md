@@ -84,23 +84,31 @@ To run it from your own machine instead, `python src\app.py` and reach it at `ht
 | `references/rubrics-detailed.md` | Detailed scoring anchors |
 | `practice/00-response-architecture.md` | Answer-structure beats and length discipline the debrief grades against |
 
+`references/` also holds the candidate's source artifacts — the granted patent, the written response to Dr. Kim's Learners Conference questions, and two former-employer research reports. The reports are **confidential**: `data/candidate_profile.json` records what each one establishes and how it may be used. Method and structure are discussable; internal codenames, competitor benchmarking, and any dollar figure other than the ~$50M on the resume are not, and must not even be alluded to.
+
 Every question bank carries persona adaptations, follow-up probes, and a Lead/Staff bar for each pillar. Live turns keep each bank question's construct and demand intact so the wording stays recognizable against the practice set; framing varies by persona style and a rotating probe stance rather than by rewriting the pillar.
 
 ### Evidence boundaries
 
-The coach never invents metrics, outcomes, clearance status, classified details, team structure, or prior familiarity with an interviewer. Candidate claims are context to probe, not evidence that a competency was demonstrated.
+The coach never invents metrics, outcomes, clearance status, classified details, team structure, or acquaintance with an interviewer. Candidate claims are context to probe, not evidence that a competency was demonstrated.
 
 The recruiter screen is complete: **location, compensation, travel, and clearance are settled** and are never asked about or treated as gaps. Level is the only open item, and it is argued from scope rather than title.
 
+The remaining loop is a **45-minute conversation with Dr. Daniella Kim built around a single case study**, which gates an onsite of four back-to-back 1:1 interviews. One boundary is narrowed rather than absolute: the candidate may state that Dr. Kim posed three questions publicly at the Learners Conference in May 2026 and that he wrote a research response to them. No acquaintance, no private exchange, and nothing characterized beyond those three questions.
+
 ## Practice Set
 
-`practice/` holds the written answer bank — 40 pillars with one model answer each, all follow-ups answered at follow-up length, and the Senior → Lead/Staff delta per pillar.
+`practice/` holds the written answer bank — 40 question pillars with one model answer each, all follow-ups answered at follow-up length, and the Senior → Lead/Staff delta per pillar — plus two case-study files built for the single-case hiring-manager conversation.
 
 - `00-response-architecture.md` — the two answer structures, length discipline, uplevel moves, evidence boundaries, drill protocol, and a one-page cheat sheet
 - `01-technical-track.md` — TQ01–TQ10
 - `02-behavioral-track.md` — BQ01–BQ10
 - `03-culture-stakeholder-track.md` — CQ01–CQ10
 - `04-positioning-close-track.md` — PQ01–PQ10
+- `05-nasa-case-study.md` — NC01–NC08, the NASA Langley case: a 55-second module inside the hiring-manager conversation, and the full deep-dive for the onsite loop
+- `06-amazon-case-study.md` — AC01–AC11, **the primary case for the 45-minute hiring-manager conversation.** A counted three-minute presentation, five drilled deep-dive layers, the rigor follow-ups, the evidence-tier ladder, the off-case answers for when she leaves the case, and a minute-by-minute run sheet
+
+Every spoken block is **counted at 150 words per minute**, not estimated, so the stated timings are real.
 
 Placeholders in `[brackets]` mark facts only the candidate can supply. Fill them in or cut the sentence — never improvise a number, a name, or an outcome.
 
@@ -110,7 +118,7 @@ Placeholders in `[brackets]` mark facts only the candidate can supply. Fill them
 python scripts\build_practice_html.py
 ```
 
-Renders each markdown file plus a combined `ALL-tracks.html` into `practice/print/`, styled for two-column printing at 10.5pt. Open the combined file in a browser and `Ctrl+P` with **Background graphics** enabled. Generated output is gitignored; regenerate after editing any practice markdown.
+Renders each markdown file plus a combined `ALL-tracks.html` into `practice/print/`, styled for two-column printing at 9.6pt. Open a file in a browser and `Ctrl+P` with **Background graphics** enabled; if a document spills one page past where you want it, set **Scale: 95%**. Generated output is gitignored — regenerate after editing any practice markdown rather than keeping a stale PDF around.
 
 ## Validation
 

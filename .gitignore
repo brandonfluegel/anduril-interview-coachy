@@ -22,6 +22,7 @@ venv/
 temp_audio/
 exports/
 practice/print/
+*.log
 .vscode/
 .idea/
 .DS_Store

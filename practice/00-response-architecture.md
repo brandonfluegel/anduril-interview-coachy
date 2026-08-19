@@ -140,9 +140,9 @@ Closed topics — never raise, never treat as a gap: location, compensation, tra
 
 The markdown files are the source. Printable versions live in `practice/print/`.
 
-**Fastest path:** open `practice/print/ALL-tracks.pdf` and print it. 41 pages, everything, two columns at 10.5pt.
+**Open `practice/print/ALL-tracks.html` in your browser and `Ctrl+P`.** Turn on **Background graphics** so the table shading and blockquote rules render. Individual tracks are there as separate HTML files if you'd rather print one at a time — for the hiring-manager conversation, `06-amazon-case-study.html` is the only one you need on the day. If a document spills one page past where you want it, set **Scale: 95%**.
 
-**From HTML instead:** open `practice/print/ALL-tracks.html` in your browser and `Ctrl+P`. Turn on **Background graphics** so the table shading and blockquote rules render. Individual tracks are there as separate HTML files if you'd rather print one at a time.
+There is deliberately no checked-in PDF: it goes stale the moment you edit a track, and printing a week-old copy of a case study is worse than printing nothing.
 
 **If you edit the markdown**, regenerate before reprinting:
 
