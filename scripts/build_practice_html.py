@@ -91,54 +91,54 @@ p.probe {
 p.probe em { color: #666; font-style: normal; }
 
 @media print {
-  @page { size: letter; margin: 10mm 9mm; }
-  body { background: #fff; font-size: 11pt; line-height: 1.42; padding: 0; }
+  @page { size: letter; margin: 8mm 7mm; }
+  body { background: #fff; font-size: 9.6pt; line-height: 1.28; padding: 0; }
   /* Two columns keeps a readable line length; a single column at this size runs ~100 characters. */
   main {
     max-width: none; box-shadow: none; padding: 0;
-    column-count: 2; column-gap: 6.5mm; column-fill: auto;
+    column-count: 2; column-gap: 5mm; column-fill: auto;
     column-rule: 0.5pt solid #ddd;
     hyphens: none;
   }
   h1 {
-    font-size: 16pt; column-span: all; margin: 12pt 0 8pt;
-    padding-bottom: 4pt; border-bottom: 2.5pt solid #000;
+    font-size: 14pt; column-span: all; margin: 0 0 6pt;
+    padding-bottom: 3pt; border-bottom: 2pt solid #000;
   }
   h1:first-of-type { margin-top: 0; }
   /* Each pillar is a memorization chunk, so give it a hard visual boundary. */
   h2 {
-    font-size: 12.5pt; margin: 16pt 0 5pt; padding-top: 5pt;
-    border-top: 2pt solid #000; break-after: avoid; break-inside: avoid;
+    font-size: 11pt; margin: 10pt 0 3pt; padding-top: 3pt;
+    border-top: 1.5pt solid #000; break-after: avoid; break-inside: avoid;
   }
-  h2 + p { font-size: 8.8pt; color: #444; margin: 0 0 6pt; }
+  h2 + p { font-size: 8.2pt; color: #444; margin: 0 0 4pt; }
   h3 {
-    font-size: 10.8pt; margin: 11pt 0 3pt; break-after: avoid;
-    text-transform: uppercase; letter-spacing: .04em;
+    font-size: 9.6pt; margin: 7pt 0 2pt; break-after: avoid;
+    text-transform: uppercase; letter-spacing: .03em;
   }
-  h4 { font-size: 10.4pt; margin: 8pt 0 2pt; break-after: avoid; }
-  p { margin: 0 0 5.5pt; }
-  ul, ol { margin: 0 0 5.5pt; padding-left: 14pt; }
-  li { margin: 0 0 2.5pt; }
+  h4 { font-size: 9.4pt; margin: 5pt 0 1.5pt; break-after: avoid; }
+  p { margin: 0 0 4pt; }
+  ul, ol { margin: 0 0 4pt; padding-left: 11pt; }
+  li { margin: 0 0 1.5pt; }
   p, li, blockquote { orphans: 2; widows: 2; }
   /* Default blockquote = the words you actually say. */
   blockquote {
-    margin: 4pt 0 7pt; padding: 1pt 0 1pt 8pt;
-    border-left: 2.5pt solid #555; background: none;
+    margin: 3pt 0 5pt; padding: 0 0 0 6pt;
+    border-left: 2pt solid #555; background: none;
   }
-  blockquote p { margin: 0 0 3pt; }
+  blockquote p { margin: 0 0 2.5pt; }
   blockquote.prompt {
-    border: 0.8pt solid #333; border-left-width: 4pt;
-    background: #f0f0ee; padding: 5pt 7pt; margin: 5pt 0 8pt;
+    border: 0.7pt solid #333; border-left-width: 3pt;
+    background: #f0f0ee; padding: 4pt 5pt; margin: 4pt 0 6pt;
     break-inside: avoid;
   }
   blockquote.warn {
-    border: 0.8pt dashed #7a6118; border-left-width: 3pt;
-    background: #fbf6e8; padding: 5pt 7pt;
+    border: 0.7pt dashed #7a6118; border-left-width: 2.5pt;
+    background: #fbf6e8; padding: 4pt 5pt;
   }
-  p.probe { margin: 11pt 0 3pt; font-size: 10.4pt; break-after: avoid; }
+  p.probe { margin: 8pt 0 2pt; font-size: 9.6pt; break-after: avoid; }
   p.probe em { color: #555; font-style: normal; }
-  table { column-span: all; font-size: 9pt; margin: 8pt 0; }
-  th, td { padding: 3.5pt 5pt; }
+  table { column-span: all; font-size: 8.2pt; margin: 5pt 0; }
+  th, td { padding: 2.5pt 4pt; }
   code { background: none; font-size: .9em; }
   hr { display: none; }
   a { color: inherit; text-decoration: none; }
