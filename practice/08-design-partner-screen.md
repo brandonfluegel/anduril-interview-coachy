@@ -82,11 +82,11 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 > **Base:** Give me the quick version of your background.
 
-**Say this** *(~230 words / 92s)*
+**Say this** *(~185 words / 74s)*
 
 > I'm a researcher. My training is human factors psychology, which means I study people in situations where a mistake is expensive and nobody gets a second attempt.
 >
-> Most of my six years applied is design research, and the biggest piece was four years at the Amazon Devices Design group. There I used neuroimaging and eye tracking to settle visual density debates with objective workload data rather than taste. I also ran the research that replaced invented response-time targets with measured human ones. And I'm the named inventor on a patent for context-based control inputs, where the same physical action resolves to a different command depending on which interface is up and where you are inside it.
+> Most of my six years applied is design research, and the biggest piece was four years at the Amazon Devices Design group. There I used neuroimaging and eye tracking to settle visual density debates with objective workload data rather than taste. I also ran the research that replaced invented response-time targets with measured human ones.
 >
 > At Uber I did field work in dense urban cores, riding along with drivers to find where the mobile interface was losing against the road. That fed changes tied to a five percent lift in driver retention.
 >
@@ -95,8 +95,6 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 > Now I'm Staff at Sling, running research across software, hardware, and AI.
 >
 > What I'd want you to take from that is that I've done as much scrappy work in the field as controlled work in a lab, and knowing which one a question deserves is most of the job.
-
-> ⚠️ Running long? The patent sentence is the one to drop — it's the least design-facing of the three, and DS05 and DS08 both give you a better place to spend the time.
 
 **F1 — "What would your first month look like?"** *(~65 words)*
 
