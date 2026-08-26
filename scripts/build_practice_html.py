@@ -170,6 +170,17 @@ p.level {
     padding-top: 2pt; border-top: 0.4pt solid #bbb;
     break-before: avoid; break-inside: avoid;
   }
+  /* The briefing block runs full width; only the rehearsal entries belong in columns.
+     Each paragraph gets its own two columns so the line length stays readable. */
+  .lede { column-span: all; }
+  .lede > p { columns: 2; column-gap: 5mm; }
+  .lede > ol, .lede > ul { columns: 2; column-gap: 5mm; padding-left: 13pt; }
+  .lede > blockquote.warn { columns: 2; column-gap: 5mm; }
+  .lede > h2 { margin-top: 7pt; }
+  .lede table { font-size: 7.9pt; margin: 3pt 0 5pt; }
+  .lede th, .lede td { padding: 2pt 3.5pt; }
+  /* Briefing blocks are small enough to keep whole, so the page breaks at a section edge. */
+  .lede table, .lede > ol, .lede > blockquote.warn { break-inside: avoid; }
   /* Tables may split at a row boundary; forcing them whole punches holes in the page. */
   table { column-span: all; font-size: 8.1pt; margin: 4pt 0 6pt; }
   thead { display: table-header-group; }
@@ -215,7 +226,17 @@ def render(md: MarkdownIt, path: Path) -> str:
     )
     body = body.replace("<p><strong>Say this</strong>", '<p class="say"><strong>Say this</strong>')
     body = body.replace("<p><strong>Level:</strong>", '<p class="level"><strong>Level:</strong>')
-    return body
+    return wrap_lede(body)
+
+
+def wrap_lede(body: str) -> str:
+    """Group everything between the title and the first numbered entry so it can span both columns."""
+    start = body.find("</h1>")
+    entry = re.search(r'<h2>[A-Z]{2}\d{2}', body)
+    if start == -1 or entry is None:
+        return body
+    start += len("</h1>")
+    return f'{body[:start]}\n<section class="lede">{body[start:entry.start()]}</section>\n{body[entry.start():]}'
 
 
 def main() -> None:

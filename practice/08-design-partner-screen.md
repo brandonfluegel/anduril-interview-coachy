@@ -2,16 +2,17 @@
 
 **Monday, August 31 · 30 minutes · one embedded design partner** — Tiffany Chen, Principal Product Designer and Design Manager on Air Defense. No panel, no presentation.
 
-**What this screen decides.** The posted role is **Senior User Experience Researcher**. Your rigor was examined last round and isn't what's on trial here. She's working out whether you can run research at the speed her sprint moves, hand back something a designer can act on this week, and still know when to refuse to go fast. That's the whole conversation: **two gears, and the judgment to pick one.**
+**What this screen decides.** The posted role is **Senior User Experience Researcher**. Your rigor was examined last round and isn't on trial here. She's working out whether you can run research at the speed her sprint moves, hand back something a designer can act on this week, and still know when to refuse to go fast. That's the whole conversation: **two gears, and the judgment to pick one.**
 
-**The register problem.** Round one read you as a human factors engineer. Nothing you know is wrong; the framing is. In this room you're a UX researcher with psychophysics and safety-critical depth in reserve. Lead with field craft and what changed in the product; bring out standards and thresholds only when someone digs.
+**The register problem.** Round one read you as a human factors engineer. Nothing you know is wrong; the framing is. Here you're a UX researcher with psychophysics and safety-critical depth in reserve. Lead with field craft and what changed in the product.
 
 | Lead with this | Hold in reserve until asked |
 |---|---|
 | Contextual inquiry, ride-alongs, rapid field work, observation | uFMEA, MIL-STD-1472, NASA-STD-3001 |
-| Usability sessions, structured walkthroughs, service blueprints | Psychophysics, within-subjects design, staircase methods |
-| Insight, iteration, readouts, repositories, workshops | Specifications, compliance, verification, reach envelopes |
+| Usability sessions, structured walkthroughs, service blueprints, readouts, repositories | Psychophysics, within-subjects design, staircase methods, reach envelopes |
 | "Here's what I watched operators actually do" | "Here's what the standard requires" |
+
+## Before you go in
 
 **Targets:** anchor **~90s** · answers **55–70s** · follow-ups **45–70 words**. You have roughly twenty minutes of talking. A 110-second answer costs you a whole topic.
 
@@ -52,8 +53,9 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 | **Sample** | 3–8 people, whoever you can get | Powered for the effect, counterbalanced |
 | **Clock** | Hours to a week | Weeks to months |
 | **Output** | A direction, an edge-case list, a same-day readout | A number that will be quoted for years |
-| **Licenses you to say** | "Here's what's happening and what I'd change first" | "Here's the boundary, and here's what happens on either side of it" |
-| **Fails when** | Someone quotes it as if it were a rate | Someone spends a quarter answering a reversible question |
+| **Lets you say** | "Here's what's happening and what I'd change first" | "Here's the boundary, and what happens either side of it" |
+
+Each fails in its own way. The fast gear fails when someone quotes it as if it were a rate; the slow gear fails when a quarter goes into answering a reversible question.
 
 **How you pick, in four questions.** Say them in this order if she asks:
 
@@ -72,7 +74,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 | **Amazon** — cognitive load, fNIRS + eye tracking | Confirmation | You measure effort objectively, not by asking | Density, layout, what users notice |
 | **Amazon** — response-time thresholds | Confirmation | You know what a number costs and when it's worth it | Rigor, standards, specifications |
 | **Mercedes** — L2/L3 handover comparison | Confirmation | You run a clean comparison when the answer has to hold | Automation, alerts, trust |
-| **NASA** — workstation use-error work | Confirmation | You redesign against observed failure, then measure the change | Safety-critical, error prevention |
+| **NASA** — workstation use-error work | Confirmation | You redesign against observed failure, then measure it | Safety-critical, error prevention |
 
 ---
 
@@ -82,11 +84,11 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 > **Base:** Give me the quick version of your background.
 
-**Say this** *(~220 words / 88s)*
+**Say this** *(~195 words / 78s)*
 
 > I'm a researcher. My training is human factors psychology, which means I study people in situations where a mistake is expensive and nobody gets a second attempt.
 >
-> Most of my six years applied is design research, and the biggest piece was four years at the Amazon Devices Design group. I was the only human factors researcher covering the entire Echo device and Alexa portfolio, so I sat inside the iterative design cycle for all of it, from early concept through to what actually shipped. Within that, I used neuroimaging and eye tracking to settle visual density debates with objective workload data rather than taste, and I ran the research that replaced invented response-time targets with measured human ones.
+> Most of my six years applied is design research. The biggest piece was four years at Amazon, where I was the sole human factors researcher in the Devices Design Group. I introduced rapid iterative design and evaluation as the way we drove the Echo portfolio, so research ran inside the design cycle rather than after it. I co-invented the workload measurement we used to settle visual density debates with objective data rather than taste, and I ran the latency perception work that replaced invented response-time targets with measured human ones.
 >
 > At Uber I did field work in dense urban cores, riding along with drivers to find where the mobile interface was losing against the road. That fed changes tied to a five percent lift in driver retention.
 >
