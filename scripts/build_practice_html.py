@@ -103,11 +103,11 @@ p.level {
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
   body { background: #fff; font-size: 9.5pt; line-height: 1.3; padding: 0; }
-  /* Two columns keeps a readable line length; a single column at this size runs ~100 characters. */
+  /* Two columns keeps a readable line length; a single column at this size runs ~100 characters.
+     No column rule: it paints straight through the full-width tables. */
   main {
     max-width: none; box-shadow: none; padding: 0;
-    column-count: 2; column-gap: 4.5mm; column-fill: auto;
-    column-rule: 0.5pt solid #ddd;
+    column-count: 2; column-gap: 5mm; column-fill: auto;
     hyphens: none;
   }
   h1 {
@@ -115,26 +115,26 @@ p.level {
     padding-bottom: 3pt; border-bottom: 2pt solid #000;
   }
   h1:first-of-type { margin-top: 0; }
-  /* Each pillar is a memorization chunk, so give it a hard visual boundary. */
+  /* Each pillar is a memorization chunk, so give it a tinted band you can find while talking. */
   h2 {
-    font-size: 10.5pt; margin: 9pt 0 2pt; padding-top: 3pt;
-    border-top: 1.5pt solid #000; break-after: avoid; break-inside: avoid;
+    font-size: 10.5pt; margin: 8pt 0 3pt; padding: 2.5pt 4pt;
+    background: #ececec; border-left: 2.5pt solid #000;
+    break-after: avoid; break-inside: avoid;
   }
   h3 {
     font-size: 9.5pt; margin: 6pt 0 2pt; break-after: avoid;
     text-transform: uppercase; letter-spacing: .03em;
   }
   h4 { font-size: 9.3pt; margin: 5pt 0 1.5pt; break-after: avoid; }
-  /* Nothing shorter than a paragraph should straddle a column break. */
-  p { margin: 0 0 3.5pt; break-inside: avoid; }
+  p { margin: 0 0 3.5pt; }
   ul, ol { margin: 0 0 4pt; padding-left: 11pt; }
   li { margin: 0 0 1.5pt; break-inside: avoid; }
-  p, li, blockquote { orphans: 2; widows: 2; }
-  /* Default blockquote = the words you actually say. Never split one; it's a rehearsal unit. */
+  /* Three lines minimum on either side of a break keeps a split script readable. */
+  p, li, blockquote { orphans: 3; widows: 3; }
+  /* Default blockquote = the words you actually say. */
   blockquote {
     margin: 2pt 0 5pt; padding: 0 0 0 6pt;
     border-left: 2pt solid #555; background: none;
-    break-inside: avoid;
   }
   blockquote p { margin: 0 0 2.5pt; }
   blockquote.prompt {
@@ -148,25 +148,32 @@ p.level {
     background: #fbf6e8; padding: 3.5pt 5pt;
     font-size: 9pt; break-inside: avoid;
   }
-  /* The metadata strip under a heading: arc, gear, timing. */
+  /* Labels are sans, the words you speak stay serif. That contrast is the whole navigation system. */
+  p.meta, p.say, p.probe, p.level { font-family: Helvetica, Arial, sans-serif; }
   p.meta {
     font-size: 8.2pt; color: #444; margin: 0 0 3pt;
     break-after: avoid; break-inside: avoid;
   }
-  /* "Say this" cue must never be orphaned from the script it introduces. */
   p.say {
-    font-size: 9.3pt; margin: 5pt 0 1.5pt;
+    font-size: 8.8pt; margin: 5pt 0 1.5pt;
+    text-transform: uppercase; letter-spacing: .04em;
     break-after: avoid; break-inside: avoid;
   }
-  p.say em { color: #555; font-style: normal; }
-  p.probe { margin: 6pt 0 1.5pt; font-size: 9.3pt; break-after: avoid; break-inside: avoid; }
+  p.say em { color: #555; font-style: normal; text-transform: none; letter-spacing: 0; }
+  p.probe {
+    margin: 6pt 0 1.5pt; font-size: 9pt;
+    break-after: avoid; break-inside: avoid;
+  }
   p.probe em { color: #555; font-style: normal; }
   p.level {
-    font-size: 8.4pt; color: #333; margin: 3pt 0 0;
+    font-size: 8.3pt; color: #333; margin: 3pt 0 0;
     padding-top: 2pt; border-top: 0.4pt solid #bbb;
     break-before: avoid; break-inside: avoid;
   }
-  table { column-span: all; font-size: 8.1pt; margin: 4pt 0 6pt; break-inside: avoid; }
+  /* Tables may split at a row boundary; forcing them whole punches holes in the page. */
+  table { column-span: all; font-size: 8.1pt; margin: 4pt 0 6pt; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
   th, td { padding: 2.5pt 4pt; }
   code { background: none; font-size: .9em; }
   hr { display: none; }
