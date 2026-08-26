@@ -89,55 +89,84 @@ p.probe {
   margin-top: 1.1em;
 }
 p.probe em { color: #666; font-style: normal; }
+p.meta { font-size: .92rem; color: #555; margin-top: -.2em; }
+p.say {
+  font-family: Helvetica, Arial, sans-serif;
+  margin-top: 1.1em;
+}
+p.say em { color: #666; font-style: normal; }
+p.level {
+  font-size: .92rem; color: #333;
+  border-top: 1px solid #ddd; padding-top: .45em; margin-top: .9em;
+}
 
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
-  body { background: #fff; font-size: 9.6pt; line-height: 1.28; padding: 0; }
+  body { background: #fff; font-size: 9.5pt; line-height: 1.3; padding: 0; }
   /* Two columns keeps a readable line length; a single column at this size runs ~100 characters. */
   main {
     max-width: none; box-shadow: none; padding: 0;
-    column-count: 2; column-gap: 5mm; column-fill: auto;
+    column-count: 2; column-gap: 4.5mm; column-fill: auto;
     column-rule: 0.5pt solid #ddd;
     hyphens: none;
   }
   h1 {
-    font-size: 14pt; column-span: all; margin: 0 0 6pt;
+    font-size: 13.5pt; column-span: all; margin: 0 0 5pt;
     padding-bottom: 3pt; border-bottom: 2pt solid #000;
   }
   h1:first-of-type { margin-top: 0; }
   /* Each pillar is a memorization chunk, so give it a hard visual boundary. */
   h2 {
-    font-size: 11pt; margin: 10pt 0 3pt; padding-top: 3pt;
+    font-size: 10.5pt; margin: 9pt 0 2pt; padding-top: 3pt;
     border-top: 1.5pt solid #000; break-after: avoid; break-inside: avoid;
   }
-  h2 + p { font-size: 8.2pt; color: #444; margin: 0 0 4pt; }
   h3 {
-    font-size: 9.6pt; margin: 7pt 0 2pt; break-after: avoid;
+    font-size: 9.5pt; margin: 6pt 0 2pt; break-after: avoid;
     text-transform: uppercase; letter-spacing: .03em;
   }
-  h4 { font-size: 9.4pt; margin: 5pt 0 1.5pt; break-after: avoid; }
-  p { margin: 0 0 4pt; }
+  h4 { font-size: 9.3pt; margin: 5pt 0 1.5pt; break-after: avoid; }
+  /* Nothing shorter than a paragraph should straddle a column break. */
+  p { margin: 0 0 3.5pt; break-inside: avoid; }
   ul, ol { margin: 0 0 4pt; padding-left: 11pt; }
-  li { margin: 0 0 1.5pt; }
+  li { margin: 0 0 1.5pt; break-inside: avoid; }
   p, li, blockquote { orphans: 2; widows: 2; }
-  /* Default blockquote = the words you actually say. */
+  /* Default blockquote = the words you actually say. Never split one; it's a rehearsal unit. */
   blockquote {
-    margin: 3pt 0 5pt; padding: 0 0 0 6pt;
+    margin: 2pt 0 5pt; padding: 0 0 0 6pt;
     border-left: 2pt solid #555; background: none;
+    break-inside: avoid;
   }
   blockquote p { margin: 0 0 2.5pt; }
   blockquote.prompt {
+    font-size: 9.3pt;
     border: 0.7pt solid #333; border-left-width: 3pt;
-    background: #f0f0ee; padding: 4pt 5pt; margin: 4pt 0 6pt;
-    break-inside: avoid;
+    background: #f0f0ee; padding: 3.5pt 5pt; margin: 3pt 0 5pt;
+    break-inside: avoid; break-after: avoid;
   }
   blockquote.warn {
     border: 0.7pt dashed #7a6118; border-left-width: 2.5pt;
-    background: #fbf6e8; padding: 4pt 5pt;
+    background: #fbf6e8; padding: 3.5pt 5pt;
+    font-size: 9pt; break-inside: avoid;
   }
-  p.probe { margin: 8pt 0 2pt; font-size: 9.6pt; break-after: avoid; }
+  /* The metadata strip under a heading: arc, gear, timing. */
+  p.meta {
+    font-size: 8.2pt; color: #444; margin: 0 0 3pt;
+    break-after: avoid; break-inside: avoid;
+  }
+  /* "Say this" cue must never be orphaned from the script it introduces. */
+  p.say {
+    font-size: 9.3pt; margin: 5pt 0 1.5pt;
+    break-after: avoid; break-inside: avoid;
+  }
+  p.say em { color: #555; font-style: normal; }
+  p.probe { margin: 6pt 0 1.5pt; font-size: 9.3pt; break-after: avoid; break-inside: avoid; }
   p.probe em { color: #555; font-style: normal; }
-  table { column-span: all; font-size: 8.2pt; margin: 5pt 0; }
+  p.level {
+    font-size: 8.4pt; color: #333; margin: 3pt 0 0;
+    padding-top: 2pt; border-top: 0.4pt solid #bbb;
+    break-before: avoid; break-inside: avoid;
+  }
+  table { column-span: all; font-size: 8.1pt; margin: 4pt 0 6pt; break-inside: avoid; }
   th, td { padding: 2.5pt 4pt; }
   code { background: none; font-size: .9em; }
   hr { display: none; }
@@ -171,6 +200,14 @@ def render(md: MarkdownIt, path: Path) -> str:
     )
     body = body.replace("<blockquote>\n<p>\u26a0\ufe0f", '<blockquote class="warn">\n<p>\u26a0\ufe0f')
     body = re.sub(r"<p><strong>(F\d) \u2014", lambda m: f'<p class="probe"><strong>{m.group(1)} \u2014', body)
+    # Cue lines must stay welded to the block they introduce, so they need their own classes.
+    body = re.sub(
+        r"<p><strong>(Ask|Arc|Stakeholders):</strong>",
+        lambda m: f'<p class="meta"><strong>{m.group(1)}:</strong>',
+        body,
+    )
+    body = body.replace("<p><strong>Say this</strong>", '<p class="say"><strong>Say this</strong>')
+    body = body.replace("<p><strong>Level:</strong>", '<p class="level"><strong>Level:</strong>')
     return body
 
 

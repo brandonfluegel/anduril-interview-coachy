@@ -16,10 +16,14 @@
 **Targets:** anchor **~90s** · answers **55–70s** · follow-ups **45–70 words**. You have roughly twenty minutes of talking. A 110-second answer costs you a whole topic.
 
 > ⚠️ **Four boundaries.**
+>
 > **The 1:1 stays private.** Never quote Dr. Kim or reference coaching you were given. It shapes *how* you answer; it is never content.
-> **Assert nothing internal.** You do not know their design system, their sprint cadence, or what operators do in Lattice today. Each of those is a question, never a statement.
+>
+> **Assert nothing internal.** You don't know their design system, their sprint cadence, or what operators do in Lattice today. Each is a question, never a statement.
+>
 > **No apology framing.** Never "I haven't worked with military operators, but…" Say: *"I've worked in high-consequence environments where a use error is irreversible. I'd rather be exact about what transfers and what doesn't."*
-> **Never raise** compensation, location, travel, or clearance. All four are settled. If she raises one, answer in a sentence and go back to the work.
+>
+> **Never raise** compensation, location, travel, or clearance. All four are settled.
 
 ---
 
@@ -33,9 +37,11 @@
 | 20–27 | Your questions | Ask three from the reverse set; hold one back for the gap she opens. |
 | 27–30 | Close | The close line at the end of this track. Do not re-pitch. |
 
+**The sixteen, in order:** DS01 anchor · DS02 how much rigor · DS03 Uber · DS04 Amazon · DS05 density · DS06 what you hand over · DS07 one operator · DS08 designer was right · DS09 pushback · DS10 non-deterministic · DS11 degraded conditions · DS12 operator model · DS13 domain transfer · DS14 what you cut · DS15 current role · DS16 why leave
+
 ---
 
-## The two gears — the spine of everything below
+## The two gears
 
 Name the gear out loud in every answer. That is the single habit that makes you read as a researcher with judgment rather than an academic with a method.
 
@@ -58,7 +64,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## Your four cases, in one line each
+## Your four cases
 
 | Case | Gear | What it proves for this role | Deploy when she asks about |
 |---|---|---|---|
@@ -104,7 +110,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS02 — How You Decide How Rigorous to Be
+## DS02 — How Much Rigor a Question Deserves
 
 **Ask:** the centerpiece of this screen · **Target:** 65s
 
@@ -152,7 +158,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS04 — The Rigorous One, and What It Cost: Amazon
+## DS04 — The Rigorous One: Amazon
 
 **Ask:** the counterweight to DS03 · **Gear:** confirmation · **Target:** 65s
 
@@ -176,7 +182,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS05 — Knowing When a Screen Is Too Dense
+## DS05 — When a Screen Is Too Dense
 
 **Ask:** the density question, and the one a designer cares most about · **Gear:** either · **Target:** 65s
 
@@ -204,7 +210,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS06 — What You Actually Hand a Designer
+## DS06 — What You Hand a Designer
 
 **Ask:** the question behind every other question here · **Target:** 70s
 
@@ -230,7 +236,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS07 — Thirty Minutes, One Operator, Friday Lock
+## DS07 — One Operator, Thirty Minutes
 
 **Ask:** her most probable opener after the pitch · **Gear:** discovery · **Target:** 60s
 
@@ -256,7 +262,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS08 — When the Designer Was Right and Your Data Wasn't
+## DS08 — When the Designer Was Right
 
 **Ask:** the credibility test · **Target:** 45s · Conceding this well is what makes everything else you've said about partnership believable.
 
@@ -298,7 +304,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS10 — Researching an Interface That Isn't Deterministic
+## DS10 — Non-Deterministic Interfaces
 
 **Ask:** unavoidable given what they build · **Target:** 65s
 
@@ -322,7 +328,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS11 — Degraded Conditions, and When Stress Turns Physical
+## DS11 — Degraded Conditions
 
 **Ask:** the environment question · **Gear:** either · **Target:** 70s
 
@@ -348,7 +354,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS12 — Representing the Operator Without Personas
+## DS12 — Representing the Operator
 
 **Ask:** likely philosophical probe · **Target:** 60s
 
@@ -412,7 +418,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS15 — Your Current Role at Sling
+## DS15 — Your Current Role
 
 **Ask:** the down-level probe in disguise · **Target:** 65s · The real question is whether a Staff title means you've stopped doing the work.
 
@@ -436,7 +442,7 @@ Name the gear out loud in every answer. That is the single habit that makes you 
 
 ---
 
-## DS16 — Why Leave, and the Level Question
+## DS16 — Why Leave, and Level
 
 **Ask:** motivation · **Target:** 55s · Say it without a word against Sling. Never raise level yourself.
 
