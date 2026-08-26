@@ -1,14 +1,25 @@
-# 08 — Design Partner Screen: 30 Minutes with the Principal Designer (DS01–DS14)
+# 08 — The Design Partner Screen: Rapid Research at Sprint Speed (DS01–DS16)
 
-The **Monday, August 31** embedded stakeholder screen — 30 minutes with **Tiffany Chen**, Principal Product Designer and Design Manager on Air Defense / Lattice. Rigor has already been ruled on. The only question here is whether a Ph.D. researcher is a fast, concrete design partner or a reviewer who shows up after the work and grades it. Her background — computer science, then Windows accessibility and assistive technology — means she thinks in mechanisms, states, and failure modes. Speak in the same units.
+**Monday, August 31 · 30 minutes · one embedded design partner** — Tiffany Chen, Principal Product Designer and Design Manager on Air Defense. No panel, no presentation.
 
-**Targets:** anchor **~90s** · main answers **60–75s** · follow-ups **45–80 words**. You get roughly twenty minutes of talking, so a 110-second answer costs you a whole topic.
+**What this screen decides.** The posted role is **Senior User Experience Researcher**. Your rigor was examined last round and isn't what's on trial here. She's working out whether you can run research at the speed her sprint moves, hand back something a designer can act on this week, and still know when to refuse to go fast. That's the whole conversation: **two gears, and the judgment to pick one.**
+
+**The register problem.** Round one read you as a human factors engineer. Nothing you know is wrong; the framing is. In this room you're a UX researcher with psychophysics and safety-critical depth in reserve. Lead with field craft and what changed in the product; bring out standards and thresholds only when someone digs.
+
+| Lead with this | Hold in reserve until asked |
+|---|---|
+| Contextual inquiry, ride-alongs, rapid field work, observation | uFMEA, MIL-STD-1472, NASA-STD-3001 |
+| Usability sessions, structured walkthroughs, service blueprints | Psychophysics, within-subjects design, staircase methods |
+| Insight, iteration, readouts, repositories, workshops | Specifications, compliance, verification, reach envelopes |
+| "Here's what I watched operators actually do" | "Here's what the standard requires" |
+
+**Targets:** anchor **~90s** · answers **55–70s** · follow-ups **45–70 words**. You have roughly twenty minutes of talking. A 110-second answer costs you a whole topic.
 
 > ⚠️ **Four boundaries.**
-> **One — the 1:1 stays private.** Never quote Dr. Kim or reference coaching you were given. It shapes *how* you answer; it is never content.
-> **Two — her public writing is a lens, not an icebreaker.** Don't name-check her essay or her plugin. Demonstrate the argument instead. One attributed reference is allowed, late, and only if she raises design philosophy first (DS03).
-> **Three — assert nothing internal.** You don't know how their design system is structured, what the sprint cadence is, or what operators do in Lattice today. Each of those is a question, never a statement.
-> **Four — no apology framing.** Never "I haven't worked with military operators, but…" Say instead: *"I've worked in high-consequence environments where a use error is irreversible — spaceflight medical operations, autonomous vehicle handovers. I'd rather be exact about what transfers and what doesn't."*
+> **The 1:1 stays private.** Never quote Dr. Kim or reference coaching you were given. It shapes *how* you answer; it is never content.
+> **Assert nothing internal.** You do not know their design system, their sprint cadence, or what operators do in Lattice today. Each of those is a question, never a statement.
+> **No apology framing.** Never "I haven't worked with military operators, but…" Say: *"I've worked in high-consequence environments where a use error is irreversible. I'd rather be exact about what transfers and what doesn't."*
+> **Never raise** compensation, location, travel, or clearance. All four are settled. If she raises one, answer in a sentence and go back to the work.
 
 ---
 
@@ -17,408 +28,455 @@ The **Monday, August 31** embedded stakeholder screen — 30 minutes with **Tiff
 | Minutes | What is happening | What you do |
 |---|---|---|
 | 0–2 | Her framing of the role | Listen for the words she uses for the operator. Reuse them all call. |
-| 2–5 | "Tell me about yourself" | **DS02** verbatim. Stop at 90 seconds. |
-| 5–20 | Her three or four real questions | **DS06–DS11**, or **DS12–DS14** if she goes at your current role. One example each. |
-| 20–27 | Your questions | Ask three from the reverse set; hold one for the gap she opens. |
+| 2–5 | "Tell me about yourself" | **DS01** verbatim. Stop at 90 seconds. |
+| 5–20 | Her three or four real questions | **DS02–DS15**. One example each. Answer, land it, stop. |
+| 20–27 | Your questions | Ask three from the reverse set; hold one back for the gap she opens. |
 | 27–30 | Close | The close line at the end of this track. Do not re-pitch. |
 
-**What she is scoring:** interaction-architecture reasoning · physical-digital ergonomics · information-density judgment · multimodal and handover reasoning · design partnership.
+---
+
+## The two gears — the spine of everything below
+
+Name the gear out loud in every answer. That is the single habit that makes you read as a researcher with judgment rather than an academic with a method.
+
+| | **Discovery gear** — fast and scrappy | **Confirmation gear** — slow and controlled |
+|---|---|---|
+| **Answers** | Where is this breaking, and why? | How much, exactly, and where's the line? |
+| **Methods** | Field observation, ride-alongs, contextual inquiry, structured walkthroughs, hallway tests, diary check-ins | Controlled comparison, within-subjects design, thresholds, scaled surveys, MaxDiff |
+| **Sample** | 3–8 people, whoever you can get | Powered for the effect, counterbalanced |
+| **Clock** | Hours to a week | Weeks to months |
+| **Output** | A direction, an edge-case list, a same-day readout | A number that will be quoted for years |
+| **Licenses you to say** | "Here's what's happening and what I'd change first" | "Here's the boundary, and here's what happens on either side of it" |
+| **Fails when** | Someone quotes it as if it were a rate | Someone spends a quarter answering a reversible question |
+
+**How you pick, in four questions.** Say them in this order if she asks:
+
+1. **Is the decision reversible?** If yes, fast gear. The cost of being wrong is one iteration.
+2. **Do they need a direction or a number?** Directions are cheap. Most people asking for a number only need a direction.
+3. **Will it get quoted after I leave the room?** Anything that becomes a target or a default has to survive being repeated without me.
+4. **Is the effect perceptual?** Perceptual effects are large and consistent, so small samples find them honestly. Preference effects aren't, and small samples lie about them.
 
 ---
 
-## DS01 — The Frame
+## Your four cases, in one line each
 
-**1. Constraints beat archetypes.** A persona summarizes a person; a constraint is a boundary the system has to satisfy. Work in the second currency — reach envelopes, time budgets, perceptual thresholds, error classes.
-
-**2. Assistive-technology mechanics are high-stress interaction mechanics.** Unreliable input channel, feedback that has to confirm what the system *believes* it received, recovery cheaper than the error. An operator in gloves, at night, three targets deep is a temporarily impaired user by every definition that matters.
-
-**3. Speed is a competency, not a compromise.** Every answer needs a "here's the version that fits in four days" branch. A researcher with only a good six-week answer is a scheduling risk.
-
-| Do | Don't |
-|---|---|
-| Name what you'd hand her, and when | Describe a study design she didn't ask about |
-| Give the four-day version | Present method as the point |
-| Talk in states, edge cases, error classes | Talk in themes and generalities |
-| Say "spaceflight medical operations," "four-second handover budget" | Say "I don't have combat experience, but" |
-| Ask how something works at Anduril | Assert how something works at Anduril |
-| Cede the solution space out loud, once | Sketch her a screen |
-
-> **The sentence she should repeat in the debrief:** *"He gives designers something they can actually design from, and he's fast."*
+| Case | Gear | What it proves for this role | Deploy when she asks about |
+|---|---|---|---|
+| **Uber** — urban ride-alongs, mobile HMI | Discovery | You do real field research, in the environment, on a timeline | Scrappiness, field work, ambiguity |
+| **Amazon** — cognitive load, fNIRS + eye tracking | Confirmation | You measure effort objectively, not by asking | Density, layout, what users notice |
+| **Amazon** — response-time thresholds | Confirmation | You know what a number costs and when it's worth it | Rigor, standards, specifications |
+| **Mercedes** — L2/L3 handover comparison | Confirmation | You run a clean comparison when the answer has to hold | Automation, alerts, trust |
+| **NASA** — workstation use-error work | Confirmation | You redesign against observed failure, then measure the change | Safety-critical, error prevention |
 
 ---
 
-## DS02 — The 90-Second Anchor
+## DS01 — The 90-Second Anchor
 
-**Arc:** opening · **Target:** 90s · `PQ01` retuned for a designer.
+**Ask:** opening · **Target:** 90s · Memorize this one verbatim.
 
 > **Base:** Give me the quick version of your background.
 
-### Model answer — memorize verbatim (~195 words / 80s)
+**Say this** *(~225 words / 90s)*
 
-> I'm a human factors engineer, and the through-line is that I work where a use error can't be taken back.
+> I'm a researcher. My training is human factors psychology, which means I study people in situations where a mistake is expensive and nobody gets a second attempt.
 >
-> My Ph.D. is in human factors psychology, on working memory and reaction time under high-stress interruption. Six years applied since then.
+> Most of my six years applied is design research. The biggest piece was four years at Amazon in the devices design group, where I built a way to measure what an interface actually costs someone — near-infrared sensing on the forehead for mental effort, paired with eye tracking and people's own complexity ratings. That let us settle density arguments with evidence instead of taste. I also ran the program that replaced invented response-time targets with measured human ones, which is where patent US-12532040-B1 came from.
 >
-> Three things that are relevant to what you build. At NASA Langley I did human-systems integration on Lunar Gateway clinical workstations, running a use-error analysis against NASA-STD-3001 and MIL-STD-1472. Task time came down 30% and the critical input errors were eliminated by physical layout rather than by training.
+> At Uber I did field work in dense urban cores, riding along with drivers to find where the mobile interface was losing against the road. That fed changes tied to a five percent lift in driver retention.
 >
-> At Mercedes-Benz I studied Level 2 and Level 3 handovers, where a driver who is genuinely out of the loop has four to seven seconds to take back control.
+> At NASA Langley I worked on medical workstations for Lunar Gateway — watching procedures, cataloguing the use errors, redesigning the displays and layout around what I saw. Task time came down thirty percent and the critical input errors went away.
 >
-> At Sling I'm Staff, and I own human factors across software, hardware, and AI. That's reach envelopes and physical fit on one side, and *Principles for Agentic Trust* on the other, for systems whose behavior isn't deterministic.
+> Now I'm Staff at Sling, running research across software, hardware, and AI.
 >
-> What that adds up to for you is that I don't hand designers a report and walk away. I hand you insight you can iterate against, and what you do with it stays yours.
->
-> Air Defense is where being wrong about attention actually costs something. That's why I'm here.
+> What I'd want you to take from that is that I've done as much scrappy work in the field as controlled work in a lab, and knowing which one a question deserves is most of the job.
 
-**F1 — "What would you be doing in your first month?"** *(~65 words)*
+**F1 — "What would your first month look like?"** *(~65 words)*
 
-> Watching the flow before touching it, end to end, looking for where the interface competes with the mission instead of serving it. Then one thing fast: an edge-case and error inventory for whichever surface is closest to shipping, in your format rather than mine. I'd want that month judged on whether the document changed a screen, not on whether it was thorough.
+> Watching before touching. I'd sit with the flow end to end and find where the interface is competing with the mission instead of serving it. Then one thing fast — an edge-case and error list for whichever surface is closest to shipping, in your format rather than mine. I'd want that month judged on whether it changed a screen, not on whether it was thorough.
 
-**F2 — "Ph.D., patent, NASA. Which of those do I actually care about?"** *(~55 words)*
+**F2 — "You have a Ph.D. Are you going to slow us down?"** *(~55 words)*
 
-> None of them directly. What matters is the method underneath — establishing a human limit defensibly with a small sample, quickly. That's the constraint here too, because you're never going to have two hundred operators. The credentials are evidence I can do that. They aren't the thing itself.
+> The Ph.D. is why I'm comfortable going fast. Knowing exactly how much a small sample can carry is what lets me hand you an answer on Thursday and tell you precisely how far you can push it. People who can't calibrate that are the ones who either over-study everything or over-claim everything.
 
-### Senior → Lead/Staff
-
-- **Senior:** gives a competent history and waits to be asked what it means for design.
-- **Lead/Staff:** ends on the working relationship — *what I hand you, and what stays yours* — before she has to ask.
+**Level:** *Senior* recites a competent history. *Lead/Staff* lands the working relationship and the two gears before she has to ask.
 
 ---
 
-## DS03 — Pillar 1: Constraints Over Archetypes
+## DS02 — How You Decide How Rigorous to Be
 
-**Arc:** her most likely philosophical probe · **Target:** 65s
+**Ask:** the centerpiece of this screen · **Target:** 65s
 
-> **Base:** How do you represent the operator to a design team? We're not really a personas shop.
+> **Base:** How do you decide how much rigor a question deserves?
 
-### Model answer (~165 words / 66s)
+**Say this** *(~145 words / 58s)*
 
-> Good, because a persona is a compression artifact. It takes a distribution of real people and hands you a fiction with a name and a coffee preference, and the parts that got compressed out are exactly the parts that break the design — the tails, the degraded conditions, the moment somebody is doing three things at once.
+> I start from what happens if I'm wrong, not from what's interesting.
 >
-> What I build instead is a task model and a constraint set. A cognitive task analysis gives you the decision sequence: what the operator has to know at each step, what they're holding in working memory, and what the interface is competing with for attention. Then the constraints get numbers, like the time budget for a decision or the point where added items stop being scanned and start being sampled.
+> If the decision is reversible and cheap to undo, the fast gear is right and I'd rather spend a day than a month. Three or four people in front of the real build will tell you where it breaks, and that's usually enough to move.
 >
-> That's testable, and a persona isn't. If I tell you the assessment step has a four-second budget, you can hold me to it, and you can design against it without me in the room.
+> The slow gear earns its keep in two cases. One is when the output becomes a number other people build against, because that gets repeated for years without me standing next to it. The other is when the effect is subtle enough that a small sample would genuinely mislead — anything about preference, where six people will happily point you the wrong way.
+>
+> The failure I watch for isn't going too fast. It's going fast and then talking about the result as if I hadn't.
 
-### The permitted attributed reference
+**F1 — "What's your default?"** *(~50 words)*
 
-Only if **she** raises the persona argument first. Say it once, then move on.
+> Fast, and then earn the right to slow down. I'd rather start with observation this week and discover the question is bigger than I thought than spend three weeks designing a study for a problem that turns out to be a copy change.
 
-> You've written about that publicly, and the objection I'd add is that personas don't just lose accuracy — they quietly assume a nominal operator. In this domain the nominal operator is not the design case.
-
-**Do not** say you read it if she hasn't opened the door, and do not say you enjoyed it. It is a claim about the argument, not a compliment.
-
-### STAR — NASA Langley
-
-- **S:** Lunar Gateway clinical workstations. Crew performing medical procedures in microgravity, with no evacuation option.
-- **T:** As the human-systems integration contributor, establish what the workstation had to satisfy before anyone argued about layout.
-- **A:** I ran a use-error analysis against NASA-STD-3001 and MIL-STD-1472 — every foreseeable use failure, its consequence, and how you would verify it was closed. I drove it down to physical reach and control placement rather than to a training recommendation, because training is what you reach for when the design can't be fixed.
-- **R:** Task time down 30% and critical input errors eliminated — by geometry, not by vigilance.
-- **Earned secret:** Compliance is the floor, not the argument. A standard only becomes useful when it's tied to a specific use failure.
-
-### Senior → Lead/Staff
-
-- **Senior:** critiques personas.
-- **Lead/Staff:** replaces them with a task model the team keeps using without the researcher present.
+**Level:** *Senior* picks the right method. *Lead/Staff* makes the tradeoff legible to the team so other people can make the same call without them.
 
 ---
 
-## DS04 — Pillar 2: Rigor Into Things You Can Iterate On
+## DS03 — The Scrappy One: Uber
 
-**Arc:** the question behind every other question in this screen · **Target:** 70s
+**Ask:** field craft and speed · **Gear:** discovery · **Target:** 60s
 
-> **Base:** Walk me through what you'd actually hand me at the end of a study.
+> **Base:** Tell me about the scrappiest research you've run.
 
-### Model answer (~180 words / 72s)
+**Say this** *(~150 words / 60s)*
 
-> Three things, and none of them is a deck that ends a project.
+> Uber, and it was scrappy because it had to be. The question was why drivers were struggling with navigation in dense urban cores, and there was no version of that answerable from a desk.
 >
-> First, a short insight report — what I saw, what I think it means, and how confident I am in each line. I want you reading my uncertainty, not just my conclusions.
+> So I went out with them. Ride-alongs on real shifts, watching what they did at the moments the interface and the street were competing for the same attention. Less a protocol than a hunt for the tells — the glance held too long, the reroute they ignored, the pull-over to re-read the screen.
 >
-> Second, a flow map of the operator's sequence with the failure points marked, showing where what the person expects and what the system is doing come apart. That becomes the shared object. When design and research disagree afterward, we find out we're disagreeing about the model rather than about taste.
+> What came out was a small set of failures that only exist in the environment. Glare, one-handed use, a decision point arriving after the turn was already committed. None of it surfaces in a lab, where the participant has both hands free and no traffic.
 >
-> Third, an annotated list of interaction edge cases — the states nobody thinks about. A degraded feed, contradictory tracks, an alert landing mid-input, the operator coming back after ninety seconds away.
->
-> I'd be clear about what those are, though. They're insight to iterate against, not requirements I'm handing down. You're the one who decides what the interface does about them, and I'd rather be in the room while you do that than get a link to the file afterward.
+> That went back to design as an edge-case list they iterated on across releases, and it was part of a five percent increase in driver retention.
 
-### STAR — Uber
+**F1 — "How many drivers?"** *(~55 words)*
 
-- **S:** Drivers were navigating dense urban environments where the app was competing for attention against the road.
-- **T:** Find out where the mobile interface was failing them in the field, not in a lab.
-- **A:** I ran field studies in the actual environment, riding along and watching spatial-navigation behavior at the moments it broke down, then turned that into interface insight the design team iterated on over several releases.
-- **R:** A 5% increase in driver retention.
-- **Earned secret:** Nothing about that was findable in a usability lab. The failures were environmental, and you only see them where the work happens.
+> A handful, which is the right answer for that question. I wasn't estimating a rate, I was finding failure modes, and failure modes saturate fast — by the third or fourth ride-along I was seeing the same three things. If I'd needed to know how *often* it happened, that's a survey, not a ride-along.
 
-### The four-day version — volunteer this
-
-> The heavier version of that is a controlled study, and I've run those — at Amazon I spent multiple years replacing arbitrary latency targets with measured perceptual thresholds. But the sprint version of the same logic is two days: one variable, the single interaction that's actually in dispute, six to eight people. You get a defensible answer by Thursday, it won't generalize past that interaction, and I'd say so.
-
-### Senior → Lead/Staff
-
-- **Senior:** produces excellent artifacts on request.
-- **Lead/Staff:** produces the one artifact the team keeps opening after the project ends.
+**Level:** *Senior* runs the field study well. *Lead/Staff* says out loud what that sample can and can't support, before anyone asks.
 
 ---
 
-## DS05 — Pillar 3: High-Stress Accessibility and Error Prevention
+## DS04 — The Rigorous One, and What It Cost: Amazon
 
-**Arc:** the strongest bridge to her own background · **Target:** 70s
+**Ask:** the counterweight to DS03 · **Gear:** confirmation · **Target:** 65s
 
-> **Base:** You've seen the environments this runs in. What actually breaks an interface out there?
+> **Base:** And when have you insisted on doing it the slow way?
 
-### Model answer (~175 words / 70s)
+**Say this** *(~155 words / 62s)*
 
-> The framing I'd use is that a stressed operator is a temporarily impaired user, and that isn't a metaphor — it's the same mechanics. Under acute stress, working memory shrinks, attention narrows, and fine motor control degrades. That's what my dissertation was on. So the interface has to survive a user whose channels are worse than the ones it was designed for.
+> The response-time work at Amazon. Engineering had targets that were essentially invented — round numbers with no human behind them — and everyone was arguing from intuition.
 >
-> Which makes the accessibility toolkit the right toolkit rather than an adjacent one. Redundant coding, because color alone fails at night and under adrenaline. Confirmation of what the system believes it received, because an unacknowledged input under load gets repeated. Target sizes set by gloved reach rather than by a mouse. And recovery that costs less than the error, so nobody is choosing between an undo and the mission.
+> That deserved the slow gear for a specific reason. The output wasn't a recommendation, it was a number teams would design against for years without me in the room. So it ran as a controlled study across a set of interaction types, and it took months.
 >
-> The failure I'd watch hardest is silent mode error — the operator acting correctly for a state the system is no longer in. That one doesn't show up in usability testing. It shows up in an incident.
-
-### The hardware boundary — say this next
-
-It is the part most researchers don't have, and it is half of what she works on.
-
-> The other thing I'd say is that the screen isn't the system. Whatever this runs on — a tablet in gloved hands, something vehicle-mounted, a display at a fixed site — the hardware sets the constraint before the layout gets a vote. Mount angle, glare, one-handed reach, and the fact that a person under load presses harder and faster than anyone in a usability lab ever does.
+> Two things came out that intuition never would have. The right target depends on what the person thinks they're doing, so there's no single number. And the curve isn't a straight line — past a point, faster reads as *nothing happened*, so you need a floor as well as a ceiling.
 >
-> What I've watched happen in every hardware program I've worked on is that an illegible interface state gets escalated physically. Nothing acknowledges the input, so the operator taps again. Still nothing, so they press harder. Then they start hunting for a power button. Each of those is a rational response to an unreadable state, and each one leaves the system worse off than the original delay did — a power cycle to clear an ambiguous state costs you the whole session at the moment you can least afford it.
->
-> So the insight I'd want in front of you is a single line: acknowledgment and completion are two different signals, and collapsing them is what manufactures double-actuation.
+> I'd be honest about the cost, though. I would never run that for a layout question. It was worth it because a wrong number there propagates into everything.
 
-> ⚠️ You do not know the hardware envelope here. Say *"whatever this runs on"* and then ask — that is what **RQ4** is for.
+**F1 — "How would you get 80% of that in a week?"** *(~60 words)*
 
-### STAR — Mercedes-Benz
+> One interaction, the one actually in dispute, six to eight people, one variable, real build. You'd have a defensible answer in two days. What you would not have is anything that generalizes past that interaction, and I'd say that in the first line of the readout rather than the last.
 
-- **S:** Level 2 and Level 3 handovers in a high-fidelity simulator, with the driver genuinely out of the loop and four to seven seconds to take back control.
-- **T:** Determine which alert modality actually restores control, not just attention.
-- **A:** I decomposed takeover latency into hands-on-wheel, eyes-on-road, and first control input, because a single reaction time hides which stage failed. Multimodal alerts against auditory-only, haptic-only, and a visual baseline.
-- **R:** A 24% improvement in safety and trust ratings for the multimodal condition.
-- **Earned secret:** A handover transfers situation awareness, confidence, and control — not a notification. Alerting faster doesn't help if the operator hasn't rebuilt the picture.
-
-### The Anduril bridge — say it unprompted
-
-> That transfers because an operator handing control back and forth with an autonomous system is running the same sequence, at higher consequence and with more agents demanding attention at once. What doesn't transfer is the timeline and the adversary. A car doesn't have one.
+**Level:** *Senior* runs the rigorous study. *Lead/Staff* names its cost unprompted and tells you when not to buy it.
 
 ---
 
-## DS06 — The Sprint-Speed Question
+## DS05 — Knowing When a Screen Is Too Dense
 
-**Arc:** her most probable opener after the pitch · **Target:** 65s
+**Ask:** the density question, and the one a designer cares most about · **Gear:** either · **Target:** 65s
+
+> **Base:** How do you tell me a screen is too dense without just telling me it feels busy?
+
+**Say this** *(~175 words / 70s)*
+
+> That's the question I built a measurement capability around at Amazon, because "feels busy" is exactly where design conversations stall.
+>
+> The objective piece was fNIRS — near-infrared light through the forehead, reading how hard the front of the brain is working. It's less exotic than it sounds: a headband, a clean baseline, and the same person doing the same task across two interfaces. What you get is mental effort the person can't self-report, measured continuously while they work.
+>
+> I paired it with eye tracking and with people's own complexity ratings, and the useful part was that all three moved together. Interfaces that looked comparable on paper produced measurably different prefrontal activation, and that lined up with what people said and where they actually looked.
+>
+> What I'd hand you from that isn't a workload score. It's a comparison — this version costs more effort than that one, and here's the region nobody looked at while paying for it.
+>
+> The boundary is that it's relative and within-person. There's no absolute number where a screen becomes too dense.
+
+**F1 — "And if I need that answer this week?"** *(~65 words)*
+
+> Then it's the cheap proxies, and they're decent. Time to first correct fixation, how often someone backtracks, error rate on a timed task, and a complexity rating right afterward. That gives you a direction in a day or two. What it won't tell you is *why* one layout costs more, which is where the instrumented version earns its keep.
+
+> ⚠️ Say **converges with** the subjective ratings. Never claim the neuroimaging beat a questionnaire — you didn't run that comparison — and never name the interfaces that were compared.
+
+**Level:** *Senior* runs the study. *Lead/Staff* builds a capability the team reuses, and says out loud what it can't claim.
+
+---
+
+## DS06 — What You Actually Hand a Designer
+
+**Ask:** the question behind every other question here · **Target:** 70s
+
+> **Base:** Walk me through what you'd hand me at the end of a study.
+
+**Say this** *(~150 words / 60s)*
+
+> Three things, and none of them is a deck that closes out a project.
+>
+> A short insight report — what I saw, what I think it means, and how confident I am line by line. I want you reading my uncertainty, not just my conclusions.
+>
+> A blueprint of the operator's flow with the failure points marked, showing where what the person expects and what the system is doing come apart. That becomes the shared object between us, so when we disagree later we're disagreeing about the model rather than about taste.
+>
+> And an annotated list of edge cases — a degraded feed, contradictory tracks, an alert landing mid-input, someone coming back after ninety seconds away.
+>
+> Those are insight for you to iterate against, not requirements I'm handing down. You decide what the interface does about them, and I'd rather be in the room while you do that than send a link afterward.
+
+**F1 — "How fast?"** *(~50 words)*
+
+> Notes the same day, the tidy version within two. If a readout takes me a week to write, the sprint has already moved past it and I've produced a historical document. I'd rather give you something rough on Tuesday that's still in time to matter.
+
+**Level:** *Senior* produces excellent artifacts on request. *Lead/Staff* produces the one the team keeps opening after the project ends.
+
+---
+
+## DS07 — Thirty Minutes, One Operator, Friday Lock
+
+**Ask:** her most probable opener after the pitch · **Gear:** discovery · **Target:** 60s
 
 > **Base:** Design locks Friday. It's Monday and I have one operator for thirty minutes. What do you do with it?
 
-### Model answer (~150 words / 60s)
+**Say this** *(~150 words / 60s)*
 
-> I don't run a study, I resolve the one disagreement blocking the lock. So the first thing I'd need from you is which decision is actually open, because thirty minutes of operator time buys one answer and a pile of context.
+> I don't run a study, I resolve the one disagreement blocking the lock. So the first thing I'd need from you is which decision is actually open, because thirty minutes buys one answer and a pile of context.
 >
 > Then it's a structured walkthrough on the real build, not an interview. I'd have them narrate a task they've done a thousand times while I time the decision points and mark every place they hesitate, back up, or ask the screen a question it can't answer. Hesitation is the signal. Stated preference isn't, not in thirty minutes.
 >
-> You'd get notes the same day rather than a readout: the edge cases that surfaced, the one thing I'd change before Friday, and what I still don't know. Everything left over goes in a backlog tagged with the decision it would unblock.
+> You'd get notes the same day rather than a readout — the edge cases that surfaced, the one thing I'd change before Friday, and what I still don't know. Everything left over goes in a backlog tagged with the decision it would unblock.
 
-**F1 — "What if there's no operator available at all?"** *(~65 words)*
+**F1 — "What if there's no operator at all?"** *(~60 words)*
 
-> Then I say that out loud and we decide on the best available basis instead of pretending otherwise. I'd run a cognitive walkthrough against the task model with two internal proxies, label the conclusion as inference rather than evidence, and make sure the thing reports on itself once it's in front of real users. What I won't do is launder a walkthrough into "research shows."
+> Then I say so out loud and we decide on the best available basis instead of pretending otherwise. I'd walk the task model with two internal proxies, label the conclusion as inference rather than evidence, and make sure the thing reports on itself once real users have it. What I won't do is launder a walkthrough into "research shows."
 
 **F2 — "You'd really ship on that?"** *(~50 words)*
 
-> Yes, with the risk named. Most design decisions are low-consequence and reversible, and blocking those on evidence costs more than being wrong. The irreversible ones are where I'd hold the line, and in any given flow there are usually two or three of them, not thirty.
+> Yes, with the risk named. Most design decisions are reversible, and blocking those on evidence costs more than being wrong. The irreversible ones are where I'd hold the line, and in any given flow there are two or three of those, not thirty.
+
+**Level:** *Senior* runs the session. *Lead/Staff* gets the decision named first, so the thirty minutes buys something.
 
 ---
 
-## DS07 — The Research–Design Friction Question
+## DS08 — When the Designer Was Right and Your Data Wasn't
 
-**Arc:** partnership test · **Target:** 60s
+**Ask:** the credibility test · **Target:** 45s · Conceding this well is what makes everything else you've said about partnership believable.
 
-> **Base:** Tell me about a time your research contradicted a design direction someone was already committed to.
+> **Base:** When has a designer been right and your research wrong?
 
-### Model answer (~165 words / 66s)
+**Say this** *(~120 words / 48s)*
 
-> The one I'd pick is the frictionless-experience argument, because I lost the first round of it.
+> Same cognitive-load program at Amazon. The eye tracking showed a region of the interface that people simply never looked at, and my read was salience — make it louder, move it up.
 >
-> The prevailing position was that every confirmation step is a defect — count the taps, remove the taps. My evidence said the opposite for one class of action. Where the action is irreversible and the system's confidence is low, removing the checkpoint doesn't buy speed, it buys automation bias. The operator stops evaluating and starts executing.
+> The designer's read was that the region was fine, and the problem was where it sat in the task sequence. It was never in anyone's scan path at the moment it mattered. She was right, and the fix was sequence rather than styling.
 >
-> Arguing it as a principle got me nowhere. What worked was making it risk-proportional and explicit: irreversible actions behave one way, reversible ones behave another, and the classification is written down so it's predictable rather than arbitrary. That gave design a consistent rule instead of a consistent pattern, which is what consistency was protecting anyway.
->
-> I'd flag honestly that this is a thesis I've argued, not a result I've deployed at scale. I call it Calibrated Cognitive Friction, and this is the kind of place where it would actually get tested.
-
-**F1 — "How do you tell me a design I've spent three weeks on doesn't work?"** *(~65 words)*
-
-> Early, directly, and about the constraint rather than the artifact. Early is the part that matters, because the cost isn't being told — it's the three weeks spent after I already knew and was working out how to say it. And framed as "here's the constraint this runs into," which is a shared problem, rather than "this doesn't work," which buys you a defense instead of a revision.
-
-**F2 — "When has a designer been right and your data wrong?"** *(~105 words / 42s)*
-
-Conceding this well is what makes everything else you've said about partnership credible.
-
-> At Amazon I had eye-tracking data showing a region of an interface that people simply weren't looking at. My read was salience — make it louder, move it up. The designer's read was that the region was fine and the problem was where it sat in the task sequence, so it was never in the scan path at the moment it mattered. She was right, and the fix was sequence rather than styling.
->
-> What I took from it is that my measurement was authoritative about where the failure was and had nothing to say about why. She was reading the state model. I was reading a distribution.
+> What I took from it is that my measurement was authoritative about *where* the failure was and had almost nothing to say about *why*. She was reading the flow. I was reading a distribution. That's a division of labor I've respected since.
 
 > ⚠️ The gaze evidence is canonical. Attributing the diagnosis to a specific designer is *your recollection* — if you can't place the conversation, say "a designer on the team," and never quote words you aren't sure of.
 
 ---
 
-## DS08 — The Non-Deterministic UI Question
+## DS09 — Pushing Back on a Design Direction
 
-**Arc:** the question her Anduril context makes unavoidable · **Target:** 70s
+**Ask:** partnership under disagreement · **Target:** 60s
 
-> **Base:** How do you evaluate an interface when the system underneath it doesn't behave the same way twice?
+> **Base:** Tell me about a time your research contradicted a direction someone was already committed to.
 
-### Model answer (~170 words / 68s)
+**Say this** *(~145 words / 58s)*
 
-> You stop evaluating outputs and start evaluating whether the operator's trust is calibrated to how reliable the system actually is. That's the measurable thing.
+> The frictionless-experience argument, and I lost the first round of it.
 >
-> Concretely, that means two error rates rather than one. The times an operator accepted a recommendation that was wrong, and the times they overrode one that was right. Those are different failures with different fixes, and a single accuracy number hides both. Then I'd look at whether the interface's expression of uncertainty actually moves behavior, because if confidence is displayed and reliance doesn't change with it, the display is decoration.
+> The prevailing position was that every confirmation step is a defect — count the taps, remove the taps. My evidence said the opposite for one narrow class of action. Where the action is irreversible and the system's confidence is low, removing the checkpoint doesn't buy speed, it buys automation bias. People stop evaluating and start executing.
 >
-> The framework I wrote at Sling splits trust into four things people usually collapse into one: does the system intend the right goal, does it execute reliably, can I still take control, and does it tell me how sure it is in time for me to intervene. Alignment, execution, control, calibration.
+> Arguing it as a principle got me nowhere. What worked was making it proportional and explicit — irreversible actions behave one way, reversible ones another, and the classification written down so it's predictable rather than arbitrary. That gave design a consistent *rule* instead of a consistent *pattern*, which is what consistency was protecting anyway.
 >
-> What that gives you as a designer is that "make it trustworthy" becomes four separate things to design for instead of a vibe.
+> I'd flag that this is a position I've argued, not a result I've deployed at scale. This is the kind of place where it would get tested.
 
-**F1 — "What would you look at first on an autonomy display?"** *(~60 words)*
+**F1 — "How do you tell me a design I've spent three weeks on doesn't work?"** *(~60 words)*
 
-> Whether operators can tell at a glance what mode the system is in and what it currently believes. Mode error is the highest-consequence failure in every automation domain I've worked in, and it precedes every other problem you'd want to study. If the state isn't legible before the operator commits, nothing downstream of that is worth measuring yet.
+> Early, directly, and about the problem rather than the artifact. Early is the part that matters, because the cost isn't being told — it's the three weeks spent after I already knew and was working out how to say it. "Here's what this runs into" is a shared problem. "This doesn't work" buys you a defense instead of a revision.
 
-**F2 — "Does that change on a device in the field instead of a desk?"** *(~70 words)*
-
-> Substantially, and it's the part I'd look at first. On fielded hardware, three different conditions produce the same visual signature — the system is thinking, it's waiting on data it isn't getting, or the device is wedged. The right response differs in each case, and if the display can't separate them, people default to the physical remedy: press again, then power-cycle.
+**Level:** *Senior* reports the finding. *Lead/Staff* converts it into a rule design can apply without them.
 
 ---
 
-## DS09 — The Domain Transfer Question
+## DS10 — Researching an Interface That Isn't Deterministic
 
-**Arc:** the challenge · **Target:** 60s · **No apology form. Ever.**
+**Ask:** unavoidable given what they build · **Target:** 65s
 
-> **Base:** Everything you've described is a lab, a car, or a consumer device. Why should I believe any of it holds for an operator under fire?
+> **Base:** How do you evaluate an interface when the system underneath it doesn't behave the same way twice?
 
-### Model answer (~145 words / 58s)
+**Say this** *(~150 words / 60s)*
+
+> You stop evaluating outputs and start evaluating whether the person's trust is calibrated to how reliable the system actually is. That's the measurable thing.
+>
+> In practice that's two error rates rather than one — the times someone accepted a recommendation that was wrong, and the times they overrode one that was right. Different failures, different design fixes, and a single accuracy number hides both. Then I'd look at whether the interface's expression of uncertainty actually moves behavior, because if confidence is displayed and reliance doesn't change with it, the display is decoration.
+>
+> The framework I wrote at Sling splits trust into four things people collapse into one. Does the system intend the right goal, does it execute reliably, can I still take control, and does it tell me how sure it is in time for me to intervene.
+>
+> So "make it trustworthy" becomes four separate things to design for instead of a vibe.
+
+**F1 — "What would you look at first?"** *(~55 words)*
+
+> Whether people can tell at a glance what mode the system is in and what it currently believes. Mode error is the highest-consequence failure in every automation domain I've worked in, and it precedes everything else you'd want to study. If the state isn't legible before someone commits, nothing downstream is worth measuring yet.
+
+**Level:** *Senior* evaluates the interface. *Lead/Staff* gives the team a shared vocabulary for a problem that didn't have one.
+
+---
+
+## DS11 — Degraded Conditions, and When Stress Turns Physical
+
+**Ask:** the environment question · **Gear:** either · **Target:** 70s
+
+> **Base:** You've seen the environments this runs in. What actually breaks an interface out there?
+
+**Say this** *(~135 words / 54s)*
+
+> My working frame is that a stressed operator is a temporarily impaired user, and that isn't a metaphor. Under acute stress working memory shrinks, attention narrows, and fine motor control degrades. The interface has to survive a person whose channels are worse than the ones it was designed for.
+>
+> Which makes the accessibility toolkit the right toolkit rather than an adjacent one. Redundant coding, because color alone fails at night. Confirmation of what the system believes it received, because an unacknowledged input under load gets repeated. Targets sized for gloved hands. Recovery that costs less than the error.
+>
+> And the screen isn't the system — whatever this runs on, mount angle, glare and one-handed reach set the constraint before the layout gets a vote.
+
+**F1 — "What does that look like in the field?"** *(~65 words)*
+
+> An unreadable state gets escalated physically. Nothing acknowledges the input, so they tap again. Still nothing, so they press harder. Then they go looking for the power button. Each step is rational, and a power cycle to clear an ambiguity costs the whole session. Acknowledgment and completion are two different signals, and collapsing them is what manufactures double-actuation.
+
+**F2 — "Have you studied that directly?"** *(~55 words)*
+
+> On automotive handovers, yes. I split takeover time into hands on the wheel, eyes on the road, and first control input, because one reaction time hides which stage failed. Multimodal alerts came out 24% better on safety and trust than the single-channel versions.
+
+> ⚠️ You don't know their hardware envelope. Say *"whatever this runs on"* and then ask — that's what **RQ4** is for.
+
+---
+
+## DS12 — Representing the Operator Without Personas
+
+**Ask:** likely philosophical probe · **Target:** 60s
+
+> **Base:** How do you represent the operator to a design team?
+
+**Say this** *(~155 words / 62s)*
+
+> Not with a persona, because a persona is a compression artifact. It takes a distribution of real people and hands you a fiction with a name and a coffee preference, and what got compressed out is exactly what breaks the design — the tails, the degraded conditions, the moment someone is doing three things at once.
+>
+> What I build instead is a task model. The decision sequence, what the person needs to know at each step, what they're holding in their head, and what the interface is competing with for attention. Then the parts that can carry numbers get them.
+>
+> That's checkable, and a persona isn't. The NASA work is the clearest version — I watched people run medical procedures on a workstation, catalogued the ways the design invited errors, and redesigned the displays and layout around those. Task time dropped thirty percent and the critical input errors went away.
+
+**F1 — "What if design already has personas?"** *(~55 words)*
+
+> Then I'd use them and not fight about it, because that's a taste argument I can't win and don't need. I'd just add the layer they don't carry — the conditions and the failure cases. Those two things coexist fine. What I won't do is treat a persona as evidence.
+
+**Level:** *Senior* critiques personas. *Lead/Staff* hands over a model the team keeps using without them.
+
+---
+
+## DS13 — Domain Transfer
+
+**Ask:** the challenge · **Target:** 55s · **No apology form. Ever.**
+
+> **Base:** Everything you've described is a lab, a car, or a consumer device. Why would any of it hold for an operator under fire?
+
+**Say this** *(~145 words / 58s)*
 
 > I'd separate what transfers from what doesn't, because both answers matter.
 >
-> What transfers is the human under load. Working memory doesn't get bigger because the stakes went up, it gets smaller. Attention narrows, motor control degrades, and mode error becomes more likely rather than less. The spaceflight medical work was irreversible-consequence, and the handover work ran on a four-second budget with a genuinely out-of-the-loop human. Those are the two mechanics that matter here, and I've measured both.
+> What transfers is the person under load. Working memory doesn't get bigger because the stakes went up, it gets smaller. Attention narrows, motor control degrades, and mode error gets more likely rather than less. The spaceflight medical work was irreversible-consequence, and the handover work ran on a few seconds with a genuinely out-of-the-loop human. Those are the two mechanics that matter here, and I've studied both.
 >
-> What doesn't transfer is the domain content, and I won't pretend otherwise. I don't know the doctrine, the timeline, or what an operator's day actually looks like, and that's a curve I'd close by watching rather than by reading.
+> What doesn't transfer is the domain content, and I won't pretend otherwise. I don't know the doctrine, the timeline, or what an operator's day actually looks like, and that's a curve I'd close by watching rather than reading.
 >
 > So I'm not claiming the operator's world. I'm claiming the limits of the human sitting in it.
 
 **F1 — "How fast do you close that curve?"** *(~50 words)*
 
-> Weeks to be useful, months to be right. The accelerant is task observation, because an hour watching someone work beats a week of documents. I'd also expect to be corrected early and often, and I'd rather be corrected than be careful — careful is slow, and slow is the real risk.
+> Weeks to be useful, months to be right. The accelerant is watching people work — an hour of that beats a week of documents. I'd expect to be corrected early and often, and I'd rather be corrected than careful, because careful is slow and slow is the real risk.
 
 ---
 
-## DS10 — The Scoping Question
+## DS14 — What You Cut
 
-**Arc:** speed and judgment · **Target:** 60s
+**Ask:** judgment under a deadline · **Target:** 55s
 
 > **Base:** What do you cut when a study won't fit in the time you have?
 
-### Model answer (~145 words / 58s)
+**Say this** *(~145 words / 58s)*
 
-> The rule I use is cut scope, never cut controls. One interaction with the confounds handled is useful. Six interactions with the confounds loose isn't a smaller finding, it's a wrong one, and a wrong number travels faster than no number because it's quotable.
+> Cut scope, never cut controls. One interaction with the confounds handled is useful. Six interactions with the confounds loose isn't a smaller finding, it's a wrong one — and a wrong number travels faster than no number, because it's quotable.
 >
-> So the order is conditions first, then participants, then how far I'll generalize — and I say what got cut, out loud, in one line. Sample size is more negotiable than people think when the design is within-subjects and the effect is perceptual. Six to eight people will find a threshold. Six to eight people will not find a preference.
+> So the order is conditions first, then participants, then how far I'll generalize, and I say what got cut in the first line rather than a footnote. Sample size is more negotiable than people think when the effect is perceptual. Six people will find a threshold. Six people will not find a preference.
 >
-> What I never cut is the falsifier. Before I run anything I write down the result that would tell me I'm wrong. Without that, a study isn't shorter, it's theater.
+> What I never cut is writing down, before I start, the result that would tell me I'm wrong. Without that a study isn't shorter, it's theater.
 
 **F1 — "What's the smallest thing you'd call real research?"** *(~45 words)*
 
-> Five structured task observations against a build, timed, with the errors classified. That's a day of work and it will change a design. What it won't do is establish a rate — and knowing which of those two I'm being asked for is most of the job.
+> Five structured observations against a build, timed, with the errors classified. That's a day of work and it will change a design. What it won't do is establish a rate — and knowing which of those two I'm being asked for is most of the job.
 
 ---
 
-## DS11 — The Level Question, If She Raises It
+## DS15 — Your Current Role at Sling
 
-**Arc:** only if she opens it · **Target:** 45s · Argue from scope, never from title. Do not raise this yourself.
+**Ask:** the down-level probe in disguise · **Target:** 65s · The real question is whether a Staff title means you've stopped doing the work.
 
-> **Base:** You're currently Staff. This is posted at Senior. Is that going to be a problem?
+> **Base:** What does your week actually look like right now?
 
-### Model answer (~110 words / 44s)
-
-> Not for me, and I'd rather be direct about why.
->
-> I'm optimizing for the consequence class of the problem, not the label on it. The scope I'd want is the same either way — I want to own the questions the team keeps running into, not just the studies, and what outlasts me should be a shared way of thinking about the operator.
->
-> If that scope is available here, the title is bookkeeping. If it isn't, I'd rather have that conversation now than in a year. Either way it doesn't change what I'd do on Monday.
-
-> ⚠️ Never raise compensation, location, travel, or clearance. All four are settled. If she raises one, answer in a sentence and go back to the work.
-
----
-
-## DS12 — Sling: Agentic AI Without Slowing the Sprint
-
-**Arc:** current-role probe · **Target:** 70s · She is checking whether your framework work is a tax on velocity.
-
-> **Base:** You're doing AI trust work at Sling. How does that survive a two-week sprint?
-
-### Model answer (~155 words / 62s)
-
-> By making it something you check at design time rather than something you study afterward. That was deliberate. If the only way to know whether an agentic feature is trustworthy is to run research once it's built, the framework doesn't survive contact with a sprint, and it shouldn't.
->
-> So *Principles for Agentic Trust* is four questions you can ask of a design in a review. Does the system intend the right goal, does it execute reliably, can the user still take control, and does it say how sure it is in time for someone to intervene. Alignment, execution, control, calibration.
->
-> Each one fails differently and each one shows up somewhere specific in the interface, which is what makes it fast — an hour in a critique rather than a sprint of work. It's peer-reviewed at CSCW 2026, but I'd be clear that I've used it as a review instrument. I haven't validated it as a measure of deployed trust.
-
-**F1 — "Where has it actually changed something?"** *(~50 words)*
-
-> Mostly at the control and calibration ends — moving behaviors out of silent action into acknowledge-or-undo, and pushing a system that had one confidence display to say what the confidence was about. It changed design decisions. It didn't produce a measured trust outcome, because I haven't measured one.
-
----
-
-## DS13 — Sling: Framework Work vs. Hands in the Work
-
-**Arc:** the down-level probe in disguise · **Target:** 65s
-
-> **Base:** At Staff level, how much of your time is actually hands-on versus setting direction?
-
-### Model answer (~150 words / 60s)
+**Say this** *(~160 words / 64s)*
 
 > More hands-on than the title implies, and I want it that way.
 >
-> A normal week at Sling has reach-envelope modeling and physical fit work in it — anatomical limits, what a person can operate without looking — plus usability criteria for latency, feedback, and spatial layout. That's tactical work. It has millimeters and milliseconds in it.
+> A normal week has usability sessions and design reviews in it, plus the physical side — what a person can reach and operate without looking — and criteria for how the system should respond, sound, and lay out. It has millimeters and milliseconds in it. That's tactical work and I do it myself.
 >
-> The framework work only exists because of that. *Principles for Agentic Trust* came out of hitting the same wall in ordinary design reviews, where the usability methods I had were built for deterministic systems and I was being asked to weigh in on ones that weren't. Written without the hands-on work, it would have been a literature review.
+> The one strategic piece came directly out of that. I kept hitting the same wall in ordinary design reviews, where the methods I had were built for systems that behave the same way twice and I was being asked to weigh in on ones that don't. So I wrote it up as four questions you can ask of a design in a review, and it's peer-reviewed at CSCW next year.
 >
-> So I'm doing the tactical work either way. The Staff part is just that I try not to solve the same problem twice.
+> That takes an hour in a critique, not a sprint of work. Written without the hands-on part, it would have been a literature review.
 
-**F1 — "So what would you not want to be doing here?"** *(~45 words)*
+**F1 — "What would you not want to be doing here?"** *(~50 words)*
 
-> Nothing on the list, honestly. What I'd push back on isn't a task, it's a pattern — being brought in after the decision to validate it. Give me the ugly part of the flow early and I'll take whatever method it needs, including a stopwatch.
+> Nothing on the list, honestly. What I'd push back on isn't a task, it's a pattern — being brought in after the decision to validate it. Give me the ugly part of the flow early and I'll take whatever method it needs, including sitting there with a stopwatch.
+
+**Level:** *Senior* does the work well. *Lead/Staff* does the work and refuses to solve the same problem twice.
 
 ---
 
-## DS14 — Sling: Why Leave, in Design Terms
+## DS16 — Why Leave, and the Level Question
 
-**Arc:** motivation probe · **Target:** 55s · Say it without a word against Sling.
+**Ask:** motivation · **Target:** 55s · Say it without a word against Sling. Never raise level yourself.
 
-### Model answer (~135 words / 54s)
+> **Base:** Why leave, and why this?
+
+**Say this** *(~135 words / 54s)*
 
 > The honest answer is the consequence class of a user error.
 >
-> The methods I use at Sling are the same ones I'd use here — same task analysis, same thresholds, same criteria. What's different is what happens when I get it wrong. There, a bad interaction costs someone a few seconds and some goodwill. I take that seriously, but nothing in that environment forces the answer to be right.
+> The methods I use at Sling are the same ones I'd use here — same field work, same sessions, same criteria. What differs is what happens when I'm wrong. There, a bad interaction costs someone a few seconds and some goodwill. I take that seriously, but nothing in that environment forces the answer to be right.
 >
-> I've spent the rest of my career in places where it was forced, like spaceflight medical operations and automated driving handovers, and that's the constraint I do my best work under.
+> I've spent the rest of my career in places where it was forced, and that's the constraint I do my best work under.
 >
-> The argument I care about — that friction should be proportional to consequence — stays a thesis anywhere the consequences are small. It only gets tested somewhere it matters.
+> The argument I care about — that friction should be proportional to consequence — stays theoretical anywhere the consequences are small. It only gets tested somewhere it matters.
 
-**F1 — "Everyone says they want fast-paced. What makes you think you'd like it here?"** *(~50 words)*
+**F1 — "You're Staff now, this is posted at Senior. Problem?"** *(~95 words / 38s)*
 
-> Because the pace I dislike is the one with no decision at the end of it. I've worked in slow places where the slowness was deliberation and slow places where it was diffusion, and only the second one is intolerable. A short deadline with a clear decision owner suits me.
+> Not for me, and I'd rather be direct about why. I'm optimizing for the consequence class of the problem, not the label on it. The scope I want is the same either way — I want to own the questions the team keeps running into, not just the studies I'm assigned. If that's available here the title is bookkeeping, and if it isn't I'd rather know now than in a year. Either way it doesn't change what I'd do on Monday.
+
+**F2 — "Everyone says they want fast-paced."** *(~50 words)*
+
+> The pace I dislike is the one with no decision at the end of it. I've worked in slow places where the slowness was deliberation and slow places where it was diffusion, and only the second is intolerable. A short deadline with a clear decision owner suits me.
 
 ---
 
 ## Reverse interview — 5 to 7 minutes
 
-Ask **three**, and hold one back for whatever she opens up. Each is a question about her world, never a statement about it. Write the answers down — they are your follow-up email.
+Ask **three**, hold one back for whatever she opens up. Each is a question about her world, never a statement about it. Write the answers down — they are your follow-up email.
 
-**RQ1 — Where the design system strains.**
-> Where does the design system currently force a compromise you're not happy with in the densest views? I'd rather bring evidence where it's already contested than where it isn't.
+**RQ1 — Where the system strains.**
+> Where does the design system currently force a compromise you're not happy with in the densest views? I'd rather bring evidence where it's already contested.
 
-**RQ2 — The friction point she'd name herself.**
-> If you mapped an operator's attention across detection, assessment, authorization, and intervention, where do you think the interface competes with the mission instead of serving it? I want to hear your read before I form my own.
+**RQ2 — The friction she'd name herself.**
+> If you mapped an operator's attention across detection, assessment, authorization, and intervention, where does the interface compete with the mission instead of serving it? I'd like your read before I form my own.
 
-**RQ3 — The working cadence.**
-> Where would research actually plug into your week, and what would you want in your hands? Some designers want a raw edge-case list mid-sprint; some want a synthesized model at the start of the cycle. Those are different jobs and I'd rather do the one you need.
+**RQ3 — Cadence and fidelity.**
+> Where would research actually plug into your week, and what would you want in your hands? A raw edge-case list mid-sprint and a synthesized model at the start of a cycle are different jobs.
 
-**RQ4 — Degraded conditions, codified or re-litigated.**
-> How much of the degraded-conditions envelope is codified as a design constraint versus re-argued screen by screen? I mean gloved input, low light and glare, noise, sustained wear — the things that set target sizes and contrast before anyone opens a layout.
+**RQ4 — Degraded conditions, codified or re-argued.**
+> How much of the degraded-conditions envelope is codified as a design constraint versus re-argued screen by screen — gloved input, glare, noise, sustained wear?
 
-**RQ5 — The gap between intent and use.**
+**RQ5 — Intent versus use.**
 > What's something design shipped that operators ended up using differently than intended? That tells me more about where research is worth spending than a roadmap does.
 
 ---
@@ -433,19 +491,21 @@ Do not re-pitch. One sentence, then let her end it.
 
 ## Drill sheet
 
-**Priority order if you only rehearse three:** DS02, DS04, DS06. Those are the three she is most likely to ask and the three that decide the debrief line.
+**Rehearse three if that's all you have:** DS01, DS02, DS07. The anchor sets the register, DS02 is the thesis of the whole screen, and DS07 is her likeliest real question.
 
-**Confirm before Monday:** the designer attribution in DS07 F2. Everything else in the track is resume-canonical.
+**Name the gear out loud in every answer.** "That was the fast version" or "that one earned the slow version" is the single phrase that separates you from a methods lecture.
 
-**Cut first if you're running long:** the second half of any STAR block. She needs the situation and the result; the method detail is follow-up material.
+**Confirm before Monday:** the designer attribution in DS08. Everything else is resume-canonical.
 
-**Six sentences that carry this entire screen:**
+**Running long?** Cut method detail, keep the outcome. She'll ask for method if she wants it.
 
-1. *"I give designers something they can iterate against, not a verdict."*
-2. *"A persona is a compression artifact, and the parts that get compressed out are the parts that break the design."*
-3. *"A stressed operator is a temporarily impaired user, and that's mechanics, not metaphor."*
-4. *"An illegible state gets escalated physically — tap again, press harder, power cycle."*
-5. *"Cut scope, never cut controls. A wrong number travels faster than no number."*
+**Six sentences that carry the screen:**
+
+1. *"I've done as much scrappy work in the field as controlled work in a lab, and knowing which one a question deserves is most of the job."*
+2. *"The mistake isn't moving fast — it's moving fast and then describing the result as if I hadn't."*
+3. *"Reversible decisions get the fast gear. Numbers people will quote for years get the slow one."*
+4. *"A persona is a compression artifact, and what gets compressed out is what breaks the design."*
+5. *"My data was authoritative about where the failure was and had nothing to say about why."*
 6. *"I'm not claiming the operator's world. I'm claiming the limits of the human sitting in it."*
 
-**Monday morning, three minutes.** Say DS02 once against a timer, read the Do/Don't rows you're most likely to violate, then stop preparing.
+**Monday morning, three minutes.** Say DS01 once against a timer, read the register table, then stop preparing.

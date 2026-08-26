@@ -109,7 +109,7 @@ The remaining loop is a **45-minute conversation with Dr. Daniella Kim built aro
 - `04-positioning-close-track.md` — PQ01–PQ10 · onsite and the close of any conversation
 - `05-nasa-case-study.md` — NC01–NC08, the NASA Langley case: a 55-second module inside the hiring-manager conversation, and the full deep-dive for the onsite loop
 - `06-amazon-case-study.md` — AC01–AC11, **the primary case for the 45-minute hiring-manager conversation.** A counted three-minute presentation, five drilled deep-dive layers, the rigor follow-ups, the evidence-tier ladder, the off-case answers for when she leaves the case, and a minute-by-minute run sheet
-- `08-design-partner-screen.md` — DS01–DS14, **the 30-minute embedded design screen with the Air Defense principal designer.** A minute-by-minute block plan, three alignment pillars with STAR bullets, the anticipated questions at 60–75s, three current-role answers, and a reverse-question set
+- `08-design-partner-screen.md` — DS01–DS16, **the 30-minute design partner screen.** Organized around the two research gears — fast and scrappy versus slow and controlled — with the Uber, Amazon, Mercedes, and NASA cases mapped to each, a register guide for staying in Senior UXR framing, and a reverse-question set
 
 Every spoken block is **counted at 150 words per minute**, not estimated, so the stated timings are real.
 
