@@ -9,6 +9,7 @@ Master index for the practice set. Read this once, then drill the four track fil
 - `05-nasa-case-study.md` — NC01–NC08, the NASA case as the 55-second safety-critical module and the onsite deep-dive
 - `06-amazon-case-study.md` — AC01–AC11, **the primary case for the 45-minute hiring manager conversation**
 - `07-extra-stuff.md` — EX01–EX07, the off-bank follow-up ground: patent framing, physiological methods, NASA-TLX tradeoff, Mercedes handover protocol, MaxDiff, Python stack, AI in your workflow
+- `08-design-partner-screen.md` — DS01–DS14, **the 30-minute embedded design screen on Monday, August 31.** Shorter answers, artifact-first, the hardware-escalation material, the Sling current-role set, and a reverse-question set
 
 The hiring manager conversation with Dr. Kim is one case study, probed in depth, and it gates the onsite loop. Amazon is that case. NASA is deployed inside it as a 55-second module. Read `06` first.
 
