@@ -83,6 +83,7 @@ To run it from your own machine instead, `python src\app.py` and reach it at `ht
 | `references/role-drills.md` | The four interviewer persona definitions |
 | `references/rubrics-detailed.md` | Detailed scoring anchors |
 | `practice/00-response-architecture.md` | Answer-structure beats and length discipline the debrief grades against |
+| `practice/06-amazon-case-study.md`, `07-extra-stuff.md`, `08-design-partner-screen.md` | The rehearsed tracks. Live turns receive the prompts and follow-ups only, so the persona can take rehearsed ground and then probe past it; the debrief receives the full text and grades delivery against the rehearsal |
 
 `references/` also holds the candidate's source artifacts — the granted patent, the written response to Dr. Kim's Learners Conference questions, and two former-employer research reports. The reports are **confidential**: `data/candidate_profile.json` records what each one establishes and how it may be used. Method and structure are discussable; internal codenames, competitor benchmarking, and any dollar figure other than the ~$50M on the resume are not, and must not even be alluded to.
 

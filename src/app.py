@@ -42,6 +42,14 @@ SESSION_LOG_END = "<!-- FOUR_TURN_SESSION_LOG_END -->"
 SPEAKING_WORDS_PER_MINUTE = 150
 SESSION_RECORD_PATTERN = re.compile(r"<!-- FOUR_TURN_SESSION_JSON (.+?) -->")
 SPRINT_PROGRESS_PATTERN = re.compile(r"<!-- SPRINT_CHECKLIST_JSON (.*?) -->")
+PRACTICE_TRACKS = {
+    "Amazon case study": "practice/06-amazon-case-study.md",
+    "Off-bank follow-up ground": "practice/07-extra-stuff.md",
+    "Design partner screen": "practice/08-design-partner-screen.md",
+}
+PRACTICE_ENTRY_PATTERN = re.compile(r"^## ([A-Z]{2}\d{2})\s+—\s+(.+?)\s*$")
+PRACTICE_BASE_PATTERN = re.compile(r"^>\s+\*\*Base:\*\*\s+(.+?)\s*$")
+PRACTICE_PROBE_PATTERN = re.compile(r'^\*\*F\d+\s+—\s+"(.+?)"\*\*')
 SESSION_WRITE_LOCK = threading.Lock()
 CORE_DIMENSIONS = (
     "Substance",
@@ -371,6 +379,49 @@ def read_text(relative_path: str) -> str:
     return (ROOT / relative_path).read_text(encoding="utf-8")
 
 
+def practice_track_probes() -> str:
+    """Live turns get the rehearsed prompts only, never the model answers, so the persona can probe past them."""
+    lines: list[str] = []
+    for track_name, relative_path in PRACTICE_TRACKS.items():
+        entries: list[str] = []
+        entry_id = title = base = ""
+        probes: list[str] = []
+
+        def flush() -> None:
+            # Structural sections carry no askable prompt, so they stay out of the interviewer's options.
+            if not entry_id or not (base or probes):
+                return
+            entry = f"- {entry_id} | {title}"
+            if base:
+                entry += f": {base}"
+            if probes:
+                entry += f"\n  Follow-ups: {' / '.join(probes)}"
+            entries.append(entry)
+
+        for line in read_text(relative_path).splitlines():
+            heading = PRACTICE_ENTRY_PATTERN.match(line)
+            if heading:
+                flush()
+                entry_id, title = heading.group(1), heading.group(2)
+                base, probes = "", []
+                continue
+            if not entry_id:
+                continue
+            prompt = PRACTICE_BASE_PATTERN.match(line)
+            if prompt and not base:
+                base = prompt.group(1)
+                continue
+            probe = PRACTICE_PROBE_PATTERN.match(line)
+            if probe:
+                probes.append(probe.group(1))
+        flush()
+
+        if entries:
+            lines.append(f"### {track_name} ({Path(relative_path).name})")
+            lines.extend(entries)
+    return "\n".join(lines)
+
+
 def load_behavioral_question_bank() -> BehavioralQuestionBank:
     bank = BehavioralQuestionBank.model_validate_json(read_text("data/behavioral_questions.json"))
     expected_personas = set(PERSONAS.values())
@@ -610,7 +661,9 @@ Technical and research-craft probes:
 Culture and stakeholder-collaboration probes:
 {culture_follow_up_probes()}
 Positioning and close pillars:
-{positioning_question_options(persona, "close")}""",
+{positioning_question_options(persona, "close")}
+
+The rehearsed practice-track prompts in your context are also open ground here. Taking one is fair game, but the candidate has prepared it, so follow it immediately with a probe they cannot have scripted.""",
     }
     return instructions.get(next_turn, instructions["open"])
 
@@ -622,6 +675,11 @@ def load_live_context() -> str:
         "CANONICAL CANDIDATE RESUME": read_text("data/candidate_profile.json"),
         "CANONICAL AIR DEFENSE JOB REQUIREMENTS": read_text("data/target_anduril_air_defense.json"),
         "CANONICAL STORYBANK AND EVIDENCE TIERS": read_text("data/storybank_6_pillars.json"),
+        "REHEARSED PRACTICE-TRACK PROMPTS": (
+            "The candidate has rehearsed answers to these. Their prepared wording is deliberately withheld from you. "
+            "Use a prompt when it fits the conversation, then push past the rehearsed ground with your own probe.\n"
+            f"{practice_track_probes()}"
+        ),
     }
     return "\n\n".join(f"## {name}\n{content}" for name, content in sections.items())
 
@@ -634,6 +692,13 @@ def load_debrief_context() -> str:
         "CANONICAL STORYBANK AND EVIDENCE TIERS": read_text("data/storybank_6_pillars.json"),
         "CANONICAL PILLAR INDEX": pillar_index(),
         "CANONICAL RESPONSE ARCHITECTURE": read_text("practice/00-response-architecture.md"),
+        "REHEARSED PRACTICE TRACKS": (
+            "What the candidate prepared. Grade the delivered answer, not the rehearsal: note where they hit the "
+            "prepared beats, where they drifted, and where an unrehearsed answer beat the prepared one.\n\n"
+            + "\n\n".join(
+                f"### {name} ({path})\n{read_text(path)}" for name, path in PRACTICE_TRACKS.items()
+            )
+        ),
         "CURRENT COACHING STATE": read_text("data/coaching_state.md"),
         "INTERVIEW PERSONAS": read_text("references/role-drills.md"),
         "DETAILED RUBRIC": read_text("references/rubrics-detailed.md"),
