@@ -45,16 +45,27 @@ blockquote.warn { background: #fdf8ea; border: 1px dashed #8a6d1f; border-left-w
 blockquote.note { background: #eef3f7; border-left-color: #35637f; padding: .55em .9em; }
 blockquote p { margin: .35em 0; }
 
+/* The model answer is what gets memorized, so it gets the strongest treatment. */
+.answer { background: #f7f7f4; border-left: 4px solid #222; padding: .8em 1.1em; margin: .9em 0 1.1em; }
+.answer p { margin: 0 0 .7em; }
+.answer p:last-child { margin-bottom: 0; }
+.answer p > strong:first-child {
+  display: block; font-family: Helvetica, Arial, sans-serif;
+  font-size: .72em; text-transform: uppercase; letter-spacing: .08em;
+  color: #6a6a6a; margin-bottom: .15em;
+}
+
 table { border-collapse: collapse; width: 100%; font-size: .87rem; margin: 1em 0; }
 th, td { border: 1px solid #999; padding: 5px 8px; text-align: left; vertical-align: top; }
 th { background: #eee; }
+.calibration { font-size: .92em; color: #333; }
 code { font-family: Consolas, monospace; font-size: .88em; background: #eee; padding: .1em .3em; }
 hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }
 a { color: #14507d; }
 
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
-  body { background: #fff; font-size: 9.4pt; line-height: 1.29; padding: 0; }
+  body { background: #fff; font-size: 9.8pt; line-height: 1.33; padding: 0; }
   main {
     max-width: none; box-shadow: none; padding: 0;
     column-count: 2; column-gap: 6mm; column-fill: auto; hyphens: none;
@@ -65,12 +76,12 @@ a { color: #14507d; }
   }
   /* Parts span both columns so you can find them while talking. */
   h2 {
-    font-size: 11pt; column-span: all; margin: 9pt 0 4pt;
+    font-size: 11pt; column-span: all; margin: 7pt 0 3pt;
     padding: 3pt 5pt; background: #e4e4e4; border-left: 3pt solid #000;
     break-after: avoid; break-inside: avoid;
   }
   h3 {
-    font-size: 9.9pt; margin: 7pt 0 2pt; padding-bottom: 1.5pt;
+    font-size: 9.9pt; margin: 6pt 0 2pt; padding-bottom: 1.5pt;
     border-bottom: .6pt solid #999; break-after: avoid; break-inside: avoid;
   }
   h4 {
@@ -90,6 +101,20 @@ a { color: #14507d; }
     padding: 4pt 6pt; font-size: 9.2pt; break-inside: avoid;
   }
   blockquote.note { background: #eef2f6; border-left: 2.5pt solid #35637f; padding: 4pt 6pt; font-size: 9.3pt; }
+  .answer {
+    background: #f5f5f2; border-left: 3pt solid #111;
+    padding: 4pt 6pt; margin: 2.5pt 0 5pt;
+  }
+  .answer p { margin: 0 0 4pt; }
+  .answer p:last-child { margin-bottom: 0; }
+  .answer p > strong:first-child {
+    display: block; font-family: Helvetica, Arial, sans-serif;
+    font-size: 7.6pt; text-transform: uppercase; letter-spacing: .07em;
+    color: #555; margin-bottom: .5pt;
+  }
+  .calibration { font-size: 8.7pt; color: #333; }
+  .calibration ul { margin: 0 0 3pt; padding-left: 10pt; }
+  .calibration li { margin: 0 0 1pt; }
   table { column-span: all; font-size: 8.3pt; margin: 4pt 0 6pt; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; }
@@ -117,6 +142,19 @@ PAGE = """<!DOCTYPE html>
 """
 
 
+def wrap_model_answers(body: str) -> str:
+    """Group the paragraphs under a 'Model answer' heading so the spoken block reads as one unit."""
+    pattern = re.compile(
+        r"(<h3>Model answer[^<]*</h3>\s*)((?:<p>(?:(?!</?h[1-4]|<blockquote|<hr).)*?</p>\s*)+)",
+        flags=re.DOTALL,
+    )
+    body = pattern.sub(lambda m: f'{m.group(1)}<div class="answer">\n{m.group(2)}</div>\n', body)
+
+    # The calibration list is reference, not rehearsal, so it reads smaller.
+    calib = re.compile(r"(<h3>Senior \u2192 Staff-signal</h3>\s*)(<ul>.*?</ul>)", flags=re.DOTALL)
+    return calib.sub(lambda m: f'{m.group(1)}<div class="calibration">{m.group(2)}</div>', body)
+
+
 def classify_blockquotes(body: str) -> str:
     """Warnings, coaching asides and spoken lines all render as plain blockquotes; separate them."""
 
@@ -137,7 +175,7 @@ def main() -> None:
     md = MarkdownIt("commonmark", {"html": True}).enable("table")
     OUT.mkdir(parents=True, exist_ok=True)
 
-    body = classify_blockquotes(md.render(SRC.read_text(encoding="utf-8")))
+    body = wrap_model_answers(classify_blockquotes(md.render(SRC.read_text(encoding="utf-8"))))
     target = OUT / "intuitive-interview-guide.html"
     target.write_text(
         PAGE.format(title=html.escape(TITLE), css=CSS, body=body),

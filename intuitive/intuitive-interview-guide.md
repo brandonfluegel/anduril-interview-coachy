@@ -4,11 +4,13 @@
 
 Hiring director conversation held September 15. It went well. What's left is the stakeholder calls and the onsite loop.
 
-**Parts 1 to 3 are eighteen questions you rehearse out loud** — the question as it will actually be asked, a model answer, three scoped follow-ups, and the line that moves you from Senior to Staff-signal. **Parts 4 to 6 are reference** — read once, don't memorize.
+**Parts 1–3 are eighteen questions to rehearse out loud.** Each has the question as it will actually be asked, a model answer, three scoped follow-ups, and the line that separates Senior from Staff-signal. **Parts 4–6 are reference** — read once, don't memorize.
 
-> **One answer per question — however they word it.** Interviewers rephrase. The claim, the evidence, and the boundary stay identical across every room, because they compare notes afterward.
+**How the page works.** Blue = the question as they'll ask it. **Dark-bordered = the model answer, the thing you rehearse.** Grey = a follow-up answer. Yellow = a warning; read every one.
 
-A handful of specifics are marked **CONFIRM** — they're reconstructed from your résumé and the shipped product, and you should correct them to what actually happened before you say them. Everything else is yours already.
+> **One answer per question — however they word it.** Interviewers rephrase. The claim, the evidence, and the boundary stay identical in every room, because they compare notes afterward.
+
+Three answers are marked **CONFIRM** — reconstructed from your résumé rather than dictated by you. Correct them before you say them.
 
 ---
 
@@ -549,7 +551,7 @@ This is exactly what the job description means by *authoring usability design in
 
 **Asked by:** HF peers, regulatory, clinical engineers · **Target:** ~85s · **Structure:** B
 
-> **Base:** "Walk me through how you'd do a use-related risk analysis." / "How do you find use errors before testing?" / "What's your uFMEA experience?"
+> **Base:** "Walk me through how you'd do a use-related risk analysis." / "How do you find use errors before testing?" / "What's your uFMEA experience?" / "How many participants?"
 
 ### Model answer (~215 words / 86s)
 
@@ -559,7 +561,7 @@ This is exactly what the job description means by *authoring usability design in
 
 **Evidence, and where it stops.** I did exactly this at NASA Langley on the Lunar Gateway medical workstations — uFMEA across the clinical task set, then redesign against the failures it surfaced. The limit: that was a workstation with a small SME pool, not a fielded product with post-market data. Here you'd have complaint data and known use problems, which is better evidence than anything I had — and a required input.
 
-**The decision it drives.** The output is the critical task list plus candidate risk controls, each tied to the use scenario it came from — so the traceability argument exists before anyone needs it.
+**The decision it drives.** The output is the critical task list plus candidate risk controls, each tied to the use scenario it came from — so the traceability argument exists before anyone needs it. And it sets the sample logic downstream: formative work should be small and iterative, five participants three times rather than fifteen once, because the point is changing the design between rounds. Validation is a different animal — generally at least fifteen per distinct user group. Treating a formative study as a small validation is the most common way the record ends up weak.
 
 **What would change my mind.** If formative testing repeatedly surfaces error modes the analysis never predicted, the task decomposition is wrong and I'd rebuild it from observation rather than from documentation."
 
@@ -711,46 +713,6 @@ This is exactly what the job description means by *authoring usability design in
 
 ---
 
-## MQ08 — Method selection and study scoping
-
-**Asked by:** HF peers, PMs · **Target:** ~80s · **Structure:** B
-
-> **Base:** "How do you choose a method?" / "How many participants?" / "How do you scope a formative study?" / "When is research not worth running?"
-
-### Model answer (~205 words / 82s)
-
-**The claim.** "Method follows the decision, and I work down a ladder — stopping at the cheapest rung that answers the question.
-
-**How I'd know.** The first question is always what decision is pending and what would change it. If the answer is 'we want to understand the space,' that's generative: contextual inquiry, cognitive task analysis, critical decision method. If it's 'we think this design works,' that's evaluative and needs something to look at — cognitive walkthrough first because it's free, then formative testing at the lowest fidelity that can produce the error you're worried about. High fidelity is expensive and mostly buys confidence, not information.
-
-**Evidence, and where it stops.** Sample size follows the same logic. For formative work, small and iterative beats large and single-shot — I'd rather run five participants three times than fifteen once, because the point is changing the design between rounds. Validation is a different animal: generally at least fifteen participants per distinct user group, representative users, production-equivalent interface, deviations justified. Those get confused constantly, and treating a formative study as a small validation is the most common way the record ends up weak.
-
-**The decision it drives.** Formative isn't a small summative. It's the only place the design actually changes.
-
-**What would change my mind.** If the cheap method and the expensive one keep producing the same answer on a program, I stop buying the expensive one."
-
-### Follow-ups
-
-**F1 — "When would you not run a study at all?"** *(~55 words)*
-
-> "When no plausible result changes a decision. If I walk the branches with a stakeholder and every outcome leads to the same action, the study is reassurance and I'd rather say so and give the time back. I've killed my own proposed work on that basis, and it bought more credibility than the study would have."
-
-**F2 — "What do you do with a use error found late?"** *(~70 words)*
-
-> "Work the hierarchy in order: design it out, protect against it, and only then talk about labeling or training. And you can't close out an observed use error with labeling or training alone unless you have evidence the fix works — which means testing the mitigation, not just adding it. A warning nobody reads isn't a risk control, it's a record of having noticed."
-
-**F3 — "How do you keep research from being the schedule risk?"** *(~65 words)*
-
-> "By naming the decision points before the program starts, so research is on the critical path deliberately rather than by surprise. Most research-as-bottleneck problems are actually scoping problems — an open-ended question attached to a fixed date. If I know which gate the study serves, I can size it to the gate."
-
-### Senior → Staff-signal
-
-- **Senior:** selects appropriate methods and justifies sample sizes.
-- **Staff-signal:** separates formative from validation logic explicitly, and names the point at which a method becomes expensive theater.
-- **Say this:** *"Formative isn't a small summative. It's the only place the design actually changes."*
-
----
-
 # Part 3 · Regulatory questions — Structure B
 
 > ⚠️ **Read this before all three.** You are not the regulatory person, and pretending to be is the fastest way to lose the room. Frame everything as **current reading**, not expertise: *"I've been working through the two 2026 guidances."* When you hit something you don't know: *"I'd want to read the clause before I answered that."* That sentence costs nothing and buys more than a guess. And say **guidance**, never "regulation."
@@ -896,8 +858,6 @@ This is exactly what the job description means by *authoring usability design in
 > "My graduate work was on what interruptions cost people doing medical tasks. The short version is that getting a user back to where they were is the system's job, not the user's."
 
 **If they want method depth:** after each interruption I cleared the entered values and reset the cursor, removing the visual and spatial cues that let participants in the two closest prior studies read the answer off the screen instead of remembering it.
-
-**Two résumé errors sit here** — see the Résumé row in Part 6 before you send a panel version.
 
 ---
 

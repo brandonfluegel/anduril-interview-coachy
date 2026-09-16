@@ -30,16 +30,27 @@ blockquote.warn { background: #fdf8ea; border: 1px dashed #8a6d1f; border-left-w
 blockquote.note { background: #eef3f7; border-left-color: #35637f; padding: .55em .9em; }
 blockquote p { margin: .35em 0; }
 
+/* The model answer is what gets memorized, so it gets the strongest treatment. */
+.answer { background: #f7f7f4; border-left: 4px solid #222; padding: .8em 1.1em; margin: .9em 0 1.1em; }
+.answer p { margin: 0 0 .7em; }
+.answer p:last-child { margin-bottom: 0; }
+.answer p > strong:first-child {
+  display: block; font-family: Helvetica, Arial, sans-serif;
+  font-size: .72em; text-transform: uppercase; letter-spacing: .08em;
+  color: #6a6a6a; margin-bottom: .15em;
+}
+
 table { border-collapse: collapse; width: 100%; font-size: .87rem; margin: 1em 0; }
 th, td { border: 1px solid #999; padding: 5px 8px; text-align: left; vertical-align: top; }
 th { background: #eee; }
+.calibration { font-size: .92em; color: #333; }
 code { font-family: Consolas, monospace; font-size: .88em; background: #eee; padding: .1em .3em; }
 hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }
 a { color: #14507d; }
 
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
-  body { background: #fff; font-size: 9.4pt; line-height: 1.29; padding: 0; }
+  body { background: #fff; font-size: 9.8pt; line-height: 1.33; padding: 0; }
   main {
     max-width: none; box-shadow: none; padding: 0;
     column-count: 2; column-gap: 6mm; column-fill: auto; hyphens: none;
@@ -50,12 +61,12 @@ a { color: #14507d; }
   }
   /* Parts span both columns so you can find them while talking. */
   h2 {
-    font-size: 11pt; column-span: all; margin: 9pt 0 4pt;
+    font-size: 11pt; column-span: all; margin: 7pt 0 3pt;
     padding: 3pt 5pt; background: #e4e4e4; border-left: 3pt solid #000;
     break-after: avoid; break-inside: avoid;
   }
   h3 {
-    font-size: 9.9pt; margin: 7pt 0 2pt; padding-bottom: 1.5pt;
+    font-size: 9.9pt; margin: 6pt 0 2pt; padding-bottom: 1.5pt;
     border-bottom: .6pt solid #999; break-after: avoid; break-inside: avoid;
   }
   h4 {
@@ -75,6 +86,20 @@ a { color: #14507d; }
     padding: 4pt 6pt; font-size: 9.2pt; break-inside: avoid;
   }
   blockquote.note { background: #eef2f6; border-left: 2.5pt solid #35637f; padding: 4pt 6pt; font-size: 9.3pt; }
+  .answer {
+    background: #f5f5f2; border-left: 3pt solid #111;
+    padding: 4pt 6pt; margin: 2.5pt 0 5pt;
+  }
+  .answer p { margin: 0 0 4pt; }
+  .answer p:last-child { margin-bottom: 0; }
+  .answer p > strong:first-child {
+    display: block; font-family: Helvetica, Arial, sans-serif;
+    font-size: 7.6pt; text-transform: uppercase; letter-spacing: .07em;
+    color: #555; margin-bottom: .5pt;
+  }
+  .calibration { font-size: 8.7pt; color: #333; }
+  .calibration ul { margin: 0 0 3pt; padding-left: 10pt; }
+  .calibration li { margin: 0 0 1pt; }
   table { column-span: all; font-size: 8.3pt; margin: 4pt 0 6pt; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; }
@@ -90,11 +115,12 @@ a { color: #14507d; }
 <h1>Intuitive Surgical — Senior Human Factors Analyst</h1>
 <h3>Interview guide · Sunnyvale · fully onsite</h3>
 <p>Hiring director conversation held September 15. It went well. What's left is the stakeholder calls and the onsite loop.</p>
-<p><strong>Parts 1 to 3 are eighteen questions you rehearse out loud</strong> — the question as it will actually be asked, a model answer, three scoped follow-ups, and the line that moves you from Senior to Staff-signal. <strong>Parts 4 to 6 are reference</strong> — read once, don't memorize.</p>
+<p><strong>Parts 1–3 are eighteen questions to rehearse out loud.</strong> Each has the question as it will actually be asked, a model answer, three scoped follow-ups, and the line that separates Senior from Staff-signal. <strong>Parts 4–6 are reference</strong> — read once, don't memorize.</p>
+<p><strong>How the page works.</strong> Blue = the question as they'll ask it. <strong>Dark-bordered = the model answer, the thing you rehearse.</strong> Grey = a follow-up answer. Yellow = a warning; read every one.</p>
 <blockquote class="note">
-<p><strong>One answer per question — however they word it.</strong> Interviewers rephrase. The claim, the evidence, and the boundary stay identical across every room, because they compare notes afterward.</p>
+<p><strong>One answer per question — however they word it.</strong> Interviewers rephrase. The claim, the evidence, and the boundary stay identical in every room, because they compare notes afterward.</p>
 </blockquote>
-<p>A handful of specifics are marked <strong>CONFIRM</strong> — they're reconstructed from your résumé and the shipped product, and you should correct them to what actually happened before you say them. Everything else is yours already.</p>
+<p>Three answers are marked <strong>CONFIRM</strong> — reconstructed from your résumé rather than dictated by you. Correct them before you say them.</p>
 <hr />
 <h2>Two structures. Using the wrong one costs you even when the content is right.</h2>
 <p>Every question is tagged <strong>A</strong> or <strong>B</strong>. Tell a story in answer to a method question and it reads as dodging; recite method in answer to an experience question and it reads as evasive.</p>
@@ -190,9 +216,11 @@ a { color: #14507d; }
 <p><strong>Base:</strong> &quot;Tell me about yourself.&quot; / &quot;Walk me through your background.&quot; / &quot;What brings you here?&quot;</p>
 </blockquote>
 <h3>Model answer (~185 words / 75s)</h3>
+<div class="answer">
 <p><strong>What I do.</strong> &quot;I turn human perceptual and cognitive limits into design inputs that engineers can verify — in systems where a use error causes physical harm.</p>
 <p><strong>Why here, three reasons.</strong> First, I want the consequence back. I do my best work when a use error means physical harm, not a bad quarter. Second, the problem is multimodal — visual, haptic, and auditory interaction under load is what I've spent my career measuring. And third, my closest work to this was at NASA Langley: safety-critical validation of a medical workstation, with surgical-like workspace layouts and a usability FMEA underneath it.</p>
 <p><strong>The arc.</strong> Depth, then breadth, then building. Four and a half years at Amazon as the sole human factors researcher in the Devices Design Group. Then consulting. Now EchoStar, where I report to the VP of Product and lead human factors strategy across software, hardware, and AI. What I want next is a regulated domain worth staying in for a long time. That's a deliberate choice, not a reaction to anything.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;Why leave EchoStar?&quot;</strong> <em>(~55 words)</em></p>
 <blockquote class="say">
@@ -210,11 +238,11 @@ a { color: #14507d; }
 <p>⚠️ <strong>Compensation has not been discussed with Intuitive at all</strong> — if it comes up, <em>&quot;I'd like to understand the level and scope first.&quot;</em> Posted Region 1 range is $170,600–$245,400, and their posting says it wouldn't be typical to hire at the top.</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> gives a clear, confident summary of their background.</li>
 <li><strong>Staff-signal:</strong> leads &quot;why here&quot; with safety-critical medical work rather than interest, and frames the moves as a thesis rather than a sequence.</li>
 <li><strong>Say this:</strong> <em>&quot;What I want next is a regulated domain worth staying in for a long time.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>EQ02 — The unarticulated need ★ rehearse this one hardest</h2>
 <p><strong>Asked by:</strong> hiring manager, senior HF, designers · <strong>Target:</strong> ~95s · <strong>Structure:</strong> A</p>
@@ -226,12 +254,14 @@ a { color: #14507d; }
 <p>⚠️ <strong>CONFIRM this whole answer against what actually happened.</strong> It's reconstructed from your résumé and from what Echo Hub actually shipped — the shape is right and the details are plausible, but a panel will probe them and you need them to be true.</p>
 </blockquote>
 <h3>Model answer (~240 words / 95s)</h3>
+<div class="answer">
 <p><strong>Situation.</strong> &quot;Echo Hub was a genuinely new kind of device — a control panel mounted on a wall and shared by a whole household. No prior product to test against, no usage data, nothing to run a study on. I was the only human factors researcher in the group.</p>
 <p><strong>Task.</strong> My charge was to define what it needed to do for people before there was a design to evaluate. And the first question wasn't about the interface at all — it was what a wall-mounted panel has to show someone who is <em>walking past</em> it, rather than standing at it.</p>
 <p><strong>Action.</strong> I ran in-home contextual inquiry with twelve households across a range of smart-home density, watching how people actually controlled their connected devices over a normal week. What came out was that nobody wanted a faster controller. They wanted to not have to decide whether crossing the room was worth it. The reason nobody had written that down is that the workaround looked like ordinary behavior — people reached for their phone even when the panel was closer, and then told us the panel was great. A single qualitative source isn't enough to move an architecture decision, so I checked it against the existing Echo Show interaction data, which showed the same pattern: a fixed-position device gets used for whatever is already on screen, not for what's one navigation step away. Then I translated it into something an engineer could verify rather than interpret: the device shall resolve to the controls relevant to that room and that time of day <em>before</em> the user reaches it, so the panel is readable in a single glance at approach distance without a touch to orient.</p>
 <p><strong>Result.</strong> That shaped the decision to treat approach and proximity as a first-class input to what the screen shows, rather than treating the panel as a small wall-mounted tablet.</p>
 <p><strong>Earned secret.</strong> The needs that don't get written down are the ones where the workaround looks like ordinary behavior. Nobody reports it as a problem, because from the inside it isn't one.</p>
 <p><strong>Mechanism.</strong> What I left behind was the glance-first requirement and the criteria behind it, and the Echo hardware and Alexa interface teams still design against it.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;How did you know that was real and not just a few people talking?&quot;</strong> <em>(~70 words)</em></p>
 <blockquote class="say">
@@ -249,11 +279,11 @@ a { color: #14507d; }
 <p>⚠️ <strong>Portfolio level only.</strong> No Echo Hub or Echo Show metric. Refusing well reads as discipline to a medical device company — the same instinct they want you to have about <em>their</em> data.</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> finds an insight and reports it persuasively.</li>
 <li><strong>Staff-signal:</strong> explains why the need was structurally invisible, corroborates across sources, and converts it into a <em>shall</em> statement someone else can verify.</li>
 <li><strong>Say this:</strong> <em>&quot;The needs that don't get written down are the ones where the workaround looks like ordinary behavior.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>EQ03 — Pushing back</h2>
 <p><strong>Asked by:</strong> senior HF, engineers, PMs · <strong>Target:</strong> ~95s · <strong>Structure:</strong> A</p>
@@ -264,12 +294,14 @@ a { color: #14507d; }
 <p>⚠️ <strong>CONFIRM the specifics.</strong> This is built from the latency program, where your résumé says you replaced arbitrary engineering targets — so a real disagreement is implied. Correct the details to what actually happened.</p>
 </blockquote>
 <h3>Model answer (~235 words / 95s)</h3>
+<div class="answer">
 <p><strong>Situation.</strong> &quot;On the Alexa latency program I recommended we stop using the existing engineering latency targets and replace them with perception-derived thresholds. For several interaction types that meant a tighter budget than engineering had been building to, so it carried real cost in effort and schedule — and the engineering leads who owned those budgets pushed back.</p>
 <p><strong>Task.</strong> My job was to either move the decision or accept it honestly, not to be right in a meeting.</p>
 <p><strong>Action.</strong> I granted the objection out loud first, because it was legitimate: they had been hitting their targets, those targets had been stable for years, and nothing was visibly broken. I was proposing to make their work harder on the strength of a research finding. Then I argued from the strongest ground I had, in order. First, that the existing numbers weren't a measurement of anything — they were a convention, and nobody could say what they were a threshold <em>for</em>. Second, converging evidence: the detection thresholds and the subjective slowness ratings pointed the same way. Third — the part that actually moved it — I built them a cheaper alternative: a two-tier specification per interaction type, a must-hit threshold and a target threshold, so they could sequence the work instead of absorbing every budget at once. I didn't escalate. Escalation is available, but it spends credit you need later and makes the next disagreement harder.</p>
 <p><strong>Result.</strong> The two-tier spec was adopted. What I conceded was the rollout sequence — lower-frequency interaction types kept their old budgets for a release cycle. If I'd conceded nothing, I wasn't negotiating, I was waiting.</p>
 <p><strong>Earned secret.</strong> I don't win these by being right. I win them by making the residual risk visible enough that accepting it requires a signature. Once a decision has a name attached, the conversation changes character.</p>
 <p><strong>Mechanism.</strong> What I left behind was the rule that any proposed latency target had to name its interaction type and the perceptual basis for the number — so the argument didn't recur on the next program.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;What did you concede?&quot;</strong> <em>(~50 words)</em></p>
 <blockquote class="say">
@@ -284,11 +316,11 @@ a { color: #14507d; }
 <p>&quot;By showing up early enough that I'm shaping the design rather than grading it. Most friction in this job comes from human factors arriving after the architecture is fixed, when every finding is expensive. If I'm in at concept, my constraint is one input among several instead of a late veto — and I'm arguing with a whiteboard, not a schedule.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> advocates effectively with evidence.</li>
 <li><strong>Staff-signal:</strong> grants the counter-argument, names the concession, and converts a won argument into a standing gate.</li>
 <li><strong>Say this:</strong> <em>&quot;I don't win these by being right. I win them by making the residual risk visible enough that accepting it requires a signature.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>EQ04 — Getting research acted on ★ your signature habit</h2>
 <p><strong>Asked by:</strong> PMs, senior HF, hiring manager · <strong>Target:</strong> ~85s · <strong>Structure:</strong> A</p>
@@ -296,12 +328,14 @@ a { color: #14507d; }
 <p><strong>Base:</strong> &quot;How do you make sure your research actually gets used?&quot; / &quot;Tell me about influencing without authority.&quot; / &quot;What do you do when findings get ignored?&quot;</p>
 </blockquote>
 <h3>Model answer (~220 words / 88s)</h3>
+<div class="answer">
 <p><strong>Situation.</strong> &quot;Early on I watched good studies land in a findings meeting and change nothing, and I stopped believing the problem was research quality or how well I presented it.</p>
 <p><strong>Task.</strong> So I changed what I do before a study runs rather than after.</p>
 <p><strong>Action.</strong> I get stakeholders to agree in writing on what each possible result will change. Not 'we'll consider the findings' — the actual branches. On the Alexa latency program that looked like this: if the measured threshold came in tighter than the current target, the target changes and engineering absorbs the work. If it came in looser, we stop spending engineering cycles on latency and move that effort to feature work. Both branches, written down, before anyone had a result to defend.</p>
 <p><strong>Result.</strong> The thresholds went to Alexa Economics, who applied them to their Negative Value Action model and projected about fifty million dollars in incremental operational value over fifteen months. Nobody relitigated whether the research counted, because that argument had already happened.</p>
 <p><strong>Earned secret.</strong> Findings don't get ignored because they're weak. They get ignored because nobody ever owned the decision they were meant to inform. Pre-commitment moves the argument to a moment when nobody's ego is attached to an outcome yet.</p>
 <p><strong>Mechanism.</strong> And it cuts both ways — it kills my own studies. I killed a proposed study on response phrasing once, because I walked the branches with the team and every outcome led to the same design. If no plausible result changes a decision, I don't run it.&quot;</p>
+</div>
 <blockquote class="warn">
 <p>⚠️ <strong>CONFIRM the cancelled study.</strong> The pre-commitment habit and the $50M outcome are yours; the phrasing study is a placeholder for whatever you actually killed. This line is what makes the answer read as judgment rather than process, so it has to be real and concrete.</p>
 </blockquote>
@@ -319,11 +353,11 @@ a { color: #14507d; }
 <p>&quot;On the latency program the metric everyone used conflated the objective response interval with the user's perception of it — the name itself encoded an assumption my data falsified. I proposed splitting them, and the organization renamed the metric. That mattered more than any single threshold, because afterwards nobody could argue the two were the same thing by accident.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> communicates findings clearly and builds relationships to drive adoption.</li>
 <li><strong>Staff-signal:</strong> restructures <em>when</em> the decision gets made, applies the same discipline to killing their own work, and has changed the vocabulary an organization reasons in.</li>
 <li><strong>Say this:</strong> <em>&quot;If no plausible result changes a decision, I don't run the study.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>EQ05 — Safety-critical work ★ your closest analogue to this job</h2>
 <p><strong>Asked by:</strong> clinical engineers, HF peers, regulatory · <strong>Target:</strong> ~90s · <strong>Structure:</strong> A</p>
@@ -332,12 +366,14 @@ a { color: #14507d; }
 </blockquote>
 <p><strong>Lead with this whenever you can.</strong> It is the only thing on your résumé that is medical, safety-critical, and surgical-adjacent at the same time.</p>
 <h3>Model answer (~230 words / 92s)</h3>
+<div class="answer">
 <p><strong>Situation.</strong> &quot;At NASA Langley I led the human factors design validation for the next-generation medical workstations on the Lunar Gateway — where a crew member would actually be treated, with no evacuation and no second clinician. I was the PhD intern on that team, and this was my piece of it.</p>
 <p><strong>Task.</strong> We were evaluating operational environments and surgical-like workspace layouts in simulated microgravity, and my charge was to find the use errors that would actually hurt someone before the layouts were fixed.</p>
 <p><strong>Action.</strong> The method was a usability Failure Modes and Effects Analysis. I decomposed the clinical tasks, then went step by step asking how each one could fail — omission, wrong sequence, wrong object, wrong timing — and rated each by the severity of the harm it would produce rather than how often I thought it would happen. That surfaced the high-consequence input errors and the cognitive load bottlenecks. Then I redesigned the workstation layouts and the information displays against NASA-STD-3001 and MIL-STD-1472, off simulated-use testing data.</p>
 <p><strong>Result.</strong> Operator task completion time came down about thirty percent, and the critical system input errors were eliminated.</p>
 <p><strong>Earned secret.</strong> That was a use-related risk analysis before I had the regulatory vocabulary for it — uFMEA and the hazard-related use scenario chain in 62366 are the same reasoning with different paperwork.</p>
 <p><strong>Mechanism.</strong> And the ordering wasn't a preference, it was the risk control hierarchy: design it out, protect against it, tell people about it last — because a label is the weakest control there is.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;How did you decide which tasks were critical?&quot;</strong> <em>(~70 words)</em></p>
 <blockquote class="say">
@@ -352,11 +388,11 @@ a { color: #14507d; }
 <p>&quot;Tested against a fatigued, task-loaded operator rather than a rested one. The layouts were evaluated under reasonable conditions, and the realistic condition for that workstation is someone who's been awake too long and is frightened. That's the gap I'd close, and I'd expect some of the error reduction to shrink under it.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> describes safety-critical work accurately with honest attribution.</li>
 <li><strong>Staff-signal:</strong> names the method and the standards, explains the severity-over-probability logic, and volunteers the limit of a clean result unprompted.</li>
 <li><strong>Say this:</strong> <em>&quot;I changed the layout rather than adding a warning. A label is the weakest control there is.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>EQ06 — When you got it wrong</h2>
 <p><strong>Asked by:</strong> HF peers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> A</p>
@@ -367,12 +403,14 @@ a { color: #14507d; }
 <p>⚠️ <strong>This one uses the master's thesis</strong> — it's a genuinely strong failure story and it's true, so it's worth the thirty seconds of graduate-work exposure. Swap in a professional example if you have one you'd rather tell.</p>
 </blockquote>
 <h3>Model answer (~215 words / 86s)</h3>
+<div class="answer">
 <p><strong>Situation.</strong> &quot;My master's thesis was supposed to measure how long it takes to get back to a laparoscopic task after an interruption.</p>
 <p><strong>Task.</strong> The setup was the standard laparoscopic peg-transfer exercise, and I interrupted people the way the literature says surgeons actually get interrupted — somebody talks to you about something unrelated.</p>
 <p><strong>Action.</strong> Forty-six of my fifty-one participants never stopped. They kept moving pegs while they answered me. So they were <em>distracted</em>, not interrupted, and the dependent variable the whole study was built around stopped existing. A six-person pilot had shown me the opposite, which is exactly why I'd trusted it. I couldn't rescue the resumption measure, so I reported the null plainly rather than reframing the hypothesis around whatever turned out significant, and analyzed what the data could actually support — which was a clean task-demand effect on sequence errors.</p>
 <p><strong>Result.</strong> What it could support was that task demand drives errors. What it could not support was anything about resumption time, and I said so in the document and in the paper.</p>
 <p><strong>Earned secret.</strong> The failure mode I watch for now is confirmation at small n. A pilot that agrees with you is the most dangerous result you can get, because it buys confidence without buying evidence — the sample is too small to disagree.</p>
 <p><strong>Mechanism.</strong> So I pilot the manipulation check as its own question, separately from the effect. That's the design the dissertation used, and it's part of why I now get stakeholders to pre-commit to what each result changes.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;How did you communicate it?&quot;</strong> <em>(~55 words)</em></p>
 <blockquote class="say">
@@ -387,11 +425,11 @@ a { color: #14507d; }
 <p>&quot;I write down what would have to be true for the study to work, and I test those assumptions first and separately. Most failed studies aren't analysis failures, they're assumption failures — and the assumption is usually that the manipulation did what the protocol said it would.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> tells a real failure honestly and says what they learned.</li>
 <li><strong>Staff-signal:</strong> identifies the <em>class</em> of error, and leaves behind a practice that prevents it recurring for other people.</li>
 <li><strong>Say this:</strong> <em>&quot;A pilot that confirms you is the most dangerous result you can get.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>EQ07 — Working with clinicians</h2>
 <p><strong>Asked by:</strong> clinical engineers, hiring manager · <strong>Target:</strong> ~80s · <strong>Structure:</strong> A</p>
@@ -400,12 +438,14 @@ a { color: #14507d; }
 </blockquote>
 <p><strong>They're screening for clinical humility.</strong> Overclaiming is the fatal move with this audience.</p>
 <h3>Model answer (~210 words / 84s)</h3>
+<div class="answer">
 <p><strong>Situation.</strong> &quot;My clinical grounding comes from the Clinical Neuroscience Laboratory at Brigham and Women's, at Harvard Medical School.</p>
 <p><strong>Task.</strong> I coordinated clinical research protocols and led data collection for large-scale functional neuroimaging and physiological stress studies — fMRI, cardiovagal and heart-rate-variability telemetry, cortisol response curves, and behavioral performance under acute stress challenges, on longitudinal data for large patient cohorts.</p>
 <p><strong>Action.</strong> Two things came out of that. The first is procedural discipline: IRB protocols, HIPAA safety requirements, and federal clinical research standards, on data where getting it wrong has real consequences for real patients. The second is how to behave in a clinical environment. You're a guest, your study is the least important thing happening in the room, and the fastest way to lose access is to cost a clinician time they didn't agree to give. So I over-prepare — I learn the procedure before I show up, so I'm asking about someone's reasoning rather than making them narrate steps I could have read.</p>
 <p><strong>Result.</strong> I can operate in a hospital without being a liability. And my international field research — naturalistic studies in Latin America for Uber — covers working across language and cultural context.</p>
 <p><strong>Earned secret.</strong> My job in an operating room is to be the least disruptive person in it and still leave with the observation nobody wrote down.</p>
 <p><strong>Mechanism.</strong> The way I earn a surgeon's second hour is by showing what changed because of the first one.&quot;</p>
+</div>
 <blockquote class="warn">
 <p>⚠️ <strong>Your graduate studies used undergraduate participants, not clinicians.</strong> If it comes up, say so immediately and plainly. Never let an interviewer discover it.</p>
 </blockquote>
@@ -423,11 +463,11 @@ a { color: #14507d; }
 <p>&quot;Make it cheap for them and valuable to them. Short sessions anchored to a specific remembered case rather than open-ended interviews, scheduled around their day instead of mine, and I come back with what changed because of what they said. The second session is much easier to get if the first one visibly went somewhere.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> demonstrates comfort in clinical settings and appropriate humility.</li>
 <li><strong>Staff-signal:</strong> volunteers the gap in their own clinical sampling before being asked, and describes a repeatable way of earning expert access.</li>
 <li><strong>Say this:</strong> <em>&quot;My job in an operating room is to be the least disruptive person in it and still leave with the observation nobody wrote down.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>EQ08 — Being a design partner, not a design grader</h2>
 <p><strong>Asked by:</strong> industrial and interaction designers, engineers · <strong>Target:</strong> ~80s · <strong>Structure:</strong> A</p>
@@ -436,12 +476,14 @@ a { color: #14507d; }
 </blockquote>
 <p><strong>The designers on this loop are deciding whether you'd make their work better or slower.</strong> They have met human factors people who show up at the end with a list.</p>
 <h3>Model answer (~205 words / 82s)</h3>
+<div class="answer">
 <p><strong>Situation.</strong> &quot;At EchoStar I report to the VP of Product and lead human factors across software, physical hardware, and generative AI integrations. There was no function before me, which meant every bit of influence had to be earned rather than assigned.</p>
 <p><strong>Task.</strong> My charge was to make human factors something teams wanted early rather than something that happened to them late.</p>
 <p><strong>Action.</strong> The move that worked was bringing constraints instead of verdicts. Rather than reviewing a design and listing problems, I'd arrive at concept stage with the envelope — reach envelope and anatomical safety limits for physical hardware, perceptual thresholds for latency and feedback, criteria for screen layout and conversational interfaces. Designers can work inside a constraint; they can't do much with a critique of something already built. On one hardware program I brought the reach and anatomical safety envelope into the concept review rather than the design review, and a control placement moved before any tooling existed — which is a cheap change at that stage and an expensive one three months later. I also made a rule of never giving a finding without a candidate direction, even a bad one, because a finding with no path forward puts the whole cost of the problem on the designer.</p>
 <p><strong>Result.</strong> The hardware teams started pulling me into concept reviews by default rather than design reviews, which is the only durable version of this.</p>
 <p><strong>Earned secret.</strong> Human factors gets treated as a gate when it arrives late and as a partner when it arrives early — and that's almost entirely within my control, not theirs.</p>
 <p><strong>Mechanism.</strong> What I left behind was the org-wide usability criteria those teams now design against.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;What if a designer pushes back on your constraint?&quot;</strong> <em>(~60 words)</em></p>
 <blockquote class="say">
@@ -456,11 +498,11 @@ a { color: #14507d; }
 <p>&quot;Read the existing record first — known use problems, complaint data, prior risk analyses — because that's the cheapest evidence available and it's already a required input. Then get into the environment: observation, and time with the team roles I'd be designing for. I'd want to be useful on something small and real early rather than arriving with a plan for how everyone should work.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> collaborates well and communicates findings clearly.</li>
 <li><strong>Staff-signal:</strong> frames the partner-versus-gate dynamic as their own responsibility, and distinguishes non-negotiable constraints from judgment calls out loud.</li>
 <li><strong>Say this:</strong> <em>&quot;Designers can work inside a constraint. They can't do much with a critique of something already built.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h1>Part 2 · Methodological questions — Structure B</h1>
 <p>State the claim first. Do <strong>not</strong> use STAR here.</p>
@@ -472,6 +514,7 @@ a { color: #14507d; }
 </blockquote>
 <p><strong>Announce the sequence first:</strong> <em>&quot;Let me take that in order. What already exists, what's already known, what I'd ask experts, what I'd test once there's something to test, and what it all has to turn into.&quot;</em></p>
 <h3>Model answer (~380 words / 3 min — deliberately long)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;The first question isn't whether surgeons want force feedback. It's what their current visual compensation strategy is doing for them, and what restoring force changes about it.</p>
 <p><strong>What already exists.</strong> Three reference points bound the problem. Open surgery, where the surgeon feels tissue directly and their whole model is built on that. Laparoscopic, where force arrives through a long instrument and a pivot — attenuated and distorted, and surgeons have adapted to that degraded signal for decades. And current robotic practice, where surgeons compensate visually: they read how tissue deforms instead of feeling resistance.</p>
 <p><strong>What's already known.</strong> Before generating anything I'd go through complaint data and known use problems on the fielded system, plus the literature. Known use problems are free evidence and the cheapest hypotheses I'll get — and they're a required input to the process anyway.</p>
@@ -479,6 +522,7 @@ a { color: #14507d; }
 <p><strong>What I'd test.</strong> Once there's something to react to: cognitive walkthroughs, then formative testing at increasing fidelity, each round scoped to a decision agreed in advance.</p>
 <p><strong>The decision it drives.</strong> The output isn't a report. It's verifiable design inputs — a detectable force difference, a latency bound, a defined behavior when feedback drops out — plus the first entries in the use-related risk analysis. Those early entries are what the submission gets argued from years later.</p>
 <p><strong>What would change my mind.</strong> If cognitive task analysis shows the visual compensation strategy is <em>better</em> than force in the cases that matter — more accurate, less effortful — then force feedback is solving a problem surgeons already solved, and the work shifts to not disrupting it.&quot;</p>
+</div>
 <blockquote class="warn">
 <p>⚠️ <strong>One precision point.</strong> <strong>Cognitive task analysis</strong> studies how experts think in current practice, needs no prototype, and <strong>generates</strong>. <strong>Cognitive walkthroughs and formative testing</strong> evaluate a design, need something to look at, and <strong>evaluate</strong>. Using them interchangeably tells a specialist you learned the vocabulary rather than the practice.</p>
 </blockquote>
@@ -496,11 +540,11 @@ a { color: #14507d; }
 <p>&quot;Everything upstream of the prototype, which is most of the value anyway. Complaint data and known use problems in week one. Cognitive task analysis with eight to twelve expert surgeons through weeks two to four, anchored on remembered cases. Workflow mapping across roles. Then I'd deliver the draft use-related risk analysis and a first set of design inputs — so when a prototype exists the evaluation is already scoped and the risk file isn't starting from zero.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> proposes a sound, well-sequenced research plan.</li>
 <li><strong>Staff-signal:</strong> separates generative from evaluative methods precisely, names the counterintuitive risk, and ties early work to the regulatory record it becomes.</li>
 <li><strong>Say this:</strong> <em>&quot;I treat generative work as the first draft of the submission argument, not as pre-work.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>MQ02 — From observation to design input ★ the most valuable thing you can say</h2>
 <p><strong>Asked by:</strong> everyone · <strong>Target:</strong> ~90s · <strong>Structure:</strong> B</p>
@@ -509,11 +553,13 @@ a { color: #14507d; }
 </blockquote>
 <p>This is exactly what the job description means by <em>authoring usability design inputs</em>. Say the chain end to end.</p>
 <h3>Model answer (~225 words / 90s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;My output isn't a report, it's a design input an engineer can verify without me in the room. Let me walk the chain — and I'll make the numbers up, because the point is the shape.</p>
 <p><strong>The chain.</strong> <em>Observation:</em> surgeons tell me they're uncertain about grip on friable tissue — vessel wall, bowel — and compensate by watching how it deforms. <em>Need:</em> the user has to distinguish a safe grip from an unsafe one without taking their eyes off the operative field. <em>Design input:</em> the system shall present force information such that a one-newton difference is discriminable within a hundred and fifty milliseconds of contact, without requiring a visual fixation shift.</p>
 <p><strong>And the risk analysis entry, in the same breath.</strong> Hazard: mechanical force. Sequence of events: the surgeon can't perceive grip force, so grip escalates. Hazardous situation: a vessel or bowel wall exposed to force beyond what it tolerates. Harm: laceration or bleeding. Critical task: grip application during grasping and retraction. Candidate risk control: the force display, with effectiveness verified in formative evaluation before the first integrated prototype review.</p>
 <p><strong>The decision it drives.</strong> That's the whole path — from something somebody said to something an engineer can test against, and to a traceable entry somebody can find three years later.</p>
 <p><strong>What would change my mind.</strong> If the discriminable difference turns out far outside what the hardware can deliver, the design input was written against the wrong control, and I'd go back to the need rather than relax the number.&quot;</p>
+</div>
 <blockquote class="warn">
 <p>⚠️ <strong>Say &quot;I'll make the numbers up&quot; out loud.</strong> It lets you be fully concrete without claiming to know their thresholds — and being concrete is the entire value of this answer.</p>
 </blockquote>
@@ -531,11 +577,11 @@ a { color: #14507d; }
 <p>&quot;Psychophysics, with the uncertainty carried forward. An adaptive procedure converging on the detection point, the psychometric function fit per participant, and the spec takes the conservative bound of the interval rather than the mean. And you choose the population percentile deliberately and write down who it excludes — a central-tendency spec silently designs for the median user and fails the tails.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> describes translating findings into recommendations.</li>
 <li><strong>Staff-signal:</strong> produces the <em>shall</em> statement and the risk analysis entry in the same answer, unprompted.</li>
 <li><strong>Say this:</strong> <em>&quot;A design input nobody can test against isn't a requirement, it's a recommendation with confident formatting.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>MQ03 — Psychophysics into a specification ★ your deepest technical story</h2>
 <p><strong>Asked by:</strong> engineers, senior HF, hiring manager · <strong>Target:</strong> ~90s · <strong>Structure:</strong> B</p>
@@ -544,11 +590,13 @@ a { color: #14507d; }
 </blockquote>
 <p><strong>The strongest methodological evidence you own</strong> — a multi-year program with a real design, a counterintuitive finding, and a specification at the end.</p>
 <h3>Model answer (~230 words / 92s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;A latency target is a claim about human perception, so it should be measured like one and written like one — not set as a round number somebody liked.</p>
 <p><strong>How I'd know.</strong> At Amazon I ran a multi-year psychophysics program to replace Alexa's arbitrary engineering latency targets. Within-subjects, thirty participants, twelve high-priority interaction types crossed with six latency levels from five hundred milliseconds to three seconds — roughly two thousand trials. Wizard-of-Oz instrumentation gave me per-trial millisecond control of the response delay. And I used a three-point slowness scale rather than a Likert agreement scale, because people perceive slowness, not speed — asking in the direction users actually experience it is what made the ratings usable.</p>
 <p><strong>Evidence, and where it stops.</strong> Two findings mattered more than the numbers. Acceptable latency is intent-dependent, not global — interactions that mimic a real-world action need roughly five hundred milliseconds, others tolerate far more. And the response curve is non-monotonic, so conversational responses need a floor as well as a ceiling: too fast reads as canned, not as fast. The boundary is real though — thresholds are specific to the channel and the workload. A consumer visual-feedback threshold does not port to a gloved, sterile, high-tempo console. The method ports. The number doesn't.</p>
 <p><strong>The decision it drives.</strong> The output was a two-tier threshold specification per interaction type with defined pass criteria — an acceptance test, not a report. Alexa Economics applied it to their Negative Value Action model and projected about fifty million dollars in incremental operational value over fifteen months.</p>
 <p><strong>What would change my mind.</strong> If users under realistic workload show no performance or trust difference across the threshold band, latency isn't the binding constraint and I'd re-derive it under load.&quot;</p>
+</div>
 <blockquote class="warn">
 <p>⚠️ <strong>$50M is the only dollar figure you ever say</strong>, and always with its attribution — the economic model was Alexa Economics' work; your contribution is the threshold structure. Never allude to anything larger.</p>
 </blockquote>
@@ -566,23 +614,25 @@ a { color: #14507d; }
 <p>&quot;The method transfers completely and the numbers not at all. Same questions: what force difference can a surgeon actually discriminate, at what delay does force stop feeling like it originated at the instrument, what's the defined behavior when the hardware can't deliver. Each becomes a design input with a percentile and a fallback, and each becomes an entry in the risk analysis.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> reports a threshold and the study behind it.</li>
 <li><strong>Staff-signal:</strong> justifies a measurement-instrument choice on construct grounds, names the non-monotonic finding, and shows the population-to-specification translation.</li>
 <li><strong>Say this:</strong> <em>&quot;The durable output wasn't the number. It was that latency stopped being opinion — anyone proposing a target had to say which interaction type and which percentile.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>MQ04 — Use-error analysis ★ the method this job runs on</h2>
 <p><strong>Asked by:</strong> HF peers, regulatory, clinical engineers · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
-<p><strong>Base:</strong> &quot;Walk me through how you'd do a use-related risk analysis.&quot; / &quot;How do you find use errors before testing?&quot; / &quot;What's your uFMEA experience?&quot;</p>
+<p><strong>Base:</strong> &quot;Walk me through how you'd do a use-related risk analysis.&quot; / &quot;How do you find use errors before testing?&quot; / &quot;What's your uFMEA experience?&quot; / &quot;How many participants?&quot;</p>
 </blockquote>
 <h3>Model answer (~215 words / 86s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;Use-error analysis is where the design gets decided, not where it gets checked. If it happens after the architecture is fixed, everything it finds is expensive.</p>
 <p><strong>How I'd know.</strong> I'd work top-down and bottom-up and see whether they agree. Top-down: start from harms — what can this device do to a patient — and work backward to the interactions that produce them. Bottom-up: a usability Failure Modes and Effects Analysis. Decompose the procedure with a hierarchical task analysis, then take each step and ask systematically how it fails — omission, commission, wrong sequence, wrong timing, wrong object, wrong amount. Anything reachable that leads to serious harm becomes a critical task. Where the two directions disagree is usually where the real problem is.</p>
 <p><strong>Evidence, and where it stops.</strong> I did exactly this at NASA Langley on the Lunar Gateway medical workstations — uFMEA across the clinical task set, then redesign against the failures it surfaced. The limit: that was a workstation with a small SME pool, not a fielded product with post-market data. Here you'd have complaint data and known use problems, which is better evidence than anything I had — and a required input.</p>
-<p><strong>The decision it drives.</strong> The output is the critical task list plus candidate risk controls, each tied to the use scenario it came from — so the traceability argument exists before anyone needs it.</p>
+<p><strong>The decision it drives.</strong> The output is the critical task list plus candidate risk controls, each tied to the use scenario it came from — so the traceability argument exists before anyone needs it. And it sets the sample logic downstream: formative work should be small and iterative, five participants three times rather than fifteen once, because the point is changing the design between rounds. Validation is a different animal — generally at least fifteen per distinct user group. Treating a formative study as a small validation is the most common way the record ends up weak.</p>
 <p><strong>What would change my mind.</strong> If formative testing repeatedly surfaces error modes the analysis never predicted, the task decomposition is wrong and I'd rebuild it from observation rather than from documentation.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;How do you keep it from becoming a spreadsheet nobody reads?&quot;</strong> <em>(~65 words)</em></p>
 <blockquote class="say">
@@ -597,11 +647,11 @@ a { color: #14507d; }
 <p>&quot;Human factors owns the use-related portion — use errors, hazard-related use scenarios, the critical task list, and the evidence that the risk controls work. That feeds the broader risk management file. The failure mode is those living separately, where a use-related control gets credited without anyone testing whether users perceive it.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> can describe a use-error analysis process.</li>
 <li><strong>Staff-signal:</strong> runs it from both directions and treats the disagreement as signal, and prunes on severity to keep it a decision tool.</li>
 <li><strong>Say this:</strong> <em>&quot;Where the top-down and bottom-up analyses disagree is usually where the real problem is.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>MQ05 — Measuring workload and cognitive load</h2>
 <p><strong>Asked by:</strong> HF peers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
@@ -609,11 +659,13 @@ a { color: #14507d; }
 <p><strong>Base:</strong> &quot;How do you measure cognitive load?&quot; / &quot;When is a physiological measure worth it?&quot; / &quot;What do you think of NASA-TLX?&quot;</p>
 </blockquote>
 <h3>Model answer (~215 words / 86s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;Instrument choice follows the decision, not the prestige of the signal. Objective measures earn their cost in two cases: when you need <em>within-task</em> dynamics — where in the procedure load spikes — or when self-report is structurally compromised by the task itself.</p>
 <p><strong>How I'd know.</strong> I work down a ladder and stop at the cheapest rung that answers the question. Behavioral performance and system telemetry first — errors, mode confusions, time to acknowledge. Then eye tracking, when the question is attention allocation and specifically what someone never looked at, which no post-task rating recovers. Then continuous physiological measures when I need a time series across a long, uneven task. NASA-TLX stays in the kit as a cheap, comparable post-task summary — it just can't tell me <em>when</em>.</p>
 <p><strong>Evidence, and where it stops.</strong> At Amazon I co-established the company's first objective framework for measuring cognitive load in complex interfaces, using fNIRS neuroimaging to quantify neural activation patterns that identify cognitive friction. Separately, at Brigham I processed fMRI, cardiovagal telemetry, and cortisol response curves for acute-stress research — two different toolkits in two different settings, and I keep them separate. And to be precise: I don't have a head-to-head result showing a biometric measure outperformed NASA-TLX. My claim is about which class of question each answers.</p>
 <p><strong>The decision it drives.</strong> A biometric measure gets funded only when it's pre-committed to a decision. If no plausible result changes anything, it's expensive theater and I'd kill it myself.</p>
 <p><strong>What would change my mind.</strong> If the physiological signal never dissociates from behavioral performance across conditions, it's redundant and I drop it.&quot;</p>
+</div>
 <blockquote class="warn">
 <p>⚠️ <strong>fNIRS belongs to Amazon. fMRI, ECG, and cortisol belong to Brigham.</strong> Never merge them, and never claim a bake-off win over NASA-TLX.</p>
 </blockquote>
@@ -631,11 +683,11 @@ a { color: #14507d; }
 <p>&quot;Optical and cardiac signals suffer motion artifact, and eye tracking suffers lighting and recalibration — so I'd assume degradation and design the field version around it. In the operating room I'd lean on observation and system telemetry: dwell, mode errors, corrections, sequence breakdowns. The physiological work stays in the simulator where I can control it. The field's job is confirming the effect exists in reality, not measuring it precisely.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> selects a valid instrument and runs it well.</li>
 <li><strong>Staff-signal:</strong> names the decision the measure serves, offers the cheaper substitute unprompted, and states the limit of their own evidence without being pushed.</li>
 <li><strong>Say this:</strong> <em>&quot;I've made a career out of objective measurement, which is exactly why I'll tell you when not to buy it.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>MQ06 — Physical ergonomics and the console</h2>
 <p><strong>Asked by:</strong> mechanical and systems engineers, industrial designers · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
@@ -644,11 +696,13 @@ a { color: #14507d; }
 </blockquote>
 <p><strong>This is where mechanical engineers decide whether you're useful.</strong> They need a number with a tolerance, not a principle.</p>
 <h3>Model answer (~205 words / 82s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;Physical fit is a specification problem, and the deciding question is always which percentile you're designing for and who that excludes.</p>
 <p><strong>How I'd know.</strong> Reach envelope modeling against anthropometric data for the intended population, then adjustability to cover the range fixed geometry can't. For a seated, immersed console the constraints stack: eye position relative to the display, hand position relative to the masters, forearm and wrist support over a multi-hour case, foot pedal reach without breaking posture, and clearances that hold while the user is gowned. Then verify with real bodies at the extremes of the range rather than the middle, because the median user was never the risk.</p>
 <p><strong>Evidence, and where it stops.</strong> At EchoStar I direct physical ergonomics and multi-platform usability validation across the hardware design portfolio — identifying physical use errors and defining anatomical safety and fit specifications. At NASA the workstation layout work was the same discipline under a harder constraint: simulated microgravity, surgical-like workspace layouts, against NASA-STD-3001 and MIL-STD-1472. The limit: neither was a sterile field with gloved interaction over four hours, and gowning changes reach and clearance in ways I'd want to measure rather than assume.</p>
 <p><strong>The decision it drives.</strong> The output is an adjustability range with stated population coverage, and a documented residual for the tail you can't reach.</p>
 <p><strong>What would change my mind.</strong> If postural strain over a long case turns out to be driven by task-induced static loading rather than geometry, adjustability is the wrong lever and the answer is in break structure or dynamic support.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;What percentile would you design to?&quot;</strong> <em>(~60 words)</em></p>
 <blockquote class="say">
@@ -663,11 +717,11 @@ a { color: #14507d; }
 <p>&quot;Completely. Standing reach, sterile field boundaries, instrument exchange clearance, and sightlines to both the patient and the console surgeon. Different anthropometric problem, different task structure — which is the practical reason I'd insist the console surgeon isn't treated as the only user.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> knows anthropometric methods and applies them correctly.</li>
 <li><strong>Staff-signal:</strong> makes the percentile and exclusion decision explicit and owned, and volunteers that the sterile, gowned, multi-hour condition sits outside their evidence.</li>
 <li><strong>Say this:</strong> <em>&quot;The median user was never the risk. I verify at the extremes of the range.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>MQ07 — Multimodal interaction and mode confusion ★ where your patent earns its place</h2>
 <p><strong>Asked by:</strong> senior HF, engineers, designers · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
@@ -676,11 +730,13 @@ a { color: #14507d; }
 </blockquote>
 <p><strong>Mode confusion is a known use-error theme on surgical robots</strong> — which arm, which control, what's active. Your patent is literally about context-dependent control mapping.</p>
 <h3>Model answer (~210 words / 84s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;Mode errors aren't user carelessness. They're a mismatch between what the system thinks is active and what the user believes is active — and that's a design property you can specify against.</p>
 <p><strong>How I'd know.</strong> My patent is on context-based control inputs: the same physical actuation resolving to a different command depending on the interface presented and the user's position within it. Building that meant spending real time on the failure mode it creates — the moment the user's model of what's active diverges from the truth. The design rules that fall out are concrete. State has to be perceptible without a deliberate check, because a user under load won't make one. Transitions between modes need to be announced in a channel that isn't already saturated. And the more consequential the action, the less the system should rely on the user having tracked state correctly.</p>
 <p><strong>Evidence, and where it stops.</strong> That was consumer multimodal hardware — visual, haptic, auditory, conversational — across the Echo portfolio, and the patent is public so it's checkable. The limit is that a mode error there costs someone an annoyance, not a patient. The mechanism transfers; the tolerance for it doesn't.</p>
 <p><strong>The decision it drives.</strong> In a surgical context I'd expect that to become a critical task determination: any control transition where the wrong mode produces irreversible harm gets designed so state is continuously perceptible, not recoverable by inference.</p>
 <p><strong>What would change my mind.</strong> If observation shows experienced users track mode reliably through cues the interface doesn't explicitly provide, then the answer is protecting those cues rather than adding new indicators.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;Is that just adding a bigger mode indicator?&quot;</strong> <em>(~60 words)</em></p>
 <blockquote class="say">
@@ -695,42 +751,11 @@ a { color: #14507d; }
 <p>&quot;It means one specific architecture is documented under my name — it's a public document, so it's checkable. What I'd bring here is the reasoning behind it rather than the claim itself: how context-dependence buys you interface density, and what it costs you in state ambiguity.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> mentions the patent as a credential.</li>
 <li><strong>Staff-signal:</strong> uses it to explain a failure mode they've studied from the inside, and converts it into a critical task determination.</li>
 <li><strong>Say this:</strong> <em>&quot;Mode errors aren't user carelessness. They're a mismatch between what the system thinks is active and what the user believes is active.&quot;</em></li>
-</ul>
-<hr />
-<h2>MQ08 — Method selection and study scoping</h2>
-<p><strong>Asked by:</strong> HF peers, PMs · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
-<blockquote class="note">
-<p><strong>Base:</strong> &quot;How do you choose a method?&quot; / &quot;How many participants?&quot; / &quot;How do you scope a formative study?&quot; / &quot;When is research not worth running?&quot;</p>
-</blockquote>
-<h3>Model answer (~205 words / 82s)</h3>
-<p><strong>The claim.</strong> &quot;Method follows the decision, and I work down a ladder — stopping at the cheapest rung that answers the question.</p>
-<p><strong>How I'd know.</strong> The first question is always what decision is pending and what would change it. If the answer is 'we want to understand the space,' that's generative: contextual inquiry, cognitive task analysis, critical decision method. If it's 'we think this design works,' that's evaluative and needs something to look at — cognitive walkthrough first because it's free, then formative testing at the lowest fidelity that can produce the error you're worried about. High fidelity is expensive and mostly buys confidence, not information.</p>
-<p><strong>Evidence, and where it stops.</strong> Sample size follows the same logic. For formative work, small and iterative beats large and single-shot — I'd rather run five participants three times than fifteen once, because the point is changing the design between rounds. Validation is a different animal: generally at least fifteen participants per distinct user group, representative users, production-equivalent interface, deviations justified. Those get confused constantly, and treating a formative study as a small validation is the most common way the record ends up weak.</p>
-<p><strong>The decision it drives.</strong> Formative isn't a small summative. It's the only place the design actually changes.</p>
-<p><strong>What would change my mind.</strong> If the cheap method and the expensive one keep producing the same answer on a program, I stop buying the expensive one.&quot;</p>
-<h3>Follow-ups</h3>
-<p><strong>F1 — &quot;When would you not run a study at all?&quot;</strong> <em>(~55 words)</em></p>
-<blockquote class="say">
-<p>&quot;When no plausible result changes a decision. If I walk the branches with a stakeholder and every outcome leads to the same action, the study is reassurance and I'd rather say so and give the time back. I've killed my own proposed work on that basis, and it bought more credibility than the study would have.&quot;</p>
-</blockquote>
-<p><strong>F2 — &quot;What do you do with a use error found late?&quot;</strong> <em>(~70 words)</em></p>
-<blockquote class="say">
-<p>&quot;Work the hierarchy in order: design it out, protect against it, and only then talk about labeling or training. And you can't close out an observed use error with labeling or training alone unless you have evidence the fix works — which means testing the mitigation, not just adding it. A warning nobody reads isn't a risk control, it's a record of having noticed.&quot;</p>
-</blockquote>
-<p><strong>F3 — &quot;How do you keep research from being the schedule risk?&quot;</strong> <em>(~65 words)</em></p>
-<blockquote class="say">
-<p>&quot;By naming the decision points before the program starts, so research is on the critical path deliberately rather than by surprise. Most research-as-bottleneck problems are actually scoping problems — an open-ended question attached to a fixed date. If I know which gate the study serves, I can size it to the gate.&quot;</p>
-</blockquote>
-<h3>Senior → Staff-signal</h3>
-<ul>
-<li><strong>Senior:</strong> selects appropriate methods and justifies sample sizes.</li>
-<li><strong>Staff-signal:</strong> separates formative from validation logic explicitly, and names the point at which a method becomes expensive theater.</li>
-<li><strong>Say this:</strong> <em>&quot;Formative isn't a small summative. It's the only place the design actually changes.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h1>Part 3 · Regulatory questions — Structure B</h1>
 <blockquote class="warn">
@@ -743,11 +768,13 @@ a { color: #14507d; }
 <p><strong>Base:</strong> &quot;What's your familiarity with the FDA human factors guidance?&quot; / &quot;What changed this year?&quot;</p>
 </blockquote>
 <h3>Model answer (~200 words / 80s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;FDA refreshed the entire human factors framework inside a single year, and the most useful thing about it is that the two documents now work as a matched pair.</p>
 <p><strong>The two documents.</strong> The May one — <em>Content of Human Factors Information in Medical Device Marketing Submissions</em>, announced May 29 — tells you <strong>what</strong> goes in a submission, across 510(k)s, De Novo, PMA, and HDE. The August one — <em>Applying Human Factors and Usability Engineering to Medical Devices</em>, revised August 3 — tells you <strong>how</strong> to do the work. First revision since 2016.</p>
 <p><strong>What changed.</strong> FDA's own change table lists three things. Definitions updated and expanded — including broader definitions of <em>task</em> and <em>user interface</em>, and 'risk management measure' became <strong>risk control measure</strong> throughout. Section 9, the documentation section, got much shorter and now points at the May guidance. And Appendix A — the familiar eight-section report outline — was deleted, because it now lives in the May document.</p>
 <p><strong>The decision it drives.</strong> The date to know is August 1, 2026: submissions received before then aren't expected to include the newly recommended content.</p>
 <p><strong>Why I find it interesting.</strong> Teams that read only one of the two either do good work and present it badly, or present a tidy package built on a weak process.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;Significance of the user interface definition change?&quot;</strong> <em>(~65 words)</em></p>
 <blockquote class="say">
@@ -762,11 +789,11 @@ a { color: #14507d; }
 <p>&quot;No, and I wouldn't claim to be. I'm a practitioner who has to produce records that survive that process, so I read the guidances carefully and I know where my knowledge stops. Past that I'd want regulatory in the room.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> knows the guidances exist and can summarize the changes.</li>
 <li><strong>Staff-signal:</strong> explains why the pairing matters operationally, and volunteers the boundary of their own expertise without it reading as weakness.</li>
 <li><strong>Say this:</strong> <em>&quot;One document is how you do the work, the other is what you hand over.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>RQ02 — Submission categories and the judgment call</h2>
 <p><strong>Asked by:</strong> regulatory/quality, senior HF · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
@@ -774,11 +801,13 @@ a { color: #14507d; }
 <p><strong>Base:</strong> &quot;Walk me through the submission categories.&quot; / &quot;How do you decide whether validation testing is needed?&quot;</p>
 </blockquote>
 <h3>Model answer (~205 words / 82s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;Every submission now lands in one of three categories, decided by a four-step flowchart — and the interesting part isn't the categories, it's Decision Point D.</p>
 <p><strong>The three categories.</strong> Category 1 is a modification with no change to the user interface, users, uses, use environments, training, or labeling — a written justification that human factors is unaffected. Category 2 is either no critical tasks, or the modification doesn't touch any — <em>or</em> critical tasks are affected but validation isn't warranted. That gets a written rationale plus a defined subset of the report, and for a modified device a comparative risk analysis. Category 3 is new or affected critical tasks with validation warranted: all eight sections, full risk analysis, critical task list, and the complete validation study with protocol.</p>
 <p><strong>Decision Point D is the one to know cold.</strong> It's where you decide whether affected critical tasks still need validation, and the rationale rests on three things: an established history of safe use for that interface, low user interface complexity, and the continued adequacy of existing risk controls.</p>
 <p><strong>The decision it drives.</strong> That accommodation is new in the final — the 2022 draft didn't offer it. And it's exactly the judgment a senior analyst gets handed, because all three factors are arguable.</p>
 <p><strong>What would change my mind.</strong> If any of the three is weak, I'd rather run the validation than defend a thin rationale at review.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;What's the trap people fall into?&quot;</strong> <em>(~60 words)</em></p>
 <blockquote class="say">
@@ -793,11 +822,11 @@ a { color: #14507d; }
 <p>&quot;Not me alone. Human factors owns the risk analysis and critical task determination the call rests on; regulatory owns submission strategy. My job is making the underlying evidence strong enough that the call is defensible either way — and saying clearly when I think it's close.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> describes the categories accurately.</li>
 <li><strong>Staff-signal:</strong> identifies the judgment call inside the framework, names all three factors, and defaults conservative when the rationale is thin.</li>
 <li><strong>Say this:</strong> <em>&quot;All three factors are arguable, which is exactly why it's the judgment a senior analyst gets handed.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h2>RQ03 — The risk framework, and what didn't change</h2>
 <p><strong>Asked by:</strong> regulatory, engineers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
@@ -806,11 +835,13 @@ a { color: #14507d; }
 </blockquote>
 <p><strong>Anyone can recite what's new. Knowing what held is the tell that you understand the framework.</strong></p>
 <h3>Model answer (~210 words / 84s)</h3>
+<div class="answer">
 <p><strong>The claim.</strong> &quot;The load-bearing logic didn't change: critical tasks are prioritized by severity of potential harm, not by probability — because the probability of a use error can't be estimated reliably. That one sentence holds up the entire framework.</p>
 <p><strong>The process chain, from 62366.</strong> Use specification, then user interface characteristics related to safety, then known use problems, then hazard-related use scenarios, then critical tasks, then the evaluation plan, then formative evaluation, then validation. The chain <em>is</em> the traceability argument — every critical task has to have come from somewhere, and every risk control has to get evaluated.</p>
 <p><strong>The causal chain, from 14971.</strong> Hazard, then sequence of events, then <strong>hazardous situation</strong>, then <strong>harm</strong> — in that order. Most people collapse hazard and hazardous situation; not collapsing them is an instant credibility marker. And the control hierarchy is design it out, protect against it, tell people about it.</p>
 <p><strong>The decision it drives.</strong> Validation expectations held too: generally at least fifteen participants per distinct user group, representative US users, production-equivalent interface with final labeling, and no closing out an observed use error with labeling or training alone without evidence the fix works.</p>
 <p><strong>Why it matters for my actual job.</strong> The submission category and the validation argument get settled years downstream — but they're settled <em>by</em> the risk analysis somebody created at the very beginning. So I treat early generative work as the first draft of the submission argument.&quot;</p>
+</div>
 <h3>Follow-ups</h3>
 <p><strong>F1 — &quot;Give me a concrete hazard chain.&quot;</strong> <em>(~70 words)</em></p>
 <blockquote class="say">
@@ -825,11 +856,11 @@ a { color: #14507d; }
 <p>&quot;You analyze it like any other interface element, because it is one. A confirmation step added to prevent one error creates its own failure modes — habituation, and the error of confirming reflexively. So a risk control isn't finished when it's specified; it's finished when it's been evaluated for the errors it introduces as well as the ones it prevents.&quot;</p>
 </blockquote>
 <h3>Senior → Staff-signal</h3>
-<ul>
+<div class="calibration"><ul>
 <li><strong>Senior:</strong> knows the standards and can describe the process.</li>
 <li><strong>Staff-signal:</strong> leads with what <em>didn't</em> change, keeps hazard and hazardous situation distinct unprompted, and treats risk controls as things that introduce new failure modes.</li>
 <li><strong>Say this:</strong> <em>&quot;Critical tasks are prioritized by severity, not probability — because the probability of a use error can't be estimated reliably.&quot;</em></li>
-</ul>
+</ul></div>
 <hr />
 <h1>Part 4 · Reference — read once, don't memorize</h1>
 <hr />
@@ -842,7 +873,6 @@ a { color: #14507d; }
 <p>&quot;My graduate work was on what interruptions cost people doing medical tasks. The short version is that getting a user back to where they were is the system's job, not the user's.&quot;</p>
 </blockquote>
 <p><strong>If they want method depth:</strong> after each interruption I cleared the entered values and reset the cursor, removing the visual and spatial cues that let participants in the two closest prior studies read the answer off the screen instead of remembering it.</p>
-<p><strong>Two résumé errors sit here</strong> — see the Résumé row in Part 6 before you send a panel version.</p>
 <hr />
 <h2>What you can claim, and what you can't</h2>
 <p><strong>Say freely:</strong></p>
