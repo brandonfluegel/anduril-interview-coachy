@@ -73,7 +73,7 @@ a { color: #14507d; }
 
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
-  body { background: #fff; font-size: 9.6pt; line-height: 1.33; padding: 0; }
+  body { background: #fff; font-size: 10pt; line-height: 1.33; padding: 0; }
   main {
     max-width: none; box-shadow: none; padding: 0;
     column-count: 2; column-gap: 6mm; column-fill: auto; hyphens: none;
@@ -115,6 +115,7 @@ a { color: #14507d; }
     counter-reset: beat;
   }
   .answer p { margin: 0; padding: 2.4pt 0; counter-increment: beat; break-inside: avoid; }
+  .answer p.flow { break-inside: auto; orphans: 3; widows: 3; }
   .answer p + p { border-top: .4pt solid #e0e0da; }
   .answer p > strong:first-child {
     display: block; font-family: Helvetica, Arial, sans-serif;
@@ -155,13 +156,29 @@ PAGE = """<!DOCTYPE html>
 """
 
 
+# A beat longer than this can't fit a part-used column, so forcing it whole leaves a white gap.
+FLOW_CHARS = 480
+
+
+def _mark_long_beats(answer_block: str) -> str:
+    def tag(match: re.Match[str]) -> str:
+        para = match.group(0)
+        if len(re.sub(r"<[^>]+>", "", match.group(1))) > FLOW_CHARS:
+            return para.replace("<p>", '<p class="flow">', 1)
+        return para
+
+    return re.sub(r"<p>(.*?)</p>", tag, answer_block, flags=re.DOTALL)
+
+
 def wrap_model_answers(body: str) -> str:
     """Group the paragraphs under a 'Model answer' heading so the spoken block reads as one unit."""
     pattern = re.compile(
         r"(<h3>Model answer[^<]*</h3>\s*)((?:<p>(?:(?!</?h[1-4]|<blockquote|<hr).)*?</p>\s*)+)",
         flags=re.DOTALL,
     )
-    body = pattern.sub(lambda m: f'{m.group(1)}<div class="answer">\n{m.group(2)}</div>\n', body)
+    body = pattern.sub(
+        lambda m: f'{m.group(1)}<div class="answer">\n{_mark_long_beats(m.group(2))}</div>\n', body
+    )
 
     # The calibration list is reference, not rehearsal, so it reads smaller.
     calib = re.compile(r"(<h3>Senior \u2192 Staff-signal</h3>\s*)(<ul>.*?</ul>)", flags=re.DOTALL)
