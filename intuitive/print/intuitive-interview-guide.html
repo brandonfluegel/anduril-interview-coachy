@@ -30,27 +30,35 @@ blockquote.warn { background: #fdf8ea; border: 1px dashed #8a6d1f; border-left-w
 blockquote.note { background: #eef3f7; border-left-color: #35637f; padding: .55em .9em; }
 blockquote p { margin: .35em 0; }
 
-/* The model answer is what gets memorized, so it gets the strongest treatment. */
-.answer { background: #f7f7f4; border-left: 4px solid #222; padding: .8em 1.1em; margin: .9em 0 1.1em; }
-.answer p { margin: 0 0 .7em; }
-.answer p:last-child { margin-bottom: 0; }
+/* The model answer is what gets memorized: numbered beats, chunked, never split. */
+.answer {
+  background: #fafaf9; border-left: 4px solid #222;
+  padding: .55em 1.1em; margin: .9em 0 1.1em;
+  counter-reset: beat;
+}
+.answer p { margin: 0; padding: .55em 0; counter-increment: beat; }
+.answer p + p { border-top: 1px solid #e4e4de; }
 .answer p > strong:first-child {
   display: block; font-family: Helvetica, Arial, sans-serif;
-  font-size: .72em; text-transform: uppercase; letter-spacing: .08em;
-  color: #6a6a6a; margin-bottom: .15em;
+  font-size: .7em; text-transform: uppercase; letter-spacing: .09em;
+  color: #6a6a6a; margin-bottom: .2em;
+}
+.answer p > strong:first-child::before {
+  content: counter(beat); display: inline-block; width: 1.4em; color: #b0b0a8;
 }
 
 table { border-collapse: collapse; width: 100%; font-size: .87rem; margin: 1em 0; }
 th, td { border: 1px solid #999; padding: 5px 8px; text-align: left; vertical-align: top; }
 th { background: #eee; }
 .calibration { font-size: .92em; color: #333; }
+.meta { font-size: .85em; color: #555; margin: .2em 0 .6em; }
 code { font-family: Consolas, monospace; font-size: .88em; background: #eee; padding: .1em .3em; }
 hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }
 a { color: #14507d; }
 
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
-  body { background: #fff; font-size: 9.8pt; line-height: 1.33; padding: 0; }
+  body { background: #fff; font-size: 9.6pt; line-height: 1.33; padding: 0; }
   main {
     max-width: none; box-shadow: none; padding: 0;
     column-count: 2; column-gap: 6mm; column-fill: auto; hyphens: none;
@@ -66,7 +74,7 @@ a { color: #14507d; }
     break-after: avoid; break-inside: avoid;
   }
   h3 {
-    font-size: 9.9pt; margin: 6pt 0 2pt; padding-bottom: 1.5pt;
+    font-size: 9.6pt; margin: 5pt 0 1.5pt; padding-bottom: 1pt;
     border-bottom: .6pt solid #999; break-after: avoid; break-inside: avoid;
   }
   h4 {
@@ -78,28 +86,33 @@ a { color: #14507d; }
   ul, ol { margin: 0 0 4pt; padding-left: 11pt; }
   li { margin: 0 0 2pt; break-inside: avoid; }
   p, li, blockquote { orphans: 2; widows: 2; }
-  blockquote { margin: 2.5pt 0 5pt; padding: 0 0 0 6pt; border-left: 2pt solid #555; }
-  blockquote p { margin: 0 0 3pt; }
-  blockquote.say { background: #f0f0ee; border-left: 2.5pt solid #111; padding: 4pt 6pt; }
+  blockquote { margin: 2pt 0 4pt; padding: 0 0 0 6pt; border-left: 2pt solid #555; }
+  blockquote p { margin: 0 0 2.5pt; }
+  blockquote.say { background: #f0f0ee; border-left: 2.5pt solid #111; padding: 4pt 6pt; break-inside: avoid; }
   blockquote.warn {
     background: #fbf6e8; border: .7pt dashed #7a6118; border-left-width: 2.5pt;
     padding: 4pt 6pt; font-size: 9.2pt; break-inside: avoid;
   }
   blockquote.note { background: #eef2f6; border-left: 2.5pt solid #35637f; padding: 4pt 6pt; font-size: 9.3pt; }
   .answer {
-    background: #f5f5f2; border-left: 3pt solid #111;
-    padding: 4pt 6pt; margin: 2.5pt 0 5pt;
+    background: #fafaf9; border-left: 3pt solid #111;
+    padding: 2pt 6pt; margin: 2.5pt 0 5pt;
+    counter-reset: beat;
   }
-  .answer p { margin: 0 0 4pt; }
-  .answer p:last-child { margin-bottom: 0; }
+  .answer p { margin: 0; padding: 2.4pt 0; counter-increment: beat; break-inside: avoid; }
+  .answer p + p { border-top: .4pt solid #e0e0da; }
   .answer p > strong:first-child {
     display: block; font-family: Helvetica, Arial, sans-serif;
-    font-size: 7.6pt; text-transform: uppercase; letter-spacing: .07em;
-    color: #555; margin-bottom: .5pt;
+    font-size: 7.3pt; text-transform: uppercase; letter-spacing: .08em;
+    color: #666; margin-bottom: .8pt;
   }
-  .calibration { font-size: 8.7pt; color: #333; }
-  .calibration ul { margin: 0 0 3pt; padding-left: 10pt; }
-  .calibration li { margin: 0 0 1pt; }
+  .answer p > strong:first-child::before {
+    content: counter(beat); display: inline-block; width: 1.4em; color: #aaa;
+  }
+  .meta { font-size: 8.4pt; color: #555; margin: 0 0 3pt; }
+  .calibration { font-size: 8.2pt; line-height: 1.24; color: #3a3a3a; }
+  .calibration ul { margin: 0 0 2pt; padding-left: 9pt; }
+  .calibration li { margin: 0; }
   table { column-span: all; font-size: 8.3pt; margin: 4pt 0 6pt; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; }
@@ -211,7 +224,7 @@ a { color: #14507d; }
 <h1>Part 1 · Experience questions — Structure A</h1>
 <hr />
 <h2>EQ01 — The opener</h2>
-<p><strong>Asked by:</strong> everyone, first · <strong>Target:</strong> ~75s · <strong>Structure:</strong> special, not STAR</p>
+<p class="meta"><strong>Asked by:</strong> everyone, first · <strong>Target:</strong> ~75s · <strong>Structure:</strong> special, not STAR</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about yourself.&quot; / &quot;Walk me through your background.&quot; / &quot;What brings you here?&quot;</p>
 </blockquote>
@@ -245,7 +258,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>EQ02 — The unarticulated need ★ rehearse this one hardest</h2>
-<p><strong>Asked by:</strong> hiring manager, senior HF, designers · <strong>Target:</strong> ~95s · <strong>Structure:</strong> A</p>
+<p class="meta"><strong>Asked by:</strong> hiring manager, senior HF, designers · <strong>Target:</strong> ~95s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about a time you identified a user need nobody had articulated.&quot; / &quot;How have you worked in ambiguity?&quot; / &quot;Tell me about 0→1 research.&quot;</p>
 </blockquote>
@@ -286,7 +299,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>EQ03 — Pushing back</h2>
-<p><strong>Asked by:</strong> senior HF, engineers, PMs · <strong>Target:</strong> ~95s · <strong>Structure:</strong> A</p>
+<p class="meta"><strong>Asked by:</strong> senior HF, engineers, PMs · <strong>Target:</strong> ~95s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about a time you disagreed with engineering.&quot; / &quot;How do you handle it when your recommendation is rejected?&quot; / The job description says <em>negotiate design recommendations</em> — expect this.</p>
 </blockquote>
@@ -323,7 +336,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>EQ04 — Getting research acted on ★ your signature habit</h2>
-<p><strong>Asked by:</strong> PMs, senior HF, hiring manager · <strong>Target:</strong> ~85s · <strong>Structure:</strong> A</p>
+<p class="meta"><strong>Asked by:</strong> PMs, senior HF, hiring manager · <strong>Target:</strong> ~85s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you make sure your research actually gets used?&quot; / &quot;Tell me about influencing without authority.&quot; / &quot;What do you do when findings get ignored?&quot;</p>
 </blockquote>
@@ -360,7 +373,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>EQ05 — Safety-critical work ★ your closest analogue to this job</h2>
-<p><strong>Asked by:</strong> clinical engineers, HF peers, regulatory · <strong>Target:</strong> ~90s · <strong>Structure:</strong> A</p>
+<p class="meta"><strong>Asked by:</strong> clinical engineers, HF peers, regulatory · <strong>Target:</strong> ~90s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about work where the consequences were serious.&quot; / &quot;What's your experience in safety-critical domains?&quot; / &quot;Have you done use-error analysis?&quot;</p>
 </blockquote>
@@ -395,7 +408,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>EQ06 — When you got it wrong</h2>
-<p><strong>Asked by:</strong> HF peers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> A</p>
+<p class="meta"><strong>Asked by:</strong> HF peers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about a study that didn't go as planned.&quot; / &quot;Tell me about a failure.&quot; / &quot;When has your research been wrong?&quot;</p>
 </blockquote>
@@ -432,7 +445,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>EQ07 — Working with clinicians</h2>
-<p><strong>Asked by:</strong> clinical engineers, hiring manager · <strong>Target:</strong> ~80s · <strong>Structure:</strong> A</p>
+<p class="meta"><strong>Asked by:</strong> clinical engineers, hiring manager · <strong>Target:</strong> ~80s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;What's your experience working with surgeons?&quot; / &quot;How do you build credibility with clinical experts?&quot; / &quot;You'd be representing us with surgeons internationally.&quot;</p>
 </blockquote>
@@ -470,7 +483,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>EQ08 — Being a design partner, not a design grader</h2>
-<p><strong>Asked by:</strong> industrial and interaction designers, engineers · <strong>Target:</strong> ~80s · <strong>Structure:</strong> A</p>
+<p class="meta"><strong>Asked by:</strong> industrial and interaction designers, engineers · <strong>Target:</strong> ~80s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you work with designers?&quot; / &quot;Tell me about a cross-functional collaboration.&quot; / &quot;How do you fit into the development process?&quot;</p>
 </blockquote>
@@ -508,7 +521,7 @@ a { color: #14507d; }
 <p>State the claim first. Do <strong>not</strong> use STAR here.</p>
 <hr />
 <h2>MQ01 — The haptics question ★ expect a version of this</h2>
-<p><strong>Asked by:</strong> hiring manager, senior HF, engineers · <strong>Target:</strong> ~3 min · <strong>Structure:</strong> B, extended</p>
+<p class="meta"><strong>Asked by:</strong> hiring manager, senior HF, engineers · <strong>Target:</strong> ~3 min · <strong>Structure:</strong> B, extended</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How would you approach research for force feedback on a surgical system?&quot; / any &quot;how would you research X&quot; hypothetical.</p>
 </blockquote>
@@ -547,7 +560,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>MQ02 — From observation to design input ★ the most valuable thing you can say</h2>
-<p><strong>Asked by:</strong> everyone · <strong>Target:</strong> ~90s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> everyone · <strong>Target:</strong> ~90s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you turn research into requirements?&quot; / &quot;What does your output look like?&quot; / &quot;How do you author usability design inputs?&quot;</p>
 </blockquote>
@@ -584,7 +597,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>MQ03 — Psychophysics into a specification ★ your deepest technical story</h2>
-<p><strong>Asked by:</strong> engineers, senior HF, hiring manager · <strong>Target:</strong> ~90s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> engineers, senior HF, hiring manager · <strong>Target:</strong> ~90s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about the latency work.&quot; / &quot;How do you set a threshold?&quot; / &quot;How do you make a perceptual finding actionable?&quot;</p>
 </blockquote>
@@ -621,7 +634,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>MQ04 — Use-error analysis ★ the method this job runs on</h2>
-<p><strong>Asked by:</strong> HF peers, regulatory, clinical engineers · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> HF peers, regulatory, clinical engineers · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Walk me through how you'd do a use-related risk analysis.&quot; / &quot;How do you find use errors before testing?&quot; / &quot;What's your uFMEA experience?&quot; / &quot;How many participants?&quot;</p>
 </blockquote>
@@ -654,7 +667,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>MQ05 — Measuring workload and cognitive load</h2>
-<p><strong>Asked by:</strong> HF peers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> HF peers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you measure cognitive load?&quot; / &quot;When is a physiological measure worth it?&quot; / &quot;What do you think of NASA-TLX?&quot;</p>
 </blockquote>
@@ -690,7 +703,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>MQ06 — Physical ergonomics and the console</h2>
-<p><strong>Asked by:</strong> mechanical and systems engineers, industrial designers · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> mechanical and systems engineers, industrial designers · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;What's your physical ergonomics experience?&quot; / &quot;How would you approach console design?&quot; / &quot;How do you handle anthropometric variation?&quot;</p>
 </blockquote>
@@ -724,7 +737,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>MQ07 — Multimodal interaction and mode confusion ★ where your patent earns its place</h2>
-<p><strong>Asked by:</strong> senior HF, engineers, designers · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> senior HF, engineers, designers · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you think about multimodal interfaces?&quot; / &quot;How would you prevent mode confusion?&quot; / &quot;Tell me about your patent.&quot;</p>
 </blockquote>
@@ -763,7 +776,7 @@ a { color: #14507d; }
 </blockquote>
 <hr />
 <h2>RQ01 — The 2026 guidance landscape</h2>
-<p><strong>Asked by:</strong> regulatory/quality, senior HF · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> regulatory/quality, senior HF · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;What's your familiarity with the FDA human factors guidance?&quot; / &quot;What changed this year?&quot;</p>
 </blockquote>
@@ -796,7 +809,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>RQ02 — Submission categories and the judgment call</h2>
-<p><strong>Asked by:</strong> regulatory/quality, senior HF · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> regulatory/quality, senior HF · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Walk me through the submission categories.&quot; / &quot;How do you decide whether validation testing is needed?&quot;</p>
 </blockquote>
@@ -829,7 +842,7 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <h2>RQ03 — The risk framework, and what didn't change</h2>
-<p><strong>Asked by:</strong> regulatory, engineers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
+<p class="meta"><strong>Asked by:</strong> regulatory, engineers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do 62366 and 14971 fit together?&quot; / &quot;Walk me through use-related risk analysis.&quot; / &quot;What's your risk analysis experience?&quot;</p>
 </blockquote>

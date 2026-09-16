@@ -45,27 +45,35 @@ blockquote.warn { background: #fdf8ea; border: 1px dashed #8a6d1f; border-left-w
 blockquote.note { background: #eef3f7; border-left-color: #35637f; padding: .55em .9em; }
 blockquote p { margin: .35em 0; }
 
-/* The model answer is what gets memorized, so it gets the strongest treatment. */
-.answer { background: #f7f7f4; border-left: 4px solid #222; padding: .8em 1.1em; margin: .9em 0 1.1em; }
-.answer p { margin: 0 0 .7em; }
-.answer p:last-child { margin-bottom: 0; }
+/* The model answer is what gets memorized: numbered beats, chunked, never split. */
+.answer {
+  background: #fafaf9; border-left: 4px solid #222;
+  padding: .55em 1.1em; margin: .9em 0 1.1em;
+  counter-reset: beat;
+}
+.answer p { margin: 0; padding: .55em 0; counter-increment: beat; }
+.answer p + p { border-top: 1px solid #e4e4de; }
 .answer p > strong:first-child {
   display: block; font-family: Helvetica, Arial, sans-serif;
-  font-size: .72em; text-transform: uppercase; letter-spacing: .08em;
-  color: #6a6a6a; margin-bottom: .15em;
+  font-size: .7em; text-transform: uppercase; letter-spacing: .09em;
+  color: #6a6a6a; margin-bottom: .2em;
+}
+.answer p > strong:first-child::before {
+  content: counter(beat); display: inline-block; width: 1.4em; color: #b0b0a8;
 }
 
 table { border-collapse: collapse; width: 100%; font-size: .87rem; margin: 1em 0; }
 th, td { border: 1px solid #999; padding: 5px 8px; text-align: left; vertical-align: top; }
 th { background: #eee; }
 .calibration { font-size: .92em; color: #333; }
+.meta { font-size: .85em; color: #555; margin: .2em 0 .6em; }
 code { font-family: Consolas, monospace; font-size: .88em; background: #eee; padding: .1em .3em; }
 hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }
 a { color: #14507d; }
 
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
-  body { background: #fff; font-size: 9.8pt; line-height: 1.33; padding: 0; }
+  body { background: #fff; font-size: 9.6pt; line-height: 1.33; padding: 0; }
   main {
     max-width: none; box-shadow: none; padding: 0;
     column-count: 2; column-gap: 6mm; column-fill: auto; hyphens: none;
@@ -81,7 +89,7 @@ a { color: #14507d; }
     break-after: avoid; break-inside: avoid;
   }
   h3 {
-    font-size: 9.9pt; margin: 6pt 0 2pt; padding-bottom: 1.5pt;
+    font-size: 9.6pt; margin: 5pt 0 1.5pt; padding-bottom: 1pt;
     border-bottom: .6pt solid #999; break-after: avoid; break-inside: avoid;
   }
   h4 {
@@ -93,28 +101,33 @@ a { color: #14507d; }
   ul, ol { margin: 0 0 4pt; padding-left: 11pt; }
   li { margin: 0 0 2pt; break-inside: avoid; }
   p, li, blockquote { orphans: 2; widows: 2; }
-  blockquote { margin: 2.5pt 0 5pt; padding: 0 0 0 6pt; border-left: 2pt solid #555; }
-  blockquote p { margin: 0 0 3pt; }
-  blockquote.say { background: #f0f0ee; border-left: 2.5pt solid #111; padding: 4pt 6pt; }
+  blockquote { margin: 2pt 0 4pt; padding: 0 0 0 6pt; border-left: 2pt solid #555; }
+  blockquote p { margin: 0 0 2.5pt; }
+  blockquote.say { background: #f0f0ee; border-left: 2.5pt solid #111; padding: 4pt 6pt; break-inside: avoid; }
   blockquote.warn {
     background: #fbf6e8; border: .7pt dashed #7a6118; border-left-width: 2.5pt;
     padding: 4pt 6pt; font-size: 9.2pt; break-inside: avoid;
   }
   blockquote.note { background: #eef2f6; border-left: 2.5pt solid #35637f; padding: 4pt 6pt; font-size: 9.3pt; }
   .answer {
-    background: #f5f5f2; border-left: 3pt solid #111;
-    padding: 4pt 6pt; margin: 2.5pt 0 5pt;
+    background: #fafaf9; border-left: 3pt solid #111;
+    padding: 2pt 6pt; margin: 2.5pt 0 5pt;
+    counter-reset: beat;
   }
-  .answer p { margin: 0 0 4pt; }
-  .answer p:last-child { margin-bottom: 0; }
+  .answer p { margin: 0; padding: 2.4pt 0; counter-increment: beat; break-inside: avoid; }
+  .answer p + p { border-top: .4pt solid #e0e0da; }
   .answer p > strong:first-child {
     display: block; font-family: Helvetica, Arial, sans-serif;
-    font-size: 7.6pt; text-transform: uppercase; letter-spacing: .07em;
-    color: #555; margin-bottom: .5pt;
+    font-size: 7.3pt; text-transform: uppercase; letter-spacing: .08em;
+    color: #666; margin-bottom: .8pt;
   }
-  .calibration { font-size: 8.7pt; color: #333; }
-  .calibration ul { margin: 0 0 3pt; padding-left: 10pt; }
-  .calibration li { margin: 0 0 1pt; }
+  .answer p > strong:first-child::before {
+    content: counter(beat); display: inline-block; width: 1.4em; color: #aaa;
+  }
+  .meta { font-size: 8.4pt; color: #555; margin: 0 0 3pt; }
+  .calibration { font-size: 8.2pt; line-height: 1.24; color: #3a3a3a; }
+  .calibration ul { margin: 0 0 2pt; padding-left: 9pt; }
+  .calibration li { margin: 0; }
   table { column-span: all; font-size: 8.3pt; margin: 4pt 0 6pt; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; }
@@ -152,7 +165,10 @@ def wrap_model_answers(body: str) -> str:
 
     # The calibration list is reference, not rehearsal, so it reads smaller.
     calib = re.compile(r"(<h3>Senior \u2192 Staff-signal</h3>\s*)(<ul>.*?</ul>)", flags=re.DOTALL)
-    return calib.sub(lambda m: f'{m.group(1)}<div class="calibration">{m.group(2)}</div>', body)
+    body = calib.sub(lambda m: f'{m.group(1)}<div class="calibration">{m.group(2)}</div>', body)
+
+    meta = re.compile(r"<p>(<strong>Asked by:</strong>.*?)</p>", flags=re.DOTALL)
+    return meta.sub(lambda m: f'<p class="meta">{m.group(1)}</p>', body)
 
 
 def classify_blockquotes(body: str) -> str:
