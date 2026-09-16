@@ -1,9 +1,9 @@
-"""Render the Intuitive interview prep documents into print-ready HTML.
+"""Render the Intuitive interview guide into a print-ready HTML file.
 
 Run: python scripts/build_intuitive_html.py
-Output: intuitive/print/*.html — open in a browser and Ctrl+P.
+Output: intuitive/print/intuitive-interview-guide.html — open in a browser and Ctrl+P.
 
-Print layout is two-column at ~9.4pt, which keeps the study guide inside 12 letter pages.
+Print layout is two-column at ~9.4pt.
 """
 
 from __future__ import annotations
@@ -15,22 +15,9 @@ from pathlib import Path
 from markdown_it import MarkdownIt
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC_DIR = ROOT / "intuitive"
+SRC = ROOT / "intuitive" / "intuitive-interview-guide.md"
 OUT = ROOT / "intuitive" / "print"
-
-# (source filename, output filename, <title>)
-DOCS = [
-    (
-        "00-intuitive-sr-hf-study-guide.md",
-        "intuitive-study-guide.html",
-        "Intuitive Surgical — Senior Human Factors Analyst",
-    ),
-    (
-        "01-interview-drills.md",
-        "intuitive-interview-drills.html",
-        "Intuitive Surgical — Interview Drills",
-    ),
-]
+TITLE = "Intuitive Surgical — Senior Human Factors Analyst"
 
 CSS = """
 :root { color-scheme: light; }
@@ -150,15 +137,13 @@ def main() -> None:
     md = MarkdownIt("commonmark", {"html": True}).enable("table")
     OUT.mkdir(parents=True, exist_ok=True)
 
-    for src_name, out_name, title in DOCS:
-        src = SRC_DIR / src_name
-        body = classify_blockquotes(md.render(src.read_text(encoding="utf-8")))
-        target = OUT / out_name
-        target.write_text(
-            PAGE.format(title=html.escape(title), css=CSS, body=body),
-            encoding="utf-8",
-        )
-        print(f"  {src.name} -> {target.relative_to(ROOT)}")
+    body = classify_blockquotes(md.render(SRC.read_text(encoding="utf-8")))
+    target = OUT / "intuitive-interview-guide.html"
+    target.write_text(
+        PAGE.format(title=html.escape(TITLE), css=CSS, body=body),
+        encoding="utf-8",
+    )
+    print(f"  {SRC.name} -> {target.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
