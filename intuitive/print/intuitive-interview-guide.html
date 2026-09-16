@@ -58,7 +58,7 @@ a { color: #14507d; }
 
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
-  body { background: #fff; font-size: 10pt; line-height: 1.33; padding: 0; }
+  body { background: #fff; font-size: 9.8pt; line-height: 1.33; padding: 0; }
   main {
     max-width: none; box-shadow: none; padding: 0;
     column-count: 2; column-gap: 6mm; column-fill: auto; hyphens: none;
@@ -67,7 +67,19 @@ a { color: #14507d; }
     font-size: 14pt; column-span: all; margin: 0 0 4pt;
     padding-bottom: 3pt; border-bottom: 2pt solid #000;
   }
+  h1.pagebreak { break-before: page; }
+  .parthead { column-span: all; break-inside: avoid; }
+  .parthead.pagebreak { break-before: page; }
+  .parthead h1, .parthead h2, .parthead .qhead { column-span: none; }
+  .parthead .qhead { margin-top: 5pt; }
   /* Parts span both columns so you can find them while talking. */
+  .qhead {
+    column-span: all; break-inside: avoid; break-after: avoid;
+    margin: 7pt 0 3pt;
+  }
+  .qhead h2 { column-span: none; margin: 0; }
+  .qhead .meta { margin: 2.5pt 0 2pt; }
+  .qhead blockquote.note { margin: 0; }
   h2 {
     font-size: 11pt; column-span: all; margin: 7pt 0 3pt;
     padding: 3pt 5pt; background: #e4e4e4; border-left: 3pt solid #000;
@@ -93,7 +105,7 @@ a { color: #14507d; }
     background: #fbf6e8; border: .7pt dashed #7a6118; border-left-width: 2.5pt;
     padding: 4pt 6pt; font-size: 9.2pt; break-inside: avoid;
   }
-  blockquote.note { background: #eef2f6; border-left: 2.5pt solid #35637f; padding: 4pt 6pt; font-size: 9.3pt; }
+  blockquote.note { background: #eef2f6; border-left: 2.5pt solid #35637f; padding: 4pt 6pt; font-size: 9.3pt; break-inside: avoid; break-after: avoid; }
   .answer {
     background: #fafaf9; border-left: 3pt solid #111;
     padding: 2pt 6pt; margin: 2.5pt 0 5pt;
@@ -105,12 +117,12 @@ a { color: #14507d; }
   .answer p > strong:first-child {
     display: block; font-family: Helvetica, Arial, sans-serif;
     font-size: 7.3pt; text-transform: uppercase; letter-spacing: .08em;
-    color: #666; margin-bottom: .8pt;
+    color: #666; margin-bottom: .8pt; break-after: avoid;
   }
   .answer p > strong:first-child::before {
     content: counter(beat); display: inline-block; width: 1.4em; color: #aaa;
   }
-  .meta { font-size: 8.4pt; color: #555; margin: 0 0 3pt; }
+  .meta { font-size: 8.4pt; color: #555; margin: 0 0 3pt; break-after: avoid; break-inside: avoid; }
   .calibration { font-size: 8.2pt; line-height: 1.24; color: #3a3a3a; }
   .calibration ul { margin: 0 0 2pt; padding-left: 9pt; }
   .calibration li { margin: 0; }
@@ -222,13 +234,17 @@ a { color: #14507d; }
 <h3>The register check</h3>
 <p><em>&quot;We ran a study and reported findings&quot;</em> is baseline. <em>&quot;I set the perceptual threshold that latency budgets had to clear&quot;</em> is the level you're interviewing at. Hedges — <em>&quot;I sort of drove,&quot; &quot;they let me,&quot; &quot;I was involved in&quot;</em> — cap you regardless of how good the work was. Delete them for the day.</p>
 <hr />
-<h1>Part 1 · Experience questions — Structure A</h1>
+<div class="parthead pagebreak">
+<h1 class="pagebreak">Part 1 · Experience questions — Structure A</h1>
 <hr />
+<div class="qhead">
 <h2>EQ01 — The opener</h2>
 <p class="meta"><strong>Asked by:</strong> everyone, first · <strong>Target:</strong> ~75s · <strong>Structure:</strong> special, not STAR</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about yourself.&quot; / &quot;Walk me through your background.&quot; / &quot;What brings you here?&quot;</p>
 </blockquote>
+</div>
+</div>
 <h3>Model answer (~185 words / 75s)</h3>
 <div class="answer">
 <p><strong>What I do.</strong> &quot;I turn human perceptual and cognitive limits into design inputs that engineers can verify — in systems where a use error causes physical harm.</p>
@@ -258,11 +274,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;What I want next is a regulated domain worth staying in for a long time.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>EQ02 — The unarticulated need ★ rehearse this one hardest</h2>
 <p class="meta"><strong>Asked by:</strong> hiring manager, senior HF, designers · <strong>Target:</strong> ~95s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about a time you identified a user need nobody had articulated.&quot; / &quot;How have you worked in ambiguity?&quot; / &quot;Tell me about 0→1 research.&quot;</p>
 </blockquote>
+</div>
 <p><strong>This is the center of gravity for the role.</strong> The job description is almost entirely formative work, defining needs, and authoring design inputs.</p>
 <blockquote class="warn">
 <p>⚠️ <strong>CONFIRM this whole answer against what actually happened.</strong> It's reconstructed from your résumé and from what Echo Hub actually shipped — the shape is right and the details are plausible, but a panel will probe them and you need them to be true.</p>
@@ -299,11 +317,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;The needs that don't get written down are the ones where the workaround looks like ordinary behavior.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>EQ03 — Pushing back</h2>
 <p class="meta"><strong>Asked by:</strong> senior HF, engineers, PMs · <strong>Target:</strong> ~95s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about a time you disagreed with engineering.&quot; / &quot;How do you handle it when your recommendation is rejected?&quot; / The job description says <em>negotiate design recommendations</em> — expect this.</p>
 </blockquote>
+</div>
 <blockquote class="warn">
 <p>⚠️ <strong>CONFIRM the specifics.</strong> This is built from the latency program, where your résumé says you replaced arbitrary engineering targets — so a real disagreement is implied. Correct the details to what actually happened.</p>
 </blockquote>
@@ -336,11 +356,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;I don't win these by being right. I win them by making the residual risk visible enough that accepting it requires a signature.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>EQ04 — Getting research acted on ★ your signature habit</h2>
 <p class="meta"><strong>Asked by:</strong> PMs, senior HF, hiring manager · <strong>Target:</strong> ~85s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you make sure your research actually gets used?&quot; / &quot;Tell me about influencing without authority.&quot; / &quot;What do you do when findings get ignored?&quot;</p>
 </blockquote>
+</div>
 <h3>Model answer (~220 words / 88s)</h3>
 <div class="answer">
 <p><strong>Situation.</strong> &quot;Early on I watched good studies land in a findings meeting and change nothing, and I stopped believing the problem was research quality or how well I presented it.</p>
@@ -373,11 +395,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;If no plausible result changes a decision, I don't run the study.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>EQ05 — Safety-critical work ★ your closest analogue to this job</h2>
 <p class="meta"><strong>Asked by:</strong> clinical engineers, HF peers, regulatory · <strong>Target:</strong> ~90s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about work where the consequences were serious.&quot; / &quot;What's your experience in safety-critical domains?&quot; / &quot;Have you done use-error analysis?&quot;</p>
 </blockquote>
+</div>
 <p><strong>Lead with this whenever you can.</strong> It is the only thing on your résumé that is medical, safety-critical, and surgical-adjacent at the same time.</p>
 <h3>Model answer (~230 words / 92s)</h3>
 <div class="answer">
@@ -408,11 +432,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;I changed the layout rather than adding a warning. A label is the weakest control there is.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>EQ06 — When you got it wrong</h2>
 <p class="meta"><strong>Asked by:</strong> HF peers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about a study that didn't go as planned.&quot; / &quot;Tell me about a failure.&quot; / &quot;When has your research been wrong?&quot;</p>
 </blockquote>
+</div>
 <blockquote class="warn">
 <p>⚠️ <strong>This one uses the master's thesis</strong> — it's a genuinely strong failure story and it's true, so it's worth the thirty seconds of graduate-work exposure. Swap in a professional example if you have one you'd rather tell.</p>
 </blockquote>
@@ -445,11 +471,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;A pilot that confirms you is the most dangerous result you can get.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>EQ07 — Working with clinicians</h2>
 <p class="meta"><strong>Asked by:</strong> clinical engineers, hiring manager · <strong>Target:</strong> ~80s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;What's your experience working with surgeons?&quot; / &quot;How do you build credibility with clinical experts?&quot; / &quot;You'd be representing us with surgeons internationally.&quot;</p>
 </blockquote>
+</div>
 <p><strong>They're screening for clinical humility.</strong> Overclaiming is the fatal move with this audience.</p>
 <h3>Model answer (~210 words / 84s)</h3>
 <div class="answer">
@@ -483,11 +511,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;My job in an operating room is to be the least disruptive person in it and still leave with the observation nobody wrote down.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>EQ08 — Being a design partner, not a design grader</h2>
 <p class="meta"><strong>Asked by:</strong> industrial and interaction designers, engineers · <strong>Target:</strong> ~80s · <strong>Structure:</strong> A</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you work with designers?&quot; / &quot;Tell me about a cross-functional collaboration.&quot; / &quot;How do you fit into the development process?&quot;</p>
 </blockquote>
+</div>
 <p><strong>The designers on this loop are deciding whether you'd make their work better or slower.</strong> They have met human factors people who show up at the end with a list.</p>
 <h3>Model answer (~205 words / 82s)</h3>
 <div class="answer">
@@ -518,14 +548,18 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;Designers can work inside a constraint. They can't do much with a critique of something already built.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="parthead">
 <h1>Part 2 · Methodological questions — Structure B</h1>
 <p>State the claim first. Do <strong>not</strong> use STAR here.</p>
+</div>
 <hr />
+<div class="qhead">
 <h2>MQ01 — The haptics question ★ expect a version of this</h2>
 <p class="meta"><strong>Asked by:</strong> hiring manager, senior HF, engineers · <strong>Target:</strong> ~3 min · <strong>Structure:</strong> B, extended</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How would you approach research for force feedback on a surgical system?&quot; / any &quot;how would you research X&quot; hypothetical.</p>
 </blockquote>
+</div>
 <p><strong>Announce the sequence first:</strong> <em>&quot;Let me take that in order. What already exists, what's already known, what I'd ask experts, what I'd test once there's something to test, and what it all has to turn into.&quot;</em></p>
 <h3>Model answer (~380 words / 3 min — deliberately long)</h3>
 <div class="answer">
@@ -560,11 +594,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;I treat generative work as the first draft of the submission argument, not as pre-work.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>MQ02 — From observation to design input ★ the most valuable thing you can say</h2>
 <p class="meta"><strong>Asked by:</strong> everyone · <strong>Target:</strong> ~90s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you turn research into requirements?&quot; / &quot;What does your output look like?&quot; / &quot;How do you author usability design inputs?&quot;</p>
 </blockquote>
+</div>
 <p>This is exactly what the job description means by <em>authoring usability design inputs</em>. Say the chain end to end.</p>
 <h3>Model answer (~225 words / 90s)</h3>
 <div class="answer">
@@ -597,11 +633,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;A design input nobody can test against isn't a requirement, it's a recommendation with confident formatting.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>MQ03 — Psychophysics into a specification ★ your deepest technical story</h2>
 <p class="meta"><strong>Asked by:</strong> engineers, senior HF, hiring manager · <strong>Target:</strong> ~90s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Tell me about the latency work.&quot; / &quot;How do you set a threshold?&quot; / &quot;How do you make a perceptual finding actionable?&quot;</p>
 </blockquote>
+</div>
 <p><strong>The strongest methodological evidence you own</strong> — a multi-year program with a real design, a counterintuitive finding, and a specification at the end.</p>
 <h3>Model answer (~230 words / 92s)</h3>
 <div class="answer">
@@ -634,11 +672,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;The durable output wasn't the number. It was that latency stopped being opinion — anyone proposing a target had to say which interaction type and which percentile.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>MQ04 — Use-error analysis ★ the method this job runs on</h2>
 <p class="meta"><strong>Asked by:</strong> HF peers, regulatory, clinical engineers · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Walk me through how you'd do a use-related risk analysis.&quot; / &quot;How do you find use errors before testing?&quot; / &quot;What's your uFMEA experience?&quot; / &quot;How many participants?&quot;</p>
 </blockquote>
+</div>
 <h3>Model answer (~215 words / 86s)</h3>
 <div class="answer">
 <p><strong>The claim.</strong> &quot;Use-error analysis is where the design gets decided, not where it gets checked. If it happens after the architecture is fixed, everything it finds is expensive.</p>
@@ -667,11 +707,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;Where the top-down and bottom-up analyses disagree is usually where the real problem is.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>MQ05 — Measuring workload and cognitive load</h2>
 <p class="meta"><strong>Asked by:</strong> HF peers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you measure cognitive load?&quot; / &quot;When is a physiological measure worth it?&quot; / &quot;What do you think of NASA-TLX?&quot;</p>
 </blockquote>
+</div>
 <h3>Model answer (~215 words / 86s)</h3>
 <div class="answer">
 <p><strong>The claim.</strong> &quot;Instrument choice follows the decision, not the prestige of the signal. Objective measures earn their cost in two cases: when you need <em>within-task</em> dynamics — where in the procedure load spikes — or when self-report is structurally compromised by the task itself.</p>
@@ -703,11 +745,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;I've made a career out of objective measurement, which is exactly why I'll tell you when not to buy it.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>MQ06 — Physical ergonomics and the console</h2>
 <p class="meta"><strong>Asked by:</strong> mechanical and systems engineers, industrial designers · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;What's your physical ergonomics experience?&quot; / &quot;How would you approach console design?&quot; / &quot;How do you handle anthropometric variation?&quot;</p>
 </blockquote>
+</div>
 <p><strong>This is where mechanical engineers decide whether you're useful.</strong> They need a number with a tolerance, not a principle.</p>
 <h3>Model answer (~205 words / 82s)</h3>
 <div class="answer">
@@ -737,11 +781,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;The median user was never the risk. I verify at the extremes of the range.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>MQ07 — Multimodal interaction and mode confusion ★ where your patent earns its place</h2>
 <p class="meta"><strong>Asked by:</strong> senior HF, engineers, designers · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do you think about multimodal interfaces?&quot; / &quot;How would you prevent mode confusion?&quot; / &quot;Tell me about your patent.&quot;</p>
 </blockquote>
+</div>
 <p><strong>Mode confusion is a known use-error theme on surgical robots</strong> — which arm, which control, what's active. Your patent is literally about context-dependent control mapping.</p>
 <h3>Model answer (~210 words / 84s)</h3>
 <div class="answer">
@@ -771,16 +817,20 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;Mode errors aren't user carelessness. They're a mismatch between what the system thinks is active and what the user believes is active.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="parthead">
 <h1>Part 3 · Regulatory questions — Structure B</h1>
 <blockquote class="warn">
 <p>⚠️ <strong>Read this before all three.</strong> You are not the regulatory person, and pretending to be is the fastest way to lose the room. Frame everything as <strong>current reading</strong>, not expertise: <em>&quot;I've been working through the two 2026 guidances.&quot;</em> When you hit something you don't know: <em>&quot;I'd want to read the clause before I answered that.&quot;</em> That sentence costs nothing and buys more than a guess. And say <strong>guidance</strong>, never &quot;regulation.&quot;</p>
 </blockquote>
+</div>
 <hr />
+<div class="qhead">
 <h2>RQ01 — The 2026 guidance landscape</h2>
 <p class="meta"><strong>Asked by:</strong> regulatory/quality, senior HF · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;What's your familiarity with the FDA human factors guidance?&quot; / &quot;What changed this year?&quot;</p>
 </blockquote>
+</div>
 <h3>Model answer (~200 words / 80s)</h3>
 <div class="answer">
 <p><strong>The claim.</strong> &quot;FDA refreshed the entire human factors framework inside a single year, and the most useful thing about it is that the two documents now work as a matched pair.</p>
@@ -809,11 +859,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;One document is how you do the work, the other is what you hand over.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>RQ02 — Submission categories and the judgment call</h2>
 <p class="meta"><strong>Asked by:</strong> regulatory/quality, senior HF · <strong>Target:</strong> ~80s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;Walk me through the submission categories.&quot; / &quot;How do you decide whether validation testing is needed?&quot;</p>
 </blockquote>
+</div>
 <h3>Model answer (~205 words / 82s)</h3>
 <div class="answer">
 <p><strong>The claim.</strong> &quot;Every submission now lands in one of three categories, decided by a four-step flowchart — and the interesting part isn't the categories, it's Decision Point D.</p>
@@ -842,11 +894,13 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;All three factors are arguable, which is exactly why it's the judgment a senior analyst gets handed.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="qhead">
 <h2>RQ03 — The risk framework, and what didn't change</h2>
 <p class="meta"><strong>Asked by:</strong> regulatory, engineers, senior HF · <strong>Target:</strong> ~85s · <strong>Structure:</strong> B</p>
 <blockquote class="note">
 <p><strong>Base:</strong> &quot;How do 62366 and 14971 fit together?&quot; / &quot;Walk me through use-related risk analysis.&quot; / &quot;What's your risk analysis experience?&quot;</p>
 </blockquote>
+</div>
 <p><strong>Anyone can recite what's new. Knowing what held is the tell that you understand the framework.</strong></p>
 <h3>Model answer (~210 words / 84s)</h3>
 <div class="answer">
@@ -876,9 +930,11 @@ a { color: #14507d; }
 <li><strong>Say this:</strong> <em>&quot;Critical tasks are prioritized by severity, not probability — because the probability of a use error can't be estimated reliably.&quot;</em></li>
 </ul></div>
 <hr />
+<div class="parthead">
 <h1>Part 4 · Reference — read once, don't memorize</h1>
 <hr />
 <h2>Your graduate research — the 250-word version</h2>
+</div>
 <p><strong>Don't lead with this and don't volunteer it.</strong> It's five-year-old work with undergraduate participants. Know it well enough to answer accurately in thirty seconds and move on.</p>
 <p><strong>Master's thesis, 2017</strong> — <em>The Effect of Interruptions During a Laparoscopy Skills Training Task.</em> Standard laparoscopic peg-transfer exercise, 51 participants, conversational interruptions. 46 of 51 kept working while they answered, so they were distracted rather than interrupted and the resumption measure collapsed. Published as an HFES 2018 proceedings paper (Fluegel, Powers &amp; Scerbo).</p>
 <p><strong>Dissertation, 2020</strong> — <em>The Effects of Interruption Relevance and Complexity on Primary Task Resumption and Mental Demand.</em> Medical data-entry task, 36 participants, 27 interruptions each, all exactly 18 seconds. Crossed interruption difficulty against whether the cue afterward pointed at the exact field left behind. Difficulty dominated; a cue only helped when it was exactly specific. Both under Mark Scerbo at Old Dominion; committee included Kara Latorella of NASA Langley.</p>
@@ -1045,8 +1101,10 @@ a { color: #14507d; }
 </tbody>
 </table>
 <hr />
+<div class="parthead">
 <h1>Part 5 · The room</h1>
 <h2>Who you'll meet</h2>
+</div>
 <p><strong>Your answers don't change between these people.</strong> The claim, the evidence, and the boundary stay identical — that's what survives a debrief.</p>
 <table>
 <thead>
@@ -1130,8 +1188,10 @@ a { color: #14507d; }
 </tbody>
 </table>
 <hr />
+<div class="parthead">
 <h1>Part 6 · Close</h1>
 <h2>Ask these — they're diagnostic, not decorative</h2>
+</div>
 <blockquote class="say">
 <p>&quot;On a brand-new program, how early does the use-related risk analysis start? Is it shaping the concepts, or documenting them afterward?&quot;</p>
 </blockquote>

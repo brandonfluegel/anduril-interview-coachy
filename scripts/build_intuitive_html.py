@@ -73,7 +73,7 @@ a { color: #14507d; }
 
 @media print {
   @page { size: letter; margin: 8mm 7mm; }
-  body { background: #fff; font-size: 10pt; line-height: 1.33; padding: 0; }
+  body { background: #fff; font-size: 9.8pt; line-height: 1.33; padding: 0; }
   main {
     max-width: none; box-shadow: none; padding: 0;
     column-count: 2; column-gap: 6mm; column-fill: auto; hyphens: none;
@@ -82,7 +82,19 @@ a { color: #14507d; }
     font-size: 14pt; column-span: all; margin: 0 0 4pt;
     padding-bottom: 3pt; border-bottom: 2pt solid #000;
   }
+  h1.pagebreak { break-before: page; }
+  .parthead { column-span: all; break-inside: avoid; }
+  .parthead.pagebreak { break-before: page; }
+  .parthead h1, .parthead h2, .parthead .qhead { column-span: none; }
+  .parthead .qhead { margin-top: 5pt; }
   /* Parts span both columns so you can find them while talking. */
+  .qhead {
+    column-span: all; break-inside: avoid; break-after: avoid;
+    margin: 7pt 0 3pt;
+  }
+  .qhead h2 { column-span: none; margin: 0; }
+  .qhead .meta { margin: 2.5pt 0 2pt; }
+  .qhead blockquote.note { margin: 0; }
   h2 {
     font-size: 11pt; column-span: all; margin: 7pt 0 3pt;
     padding: 3pt 5pt; background: #e4e4e4; border-left: 3pt solid #000;
@@ -108,7 +120,7 @@ a { color: #14507d; }
     background: #fbf6e8; border: .7pt dashed #7a6118; border-left-width: 2.5pt;
     padding: 4pt 6pt; font-size: 9.2pt; break-inside: avoid;
   }
-  blockquote.note { background: #eef2f6; border-left: 2.5pt solid #35637f; padding: 4pt 6pt; font-size: 9.3pt; }
+  blockquote.note { background: #eef2f6; border-left: 2.5pt solid #35637f; padding: 4pt 6pt; font-size: 9.3pt; break-inside: avoid; break-after: avoid; }
   .answer {
     background: #fafaf9; border-left: 3pt solid #111;
     padding: 2pt 6pt; margin: 2.5pt 0 5pt;
@@ -120,12 +132,12 @@ a { color: #14507d; }
   .answer p > strong:first-child {
     display: block; font-family: Helvetica, Arial, sans-serif;
     font-size: 7.3pt; text-transform: uppercase; letter-spacing: .08em;
-    color: #666; margin-bottom: .8pt;
+    color: #666; margin-bottom: .8pt; break-after: avoid;
   }
   .answer p > strong:first-child::before {
     content: counter(beat); display: inline-block; width: 1.4em; color: #aaa;
   }
-  .meta { font-size: 8.4pt; color: #555; margin: 0 0 3pt; }
+  .meta { font-size: 8.4pt; color: #555; margin: 0 0 3pt; break-after: avoid; break-inside: avoid; }
   .calibration { font-size: 8.2pt; line-height: 1.24; color: #3a3a3a; }
   .calibration ul { margin: 0 0 2pt; padding-left: 9pt; }
   .calibration li { margin: 0; }
@@ -170,6 +182,39 @@ def _mark_long_beats(answer_block: str) -> str:
     return re.sub(r"<p>(.*?)</p>", tag, answer_block, flags=re.DOTALL)
 
 
+def wrap_part_heads(body: str) -> str:
+    """Keep a Part heading with whatever follows it, for the same spanner reason."""
+    pattern = re.compile(
+        r"(<h1(?: class=\"pagebreak\")?>Part [^<]*</h1>\s*)"
+        r"((?:<hr />\s*)?)"
+        r"(<div class=\"qhead\">.*?</div>\s*|<h2>.*?</h2>\s*|<p>.*?</p>\s*|<blockquote[^>]*>.*?</blockquote>\s*)?",
+        flags=re.DOTALL,
+    )
+
+    def wrap(match: re.Match[str]) -> str:
+        parts = "".join(p for p in match.groups() if p)
+        cls = "parthead pagebreak" if 'class="pagebreak"' in match.group(1) else "parthead"
+        return f'<div class="{cls}">\n{parts}</div>\n'
+
+    return pattern.sub(wrap, body)
+
+
+def wrap_question_heads(body: str) -> str:
+    """Chrome ignores break-after on column spanners, so bind each heading to its question."""
+    pattern = re.compile(
+        r"(<h2>(?:EQ|MQ|RQ)\d+[^<]*</h2>\s*)"
+        r"(<p class=\"meta\">.*?</p>\s*)?"
+        r"(<blockquote class=\"note\">.*?</blockquote>\s*)?",
+        flags=re.DOTALL,
+    )
+
+    def wrap(match: re.Match[str]) -> str:
+        parts = "".join(p for p in match.groups() if p)
+        return f'<div class="qhead">\n{parts}</div>\n'
+
+    return pattern.sub(wrap, body)
+
+
 def wrap_model_answers(body: str) -> str:
     """Group the paragraphs under a 'Model answer' heading so the spoken block reads as one unit."""
     pattern = re.compile(
@@ -185,7 +230,10 @@ def wrap_model_answers(body: str) -> str:
     body = calib.sub(lambda m: f'{m.group(1)}<div class="calibration">{m.group(2)}</div>', body)
 
     meta = re.compile(r"<p>(<strong>Asked by:</strong>.*?)</p>", flags=re.DOTALL)
-    return meta.sub(lambda m: f'<p class="meta">{m.group(1)}</p>', body)
+    body = meta.sub(lambda m: f'<p class="meta">{m.group(1)}</p>', body)
+
+    # The rehearsal section starts a fresh page so EQ01 isn't stranded under the front matter.
+    return body.replace("<h1>Part 1 ", '<h1 class="pagebreak">Part 1 ', 1)
 
 
 def classify_blockquotes(body: str) -> str:
@@ -208,7 +256,11 @@ def main() -> None:
     md = MarkdownIt("commonmark", {"html": True}).enable("table")
     OUT.mkdir(parents=True, exist_ok=True)
 
-    body = wrap_model_answers(classify_blockquotes(md.render(SRC.read_text(encoding="utf-8"))))
+    body = wrap_part_heads(
+        wrap_question_heads(
+            wrap_model_answers(classify_blockquotes(md.render(SRC.read_text(encoding="utf-8"))))
+        )
+    )
     target = OUT / "intuitive-interview-guide.html"
     target.write_text(
         PAGE.format(title=html.escape(TITLE), css=CSS, body=body),
