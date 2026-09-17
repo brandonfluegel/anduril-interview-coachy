@@ -1,23 +1,42 @@
-"""Render the Intuitive interview guide into a print-ready HTML file.
+"""Render an Intuitive interview doc into a print-ready HTML file.
 
-Run: python scripts/build_intuitive_html.py
-Output: intuitive/print/intuitive-interview-guide.html — open in a browser and Ctrl+P.
+Run: python scripts/build_intuitive_html.py [guide|screen|all]
+Output: intuitive/print/*.html — open in a browser and Ctrl+P.
 
-Print layout is two-column at ~9.4pt.
+Print layout is two-column at ~9.8pt.
 """
 
 from __future__ import annotations
 
 import html
 import re
+import sys
 from pathlib import Path
 
 from markdown_it import MarkdownIt
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "intuitive" / "intuitive-interview-guide.md"
 OUT = ROOT / "intuitive" / "print"
-TITLE = "Intuitive Surgical — Senior Human Factors Analyst"
+
+# break_before_part1 costs up to a page, so the short screen doc runs continuous.
+DOCS = {
+    "guide": {
+        "src": ROOT / "intuitive" / "intuitive-interview-guide.md",
+        "out": OUT / "intuitive-interview-guide.html",
+        "title": "Intuitive Surgical — Senior Human Factors Analyst",
+        "break_before_part1": True,
+        "body_class": "",
+    },
+    "screen": {
+        "src": ROOT / "intuitive" / "technical-screen-guide.md",
+        "out": OUT / "technical-screen-guide.html",
+        "title": "Intuitive Surgical — Technical Round",
+        "break_before_part1": False,
+        "body_class": "compact",
+        # Under a hard page cap, an unbreakable 4-line beat wastes more than a split one costs.
+        "flow_chars": 300,
+    },
+}
 
 CSS = """
 :root { color-scheme: light; }
@@ -67,6 +86,14 @@ th, td { border: 1px solid #999; padding: 5px 8px; text-align: left; vertical-al
 th { background: #eee; }
 .calibration { font-size: .92em; color: #333; }
 .meta { font-size: .85em; color: #555; margin: .2em 0 .6em; }
+
+/* A follow-up label has to be findable mid-sentence while you're talking. */
+.fq { font-family: Helvetica, Arial, sans-serif; font-size: .92em; margin: 1.1em 0 .2em; }
+.fq em { font-style: normal; color: #777; font-size: .9em; }
+
+/* Reference blocks that must never split — you read them as one unit or not at all. */
+.card { background: #f7f7f5; border-left: 3px solid #666; padding: .5em .9em; margin: .8em 0; }
+
 code { font-family: Consolas, monospace; font-size: .88em; background: #eee; padding: .1em .3em; }
 hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }
 a { color: #14507d; }
@@ -141,6 +168,13 @@ a { color: #14507d; }
   .calibration { font-size: 8.2pt; line-height: 1.24; color: #3a3a3a; }
   .calibration ul { margin: 0 0 2pt; padding-left: 9pt; }
   .calibration li { margin: 0; }
+  /* The screen-side .fq metrics would reflow the long guide, so print resets to plain
+     paragraph spacing and only the compact doc opts back in. */
+  .fq { font-family: inherit; font-size: inherit; margin: 0 0 3.5pt; }
+  .card {
+    background: #f4f4f1; border-left: 2.5pt solid #666;
+    padding: 3.5pt 6pt; margin: 0 0 4pt; break-inside: avoid;
+  }
   table { column-span: all; font-size: 8.3pt; margin: 4pt 0 6pt; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; }
@@ -148,6 +182,23 @@ a { color: #14507d; }
   code { background: none; font-size: .92em; }
   hr { display: none; }
   a { color: inherit; text-decoration: none; }
+
+  /* Every column spanner closes both columns early. A long doc amortizes that;
+     a short one pays a partial column each time, so compact keeps questions in-column.
+     Dropping the spanner also restores break-after: avoid, which Chrome ignores on spanners. */
+  body.compact .qhead { column-span: none; }
+  body.compact .parthead { column-span: none; }
+  body.compact h2 { column-span: none; }
+  /* The clock is the only table here and fits a column, so it need not close both. */
+  body.compact table { column-span: none; font-size: 8.1pt; break-inside: avoid; }
+  body.compact .calibration { break-inside: avoid; }
+  /* Stops an "F1 — ... (~55 words)" label being left alone at a page bottom. */
+  body.compact blockquote.say { break-before: avoid; }
+  body.compact blockquote.flow { break-inside: auto; }
+  body.compact .fq {
+    font-family: Helvetica, Arial, sans-serif; font-size: 8.9pt; margin: 4pt 0 1.5pt;
+    break-after: avoid; break-inside: avoid;
+  }
 }
 """
 
@@ -159,7 +210,7 @@ PAGE = """<!DOCTYPE html>
 <title>{title}</title>
 <style>{css}</style>
 </head>
-<body>
+<body class="{body_class}">
 <main>
 {body}
 </main>
@@ -172,10 +223,10 @@ PAGE = """<!DOCTYPE html>
 FLOW_CHARS = 480
 
 
-def _mark_long_beats(answer_block: str) -> str:
+def _mark_long_beats(answer_block: str, flow_chars: int = FLOW_CHARS) -> str:
     def tag(match: re.Match[str]) -> str:
         para = match.group(0)
-        if len(re.sub(r"<[^>]+>", "", match.group(1))) > FLOW_CHARS:
+        if len(re.sub(r"<[^>]+>", "", match.group(1))) > flow_chars:
             return para.replace("<p>", '<p class="flow">', 1)
         return para
 
@@ -202,7 +253,7 @@ def wrap_part_heads(body: str) -> str:
 def wrap_question_heads(body: str) -> str:
     """Chrome ignores break-after on column spanners, so bind each heading to its question."""
     pattern = re.compile(
-        r"(<h2>(?:EQ|MQ|RQ)\d+[^<]*</h2>\s*)"
+        r"(<h2>(?:EQ|MQ|RQ|SQ)\d+[^<]*</h2>\s*)"
         r"(<p class=\"meta\">.*?</p>\s*)?"
         r"(<blockquote class=\"note\">.*?</blockquote>\s*)?",
         flags=re.DOTALL,
@@ -215,25 +266,32 @@ def wrap_question_heads(body: str) -> str:
     return pattern.sub(wrap, body)
 
 
-def wrap_model_answers(body: str) -> str:
+def wrap_model_answers(
+    body: str, break_before_part1: bool = True, flow_chars: int = FLOW_CHARS
+) -> str:
     """Group the paragraphs under a 'Model answer' heading so the spoken block reads as one unit."""
     pattern = re.compile(
         r"(<h3>Model answer[^<]*</h3>\s*)((?:<p>(?:(?!</?h[1-4]|<blockquote|<hr).)*?</p>\s*)+)",
         flags=re.DOTALL,
     )
     body = pattern.sub(
-        lambda m: f'{m.group(1)}<div class="answer">\n{_mark_long_beats(m.group(2))}</div>\n', body
+        lambda m: f'{m.group(1)}<div class="answer">\n{_mark_long_beats(m.group(2), flow_chars)}</div>\n',
+        body,
     )
 
     # The calibration list is reference, not rehearsal, so it reads smaller.
-    calib = re.compile(r"(<h3>Senior \u2192 Staff-signal</h3>\s*)(<ul>.*?</ul>)", flags=re.DOTALL)
+    calib = re.compile(
+        r"(<h3>(?:Senior \u2192 Staff-signal|The Staff-signal)</h3>\s*)(<ul>.*?</ul>)", flags=re.DOTALL
+    )
     body = calib.sub(lambda m: f'{m.group(1)}<div class="calibration">{m.group(2)}</div>', body)
 
     meta = re.compile(r"<p>(<strong>Asked by:</strong>.*?)</p>", flags=re.DOTALL)
     body = meta.sub(lambda m: f'<p class="meta">{m.group(1)}</p>', body)
 
     # The rehearsal section starts a fresh page so EQ01 isn't stranded under the front matter.
-    return body.replace("<h1>Part 1 ", '<h1 class="pagebreak">Part 1 ', 1)
+    if break_before_part1:
+        body = body.replace("<h1>Part 1 ", '<h1 class="pagebreak">Part 1 ', 1)
+    return body
 
 
 def classify_blockquotes(body: str) -> str:
@@ -252,21 +310,67 @@ def classify_blockquotes(body: str) -> str:
     return re.sub(r"<blockquote>\s*<p>(.{0,12})", tag, body, flags=re.DOTALL)
 
 
+def style_labels(body: str, compact: bool = False, flow_chars: int = FLOW_CHARS) -> str:
+    """Give follow-up labels and `[[card]]`-marked paragraphs their own classes."""
+    if compact:
+        body = re.sub(
+            r"<p>(<strong>F\d+ \u2014.*?)</p>",
+            lambda m: f'<p class="fq">{m.group(1)}</p>',
+            body,
+            flags=re.DOTALL,
+        )
+        body = _flow_long_quotes(body, flow_chars)
+    return re.sub(r"<p>\[\[card\]\]\s*", '<p class="card">', body)
+
+
+def _flow_long_quotes(body: str, flow_chars: int = FLOW_CHARS) -> str:
+    """A quote taller than a part-used column strands the rest of it, so let big ones break."""
+
+    def tag(match: re.Match[str]) -> str:
+        if len(re.sub(r"<[^>]+>", "", match.group(2))) > FLOW_CHARS:
+            return match.group(0).replace(
+                f'class="{match.group(1)}"', f'class="{match.group(1)} flow"', 1
+            )
+        return match.group(0)
+
+    return re.sub(
+        r'<blockquote class="(warn|say)">(.*?)</blockquote>', tag, body, flags=re.DOTALL
+    )
+
+
 def main() -> None:
+    keys = sys.argv[1:] or ["all"]
+    if keys == ["all"]:
+        keys = list(DOCS)
+
     md = MarkdownIt("commonmark", {"html": True}).enable("table")
     OUT.mkdir(parents=True, exist_ok=True)
 
-    body = wrap_part_heads(
-        wrap_question_heads(
-            wrap_model_answers(classify_blockquotes(md.render(SRC.read_text(encoding="utf-8"))))
+    for key in keys:
+        doc = DOCS[key]
+        body = wrap_part_heads(
+            style_labels(
+                wrap_question_heads(
+                    wrap_model_answers(
+                        classify_blockquotes(md.render(doc["src"].read_text(encoding="utf-8"))),
+                        break_before_part1=doc["break_before_part1"],
+                        flow_chars=doc.get("flow_chars", FLOW_CHARS),
+                    )
+                ),
+                compact=doc["body_class"] == "compact",
+                flow_chars=doc.get("flow_chars", FLOW_CHARS),
+            )
         )
-    )
-    target = OUT / "intuitive-interview-guide.html"
-    target.write_text(
-        PAGE.format(title=html.escape(TITLE), css=CSS, body=body),
-        encoding="utf-8",
-    )
-    print(f"  {SRC.name} -> {target.relative_to(ROOT)}")
+        doc["out"].write_text(
+            PAGE.format(
+                title=html.escape(doc["title"]),
+                css=CSS,
+                body=body,
+                body_class=doc["body_class"],
+            ),
+            encoding="utf-8",
+        )
+        print(f"  {doc['src'].name} -> {doc['out'].relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

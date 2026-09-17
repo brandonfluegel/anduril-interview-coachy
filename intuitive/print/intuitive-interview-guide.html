@@ -52,6 +52,14 @@ th, td { border: 1px solid #999; padding: 5px 8px; text-align: left; vertical-al
 th { background: #eee; }
 .calibration { font-size: .92em; color: #333; }
 .meta { font-size: .85em; color: #555; margin: .2em 0 .6em; }
+
+/* A follow-up label has to be findable mid-sentence while you're talking. */
+.fq { font-family: Helvetica, Arial, sans-serif; font-size: .92em; margin: 1.1em 0 .2em; }
+.fq em { font-style: normal; color: #777; font-size: .9em; }
+
+/* Reference blocks that must never split — you read them as one unit or not at all. */
+.card { background: #f7f7f5; border-left: 3px solid #666; padding: .5em .9em; margin: .8em 0; }
+
 code { font-family: Consolas, monospace; font-size: .88em; background: #eee; padding: .1em .3em; }
 hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }
 a { color: #14507d; }
@@ -126,6 +134,13 @@ a { color: #14507d; }
   .calibration { font-size: 8.2pt; line-height: 1.24; color: #3a3a3a; }
   .calibration ul { margin: 0 0 2pt; padding-left: 9pt; }
   .calibration li { margin: 0; }
+  /* The screen-side .fq metrics would reflow the long guide, so print resets to plain
+     paragraph spacing and only the compact doc opts back in. */
+  .fq { font-family: inherit; font-size: inherit; margin: 0 0 3.5pt; }
+  .card {
+    background: #f4f4f1; border-left: 2.5pt solid #666;
+    padding: 3.5pt 6pt; margin: 0 0 4pt; break-inside: avoid;
+  }
   table { column-span: all; font-size: 8.3pt; margin: 4pt 0 6pt; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; }
@@ -133,10 +148,27 @@ a { color: #14507d; }
   code { background: none; font-size: .92em; }
   hr { display: none; }
   a { color: inherit; text-decoration: none; }
+
+  /* Every column spanner closes both columns early. A long doc amortizes that;
+     a short one pays a partial column each time, so compact keeps questions in-column.
+     Dropping the spanner also restores break-after: avoid, which Chrome ignores on spanners. */
+  body.compact .qhead { column-span: none; }
+  body.compact .parthead { column-span: none; }
+  body.compact h2 { column-span: none; }
+  /* The clock is the only table here and fits a column, so it need not close both. */
+  body.compact table { column-span: none; font-size: 8.1pt; break-inside: avoid; }
+  body.compact .calibration { break-inside: avoid; }
+  /* Stops an "F1 — ... (~55 words)" label being left alone at a page bottom. */
+  body.compact blockquote.say { break-before: avoid; }
+  body.compact blockquote.flow { break-inside: auto; }
+  body.compact .fq {
+    font-family: Helvetica, Arial, sans-serif; font-size: 8.9pt; margin: 4pt 0 1.5pt;
+    break-after: avoid; break-inside: avoid;
+  }
 }
 </style>
 </head>
-<body>
+<body class="">
 <main>
 <h1>Intuitive Surgical — Senior Human Factors Analyst</h1>
 <h3>Interview guide · Sunnyvale · fully onsite</h3>
