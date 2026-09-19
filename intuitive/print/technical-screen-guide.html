@@ -150,8 +150,11 @@ a { color: #14507d; }
   a { color: inherit; text-decoration: none; }
 
   /* Every column spanner closes both columns early, which is why the compact doc once
-     dropped them all. At the 14-page budget consistency wins: every grey-bar heading and
-     every Part divider spans, so no question header renders at half width. */
+     dropped them all. At the 14-page budget Part dividers and question headers span, so no
+     question header renders at half width. Reference-section headings stay in-column as their
+     own tier: spanning them costs a page and strands them, since Chrome ignores break-after
+     on a spanner. */
+  body.compact h2 { column-span: none; }
   /* The clock is the only table here and fits a column, so it need not close both. */
   body.compact table { column-span: none; font-size: 8.1pt; break-inside: avoid; }
   body.compact .calibration { break-inside: avoid; }
@@ -176,8 +179,7 @@ a { color: #14507d; }
 <ul>
 <li>Role is <strong>HF Design Engineer.</strong> A <strong>separate validation team</strong> runs validation studies. DE owns generative and formative work up to the validation handoff, and must understand what goes into validation without running it.</li>
 <li><strong>The team values requirements.</strong> They are building the muscle of turning user needs into requirements, and want someone who can mentor and establish best practices.</li>
-<li>What lands: evaluations that inform design iterations, user needs, and requirements. Present as <strong>finding → design impact → recommended change.</strong> Report-style readouts don't land. Respect budget and timeline, but always raise safety and efficacy.</li>
-<li>Onboarding: a <strong>six-week foundations training program</strong>, relationship-building in person, and understanding why things are done before criticizing them.</li>
+<li>What lands: evaluations that inform design iterations, user needs, and requirements. Present as <strong>finding → design impact → recommended change.</strong> Report-style readouts don't land. Respect budget and timeline, but always raise safety and efficacy.- Onboarding: a <strong>six-week foundations training program</strong>, relationship-building in person, and understanding why things are done before criticizing them.</li>
 </ul>
 <h4>What I told them — keep identical</h4>
 <ul>
@@ -189,6 +191,7 @@ a { color: #14507d; }
 <li><strong>Regulatory:</strong> I stated plainly that I have <strong>no FDA submission experience</strong>, and bridged from MIL-STD-1472 and NASA-STD-3001.</li>
 <li><strong>Residual risk:</strong> Augustina corrected me. The team uses <strong>pre-established acceptability criteria</strong>, keeps the risk file as a <strong>living document</strong>, and <strong>mitigates through design first.</strong></li>
 <li><strong>Failure story:</strong> the uncommissioned Echo Show competitive benchmark, and the lesson of pre-committing to decisions.</li>
+<li><strong>Mentoring:</strong> junior product designers, UX researchers, and HF researchers, starting at Amazon about four years ago. Lesson: pre-commit to decisions before a study runs. Story: the NASA undergraduate mentee whose work slipped during a family loss, and my lesson to check in person-to-person before coaching.</li>
 </ul>
 <blockquote class="warn">
 <p>⚠️ <strong>Three things I said Friday that I must not repeat.</strong> That validation work is <em>&quot;more tactical and more junior&quot;</em> — <strong>Elyse ran validation studies.</strong> That designers <em>&quot;don't like requirements.&quot;</em> That fNIRS is <em>&quot;expensive theater&quot;</em> — never disparage your own methods.</p>
@@ -233,7 +236,7 @@ a { color: #14507d; }
 </tr>
 </tbody>
 </table>
-<p>You get <strong>ten to fourteen exchanges.</strong> The risk at this length is running thin, not long — a 60-second answer to a method question leaves air these two will fill by probing something you'd rather they didn't. Give the full structure every time, then stop.</p>
+<p>You get <strong>ten to fourteen exchanges.</strong> The risk at this length is running thin, not long — a 60-second answer to a method question leaves air these two will fill by probing something you'd rather they didn't. Full structure every time, then stop.</p>
 <h2>The two people</h2>
 <p class="card"><strong>Elyse Hallett</strong> — Sr HF Engineer, San Diego. Ran HF validation studies at a device consultancy that supported successful FDA submissions, and has published on intraoperative disruptions in robotic ORs. <strong>Likely tests</strong> execution rigor: how you decompose a task, how you know an early finding is real, how you keep upstream work honest. <strong>Fatal move:</strong> overclaiming regulatory depth — she has defended this work and will hear the difference inside one sentence.</p>
 <p class="card"><strong>Valerie Schiebel</strong> — Sr HF Engineer, Cardiac, San Jose. Three-plus years at Intuitive on one clinical specialty: robotic cardiac, which means tight workspaces, long procedures, and a bedside team coordinating with a visually isolated console surgeon. <strong>Likely tests</strong> clinical application: clinician needs, procedure workflow, turning what a surgeon says into something engineering builds against. <strong>Fatal move:</strong> speculating about Intuitive's cardiac program, or staying qualitative when she asks what gets built.</p>
@@ -241,9 +244,9 @@ a { color: #14507d; }
 <p>⚠️ <strong>Never reveal that you researched them.</strong> No &quot;I read your paper,&quot; &quot;I saw you were at,&quot; &quot;I know you worked at.&quot; Cite published work as <strong>field literature</strong>, the way you'd cite it to anyone — and only once <em>they</em> have opened the subject.</p>
 </blockquote>
 <h2>The two structures</h2>
-<p><strong>Structure A — experience, cross-functional.</strong> Situation 20–30 · Task 15–25 · Action 90–120 · Result 25–40 · Earned secret 20–30 · Mechanism 20–30. <strong>200–265 words ≈ 90–110 seconds.</strong> The mechanism beat is the gate. Say it as its own sentence: <em>&quot;What I left behind was X, and Y still has to clear it.&quot;</em></p>
-<p><strong>Structure B — method, technical.</strong> Claim 20–30 · How I'd know 40–60 · Evidence and where it stops 40–60 · The decision it drives 30–45 · What would change my mind 20–35. <strong>160–230 words ≈ 65–90 seconds.</strong></p>
-<p>Both ask method questions for a living, and a story in answer to <em>&quot;how would you define that workflow&quot;</em> reads as never having done one. <strong>Register:</strong> delete the hedges — <em>&quot;I sort of drove,&quot; &quot;they let me,&quot; &quot;I was involved in.&quot;</em></p>
+<p><strong>Structure A — experience.</strong> Situation 20–30 · Task 15–25 · Action 90–120 · Result 25–40 · Earned secret 20–30 · Mechanism 20–30. <strong>200–265 words ≈ 90–110s.</strong> The mechanism beat is the gate: <em>&quot;What I left behind was X, and Y still has to clear it.&quot;</em></p>
+<p><strong>Structure B — method.</strong> Claim 20–30 · How I'd know 40–60 · Evidence and where it stops 40–60 · The decision it drives 30–45 · What would change my mind 20–35. <strong>160–230 words ≈ 65–90s.</strong></p>
+<p>Both ask method questions for a living, so a <em>story</em> in answer to <em>&quot;how would you define a workflow&quot;</em> reads as never having done one. Delete the hedges: <em>&quot;I sort of drove,&quot; &quot;they let me,&quot; &quot;I was involved in.&quot;</em></p>
 <hr />
 <div class="parthead">
 <h1>Part 1 · The open</h1>
@@ -256,11 +259,11 @@ a { color: #14507d; }
 </blockquote>
 </div>
 </div>
-<h3>Model answer (~185 words / 75s)</h3>
+<h3>Model answer (~195 words / 78s)</h3>
 <div class="answer">
 <p><strong>What I do.</strong> &quot;I turn human perceptual and cognitive limits into design inputs that engineers can verify — in systems where a use error causes physical harm.</p>
-<p class="flow"><strong>Why here, three reasons.</strong> First, I do my best work before there's a design to evaluate — defining what a thing has to do for people when there's no product to test against yet, and I want to do that where a use error means physical harm rather than a bad quarter. Second, the problem is multimodal — visual, haptic, and auditory interaction under load is what I've spent my career measuring. And third, my closest work to this was at NASA Langley: safety-critical human factors on a medical workstation, with surgical-like workspace layouts and a usability FMEA underneath it.</p>
-<p class="flow"><strong>The arc.</strong> Depth, then breadth. Four and a half years at Amazon as the sole human factors researcher in the Devices Design Group. Now EchoStar, where I report to the VP of Product and lead human factors across software, hardware, and platform integrations. What I want next is a regulated domain worth staying in for a long time.&quot;</p>
+<p class="flow"><strong>Why here, three reasons.</strong> First, I do my best work before there's a design to evaluate — defining what a thing has to do for people when there's no product to test against yet, and I want to do that where a use error means physical harm rather than a bad quarter. Second, the problem is multimodal — visual, haptic, and auditory interaction under load is what I've spent my career measuring. And third, my closest work to this was at NASA Langley: safety-critical human factors on a medical workstation, with clinical workspace layouts and a usability FMEA underneath it.</p>
+<p class="flow"><strong>The arc.</strong> Depth in graduate training, breadth through NASA, Mercedes-Benz, and Uber, then leadership: four and a half years at Amazon as the sole human factors researcher in the Devices Design Group. Now EchoStar, where I report to the VP of Product and lead human factors across software, hardware, and platform integrations. What I want next is a regulated domain worth staying in for a long time.&quot;</p>
 </div>
 <blockquote class="warn">
 <p>⚠️ <strong>Two facts to fix before you dial.</strong> Never state an EchoStar <strong>duration</strong> — Friday you said <em>&quot;a year and a half.&quot;</em> If asked, say <strong>&quot;since June 2025.&quot;</strong> And <em>[CONFIRM]</em> whether consulting belongs in the arc at all: it wasn't mentioned Friday, so it is cut above. Restore it only if it is true <strong>and</strong> you said it.</p>
@@ -297,7 +300,7 @@ a { color: #14507d; }
 <h3>Model answer (~200 words / 80s)</h3>
 <div class="answer">
 <p><strong>The claim.</strong> &quot;I'm not a controls engineer and I won't pretend to be. What I am is the person who specifies what the loop has to feel like to the human closing it — which is adjacent expertise, not a lesser version of the same one.</p>
-<p class="flow"><strong>How I'd know.</strong> Teleoperation is a perception–action loop with a person in it, so the questions I answer are its human-side parameters: what delay is detectable, at what point the instrument stops feeling like an extension of the hand, what force difference is discriminable, what happens when a channel drops out or authority changes hands. I've measured those directly. The latency program was per-trial millisecond control of a response loop. At Mercedes-Benz I ran L2/L3 handover studies — control authority transferring between a human and an automated system, which is the same problem shape. And my patent is on context-dependent control mapping, where one physical actuation resolves to different commands.</p>
+<p class="flow"><strong>How I'd know.</strong> Teleoperation is a perception–action loop with a person in it, so the questions I answer are its human-side parameters: what delay is detectable, at what point the instrument stops feeling like an extension of the hand, what force difference is discriminable, what happens when a channel drops out or authority changes hands. I've measured those directly. The latency program was per-trial millisecond control of a response loop. At Mercedes-Benz I ran Level 2 handover studies — control authority transferring between a human and an automated system, which is the same problem shape. And my patent is on context-dependent control mapping, where one physical actuation resolves to different commands.</p>
 <p class="flow"><strong>Evidence, and where it stops.</strong> I read kinematics and control well enough to know whether what I'm asking for is achievable and to argue it productively with a mechanical or controls engineer — I've specified reach envelopes and anatomical limits against real hardware. What I don't do is write the controller or run the simulation. If the question is whether a loop is stable at that gain, I'm asking, not answering.</p>
 <p><strong>The decision it drives.</strong> What I hand over is a threshold, a tolerance, and a defined fallback rather than an experience adjective — something the robotics side can build against.</p>
 <p><strong>What I'd close first.</strong> The kinematics and control vocabulary specific to a surgical manipulator. That's months of deliberate reading and time with the engineers, not years.&quot;</p>
@@ -336,7 +339,7 @@ a { color: #14507d; }
 <div class="answer">
 <p><strong>Situation.</strong> &quot;Echo Hub was a genuinely new kind of device — a control panel mounted on a wall and shared by a whole household. No prior product to test against, no usage data, nothing to run a study on. I was the only human factors researcher in the group.</p>
 <p><strong>Task.</strong> My charge was to define what it needed to do for people before there was a design to evaluate. And the first question wasn't about the interface at all — it was what a wall-mounted panel has to show someone who is <em>walking past</em> it, rather than standing at it.</p>
-<p class="flow"><strong>Action.</strong> I ran in-home contextual inquiry with <em>[CONFIRM: count]</em> households in <strong>Seattle and Denver</strong>, watching how people actually controlled their connected devices over a normal week. Nobody wanted a faster controller. They wanted to not have to decide whether crossing the room was worth it. Nobody had written that down because the workaround looked like ordinary behavior — people reached for their phone even when the panel was closer, then told us the panel was great. A single qualitative source isn't enough to move an architecture decision, so I didn't rely on what people said — I looked for the behavior they'd already paid a cost for, and it held across every household. Then I translated it into something an engineer could verify: the device shall resolve to the controls relevant to that room and that time of day <em>before</em> the user reaches it.</p>
+<p class="flow"><strong>Action.</strong> I ran in-home contextual inquiry with <em>[CONFIRM: count]</em> households in <strong>Seattle and Denver</strong>, watching how people actually controlled their connected devices during in-home visits. Nobody wanted a faster controller. They wanted to not have to decide whether crossing the room was worth it. Nobody had written that down because the workaround looked like ordinary behavior — people reached for their phone even when the panel was closer, then told us the panel was great. A single qualitative source isn't enough to move an architecture decision, so I didn't rely on what people said — I looked for the behavior they'd already paid a cost for, and it held across the households I observed. Then I translated it into something an engineer could verify: the device shall resolve to the controls relevant to that room and that time of day <em>before</em> the user reaches it.</p>
 <p><strong>Result.</strong> That shaped the decision to treat approach and proximity as a first-class input to what the screen shows.</p>
 <p><strong>Earned secret.</strong> The needs that don't get written down are the ones where the workaround looks like ordinary behavior. Nobody reports it as a problem, because from the inside it isn't one.</p>
 <p><strong>Mechanism.</strong> What I left behind was the glance-first requirement and the criteria behind it, and those teams still design against it.&quot;</p>
@@ -344,7 +347,7 @@ a { color: #14507d; }
 <h3>Follow-ups</h3>
 <p class="fq"><strong>F1 — &quot;How did you know that was real and not just a few people talking?&quot;</strong> <em>(~70 words)</em></p>
 <blockquote class="say">
-<p>&quot;Two things. One, I don't move an architecture decision on a stated preference, so I looked for a compensating behavior instead — something people had already built a workaround for. Two, it held across every household, not a few. What people say they want is unreliable; what they've already paid a cost for without being asked is evidence.&quot;</p>
+<p>&quot;Two things. One, I don't move an architecture decision on a stated preference, so I looked for a compensating behavior instead — something people had already built a workaround for. Two, it held across the households I observed, not one or two. What people say they want is unreliable; what they've already paid a cost for without being asked is evidence.&quot;</p>
 </blockquote>
 <p class="fq"><strong>F2 — &quot;Why should that transfer here? It's a consumer product.&quot;</strong> <em>(~65 words)</em></p>
 <blockquote class="say">
@@ -358,7 +361,7 @@ a { color: #14507d; }
 </blockquote>
 <h3>The Staff-signal</h3>
 <div class="calibration"><ul>
-<li><strong>Staff-signal:</strong> explains why the need was structurally invisible, corroborates across sources, and converts it into a <em>shall</em> statement someone else can verify.</li>
+<li><strong>Staff-signal:</strong> explains why the need was structurally invisible, corroborates with observed behavior rather than stated preference, and converts it into a <em>shall</em> statement someone else can verify.</li>
 <li><strong>Say this:</strong> <em>&quot;The needs that don't get written down are the ones where the workaround looks like ordinary behavior.&quot;</em></li>
 </ul></div>
 <hr />
@@ -481,11 +484,11 @@ a { color: #14507d; }
 <div class="answer">
 <p class="flow"><strong>The claim.</strong> &quot;Force feedback is already fielded on da Vinci 5, pairing haptic cues with a visual gauge — so the research question isn't <em>whether</em> force information helps. It's where each channel earns its place: which tasks and procedures, what happens when haptic and visual disagree, and how experienced visual-compensation users adapt. I'll make that concrete for extending it to a new instrument or procedure.</p>
 <p class="flow"><strong>What already exists.</strong> Three reference points bound it. Open surgery, where the surgeon feels tissue directly. Laparoscopic, where force arrives through a long instrument and a pivot, attenuated and distorted. And robotic practice <em>before</em> force feedback, where surgeons compensated visually. That third group is the interesting one, because they trained a strategy the hardware now partly replaces.</p>
-<p><strong>What's already known.</strong> Complaint data and known use problems on the fielded system, plus whatever the post-market record says about how the capability is actually being used. Free evidence and the cheapest hypotheses I'll get.</p>
+<p><strong>What's already known.</strong> Complaint data and known use problems on the fielded system, plus what the post-market record says about how the capability is actually used. Free evidence and the cheapest hypotheses I'll get.</p>
 <p class="flow"><strong>What I'd ask experts.</strong> Cognitive task analysis with expert surgeons about how they work <em>now</em> — which cues they're actually using, where the gauge earns a glance and where the haptic channel carries it alone, when force information changed a decision, where they still feel blind. Anchored in specific remembered cases. And workflow mapping across the whole team, because the bedside assistant and the scrub are users too.</p>
 <p><strong>What I'd test.</strong> Once there's something to react to: cognitive walkthroughs, then formative testing at increasing fidelity, each round scoped to a decision agreed in advance.</p>
-<p><strong>The decision it drives.</strong> The output isn't a report. It's verifiable design inputs — a detectable force difference, a latency bound, a defined behavior when feedback drops out — plus entries in the use-related risk analysis. Those entries are what the submission gets argued from years later.</p>
-<p class="flow"><strong>What would change my mind.</strong> If cognitive task analysis shows experienced users are still running the visual compensation strategy and largely ignoring the force channel, the work isn't tuning the signal. It's understanding why a shipped capability isn't being adopted, which is a different study entirely.&quot;</p>
+<p class="flow"><strong>The decision it drives.</strong> The output isn't a report. It's verifiable design inputs — a detectable force difference, a latency bound, a defined behavior when feedback drops out — plus entries in the use-related risk analysis. Those entries are what the submission gets argued from years later.
+<strong>What would change my mind.</strong> If cognitive task analysis shows experienced users are still running the visual compensation strategy and largely ignoring the force channel, the work isn't tuning the signal. It's understanding why a shipped capability isn't being adopted, which is a different study entirely.&quot;</p>
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>F1 — &quot;What are the risks of adding force feedback?&quot;</strong> <em>(~90 words)</em></p>
@@ -533,9 +536,9 @@ a { color: #14507d; }
 <p>They have met human factors people who show up at the end with a list. On a design engineering track, arriving early <em>is</em> the job.</p>
 <h3>Model answer (~205 words / 82s)</h3>
 <div class="answer">
-<p><strong>Situation.</strong> &quot;At EchoStar I report to the VP of Product and lead human factors across software, physical hardware, and platform integrations. There was no function before me, which meant every bit of influence had to be earned rather than assigned.</p>
+<p><strong>Situation.</strong> &quot;At EchoStar I report to the VP of Product and lead human factors across software, physical hardware, and platform integrations. There was no function before me <em>[CONFIRM]</em>, which meant every bit of influence had to be earned rather than assigned.</p>
 <p><strong>Task.</strong> My charge was to make human factors something teams wanted early rather than something that happened to them late.</p>
-<p class="flow"><strong>Action.</strong> The move that worked was bringing constraints instead of verdicts. Rather than reviewing a design and listing problems, I'd arrive at concept stage with the envelope — reach and anatomical safety limits for physical hardware, perceptual thresholds for latency and feedback, criteria for screen layout. On one hardware program I brought the reach envelope into the concept review rather than the design review, and a control placement moved before any tooling existed — cheap then, expensive three months later. I also made a rule of never giving a finding without a candidate direction, even a bad one, because a finding with no path forward puts the whole cost of the problem on the designer.</p>
+<p class="flow"><strong>Action.</strong> The move that worked was bringing constraints instead of verdicts. Rather than reviewing a design and listing problems, I'd arrive at concept stage with the envelope — reach and anatomical safety limits for hardware, perceptual thresholds for latency and feedback, criteria for screen layout. On one hardware program I brought the reach envelope into the concept review rather than the design review, and a control placement moved before any tooling existed — cheap then, expensive three months later. I also made a rule of never giving a finding without a candidate direction, because a finding with no path forward puts the whole cost of the problem on the designer.</p>
 <p><strong>Result.</strong> The hardware teams started pulling me into concept reviews by default, which is the only durable version of this.</p>
 <p><strong>Earned secret.</strong> Human factors gets treated as a gate when it arrives late and as a partner when it arrives early — and that's almost entirely within my control, not theirs.</p>
 <p><strong>Mechanism.</strong> What I left behind was the org-wide usability criteria those teams now design against.&quot;</p>
@@ -569,8 +572,8 @@ a { color: #14507d; }
 <h3>Model answer (~225 words / 92s)</h3>
 <div class="answer">
 <p><strong>The claim.</strong> &quot;Best practice transfers by artifact, not by review. If the only way the team gets a good requirement is for me to look at it, I haven't raised the practice — I've become a bottleneck.</p>
-<p class="flow"><strong>How I'd know.</strong> I'd start by reading what the team already writes, because the failure mode is usually specific. The common one is a requirement that's true but unverifiable — <em>the system shall provide clear feedback</em> — clear to whom, measured how, and what counts as passing. The other is a number with no recorded source, which nobody can defend two years later when it's challenged. So I'd give the team a template with four slots every design input has to fill: the observation it came from, the number and its tolerance, the verification method, and the risk-file entry it supports. The mentoring happens in the gap between the template and the draft — reviewing against a shared standard is teaching, reviewing against my taste is gatekeeping.</p>
-<p class="flow"><strong>Evidence, and where it stops.</strong> At EchoStar I built the function where none existed, and what scaled was the written criteria rather than my reviews. The limit is real: I've set practice for cross-functional partners and been the only human factors person in the room, but I haven't managed a team of human factors engineers. Coaching a peer and owning someone's growth are different jobs.</p>
+<p class="flow"><strong>How I'd know.</strong> I'd start by reading what the team already writes, because the failure mode is usually specific. The common one is a requirement that's true but unverifiable — <em>the system shall provide clear feedback</em> — clear to whom, measured how, and what counts as passing. The other is a number with no recorded source, which nobody can defend two years later. So I'd give the team a template with four slots every design input has to fill: the observation it came from, the number and its tolerance, the verification method, and the risk-file entry it supports. The mentoring happens in the gap between the template and the draft — reviewing against a shared standard is teaching, reviewing against my taste is gatekeeping.</p>
+<p class="flow"><strong>Evidence, and where it stops.</strong> At EchoStar I built the function where none existed <em>[CONFIRM]</em>, and what scaled was the written criteria rather than my reviews. The limit is real: I've mentored junior designers and researchers since Amazon and set practice for cross-functional partners, but I haven't managed a team of human factors engineers. Coaching a peer and owning someone's growth are different jobs.</p>
 <p><strong>The decision it drives.</strong> The test is whether a requirement written without me is one I'd have signed.</p>
 <p><strong>What would change my mind.</strong> If the drafts are already well-formed and what's thin is the evidence behind them, the problem isn't requirements practice — it's research practice, and I'd be fixing the wrong thing. So I'd read real design inputs before proposing anything.&quot;</p>
 </div>
@@ -605,6 +608,9 @@ a { color: #14507d; }
 <p><strong>The decision it drives.</strong> The output is the critical task list plus controls, each tied to the scenario it came from. And the ordering isn't a preference, it's the risk control hierarchy — I changed the layout rather than adding a warning, because a label is the weakest control there is.</p>
 <p><strong>Earned secret.</strong> That was a use-related risk analysis before I had the regulatory vocabulary for it. The uFMEA and the hazard-related use scenario chain are the same reasoning with different paperwork.&quot;</p>
 </div>
+<blockquote class="warn">
+<p>⚠️ <strong>Your résumé's NASA line says &quot;validated&quot; — the single most likely catch from someone who ran validation studies.</strong> If Elyse raises it: <em>&quot;Validated in the NASA sense: iterative testing against the task set. Not HF validation testing in the FDA sense, and I'd call it formative evidence.&quot;</em></p>
+</blockquote>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>F1 — &quot;How do you keep it from becoming a spreadsheet nobody reads?&quot;</strong> <em>(~60 words)</em></p>
 <blockquote class="say">
@@ -640,7 +646,7 @@ a { color: #14507d; }
 <p><strong>The claim.</strong> &quot;I own the front half of the design control chain, and it isn't finished until the back half can run without me.</p>
 <p class="flow"><strong>How I'd know.</strong> User needs, then design inputs that are verifiable, then outputs, then verification — did we build it right — then validation, did we build the right thing, with real users doing real tasks. Human factors sits on both ends of that, which is exactly why the handoff matters: the critical tasks and use scenarios validation gets built from are decided upstream, long before anyone writes a protocol.</p>
 <p class="flow"><strong>What I'd hand over.</strong> The critical task list with the severity rationale attached, the use scenarios written in the language of the procedure, the use-related risk analysis with every control traced to the scenario that produced it, and the formative evidence that each control actually worked. If the validation team is discovering a critical task for the first time, I failed upstream — that's a rework cycle I caused.</p>
-<p><strong>Evidence, and where it stops.</strong> I've built the analysis and the traceability, at NASA against MIL-STD-1472 and NASA-STD-3001. I have not written a validation protocol for a submission or defended one. That's the honest boundary, and it's the part I'd want to learn from the people who have.</p>
+<p class="flow"><strong>Evidence, and where it stops.</strong> I've built the analysis and the traceability <em>[CONFIRM — if NASA produced a uFMEA but no formal traceability matrix, say &quot;the analysis&quot; only]</em>, at NASA against MIL-STD-1472 and NASA-STD-3001. I have not written a validation protocol for a submission or defended one. That's the honest boundary, and it's the part I'd want to learn from the people who have.</p>
 <p><strong>What would change my mind.</strong> The measure is rework. If validation keeps sending things back, my critical task list was wrong — not their sampling.&quot;</p>
 </div>
 <h3>Follow-ups</h3>
@@ -677,7 +683,7 @@ a { color: #14507d; }
 <p><strong>Situation.</strong> &quot;My clinical grounding comes from the Clinical Neuroscience Laboratory at Brigham and Women's, at Harvard Medical School.</p>
 <p class="flow"><strong>Task.</strong> I coordinated clinical research protocols and led data collection for large-scale functional neuroimaging and physiological stress studies — fMRI, cardiovagal and heart-rate-variability telemetry, cortisol response curves, and behavioral performance under acute stress — on longitudinal data for large patient cohorts, alongside work with psychiatrists and patients with depression, including transcutaneous vagal nerve stimulation studies. <em>[CONFIRM wording]</em></p>
 <p class="flow"><strong>Action.</strong> Two things came out of that. First, procedural discipline: IRB protocols, HIPAA requirements, federal clinical research standards, on data where getting it wrong has real consequences for real patients. Second, how to behave in a clinical environment. You're a guest, your study is the least important thing happening in the room, and the fastest way to lose access is to cost a clinician time they didn't agree to give. So I over-prepare — I learn the procedure before I show up, so I'm asking about someone's reasoning rather than making them narrate steps I could have read.</p>
-<p><strong>Result.</strong> I can operate in a hospital without being a liability, and my international field research in Latin America covers working across language and cultural context.</p>
+<p><strong>Result.</strong> I can operate in a hospital without being a liability, and my international field research covers working across language and cultural context.</p>
 <p><strong>Earned secret.</strong> My job in an operating room is to be the least disruptive person in it and still leave with the observation nobody wrote down.</p>
 <p><strong>Mechanism.</strong> And the way I earn a surgeon's second hour is by showing what changed because of the first one.&quot;</p>
 </div>

@@ -184,8 +184,11 @@ a { color: #14507d; }
   a { color: inherit; text-decoration: none; }
 
   /* Every column spanner closes both columns early, which is why the compact doc once
-     dropped them all. At the 14-page budget consistency wins: every grey-bar heading and
-     every Part divider spans, so no question header renders at half width. */
+     dropped them all. At the 14-page budget Part dividers and question headers span, so no
+     question header renders at half width. Reference-section headings stay in-column as their
+     own tier: spanning them costs a page and strands them, since Chrome ignores break-after
+     on a spanner. */
+  body.compact h2 { column-span: none; }
   /* The clock is the only table here and fits a column, so it need not close both. */
   body.compact table { column-span: none; font-size: 8.1pt; break-inside: avoid; }
   body.compact .calibration { break-inside: avoid; }
