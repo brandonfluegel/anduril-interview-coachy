@@ -152,7 +152,6 @@ a { color: #14507d; }
   /* Every column spanner closes both columns early. A long doc amortizes that;
      a short one pays a partial column each time, so compact keeps questions in-column.
      Dropping the spanner also restores break-after: avoid, which Chrome ignores on spanners. */
-  body.compact .qhead { column-span: none; }
   body.compact .parthead { column-span: none; }
   body.compact h2 { column-span: none; }
   /* The clock is the only table here and fits a column, so it need not close both. */
