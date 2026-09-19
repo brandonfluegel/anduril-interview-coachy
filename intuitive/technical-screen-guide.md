@@ -19,8 +19,8 @@
 
 - **Echo Hub:** in-home contextual inquiry in **Seattle and Denver**, **no internal usage data**, and a say/do gap — people praised the display but used phone workarounds. Proximity and approach became key inputs.
 - **Uber Brazil:** rental-driver app built from ride-alongs and contextual inquiry, done with a translator. **+5% retention** against the prior version.
-- **NASA Lunar Gateway:** rudimentary prototype in simulated microgravity (Oculus Rift), three to four high-priority medical scenarios, uFMEA. Failure modes came from **adjacent controls with different severity consequences**; separating them over three to four iterations addressed them. The **30% time reduction was incidental, not the goal.**
-- **Laparoscopic thesis:** box trainer, real laparoscopic instruments, ring-and-peg transfer. Participants were *[CONFIRM: medical students, as I said Friday]*. Finding: interruptions produced a resumption lag that distractions didn't, and irrelevant interruptions cost more than procedure-relevant ones. **Dissertation:** medical data entry, interruptions, multiple resource theory.
+- **NASA Lunar Gateway:** rudimentary prototype in simulated microgravity (Oculus Rift), three to four high-priority medical scenarios, uFMEA. Failure modes came from **adjacent controls with different severity consequences**, separated over three to four iterations. The **30% time reduction was incidental, not the goal.**
+- **Laparoscopic thesis:** box trainer, real instruments, ring-and-peg transfer. Participants were *[CONFIRM: medical students, as I said Friday]*. Finding: interruptions produced a resumption lag that distractions didn't, and irrelevant interruptions cost more than procedure-relevant ones. **Dissertation:** medical data entry, interruptions, multiple resource theory.
 - **Brigham:** work with psychiatrists and depressed patient populations, including transcutaneous vagal nerve stimulation.
 - **Regulatory:** I stated plainly that I have **no FDA submission experience**, and bridged from MIL-STD-1472 and NASA-STD-3001.
 - **Residual risk:** Augustina corrected me. The team uses **pre-established acceptability criteria**, keeps the risk file as a **living document**, and **mitigates through design first.**
@@ -60,7 +60,7 @@ You get **ten to fourteen exchanges.** The risk at this length is running thin, 
 
 **Structure B — method, technical.** Claim 20–30 · How I'd know 40–60 · Evidence and where it stops 40–60 · The decision it drives 30–45 · What would change my mind 20–35. **160–230 words ≈ 65–90 seconds.**
 
-Both ask method questions for a living, and a story in answer to *"how would you define that workflow"* reads as never having done one. **Register:** delete the hedges — *"I sort of drove," "they let me," "I was involved in"* — and no *"AI," "engagement," "scale," "delight."*
+Both ask method questions for a living, and a story in answer to *"how would you define that workflow"* reads as never having done one. **Register:** delete the hedges — *"I sort of drove," "they let me," "I was involved in."*
 
 ---
 
@@ -109,7 +109,7 @@ Both ask method questions for a living, and a story in answer to *"how would you
 
 > **Base:** "How comfortable are you on the robotics side?" / "What's your experience with teleoperation or control systems?" / "How technical do you get with the engineering team?"
 
-You're interviewing at a surgical robotics company, with two engineers. Sibling Design Engineer postings list robotics depth — kinematics and mechanisms, sensing and perception, control systems, programming and simulation — as a *required* skill, and open on *tele-operations, motion control, haptics.* Those aren't Reema's team and may not be her bar, but the question is live and you have no prepared boundary for it.
+You're at a surgical robotics company, with two engineers. Sibling Design Engineer postings list robotics depth — kinematics, sensing, control systems, programming and simulation — as *required*, and open on *tele-operations, motion control, haptics.* Not Reema's team, but the question is live.
 
 > ⚠️ **CONFIRM your actual programming and simulation level** before you say this one. The beat below claims you read kinematics and control well enough to argue productively and to specify against real hardware — not that you build controllers. If you do more than that, raise it. If you do less, cut the clause.
 
@@ -154,7 +154,7 @@ You're interviewing at a surgical robotics company, with two engineers. Sibling 
 
 This is the answer Reema pointed at when she said early-stage new product development. If only one answer lands today, make it this one.
 
-> ⚠️ **CONFIRM this whole answer against what actually happened.** It's reconstructed from your résumé and from what Echo Hub shipped — the shape is right and the details are plausible, but these two will probe them and you need them to be true.
+> ⚠️ **CONFIRM the specifics against what actually happened.** The shape is right, but these two will probe the details and you need them to be true.
 
 ### Model answer (~230 words / 94s)
 
@@ -360,7 +360,6 @@ This is the answer Reema pointed at when she said early-stage new product develo
 ## If they hand you a scenario or a device
 
 Same six steps as MQ04, said out loud before you start — naming the method is half the signal.
-
 1. **Users, uses, environment.** Who touches it, which procedure phase, sterile or non-sterile.
 2. **Task decomposition.** Steps at a level where each one can fail.
 3. **Failure modes per step.** Omission, wrong sequence, wrong object, wrong timing.
@@ -421,7 +420,7 @@ They have met human factors people who show up at the end with a list. On a desi
 
 > **Base:** "Have you mentored other researchers or engineers?" / "How would you help us level up how we write requirements?" / "How do you establish best practices on a team?"
 
-Friday they said they are **building the muscle of turning user needs into requirements** and want someone who can mentor and set best practices. That is a Lead/Staff lever handed to you in advance. Don't retell the EchoStar criteria story if you already used it in EQ08 — lead on the requirements standard instead.
+Friday they said they are **building the muscle of turning user needs into requirements** and want someone who can mentor and set best practices — a Lead/Staff lever handed to you in advance. Don't retell the EchoStar criteria story if you used it in EQ08; lead on the requirements standard.
 
 > ⚠️ **CONFIRM your actual mentoring history** before you say the limit beat. As written it claims you set practice for cross-functional partners and were the only HF person in the room — not that you managed HF engineers. Adjust it to what's true; the beat only works if it's exact.
 
@@ -484,11 +483,7 @@ Design Engineering owns this analysis up to the validation handoff, and it carri
 
 > "You analyze it like any other interface element, because it is one. A confirmation step added to prevent one error creates its own failure modes — habituation, and the error of confirming reflexively. So a risk control isn't finished when it's specified. It's finished when it's been evaluated for the errors it introduces as well as the ones it prevents."
 
-**F3 — "How did you decide which tasks were critical?"** *(~55 words)*
-
-> "You can't estimate the probability of a use error reliably, which is exactly why the framework prioritizes on severity. So the question is never 'how likely is this' but 'what happens to the patient if it does' — and anything with an irreversible outcome goes on the list regardless of how rare it looks."
-
-**F4 — "When is residual risk acceptable?"** *(~60 words)*
+**F3 — "When is residual risk acceptable?"** *(~60 words)*
 
 > "Acceptability isn't negotiated case by case. It's defined in the risk management plan before any hazard is analyzed. I drive each use-related risk down the control hierarchy — design it out, then protective measures, then information for safety — verify the controls work, and evaluate what remains against those criteria. Overall residual risk is weighed against clinical benefit. My job is making sure nothing is residual by omission."
 
@@ -507,7 +502,7 @@ Design Engineering owns this analysis up to the validation handoff, and it carri
 
 > **Base:** "How does your work fit into design controls?" / "What would you hand to the validation team?" / "Walk me from user needs through to validation."
 
-Friday confirmed a **separate validation team.** So the live question isn't whether you can run validation — it's whether what you produce lands there without rework. Don't re-explain the hazard chain; you did that in MQ02.
+Friday confirmed a **separate validation team**, so the live question is whether what you produce lands there without rework. Don't re-explain the hazard chain; you did that in MQ02.
 
 ### Model answer (~195 words / 80s)
 
@@ -591,7 +586,7 @@ Friday confirmed a **separate validation team.** So the live question isn't whet
 
 > **Base:** "Tell me about a study that didn't go as planned." / "When has your research been wrong?"
 
-**Use the professional example.** You told this exact story Friday, so telling it again is consistency, not repetition. One beat on the study, the rest on the practice.
+**Use the professional example.** You told this story Friday, so repeating it is consistency. One beat on the study, the rest on the practice.
 
 > ⚠️ **Do not use the graduate task-resumption study here.** *[CONFIRM: is the 46-of-51 null the laparoscopic thesis?]* Friday you described that thesis as producing **real findings** — a resumption lag that distractions didn't produce. If it is the same study, calling it a null in front of Elyse is the single most catchable contradiction in this hour. The long-form graduate version is in the main guide; use it only if you confirm it was a **separate** study and you name it as separate.
 
@@ -653,30 +648,27 @@ Friday confirmed a **separate validation team.** So the live question isn't whet
 
 ## Boundaries live in this call
 
-> ⚠️ **fNIRS is Amazon. fMRI, ECG, cortisol, and tVNS are Brigham.** Never merged, and never a head-to-head claim that a biometric measure beat NASA-TLX. **$50M is the only dollar figure you ever say,** always attributed to Alexa Economics' model — no Echo metric beyond portfolio-level influence, nothing about Intuitive's internal process or roadmap, and Anduril never by name (*"in process elsewhere"* only if asked directly).
+> ⚠️ **fNIRS is Amazon. fMRI, ECG, cortisol, and tVNS are Brigham.** Never merged, and never a claim that a biometric beat NASA-TLX. **$50M is the only dollar figure you say,** always attributed to Alexa Economics' model. No Echo metric beyond portfolio level, nothing about Intuitive's internal process or roadmap, and Anduril never by name (*"in process elsewhere"* if asked directly).
 
-**Vocabulary that costs you here:** *user*, not operator · *patient safety*, not operator safety · *design input* **or** *requirement* — this team says "user needs and requirements," so mirror it · *risk control measure*, not guardrail · *use error* and *critical task*, not pain point · *validation testing*, not summative · *guidance*, not regulation · Findings are delivered as **finding → design impact → recommended change**; never lead with sample size.
+**Vocabulary that costs you here:** *user*, not operator · *patient safety*, not operator safety · *design input* **or** *requirement* — this team says "user needs and requirements" · *risk control measure*, not guardrail · *use error* and *critical task*, not pain point · *validation testing*, not summative · *guidance*, not regulation. No *"AI," "engagement," "scale," "delight."* Findings land as **finding → design impact → recommended change**; never lead with sample size.
 
 ## Ask these — two each, by name
 
 > **For Elyse:** *"How early does the use-related risk analysis start on a new program — is it shaping the concepts, or documenting them afterward?"* · *"Augustina mentioned validation sits with a separate team. What does a clean handoff from design engineering into validation look like — what do they need from you?"*
 
-> **For Valerie:** *"Where do findings from needs work formally land? Do they become design inputs directly, or go through a product requirements layer first?"* · *"How does the team get access to surgeons for generative work, and at what cadence?"*
+> **For Valerie:** *"Where do findings from needs work formally land — do they become design inputs directly, or go through a product requirements layer first?"* · *"How does the team get access to surgeons for generative work, and at what cadence?"*
 
 ## The last check, before you dial
 
-- ☐ Lead **upstream** — needs, workflow, interface design requirements, early prototypes — but never disclaim validation.
-- ☐ **Validation runs separately. Never call it junior or tactical.**
-- ☐ **Say "requirements" freely.** This team loves them, and is building that muscle.
+- ☐ Lead **upstream** — needs, workflow, requirements, early prototypes. But **validation runs separately**: never disclaim it, never call it junior or tactical.
+- ☐ **Say "requirements" freely** — this team is building that muscle. Findings land as **finding → design impact → recommended change**, never a report-style readout.
 - ☐ **They asked for mentoring and best practices by name.** SQ06 is ready — offer it if it doesn't come up.
 - ☐ **Residual risk is judged against pre-set criteria, not negotiated.**
 - ☐ Opener leads on *"I do my best work before there's a design to evaluate."* No EchoStar duration.
 - ☐ Robotics range: name the boundary, then show the adjacent expertise is deep.
 - ☐ **Force feedback already ships on da Vinci 5**, with a visual Force Gauge. Never treat it as hypothetical.
-- ☐ Findings land as **finding → design impact → recommended change.** Never a report-style readout.
 - ☐ Every answer ends on a design input or something I left behind, and every claim is followed by its limit.
 - ☐ Cognitive task analysis **generates.** Formative testing **evaluates.** Never synonyms.
 - ☐ **Laparoscopic thesis and Echo Hub details match the consistency log.** Thesis laparoscopy 2017, dissertation data entry 2020.
 - ☐ No requisitions, job codes, levels, or comp with these two. **Reema is the hiring manager** — that is her conversation.
-- ☐ Citations are to the field, and only after they raise the subject. When the answer lands, I stop.
-- ☐ **Every *[CONFIRM]* tag is resolved, or its line is cut.**
+- ☐ Citations are to the field, and only after they raise the subject. When the answer lands, I stop. **Every *[CONFIRM]* tag resolved, or its line cut.**

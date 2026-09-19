@@ -33,6 +33,8 @@ DOCS = {
         "title": "Intuitive Surgical — Technical Round",
         "break_before_part1": False,
         "body_class": "compact",
+        # Spanning headings leave more partial columns, so beats must break more readily.
+        "flow_chars": 300,
     },
 }
 
@@ -181,11 +183,9 @@ a { color: #14507d; }
   hr { display: none; }
   a { color: inherit; text-decoration: none; }
 
-  /* Every column spanner closes both columns early. A long doc amortizes that;
-     a short one pays a partial column each time, so compact keeps questions in-column.
-     Dropping the spanner also restores break-after: avoid, which Chrome ignores on spanners. */
-  body.compact .parthead { column-span: none; }
-  body.compact h2 { column-span: none; }
+  /* Every column spanner closes both columns early, which is why the compact doc once
+     dropped them all. At the 14-page budget consistency wins: every grey-bar heading and
+     every Part divider spans, so no question header renders at half width. */
   /* The clock is the only table here and fits a column, so it need not close both. */
   body.compact table { column-span: none; font-size: 8.1pt; break-inside: avoid; }
   body.compact .calibration { break-inside: avoid; }
