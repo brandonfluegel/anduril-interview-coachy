@@ -155,6 +155,8 @@ a { color: #14507d; }
      own tier: spanning them costs a page and strands them, since Chrome ignores break-after
      on a spanner. */
   body.compact h2 { column-span: none; }
+  /* 25 answers against a 20-page cap: a hair tighter than the long guide. */
+  body.compact { font-size: 9.6pt; line-height: 1.31; }
   /* The clock is the only table here and fits a column, so it need not close both. */
   body.compact table { column-span: none; font-size: 8.1pt; break-inside: avoid; }
   body.compact .calibration { break-inside: avoid; }

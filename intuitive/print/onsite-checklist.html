@@ -1,59 +1,10 @@
-"""Render an Intuitive interview doc into a print-ready HTML file.
-
-Run: python scripts/build_intuitive_html.py [guide|screen|all]
-Output: intuitive/print/*.html — open in a browser and Ctrl+P.
-
-Print layout is two-column at ~9.8pt.
-"""
-
-from __future__ import annotations
-
-import html
-import re
-import sys
-from pathlib import Path
-
-from markdown_it import MarkdownIt
-
-ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "intuitive" / "print"
-
-# break_before_part1 costs up to a page, so the short screen doc runs continuous.
-DOCS = {
-    "guide": {
-        "src": ROOT / "intuitive" / "intuitive-interview-guide.md",
-        "out": OUT / "intuitive-interview-guide.html",
-        "title": "Intuitive Surgical — Senior Human Factors Analyst",
-        "break_before_part1": True,
-        "body_class": "",
-    },
-    "screen": {
-        "src": ROOT / "intuitive" / "technical-screen-guide.md",
-        "out": OUT / "technical-screen-guide.html",
-        "title": "Intuitive Surgical — Onsite",
-        "break_before_part1": False,
-        "body_class": "compact",
-        # Spanning headings leave more partial columns, so beats must break more readily.
-        "flow_chars": 300,
-    },
-    "onsite": {
-        "src": ROOT / "intuitive" / "onsite-guide.md",
-        "out": OUT / "onsite-guide.html",
-        "title": "Intuitive Surgical — Onsite",
-        "break_before_part1": False,
-        "body_class": "compact",
-        "flow_chars": 300,
-    },
-    "checklist": {
-        "src": ROOT / "intuitive" / "onsite-checklist.md",
-        "out": OUT / "onsite-checklist.html",
-        "title": "Before the onsite — checklist",
-        "break_before_part1": False,
-        "body_class": "compact",
-    },
-}
-
-CSS = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before the onsite — checklist</title>
+<style>
 :root { color-scheme: light; }
 * { box-sizing: border-box; }
 body {
@@ -217,178 +168,62 @@ a { color: #14507d; }
     break-after: avoid; break-inside: avoid;
   }
 }
-"""
-
-PAGE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}</title>
-<style>{css}</style>
+</style>
 </head>
-<body class="{body_class}">
+<body class="compact">
 <main>
-{body}
+<h1>Before the onsite — checklist</h1>
+<h2>The call with Reema</h2>
+<blockquote class="note">
+<p><strong>Say:</strong> &quot;Before the onsite, can you walk me through how the job code is leveled, and whether this is scoped at Staff? I'm in final rounds elsewhere the same week, so understanding scope helps me plan.&quot;</p>
+</blockquote>
+<blockquote class="note">
+<p><strong>Say:</strong> &quot;Since we last spoke, I've gone deep on IEC 62366 and ISO 14971, particularly how critical tasks are derived and how validation is structured.&quot;</p>
+</blockquote>
+<ul>
+<li>☐ Ask about the format: who's on the panel by function, whether there's a presentation, and whether there's a one-on-one with her.</li>
+</ul>
+<h2>Fix the résumé</h2>
+<ul>
+<li>☐ Headline: <em>Human Factors Engineering | Safety-Critical &amp; Multimodal Systems.</em></li>
+<li>☐ Summary: <em>10+ years of applied human factors across industry, clinical, and government settings.</em></li>
+<li>☐ NASA: replace &quot;design validation&quot; with <em>formative simulated-use evaluation and uFMEA.</em></li>
+<li>☐ Uber: rewrite around consolidating rental-driver workflows (rental management, payments, and rides) into one app.</li>
+</ul>
+<h2>Facts to verify — resolve each one or cut the line</h2>
+<ul>
+<li>☐ Has the updated résumé been submitted? If not, drop &quot;ten-plus years&quot; from Tell me about yourself.</li>
+<li>☐ Echo Hub household count.</li>
+<li>☐ NASA final-round critical-error count, and whether a formal traceability matrix existed.</li>
+<li>☐ Your real programming and simulation level.</li>
+<li>☐ Mentoring scope: junior designers and researchers, and no human factors direct reports.</li>
+<li>☐ Uber's five percent: absolute or relative.</li>
+<li>☐ Whether the &quot;46-of-51 null&quot; is the laparoscopic study. If it is, delete it everywhere.</li>
+</ul>
+<h2>Every [CONFIRM] in the guide, by answer title</h2>
+<ul>
+<li>☐ <strong>Canonical facts:</strong> every NASA sentence, and no human factors direct reports.</li>
+<li>☐ <strong>Robotics and technical range:</strong> your real programming and simulation level.</li>
+<li>☐ <strong>Finding a need nobody had named:</strong> the household count.</li>
+<li>☐ <strong>Turning observations into requirements:</strong> the NASA haptic cue wasn't feasible (follow-up).</li>
+<li>☐ <strong>Prototyping and fidelity:</strong> the NASA VR iterations let engineers and clinicians disagree with a layout.</li>
+<li>☐ <strong>Disagreeing with engineering:</strong> what the cue signaled, that the haptic cue wasn't feasible, the visual and auditory substitution, and the documented residual risk.</li>
+<li>☐ <strong>Mentoring and best practices:</strong> no human factors direct reports.</li>
+<li>☐ <strong>The struggling mentee:</strong> what you adjusted.</li>
+<li>☐ <strong>Use-error analysis and residual risk:</strong> the final-round critical-error count.</li>
+<li>☐ <strong>Design controls and the validation handoff:</strong> whether a formal traceability matrix existed.</li>
+<li>☐ <strong>When you got it wrong:</strong> whether the 46-of-51 null is the laparoscopic thesis.</li>
+<li>☐ <strong>Held in reserve, Uber:</strong> whether the five percent was absolute.</li>
+</ul>
+<h2>Onsite logistics</h2>
+<ul>
+<li>☐ Book Sunnyvale and Irvine as one trip. Arrive the night before, and allow a 30-minute buffer.</li>
+<li>☐ If there's a presentation, rehearse it to 18 minutes for a 20-minute slot. Bring a PDF backup on a USB drive and in your email.</li>
+<li>☐ Bring printed copies of the updated résumé and a notebook. Write down each interviewer's name and one thing they said, for the thank-you notes.</li>
+<li>☐ Send thank-you notes within 24 hours: one line of personal reference each, plus one short sentence following through on anything you'd want to add.</li>
+<li>☐ Email Reema the same day. Restate your interest, name one thing that sharpened your thinking, and ask about timeline so you can line it up with your other process.</li>
+</ul>
+
 </main>
 </body>
 </html>
-"""
-
-
-# A beat longer than this can't fit a part-used column, so forcing it whole leaves a white gap.
-FLOW_CHARS = 480
-
-
-def _mark_long_beats(answer_block: str, flow_chars: int = FLOW_CHARS) -> str:
-    def tag(match: re.Match[str]) -> str:
-        para = match.group(0)
-        if len(re.sub(r"<[^>]+>", "", match.group(1))) > flow_chars:
-            return para.replace("<p>", '<p class="flow">', 1)
-        return para
-
-    return re.sub(r"<p>(.*?)</p>", tag, answer_block, flags=re.DOTALL)
-
-
-def wrap_part_heads(body: str) -> str:
-    """Keep a Part heading with whatever follows it, for the same spanner reason."""
-    pattern = re.compile(
-        r"(<h1(?: class=\"pagebreak\")?>Part [^<]*</h1>\s*)"
-        r"((?:<hr />\s*)?)"
-        r"(<div class=\"qhead\">.*?</div>\s*|<h2>.*?</h2>\s*|<p>.*?</p>\s*|<blockquote[^>]*>.*?</blockquote>\s*)?",
-        flags=re.DOTALL,
-    )
-
-    def wrap(match: re.Match[str]) -> str:
-        parts = "".join(p for p in match.groups() if p)
-        cls = "parthead pagebreak" if 'class="pagebreak"' in match.group(1) else "parthead"
-        return f'<div class="{cls}">\n{parts}</div>\n'
-
-    return pattern.sub(wrap, body)
-
-
-def wrap_question_heads(body: str) -> str:
-    """Chrome ignores break-after on column spanners, so bind each heading to its question."""
-    pattern = re.compile(
-        r"(<h2>(?:(?:EQ|MQ|RQ|SQ)\d+|[^<]*\u2014 Tier \d)[^<]*</h2>\s*)"
-        r"(<p class=\"meta\">.*?</p>\s*)?"
-        r"(<blockquote class=\"note\">.*?</blockquote>\s*)?",
-        flags=re.DOTALL,
-    )
-
-    def wrap(match: re.Match[str]) -> str:
-        parts = "".join(p for p in match.groups() if p)
-        return f'<div class="qhead">\n{parts}</div>\n'
-
-    return pattern.sub(wrap, body)
-
-
-def wrap_model_answers(
-    body: str, break_before_part1: bool = True, flow_chars: int = FLOW_CHARS
-) -> str:
-    """Group the paragraphs under a 'Model answer' heading so the spoken block reads as one unit."""
-    pattern = re.compile(
-        r"(<h3>(?:Model answer[^<]*|Answer)</h3>\s*)((?:<p>(?:(?!</?h[1-4]|<blockquote|<hr).)*?</p>\s*)+)",
-        flags=re.DOTALL,
-    )
-    body = pattern.sub(
-        lambda m: f'{m.group(1)}<div class="answer">\n{_mark_long_beats(m.group(2), flow_chars)}</div>\n',
-        body,
-    )
-
-    # The calibration list is reference, not rehearsal, so it reads smaller.
-    calib = re.compile(
-        r"(<h3>(?:Senior \u2192 Staff-signal|The Staff-signal|Say this)</h3>\s*)(<ul>.*?</ul>)", flags=re.DOTALL
-    )
-    body = calib.sub(lambda m: f'{m.group(1)}<div class="calibration">{m.group(2)}</div>', body)
-
-    meta = re.compile(r"<p>(<strong>Asked by:</strong>.*?)</p>", flags=re.DOTALL)
-    body = meta.sub(lambda m: f'<p class="meta">{m.group(1)}</p>', body)
-
-    # The rehearsal section starts a fresh page so EQ01 isn't stranded under the front matter.
-    if break_before_part1:
-        body = body.replace("<h1>Part 1 ", '<h1 class="pagebreak">Part 1 ', 1)
-    return body
-
-
-def classify_blockquotes(body: str) -> str:
-    """Warnings, coaching asides and spoken lines all render as plain blockquotes; separate them."""
-
-    def tag(match: re.Match[str]) -> str:
-        opening = match.group(1)
-        if opening.startswith("\u26a0"):
-            kind = "warn"
-        elif opening.startswith("<strong>"):
-            kind = "note"
-        else:
-            kind = "say"
-        return f'<blockquote class="{kind}">\n<p>{opening}'
-
-    return re.sub(r"<blockquote>\s*<p>(.{0,12})", tag, body, flags=re.DOTALL)
-
-
-def style_labels(body: str, compact: bool = False, flow_chars: int = FLOW_CHARS) -> str:
-    """Give follow-up labels and `[[card]]`-marked paragraphs their own classes."""
-    if compact:
-        body = re.sub(
-            r"<p>(<strong>(?:F\d+ \u2014|Follow-up:).*?)</p>",
-            lambda m: f'<p class="fq">{m.group(1)}</p>',
-            body,
-            flags=re.DOTALL,
-        )
-        body = _flow_long_quotes(body, flow_chars)
-    return re.sub(r"<p>\[\[card\]\]\s*", '<p class="card">', body)
-
-
-def _flow_long_quotes(body: str, flow_chars: int = FLOW_CHARS) -> str:
-    """A quote taller than a part-used column strands the rest of it, so let big ones break."""
-
-    def tag(match: re.Match[str]) -> str:
-        if len(re.sub(r"<[^>]+>", "", match.group(2))) > FLOW_CHARS:
-            return match.group(0).replace(
-                f'class="{match.group(1)}"', f'class="{match.group(1)} flow"', 1
-            )
-        return match.group(0)
-
-    return re.sub(
-        r'<blockquote class="(warn|say)">(.*?)</blockquote>', tag, body, flags=re.DOTALL
-    )
-
-
-def main() -> None:
-    keys = sys.argv[1:] or ["all"]
-    if keys == ["all"]:
-        keys = list(DOCS)
-
-    md = MarkdownIt("commonmark", {"html": True}).enable("table")
-    OUT.mkdir(parents=True, exist_ok=True)
-
-    for key in keys:
-        doc = DOCS[key]
-        body = wrap_part_heads(
-            style_labels(
-                wrap_question_heads(
-                    wrap_model_answers(
-                        classify_blockquotes(md.render(doc["src"].read_text(encoding="utf-8"))),
-                        break_before_part1=doc["break_before_part1"],
-                        flow_chars=doc.get("flow_chars", FLOW_CHARS),
-                    )
-                ),
-                compact=doc["body_class"] == "compact",
-                flow_chars=doc.get("flow_chars", FLOW_CHARS),
-            )
-        )
-        doc["out"].write_text(
-            PAGE.format(
-                title=html.escape(doc["title"]),
-                css=CSS,
-                body=body,
-                body_class=doc["body_class"],
-            ),
-            encoding="utf-8",
-        )
-        print(f"  {doc['src'].name} -> {doc['out'].relative_to(ROOT)}")
-
-
-if __name__ == "__main__":
-    main()
