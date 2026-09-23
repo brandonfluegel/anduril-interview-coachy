@@ -8,12 +8,12 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 1. **Who I am and why I'm here.** My background, my reasons, and the level question.
 2. **The presentation.** The hook, Echo Hub (contextual inquiry, RIDE, and the Alexa latency work as its twenty percent), NASA, the EchoStar coda, the thirty-sixty-ninety, and the Q&A.
-3. **My stories.** The six behavioral stories, each with one lesson.
+3. **My stories.** The seven behavioral stories, each with one lesson.
 4. **How I work with a team.** Constraints early, the build loop, speed, and scaling the practice.
 5. **Field research with operators.** How I learn what operators actually do, and where they fail.
 6. **Turning human data into numbers.** Thresholds, measurement, and quantitative rigor.
 7. **Operators, automation, and alerts.** The science of attention, trust, and degraded operation.
-8. **The design exercise.** How I open, and two worked hypotheticals.
+8. **The design exercise.** How I open, and three worked hypotheticals.
 9. **Communicating findings.** Readouts, bad news, storytelling, and "I don't know."
 10. **The day itself.** The rooms, the people, the closing scripts, and the last check.
 
@@ -30,9 +30,9 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 >
 > Everything else in Tier 1 comes after these eight are fluent.
 
-**Tier 1: rehearse out loud until fluent.** Tell me about yourself; Why Anduril Air Defense; Mission conviction; Researcher or engineer?; Why leave a Staff role for Senior; Presentation and Q&A pre-loads; When you got it wrong (Echo Show benchmark); Disagreeing with engineering (Alexa latency targets); Conflict resolution; Research ops and repositories; Setting a number from human data (latency psychophysics); Automation trust and calibrated friction; I read your research response; Researching degraded conditions; The opening move; Variant A: stand up a research plan; Variant B: a human factors design problem; BLUF readout; The "I don't know" answer; Level, compensation, and closing scripts.
+**Tier 1: rehearse out loud until fluent.** Tell me about yourself; Why Anduril Air Defense; Mission conviction; Researcher or engineer?; Why leave a Staff role for Senior; Presentation and Q&A pre-loads; When you got it wrong (Echo Show benchmark); Disagreeing with engineering (Alexa latency targets); Conflict resolution; Research ops and repositories; Setting a number from human data (latency psychophysics); Automation trust and calibrated friction; I read your research response; Researching degraded conditions; The opening move; Variant A: stand up a research plan; Variant B: a human factors design problem; Variant C: one operator, thirty minutes; BLUF readout; The "I don't know" answer; Level, compensation, and closing scripts.
 
-**Tier 2: know the main point.** Biggest weakness; How you like to be managed; Disagreeing when it's infeasible (NASA haptic); Influence without authority; Mentorship; Working with designers and engineers; How involved I get (RIDE); Moving fast under ambiguity; Best practice across Anduril; Situational rapid-fire; Contextual inquiry and rapid field ethnography; Focus groups and group methods with operators; Service blueprints; Usability testing with small n; Usability FMEA and use-error analysis; Quantitative rigor; Surveys and MaxDiff; Measuring workload in the field; Situation awareness; Team and crew research; If they hand you a scenario or a system; Delivering bad news to a PM; Explaining a complex method in sixty seconds; Storytelling to align stakeholders; Tailoring by audience.
+**Tier 2: know the main point.** Biggest weakness; How you like to be managed; Disagreeing when it's infeasible (NASA haptic); When the designer was right; Influence without authority; Mentorship; Working with designers and engineers; How involved I get (RIDE); Moving fast under ambiguity; Best practice across Anduril; Situational rapid-fire; Contextual inquiry and rapid field ethnography; Focus groups and group methods with operators; Service blueprints; Usability testing with small n; Usability FMEA and use-error analysis; Quantitative rigor; Surveys and MaxDiff; Measuring workload in the field; Situation awareness; Team and crew research; If they hand you a scenario or a system; Delivering bad news to a PM; Explaining a complex method in sixty seconds; Storytelling to align stakeholders; Tailoring by audience; AI in my own workflow.
 
 **Tier 3: read twice.** Workshops and co-creation; Uber Brazil; Military human factors standards and HSI; Choosing visual, audio, or haptic; The patent; Principles for Agentic Trust (only if asked); Reference cards.
 
@@ -46,6 +46,7 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 **How I answer.**
 
 - Every answer runs sixty to a hundred and ten seconds. It ends on a decision, a requirement, or an artifact, and then it stops.
+- Follow-ups run 45–90 words. Answer the one thing asked, then stop. Never re-narrate the story.
 - I ask clarifying questions before I solve anything. "I don't know," followed by how I'd find out, beats any guess.
 - I don't hedge. I never say "sort of," "kind of," or "they let me," and I never run down my own methods.
 - I let each interviewer describe their work before I describe it back. I attribute what I heard, and I never reveal that I researched anyone.
@@ -61,7 +62,7 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 **What I claim.**
 
 - I use Resume B titles only. I say EchoStar "since June 2025," never a duration, and "six-plus years" of industry experience.
-- Fifty million dollars is the only dollar figure I say, and it is always "projected" by Alexa Economics' model. I share no other Echo metrics.
+- Fifty million dollars is the only dollar figure I say, and it is always "projected" by an economics team's model. I share no other Echo metrics.
 - Every percentage I say, I can define in one sentence: the metric, the baseline, and the comparison. If I can't, I don't say the number.
 - fNIRS was Amazon, and fMRI and physiological stress measures were Brigham. I never merge them, and I never claim a biometric beat NASA-TLX.
 - NASA was "formative simulated-use evaluation," not "validation," and the thirty percent was a side effect.
@@ -72,15 +73,16 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 - I never volunteer a lack of operator experience. If asked, I give one honest sentence and then the reframe in Part 10.
 - I never express doubt about UX research as a discipline, and I never run down consumer tech. I explain the transfer instead.
 - I never name the other company. I say "final rounds elsewhere."
+- I never say "co-invented," "most of my work has been lab and simulator," "best-authorized," or "I haven't worked in defense," and I never name Calibrated Cognitive Friction.
 - Compensation comes up only with the recruiter, or with the hiring manager if she raises it. I never state current compensation, and I never say "downlevel."
 
 ## Facts I say out loud
 
-- I've been at EchoStar since June 2025 as a Staff Product Researcher. I built a net-new human factors function there, and I report to the VP of Product.
+- I've been at EchoStar since June 2025 as a Staff Product Researcher, working on Sling, which is part of EchoStar. I built a net-new human factors function there, and I report to the VP of Product.
 - From November 2024 to June 2025, I was a Managing Scientist in Human Factors at J.S. Held. It taught me I want to own a product line, not rotate across clients.
 - From June 2020 to November 2024, I spent four and a half years in Amazon's Devices Design Group as a UX Researcher II in human factors. I was the sole human factors researcher in the group.
 - At Amazon, I earned patent US-12532040-B1 and a 2023 Amazon Inventor Award for context-aware multimodal interaction.
-- Alexa Economics' model projected about fifty million dollars over fifteen months from the latency work. I always say "projected."
+- An economics team's model projected about fifty million dollars over fifteen months from the latency work. I always say "projected."
 - My "Principles for Agentic Trust" framework was accepted at ACM CSCW 2026, in Industry Perspectives.
 - From 2018 to 2019, I was a PhD intern at NASA Langley on the Lunar Gateway medical workstation. The work was formative simulated-use evaluation.
 - In 2017, at Mercedes-Benz, I ran simulator studies of takeover alerts in Level 2 and Level 3 handovers, and the guidelines improved control-transition safety and trust ratings. **I say no percentage.** If someone cites the twenty-four percent from a resume, I say, "That came from the simulator study's ratings. The claim I stand on is that the guidelines improved control-transition safety and trust ratings."
@@ -134,6 +136,12 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 **The field.** The twenty-five to thirty percent travel is a plus for me. I do my best work when I'm out watching people do the job.
 
 > ⚠️ **No speculation about programs, deployments, or who buys them.** Cite only the posting and public announcements.
+
+### Follow-ups
+
+**Follow-up: "Can research keep up with months, not years?"**
+
+> Mostly, yes. It breaks on vigilance, fatigue, and skill retention. Those can't be compressed, so I say that up front and tell you what we can know inside the window.
 
 ### Say this
 
@@ -251,6 +259,8 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 |---|---|
 | Hook | 3 |
 | Echo Hub: contextual inquiry, RIDE, and the Alexa latency work | 18 |
+| — of which, contextual inquiry and RIDE (beats 2–3) | ~11 |
+| — of which, the latency work (beats 4–9) | ~7 |
 | NASA | 10 |
 | EchoStar coda | 2 |
 | Thirty-sixty-ninety and why Air Defense | 5 |
@@ -260,7 +270,7 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 ### Answer
 
-**The hook.** Today I'll show you two projects with the same shape. Eighty percent of the work is rapid field and qualitative research. Twenty percent is the quantitative and human factors layer that makes each requirement defensible, and on Echo Hub, I'll show you what that layer was worth to engineering. Then I'll close with what I've been building since, and what my first ninety days here would look like.
+**The hook.** Today I'll show you two projects with the same shape. Eighty percent of the work is rapid field and qualitative research. Twenty percent is the quantitative and human factors layer that makes each requirement defensible, and on Echo Hub, I'll show you what that layer was worth to engineering. Then I'll close with what I've been building since, and what my first ninety days here would look like. I'll go deep on method and thresholds, and keep internal figures and competitive benchmarking out of it.
 
 **Echo Hub, the eighty percent.** I ran in-home contextual inquiry in about a dozen households in Seattle and Denver. People praised the panel, then reached for their phones. That compensating behavior became the shall statement: the device shall resolve to the controls relevant to that room and time of day, before the user reaches it. It's verified by approach-distance testing against the glance-legibility criterion.
 
@@ -274,7 +284,7 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 **Echo Hub, what the latency work found.** The acceptable delay depended on what the person was trying to do. Interactions that stand in for a physical action needed to come back in about half a second. For conversational responses, coming back too fast felt wrong too, so the spec needed a lower bound as well as an upper one. The output was a two-tier spec with pass criteria for each interaction type, and engineering adopted it as their targets.
 
-**Echo Hub, the return.** The value to engineering was that they could stop chasing speed nobody could perceive and put the effort where delay actually hurt. Alexa Economics' model projected about fifty million dollars over fifteen months from that work. I'm careful to call it a projection from their model. What I own is the thresholds and the spec.
+**Echo Hub, the return.** The value to engineering was that they could stop chasing speed nobody could perceive and put the effort where delay actually hurt. An economics team's model projected about fifty million dollars over fifteen months from that work. I'm careful to call it a projection from their model. What I own is the thresholds and the spec. I also got a company metric renamed, because its name assumed the measured delay and the felt delay were the same thing. Both outlived me.
 
 **Echo Hub, the transfer.** Both halves carry over. The field work is the same problem as a display that several roles glance at from a distance while they're doing something else. The latency work is about a person waiting on an AI system to respond, and that timing requirement should come from people, measured under control. I'd bring the method, not the numbers, and since I held workload constant in that study, here I'd make operator load part of it.
 
@@ -288,11 +298,11 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 ### The thirty-sixty-ninety
 
-**By day thirty,** I'd embed. I'd shadow PMs and engineering, interview internal ex-military subject-matter experts and field engineers, read field and after-action reports, and map where decisions get made. The output is a readout from a first rapid study on a live decision, backed by a map of the research that already exists.
+**By day thirty,** I'd embed. I'd shadow PMs and engineering, interview internal ex-military subject-matter experts and field engineers, read field and after-action reports, and map where decisions get made. I'd give field test teams a three-to-four-item observation protocol, and consolidate every team's questions before any operator visit. The output is a readout from a first rapid study on a live decision, backed by a map of the research that already exists.
 
 **By day sixty,** I'd take my first field trip, to a test event or an exercise, and run contextual inquiry on one critical operator workflow. The output is a draft service blueprint and a lightweight insight repository that works inside the security constraints, on whatever tooling is approved. That's a question I'd ask on day one.
 
-**By day ninety,** I'd have version one of the blueprint, a first RIDE cycle on a shipping feature, and a workload and error baseline that extends beyond time on task. The output is a research roadmap tied to the product roadmap.
+**By day ninety,** I'd have version one of the blueprint, a first RIDE cycle on a shipping feature, and a workload and error baseline. The output is a research roadmap tied to the product roadmap.
 
 **The close, thirty seconds.** "So why Air Defense? The stakes are real, the operators are working under load, and the team ships in months. Most of what I bring is speed in the field, and the human factors rigor on top is what makes the requirements hold up."
 
@@ -316,7 +326,7 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 **Follow-up: "What did you cut for speed?"**
 
-> On Echo Hub, I cut a diary study and went straight to in-home visits. At NASA, I cut high-fidelity physical mockups and tested layouts in a VR simulation of the workstation. My rule is that I cut breadth before I cut the link to the decision, and I never cut the severity ranking.
+> On Echo Hub, I cut a diary study and went straight to in-home visits. At NASA, I cut high-fidelity physical mockups and tested layouts in a VR simulation of the workstation. My rule is that I cut breadth before I cut the link to the decision, and I never cut the severity ranking. I cut scope, never controls. Six people will find a threshold; six people won't find a preference.
 
 **Follow-up: "Isn't that a small sample?"**
 
@@ -348,11 +358,21 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 **Follow-up: "How was the fifty million calculated?"**
 
-> That came from Alexa Economics' model, and I didn't build it. What I can speak to is the thresholds and the spec it was based on, and I always describe the number as projected.
+> That came from an economics team's model, and I didn't build it. What I can speak to is the thresholds and the spec it was based on, and I always describe the number as projected.
 
 **Follow-up: "Have you worked with military operators?"**
 
 > Not military operators specifically. My users have been subject-matter experts on a spaceflight medical workstation, professional drivers in high-stress field conditions, and drivers taking over from automation. Military operators would be a new user group for me, but the problems are ones I've worked on for years, and my first sixty days are built around getting into the field with them.
+
+*Say this: "It's a new user group, but not a new set of problems."*
+
+**Follow-up: "What's the weakest part of that study?"**
+
+> The controlled setting. I stripped out the real context that comes with delay, like the light ring, the earcons, and background noise, and those probably change the answer. And I measured a judgment, not a behavior. Someone can tell me a response was fine and still quietly use the product less.
+
+**Follow-up: "What did you get wrong?"**
+
+> I shipped a single global threshold first, because that's what I'd been asked for. The data didn't support it, and I had to restructure the whole recommendation by interaction type. The lesson was that the shape of the deliverable is a research decision too.
 
 ### Say this
 
@@ -394,13 +414,13 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 **Task.** My job was to replace the guesses with numbers from people, without trying to win on rank. They were engineering's targets, and I didn't own them.
 
-**Action.** I didn't argue opinion against opinion. I proposed a measurement engineering could trust. I built a rig that set the delay on every trial, to the millisecond, across twelve interaction types. Then I wrote the result the way engineers write: a two-tier spec with pass criteria.
+**Action.** I didn't argue opinion against opinion. The sharpest pushback came from a principal engineer in a design review, over the half-second target. His position was that it was a feasibility question, and research should describe, not constrain. I didn't win that by arguing. I rewrote the recommendation as a pass/fail test: measure against the stated band, and it either clears or it doesn't. And I conceded where he was right, which is where the looser second band came from.
 
-**Result.** Engineering adopted the thresholds as their latency targets, and teams still design against the spec. Alexa Economics' model projected about fifty million dollars over fifteen months.
+**Result.** Engineering adopted the thresholds as their latency targets, and teams still design against the spec. An economics team's model projected about fifty million dollars over fifteen months.
 
 **Earned secret.** The acceptable number depends on what the user is trying to do. One target for everything is too strict for some tasks and too loose for others.
 
-**Mechanism.** The spec outlived the program, and teams still design against it. And the disagreement just went away once we had data, because neither of us was arguing from opinion anymore.
+**Mechanism.** The spec outlived the program. And once there was a test to pass, neither of us was arguing from opinion anymore.
 
 > ⚠️ **This is in the presentation now.** If they saw it, point back ("as in the latency work I presented") and tell only the disagreement: the targets weren't mine, and the data settled it rather than rank.
 
@@ -443,6 +463,24 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 **Action.** I granted the objection, because they were right about the hardware. Then I separated the need from the solution. The need was the information at the moment it mattered, so we carried it on visual and auditory channels, and I documented what we lost without touch.
 
 **Mechanism.** Because the gap stayed on the record, nobody had to rediscover it later. If the hardware ever changes, the next team will know what's missing.
+
+---
+
+## When the designer was right — Tier 2
+
+> **Question:** "When has a designer been right and your research wrong?"
+
+### Answer
+
+**Situation.** On the cognitive load work at Amazon, the eye tracking showed a region of the interface that people never looked at.
+
+**My read.** I read it as salience: make it louder, move it up.
+
+**What the designer saw.** A designer on the team saw it was task sequence. The region was never in anyone's scan path at the moment it mattered, so the fix was sequence, not styling.
+
+**Earned secret.** My measurement was authoritative about where the failure was, and it had almost nothing to say about why.
+
+> ⚠️ **If I can't place who, I say "a designer on the team."** I never quote words I'm not sure of.
 
 ---
 
@@ -524,7 +562,7 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 ### Answer
 
-**The claim.** I triage on a few things: how bad it is if the work doesn't happen, whether the decision is still open, and how big a claim the work has to support.
+**The claim.** I triage on four questions:<br>– Is the decision reversible?<br>– Do they need a direction or a number?<br>– Will it be quoted after I leave the room?<br>– Is the effect perceptual?
 
 **How I'd know.** Setting a threshold takes a real sample, but a quick check on direction doesn't. So on a short timeline, I shrink the question and the sample, and I say plainly what the smaller claim can support.
 
@@ -556,13 +594,13 @@ The guide is grouped by theme, not by interview room, so answers that support ea
 
 ### Answer
 
-**The claim.** For me, research ops is what keeps a study useful after it's done. It's really the pipeline from the field into decisions, more than any particular tool.
+**The claim.** Research ops is what keeps a study useful after it's done: the pipeline from the field into decisions, more than any tool.
 
-**How I'd know.** It starts with intake, where every request names the decision and the date. Then there's a decision log, where stakeholders pre-commit what each result changes. Then a field kit, so a trip is ready in days. Then a repository with a tagging taxonomy built around operator tasks and severity, so a finding from one test event shows up when another team hits the same task. A weekly readout keeps it visible. And a participant pipeline runs through the field and deployment teams, because getting time with operators is usually the hardest part.
+**How I'd know.** It starts with intake, where every request names the decision and the date. Then there's a decision log, where stakeholders pre-commit what each result changes. Then a field kit, so a trip is ready in days. Then a repository tagged by operator task and severity, so a finding from one test event shows up when another team hits the same task. A weekly readout keeps it visible. And a participant pipeline runs through the field and deployment teams, because operator time is usually the hardest part. Every finding's evidence tier, directional, threshold-grade, or decision-grade, is written on the artifact, and rough findings carry an expiry date.
 
-**Evidence, and where it stops.** The pre-commit rule came from my own failure at Amazon, and RIDE came from building the practice twice. I don't know what tooling is approved here, so that's a question I'd ask first, and I wouldn't assume a commercial research tool is cleared for sensitive material.
+**Evidence, and where it stops.** The pre-commit rule came from my own failure at Amazon, and RIDE came from building the practice twice. I don't know what tooling is approved here, so I'd ask first rather than assume a commercial tool is cleared for sensitive material. For findings that can't travel, I use two-tier synthesis: the generalizable pattern goes in the shared repository, and the restricted instance stays where it belongs, with a pointer to who can speak to it.
 
-**The decision it drives.** What I want is findings anyone on the team can look up, trace back to the evidence, and act on without needing me there.
+**The decision it drives.** What I want is findings anyone can look up, trace to the evidence, and act on without me.
 
 **What would change my mind.** If the team already has a repository nobody uses, I'd look at intake and tagging before blaming the tool.
 
@@ -578,7 +616,7 @@ Each of these is a sixty-second spine: the claim, how I'd know, and the decision
 
 **Follow-up: "A PM wants to ship tomorrow, and you have a safety concern."**
 
-> I'd name the specific risk and the scenario where it shows up, then offer the smallest mitigation that could still ship tomorrow. It's the PM's call to ship. My job is to make sure they make it with the risk on the table, in writing.
+> I'd name the specific risk and the scenario where it shows up, then offer the smallest mitigation that could still ship tomorrow. It's the PM's call to ship. My job is to make sure they make it with the risk on the table, in writing. My stop-ship line is catastrophic severity with no independent detection path. Below that, I document it and get risk acceptance from a named owner.
 
 **Follow-up: "Your field test event is cancelled the day before."**
 
@@ -674,7 +712,7 @@ Each of these is a sixty-second spine: the claim, how I'd know, and the decision
 
 **The claim.** I work it from both directions: top-down from the harms, and bottom-up, step by step. The places where the two don't line up are usually where the problems are.
 
-**How I'd know.** For each step, I ask whether the operator can perceive, understand, and act correctly. A failure at any of the three is a use-error mode, and I rank it by severity.
+**How I'd know.** For each step, I ask whether the operator can perceive, understand, and act correctly. A failure at any of the three is a use-error mode, and I rank it by severity. Detectability means whether the operator or system can catch the error before the consequence, not whether a lab test catches it.
 
 **Evidence, and where it stops.** At NASA, the worst failure modes came from adjacent controls with very different severity consequences, so a slip of the hand could trigger the wrong action. We fixed that in the layout itself rather than adding a warning. I'm careful to describe it as formative work on a small sample.
 
@@ -700,7 +738,7 @@ Each of these is a sixty-second spine: the claim, how I'd know, and the decision
 
 **How I'd know.** I built a Wizard-of-Oz rig that set the response delay on every trial, to the millisecond, across twelve interaction types. It looked and sounded real to the participant, but the timing was mine. That let me find, for each kind of request, where delay started to matter.
 
-**Evidence, and where it stops.** The spec had two tiers with pass criteria, and it was intent-dependent, because the data was. Alexa Economics' model projected about fifty million dollars over fifteen months. The limit I named is that workload was held constant. Here, I'd manipulate operator load, because a threshold that holds at rest may not hold under pressure.
+**Evidence, and where it stops.** The spec had two tiers with pass criteria, and it was intent-dependent, because the data was. An economics team's model projected about fifty million dollars over fifteen months. The limit I named is that workload was held constant. Here, I'd manipulate operator load, because a threshold that holds at rest may not hold under pressure.
 
 **The decision it drives.** The output is a threshold, a tolerance, and a pass criterion an engineer can test against without me in the room.
 
@@ -710,11 +748,19 @@ Each of these is a sixty-second spine: the claim, how I'd know, and the decision
 
 **Follow-up: "Did your work produce that fifty million?"**
 
-> That's Alexa Economics' projection from their model. I didn't measure it. What I own is the thresholds and the spec, and I always call it "projected."
+> That's a projection from an economics team's model. I didn't measure it. What I own is the thresholds and the spec, and I always call it "projected."
 
 **Follow-up: "What was the dependent measure, what procedure, and how did you pick the number?"**
 
-> The dependent measure was a three-point slowness rating. I chose it over a Likert scale because people notice when something feels slow much more than when it feels fast. It was a within-subjects design: each of thirty participants saw six fixed delay levels, from half a second to three seconds, across the twelve interaction types, for roughly two thousand trials. So it was a method of constant stimuli rather than a staircase. The two tiers are two pass levels per interaction type, read off that rating curve. I set each pass level using the distribution of individual ratings instead of the average, because if you build a spec on the average, you end up designing for the median user and missing everyone at the edges. I chose that cutoff deliberately and wrote down who it leaves out.
+> The dependent measure was a unipolar three-point slowness scale rather than a bipolar fast–slow scale, because people notice slowness, not speed. It was a within-subjects design: each of thirty participants saw six fixed delay levels, from half a second to three seconds, across the twelve interaction types, for about two thousand trials. So it was a method of constant stimuli rather than a staircase. The two tiers are two pass levels per interaction type, read off that rating curve. I set each pass level using the distribution of individual ratings instead of the average, because if you build a spec on the average, you end up designing for the median user and missing everyone at the edges. Every threshold shipped with four things: the line, its confidence interval, the slope of the curve there, and the mode and workload it applies to. Engineering built to the cautious end of the interval. The high tier is the delay where more than seventy percent rate it not slow and fewer than five percent rate it too slow. The acceptable tier is more than half not slow and under fifteen percent too slow.
+
+**Follow-up: "Why constant stimuli, not a staircase?"**
+
+> A staircase finds one point. I needed two lines plus the slope, and it's harder for engineers to accept.
+
+**Follow-up: "How was workload held constant?"**
+
+> People made the judgments during a light visual monitoring task at a fixed difficulty, set from a practice block. I ran NASA-TLX after each block as a manipulation check only, to confirm the load landed where I aimed it, not as a result.
 
 > ⚠️ **The dependent measure must match every other description of this program.** If they saw the presentation, point back and go straight to the procedure and the cutoff.
 
@@ -732,7 +778,7 @@ Each of these is a sixty-second spine: the claim, how I'd know, and the decision
 
 **The claim.** Most of my work is fast qualitative research. The quantitative layer is what makes a requirement defensible: psychophysics, cognitive load modeling, and surveys at scale.
 
-**Evidence, and where it stops.** The latency program is the clearest example. I analyze in R, with mixed-effects models and psychometric curve fitting, and I use Python for data cleaning and pipelines. I'm not a software engineer.
+**Evidence, and where it stops.** The latency program is the clearest example. I analyze in Python end to end: pandas for cleaning, statsmodels for mixed-effects models, and psychometric curve fitting on top. I'm not a software engineer.
 
 **The decision it drives.** I put quantitative effort where a number has to hold up under scrutiny, like a threshold an engineering team will build to and defend in a design review. Everywhere else, fast qualitative work gets the team further.
 
@@ -798,9 +844,9 @@ Each of these is a sixty-second spine: the claim, how I'd know, and the decision
 
 ### Answer
 
-**The claim.** What I'm after is appropriate reliance: operators accept correct recommendations quickly and catch the wrong ones. Trusting the system too much and trusting it too little are both problems.
+**The claim.** What I'm after is appropriate reliance: operators accept correct recommendations quickly and catch the wrong ones. Over-trust and under-trust are both problems.
 
-**How I'd know.** Lee and See, 2004, in *Human Factors*, frame trust as calibration to what the system can actually do. Parasuraman and Manzey, 2010, in *Human Factors*, show that complacency and automation bias show up when operators are juggling several tasks at once, rather than in simple single-task monitoring. Parasuraman, Sheridan, and Wickens, 2000, in *IEEE Transactions on Systems, Man, and Cybernetics*, give the levels of automation. So I measure reliance against how accurate the system actually is, instead of relying on trust ratings alone.
+**How I'd know.** Lee and See, 2004, in *Human Factors*, frame trust as calibration to what the system can actually do. Parasuraman and Manzey, 2010, in *Human Factors*, show that complacency and automation bias show up when operators are juggling several tasks at once, rather than in simple single-task monitoring. Parasuraman, Sheridan, and Wickens, 2000, in *IEEE Transactions on Systems, Man, and Cybernetics*, give the levels of automation. So I measure reliance against how accurate the system actually is, instead of relying on trust ratings alone. Over-trust shows up as acceptance rate going flat across the system's confidence bands, and decision time collapsing on low-confidence items.
 
 **Evidence, and where it stops.** My Mercedes studies measured Level 2 and Level 3 handovers, and the guidelines improved control-transition safety and trust ratings. That was driving, and air defense is obviously a much higher-stakes setting, but a lot of the same dynamics apply.
 
@@ -850,7 +896,7 @@ Each of these is a sixty-second spine: the claim, how I'd know, and the decision
 
 **The claim.** The normal case is the easy part. Operators need to know when the system is degraded, as well as when it's wrong, and the design has to keep working in that degraded state.
 
-**How I'd know.** I build the degraded scenarios from field reports and subject-matter experts first. I'd cover comms loss or lag; sensor dropout or conflicting tracks; night, weather, and glare; gloves, cold, and noise; fatigue late in a shift; workload spikes; and handoffs in the middle of an event. Then I'd run formative testing with those degradations injected, and measure three things: whether the operator detects the degraded state, how long recovery takes, and the errors made during it.
+**How I'd know.** I build the degraded scenarios from field reports and subject-matter experts first. I'd cover comms loss or lag; sensor dropout or conflicting tracks; night, weather, and glare; gloves, cold, and noise; fatigue late in a shift; workload spikes; and handoffs in the middle of an event. Then I'd run formative testing with those degradations injected, and measure three things: whether the operator detects the degraded state, how long recovery takes, and the errors made during it. A stale input can produce a high-confidence recommendation, so the display has to separate confidence from input freshness. And acknowledgment and completion are two signals. Collapse them and operators double-actuate.
 
 **Evidence, and where it stops.** At Mercedes, I ran handovers where automation handed control back to the driver under surprise, which is degraded operation by design, and I measured situation awareness and reaction time through it. I haven't tested in military field conditions, so I'd want the field team's list of what actually fails.
 
@@ -1006,6 +1052,26 @@ Each of these is a sixty-second spine: the claim, how I'd know, and the decision
 
 ---
 
+## Variant C: one operator, thirty minutes — Tier 1
+
+> **Question, hypothetical:** "Design locks Friday. It's Monday, and I have one operator for thirty minutes. What do you do?"
+
+### Answer
+
+**The claim.** I don't run a study. I resolve the one decision blocking the lock, so first I name which decision is actually open.
+
+**How I'd know.** I run a structured walkthrough on the real build, not an interview. The operator narrates a task they know well, and I mark every place they hesitate, back up, or ask the screen a question it can't answer. In thirty minutes, hesitation is the signal, and stated preference isn't.
+
+**Evidence, and where it stops.** One operator tells me an edge case exists, not how often it happens, and I say that in the notes.
+
+**The decision it drives.** Same-day notes: the edge cases that surfaced, the one change I'd make before Friday, and what I still don't know.
+
+### Say this
+
+- *"Thirty minutes buys one answer, so first I need to know which decision is open."*
+
+---
+
 ## If they hand you a scenario or a system — Tier 2
 
 I say these six steps out loud before starting, because interviewers want to hear how I'm approaching it.
@@ -1085,6 +1151,18 @@ I say these six steps out loud before starting, because interviewers want to hea
 
 ---
 
+## AI in my own workflow — Tier 2
+
+> **Question:** "How are you using AI in your own research work?"
+
+### Answer
+
+**The claim.** I use AI on the slow, low-judgment parts of research, never on the inference.<br>– First-pass coding of transcripts, validated against my own coding on a held-out sample.<br>– Literature scoping, with every citation verified by hand.<br>– Analysis scaffolding, always reviewed.
+
+**The hard lines.** Approved tools only. No participant or restricted data in external models. And AI never decides whether a threshold is met.
+
+---
+
 ## The "I don't know" answer — Tier 1
 
 > **Question:** Anything I can't answer.
@@ -1125,7 +1203,7 @@ I'll update this with real names once the recruiter sends the schedule.
 
 [[card]] **Senior and lead designers.** They're deciding whether I bring constraints early, give findings with directions, and can uplevel research ops and quant.<br>**Lead with:** Working with designers and engineers; Research ops and repositories; Quantitative rigor; How involved I get.
 
-[[card]] **An engineer, maybe.** They're deciding whether my output is testable, with a number, a tolerance, and a verification method.<br>**Lead with:** Setting a number from human data; Disagreeing when it's infeasible; Usability FMEA and use-error analysis.
+[[card]] **An engineer, maybe.** They're deciding whether my output is testable, with a number, a tolerance, and a verification method.<br>**Lead with:** Setting a number from human data; Disagreeing when it's infeasible; Usability FMEA and use-error analysis.<br>**Have ready:** No irreversible control in the same reach arc as a high-frequency one; that's checkable against the CAD. Log corrected actuations as near-misses. Use encumbered anthropometry, not nude tables, because a fiftieth-percentile composite operator doesn't exist.
 
 [[card]] **The hiring manager.** She's validating her own judgment in front of the panel.<br>**Lead with:** Researcher or engineer?; Research ops and repositories; Presentation and Q&A pre-loads.
 
@@ -1154,6 +1232,8 @@ I'll update this with real names once the recruiter sends the schedule.
 | Mercedes handovers | Craft: automation trust | Craft: degraded conditions, one line |
 | Uber Brazil ride-alongs | Craft: contextual inquiry | None |
 | NASA haptic | Behavioral, only if asked | None |
+| Designer was right | Designers | Communication |
+| Metric rename | Presentation | Behavioral: influence |
 
 ---
 
@@ -1202,13 +1282,9 @@ I never reopen level in the loop. Compensation is only for the recruiter, or for
 
 **Equity diligence.** I'll ask about the instrument type, the vesting schedule and cliff, the current per-share price and whether it's a 409A or preferred price, the refresh policy, the tender and liquidity history, and how the grant is priced relative to the latest funding round: which per-share price is used, and as of which date.
 
-The full list, by person, is on the cue card on the last page. With Daniella, I don't re-ask about the most recent implemented recommendation, and I close every room with, supports it, I'd like the offer calibrated to the top of the Senior band, and I'd like to understand what Lead would require.
+The full list, by person, is on the cue card on the last page. With Daniella, I don't re-ask about the most recent implemented recommendation.
 
 > ⚠️ **Never name the other company, and never state current compensation.**
-
-### Say this
-
-- *"It's a new user group, but not a new set of problems."*
 
 ## The last check, before you walk in
 
@@ -1247,5 +1323,8 @@ The full list, by person, is on the cue card on the last page. With Daniella, I 
 - **Engineer:** "What does a human factors requirement need to look like for your team to build and test against it?"
 - **Hiring manager:** "What would make this hire obviously successful at twelve months?" And: "What's the hardest research question on the Air Defense roadmap right now?" And: "What tooling is approved for research data and repositories here?"
 - **Hiring manager's manager:** "How do you see research scaling across Air Defense as the portfolio grows?"
+- **Anyone:** "What research has this team decided not to do?"
+
+**After they answer,** say what it means for me: "That means I'd spend my first quarter on X."
 
 **To close every room.** "Is there anything I said today you'd want me to go deeper on?"
