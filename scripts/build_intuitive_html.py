@@ -51,6 +51,14 @@ DOCS = {
         "break_before_part1": False,
         "body_class": "compact",
     },
+    "anduril": {
+        "src": ROOT / "anduril" / "onsite-guide.md",
+        "out": ROOT / "anduril" / "print" / "onsite-guide.html",
+        "title": "Anduril Industries — Air Defense Onsite",
+        "break_before_part1": False,
+        "body_class": "compact dense",
+        "flow_chars": 300,
+    },
 }
 
 CSS = """
@@ -60,6 +68,8 @@ body {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 12pt; line-height: 1.55; color: #111;
   background: #f4f4f2; margin: 0; padding: 2rem 1rem 4rem;
+  /* "ff"/"fi" ligatures extract from the PDF as "Dif erent", so keep glyphs separate. */
+  font-variant-ligatures: no-common-ligatures;
 }
 main {
   max-width: 44em; margin: 0 auto; background: #fff;
@@ -110,6 +120,11 @@ th { background: #eee; }
 .card { background: #f7f7f5; border-left: 3px solid #666; padding: .5em .9em; margin: .8em 0; }
 
 code { font-family: Consolas, monospace; font-size: .88em; background: #eee; padding: .1em .3em; }
+/* Unverified claims about the candidate's own work, scanned for before the onsite. */
+mark.draft {
+  background: #fff176; color: inherit; padding: 0 .1em;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
 hr { border: 0; border-top: 1px solid #ccc; margin: 2em 0; }
 a { color: #14507d; }
 
@@ -216,6 +231,11 @@ a { color: #14507d; }
     font-family: Helvetica, Arial, sans-serif; font-size: 8.9pt; margin: 4pt 0 1.5pt;
     break-after: avoid; break-inside: avoid;
   }
+  /* ~45 short cards: each spanning header closes both columns, so keep all headers in-column. */
+  body.dense .parthead, body.dense .qhead { column-span: none; }
+  body.dense { font-size: 9.4pt; line-height: 1.27; }
+  /* Rows still never split; a whole unsplittable table strands a half-empty column. */
+  body.dense table { break-inside: auto; }
 }
 """
 
@@ -355,17 +375,21 @@ def _flow_long_quotes(body: str, flow_chars: int = FLOW_CHARS) -> str:
     )
 
 
+def highlight_drafts(body: str) -> str:
+    return re.sub(r"\[DRAFT[^\]]*\]", lambda m: f'<mark class="draft">{m.group(0)}</mark>', body)
+
+
 def main() -> None:
     keys = sys.argv[1:] or ["all"]
     if keys == ["all"]:
         keys = list(DOCS)
 
     md = MarkdownIt("commonmark", {"html": True}).enable("table")
-    OUT.mkdir(parents=True, exist_ok=True)
 
     for key in keys:
         doc = DOCS[key]
-        body = wrap_part_heads(
+        doc["out"].parent.mkdir(parents=True, exist_ok=True)
+        body = highlight_drafts(wrap_part_heads(
             style_labels(
                 wrap_question_heads(
                     wrap_model_answers(
@@ -374,10 +398,10 @@ def main() -> None:
                         flow_chars=doc.get("flow_chars", FLOW_CHARS),
                     )
                 ),
-                compact=doc["body_class"] == "compact",
+                compact="compact" in doc["body_class"].split(),
                 flow_chars=doc.get("flow_chars", FLOW_CHARS),
             )
-        )
+        ))
         doc["out"].write_text(
             PAGE.format(
                 title=html.escape(doc["title"]),
