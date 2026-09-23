@@ -233,7 +233,7 @@ a { color: #14507d; }
   }
   /* ~45 short cards: each spanning header closes both columns, so keep all headers in-column. */
   body.dense .parthead, body.dense .qhead { column-span: none; }
-  body.dense { font-size: 9.4pt; line-height: 1.27; }
+  body.dense { font-size: 9.3pt; line-height: 1.26; }
   /* Rows still never split; a whole unsplittable table strands a half-empty column. */
   body.dense table { break-inside: auto; }
 }
