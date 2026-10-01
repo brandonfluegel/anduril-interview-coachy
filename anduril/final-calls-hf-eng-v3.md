@@ -79,8 +79,8 @@
 
 ## Qualifications map — Tier 1
 
-- **Exact or strong.** MS and PhD in Human Factors Psychology (Old Dominion, 2017 and 2020). Six-plus years of industry HF, though my titles say researcher. MIL-STD-1472 at NASA. Task analysis at NASA, Echo Hub, and EchoStar. Field research: Uber Brazil ride-alongs and Echo Hub home visits. A/B tests, think-aloud, and card sorts. Test plans and reports: the NASA evaluation plan and uFMEA report, and the Amazon latency protocol and specification. Workload and situation awareness measurement: fNIRS and eye tracking at Amazon, situation awareness and reaction time at Mercedes, ECG at Brigham. Anthropometrics: fifth and ninety-fifth percentile at NASA, reach envelopes at EchoStar. Requirements and specs: latency for software, reach for hardware. Surveys and structured interviews. Clearance eligibility.
-- **Partial.** Uncrewed and autonomous systems, through automation handovers and the agentic AI framework. JIRA and Confluence daily, but not Jama yet. MIL-STD-1474, through audiology research and sound-based alerts. DoD HSI domains: knowledge, not practice. NASA-TLX, SAGAT, and SPAM: I know them, but I haven't run them on a program.
+- **Exact or strong.** MS and PhD in Human Factors Psychology (Old Dominion, 2017 and 2020). Six-plus years of industry HF, though my titles say researcher. MIL-STD-1472 at NASA. Task analysis at NASA, Echo Hub, and EchoStar. Field research: Uber Brazil ride-alongs and Echo Hub home visits. A/B tests, think-aloud, and card sorts. Test plans and reports: the NASA evaluation plan and uFMEA report, and the Amazon latency protocol and specification. Workload and situation awareness measurement: fNIRS and eye tracking at Amazon, NASA-TLX as a manipulation check in the latency study, decomposed takeover latency at Mercedes, ECG at Brigham. Anthropometrics: fifth and ninety-fifth percentile at NASA, reach envelopes at EchoStar. Requirements and specs: latency for software, reach for hardware. Surveys and structured interviews. Clearance eligibility.
+- **Partial.** Uncrewed and autonomous systems, through automation handovers and the agentic AI framework. JIRA and Confluence daily, but not Jama yet. MIL-STD-1474, through audiology research and sound-based alerts. DoD HSI domains: knowledge, not practice. SAGAT and SPAM: I know them, but I haven't run them on a program.
 - **Gaps.** MIL-STD-46855 and 882 under contract, though I've done the analyses through a usability FMEA. Defense hardware or software. An active TS clearance.
 
 # Part 1 · Jake: the HF role and how my experience maps
@@ -326,6 +326,10 @@
 **Follow-up: "Why constant stimuli, not a staircase?"**
 
 > A staircase moves the delay up or down after each answer, and it homes in on a single point. I tested fixed delay levels instead, because I needed two cut-offs plus how quickly the ratings changed between them. And engineers have to trust the method before they'll trust the number.
+
+**Follow-up: "How was workload held constant?"**
+
+> People made the judgments during a light visual monitoring task at a fixed difficulty, set from a practice block. I ran the NASA-TLX after each block as a manipulation check only, to confirm the load landed where I aimed it, not as a result.
 
 **Follow-up: "A voice assistant isn't an aircraft."**
 
@@ -625,7 +629,7 @@
 
 **The claim.** I manipulate load deliberately, and I pair subjective, performance, and physiological measures.
 
-**How I'd know.** At Amazon, I co-established a cognitive load framework with fNIRS and eye tracking, and at Mercedes, I measured situation awareness and reaction time during takeovers. On this program, I'd add the NASA-TLX after each block and the Bedford scale for spare capacity. For situation awareness, I'd use SAGAT freeze probes when I need precision, and SPAM real-time probes when the task can't stop.
+**How I'd know.** At Amazon, I co-established a cognitive load framework with fNIRS and eye tracking, and I ran the NASA-TLX after each block of the latency study as a manipulation check. At Mercedes, I measured situation awareness behaviorally, through decomposed takeover latency: eyes on the road, hands on the wheel, and first control input. On this program, I'd add the Bedford scale for spare capacity, SAGAT freeze probes when I need precision, and SPAM real-time probes when the task can't stop.
 
 **Evidence, and where it stops.** Physiology tells you that load changed, not why, and I never claim it beat the NASA-TLX. I haven't run SAGAT or SPAM on a program, so I'd pilot the probe set before a test event.
 
@@ -921,7 +925,7 @@
 
 ## Standards and data items
 
-[[card]] **Standards and dates.** MIL-STD-1472H, design criteria, September 15, 2020. MIL-STD-46855A, human engineering requirements, May 24, 2011, reaffirmed by Notice 1 in 2016; it superseded the 1999 handbook, MIL-HDBK-46855A, which is cancelled. MIL-STD-882E, May 11, 2012, with Change 1 on September 27, 2023, which also rates software control of a hazard on a one-to-five criticality index. DoD Instruction 5000.95, April 1, 2022. SAE6906A, December 13, 2023, with Appendix D for tailoring. DoD Directive 3000.09, January 25, 2023.
+[[card]] **Standards and dates.** MIL-STD-1472H, design criteria, September 15, 2020. MIL-STD-46855A, human engineering requirements, May 24, 2011, reaffirmed by Notice 1 in 2016; it superseded the 1999 handbook, MIL-HDBK-46855A, which is cancelled. MIL-STD-882E, May 11, 2012, with Change 1 on September 27, 2023; 882E also rates software control of a hazard on a one-to-five software criticality index. DoD Instruction 5000.95, April 1, 2022. SAE6906A, December 13, 2023, with Appendix D for tailoring. DoD Directive 3000.09, January 25, 2023.
 
 [[card]] **Data items.** The HSI Program Plan template is DI-HFAC-81743A (2011). It doesn't replace the safety, training, or human engineering plans unless the government directs it. Related: the Human Engineering Program Plan, DI-HFAC-81742A, and the Human Engineering Test Plan, DI-HFAC-80743B.
 
@@ -936,6 +940,8 @@
 ## Also in reference
 
 **Noise and auditory displays.** MIL-STD-1474E (2015) is the military noise standard: hearing-hazard signs above 85 decibels steady or 140 decibels peak, and Appendix C covers aural non-detectability, meaning how quiet a system must be so it can't be heard. My hook is undergraduate audiology research, which earned the James Jerger Award in 2014, plus sound-based alerts. An alert has to be audible over the operator's noise, and staying unheard is a real design limit for small aircraft.
+
+**AI in my own workflow.** I use AI for first-pass qualitative coding, validated against my own coding on a held-out sample, and for drafting analysis code that I review line by line. I use approved tools only, never put participant or restricted data into outside models, and AI never decides whether a threshold is met.
 
 # Part 5 · The day itself
 
