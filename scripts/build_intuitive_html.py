@@ -59,6 +59,14 @@ DOCS = {
         "body_class": "compact dense",
         "flow_chars": 300,
     },
+    "hfeng": {
+        "src": ROOT / "anduril" / "final-calls-hf-eng-v3.md",
+        "out": ROOT / "anduril" / "print" / "final calls_HF ENG role.html",
+        "title": "Anduril Industries — Senior Human Factors Engineer",
+        "break_before_part1": False,
+        "body_class": "compact dense",
+        "flow_chars": 300,
+    },
 }
 
 CSS = """
@@ -376,7 +384,7 @@ def _flow_long_quotes(body: str, flow_chars: int = FLOW_CHARS) -> str:
 
 
 def highlight_drafts(body: str) -> str:
-    return re.sub(r"\[DRAFT[^\]]*\]", lambda m: f'<mark class="draft">{m.group(0)}</mark>', body)
+    return re.sub(r"\[(?:DRAFT|VERIFY|FILL)[^\]]*\]", lambda m: f'<mark class="draft">{m.group(0)}</mark>', body)
 
 
 def main() -> None:
