@@ -281,30 +281,37 @@ a { color: #14507d; }
     letter-spacing: .08em; color: #555; border: .6pt solid #999; border-radius: 2pt;
     padding: 0 3pt; margin-left: 3pt; vertical-align: 1.5pt;
   }
-  /* Onsite guide only: its 18th page buys a larger face and memorable cues, not more content. */
-  body.story { font-size: 10.4pt; line-height: 1.34; }
+  /* Onsite guide only: the 18-page budget buys a larger face and roomier rhythm, not more content. */
+  body.story { font-size: 10.5pt; line-height: 1.34; }
   /* The "ff" in italic "effort" still extracted as "ef ort" with only common ligatures off. */
   body.story * { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
-  body.story .qhead { margin: 12pt 0 3.5pt; }
-  body.story .qhead h2 { font-size: 11pt; }
+  body.story p { margin-bottom: 4pt; }
+  body.story .qhead { margin: 13pt 0 4pt; }
+  body.story .qhead h2 { font-size: 11.8pt; padding: 3.5pt 6pt; }
+  body.story .parthead h1 { font-size: 13.5pt; padding: 5pt 8pt; }
   /* Tier 1 is rehearsed until fluent, so it has to be findable at a flip. */
   body.story .qhead.t1 h2 { border-left-width: 5pt; background: #dcdcd8; }
   body.story .tier.t1 { background: #111; color: #fff; border-color: #111; }
-  body.story .answer p { padding: 2.8pt 7pt; }
-  body.story .answer p:first-child { padding-top: 4.5pt; }
-  body.story .answer p:last-child { padding-bottom: 4.5pt; }
+  body.story .tier { font-size: 7.4pt; }
+  body.story .answer p { padding: 3pt 8pt; }
+  body.story .answer p:first-child { padding-top: 5pt; }
+  body.story .answer p:last-child { padding-bottom: 5pt; }
+  body.story .answer p > strong:first-child { font-size: 8pt; margin-bottom: 1.2pt; }
   /* The memorized line: it reads as the one sentence to carry out of the room. */
   body.story .calibration {
     border: 0; border-left: 3pt solid #8a6d1f; border-radius: 0; background: #fbf7ea;
-    padding: 3pt 7pt 3.5pt; margin: 3pt 0 8pt; font-size: 10pt; line-height: 1.3; color: #111;
+    padding: 3.5pt 8pt 4pt; margin: 4pt 0 9pt; font-size: 10.6pt; line-height: 1.35; color: #111;
     break-before: avoid;
   }
   body.story .keep { break-inside: avoid; }
-  body.story .calibration::before { content: "Anchor"; color: #7a6118; font-weight: bold; }
-  body.story .fq { margin: 5.5pt 0 2pt; }
-  body.story blockquote.say { padding: 4.5pt 7pt; margin: 2pt 0 5pt; }
-  body.story .card { padding: 4.5pt 7pt; margin: 0 0 5.5pt; }
-  body.story li { margin-bottom: 2.5pt; }
+  body.story .calibration::before { content: "Anchor"; color: #7a6118; font-weight: bold; font-size: 7.4pt; }
+  body.story .fq { font-size: 9.6pt; margin: 7pt 0 2.5pt; }
+  body.story blockquote.say { padding: 5pt 8pt; margin: 2pt 0 6pt; }
+  body.story blockquote.note { font-size: 9.8pt; padding: 4.5pt 8pt; }
+  body.story blockquote.warn { font-size: 9.6pt; padding: 4.5pt 8pt; margin: 3pt 0 6pt; }
+  body.story .card { padding: 5pt 8pt; margin: 0 0 6.5pt; }
+  body.story li { margin-bottom: 3pt; }
+  body.story h4 { font-size: 9.6pt; margin-top: 8pt; }
 }
 """
 
