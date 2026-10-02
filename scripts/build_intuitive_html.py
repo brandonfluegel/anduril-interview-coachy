@@ -60,11 +60,11 @@ DOCS = {
         "flow_chars": 300,
     },
     "hfeng": {
-        "src": ROOT / "anduril" / "final-calls-hf-eng-v3.md",
+        "src": ROOT / "anduril" / "final-calls-hf-eng-v4.md",
         "out": ROOT / "anduril" / "print" / "final calls_HF ENG role.html",
         "title": "Anduril Industries — Senior Human Factors Engineer",
         "break_before_part1": False,
-        "body_class": "compact dense",
+        "body_class": "compact dense airy",
         "flow_chars": 300,
     },
 }
@@ -244,6 +244,43 @@ a { color: #14507d; }
   body.dense { font-size: 9.3pt; line-height: 1.26; }
   /* Rows still never split; a whole unsplittable table strands a half-empty column. */
   body.dense table { break-inside: auto; }
+  /* HF guide only: its 16th page buys a larger face and clearer hierarchy, not more content. */
+  body.airy { font-size: 10.1pt; line-height: 1.32; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* In-column, because Chrome ignores break-after on a spanner and strands it at a page foot. */
+  body.airy .parthead { margin: 9pt 0 5pt; break-after: avoid; }
+  body.airy .parthead h1 {
+    background: #111; color: #fff; border: 0; padding: 4pt 7pt; margin: 0 0 3pt; font-size: 13pt;
+  }
+  body.airy .parthead blockquote.note { margin: 0; }
+  body.airy .qhead { margin: 10pt 0 3pt; }
+  body.airy .qhead h2 { font-size: 10.6pt; }
+  /* The answer box and the say-this box label themselves, so their h3s are noise. */
+  body.airy h3:has(+ .answer), body.airy h3:has(+ .calibration) { display: none; }
+  /* Chrome stretches a split box's border over the empty column end, so the box is drawn
+     per beat: an unsplit beat never stretches, and a beat pushed to the next column takes its
+     border with it. */
+  body.airy .answer { margin: 3pt 0 6pt; padding: 0; background: none; border-left: 0; }
+  body.airy .answer p { background: #fafaf9; border-left: 3pt solid #111; padding: 2.4pt 6pt; }
+  body.airy .answer p:first-child { padding-top: 4pt; }
+  body.airy .answer p:last-child { padding-bottom: 4pt; }
+  /* A split beat stretches too, and every beat here is short enough to move whole. */
+  body.airy .answer p.flow, body.airy blockquote.flow { break-inside: avoid; }
+  /* Cue card: the questions open the right column so the page reads as two even halves. */
+  body.airy h1.pagebreak ~ h4 { break-before: column; margin-top: 0; }
+  body.airy .answer p > strong:first-child { color: #444; font-size: 7.6pt; }
+  body.airy .calibration {
+    border: .6pt solid #bbb; border-radius: 2pt; padding: 2.5pt 6pt; margin: 0 0 6pt; font-size: 9pt;
+  }
+  body.airy .calibration::before {
+    content: "Say this"; display: block; font-family: Helvetica, Arial, sans-serif;
+    font-size: 7pt; text-transform: uppercase; letter-spacing: .08em; color: #666;
+  }
+  body.airy .calibration ul { list-style: none; padding-left: 0; margin: 0; }
+  body.airy .tier {
+    white-space: nowrap; font-size: 7pt; font-weight: normal; text-transform: uppercase;
+    letter-spacing: .08em; color: #555; border: .6pt solid #999; border-radius: 2pt;
+    padding: 0 3pt; margin-left: 3pt; vertical-align: 1.5pt;
+  }
 }
 """
 
@@ -410,6 +447,8 @@ def main() -> None:
                 flow_chars=doc.get("flow_chars", FLOW_CHARS),
             )
         ))
+        if "airy" in doc["body_class"].split():
+            body = re.sub(r" \u2014 (Tier \d)</h2>", r' <span class="tier">\1</span></h2>', body)
         doc["out"].write_text(
             PAGE.format(
                 title=html.escape(doc["title"]),

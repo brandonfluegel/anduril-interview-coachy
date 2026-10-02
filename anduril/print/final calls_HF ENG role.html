@@ -179,66 +179,119 @@ a { color: #14507d; }
   body.dense { font-size: 9.3pt; line-height: 1.26; }
   /* Rows still never split; a whole unsplittable table strands a half-empty column. */
   body.dense table { break-inside: auto; }
+  /* HF guide only: its 16th page buys a larger face and clearer hierarchy, not more content. */
+  body.airy { font-size: 10.1pt; line-height: 1.32; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* In-column, because Chrome ignores break-after on a spanner and strands it at a page foot. */
+  body.airy .parthead { margin: 9pt 0 5pt; break-after: avoid; }
+  body.airy .parthead h1 {
+    background: #111; color: #fff; border: 0; padding: 4pt 7pt; margin: 0 0 3pt; font-size: 13pt;
+  }
+  body.airy .parthead blockquote.note { margin: 0; }
+  body.airy .qhead { margin: 10pt 0 3pt; }
+  body.airy .qhead h2 { font-size: 10.6pt; }
+  /* The answer box and the say-this box label themselves, so their h3s are noise. */
+  body.airy h3:has(+ .answer), body.airy h3:has(+ .calibration) { display: none; }
+  /* Chrome stretches a split box's border over the empty column end, so the box is drawn
+     per beat: an unsplit beat never stretches, and a beat pushed to the next column takes its
+     border with it. */
+  body.airy .answer { margin: 3pt 0 6pt; padding: 0; background: none; border-left: 0; }
+  body.airy .answer p { background: #fafaf9; border-left: 3pt solid #111; padding: 2.4pt 6pt; }
+  body.airy .answer p:first-child { padding-top: 4pt; }
+  body.airy .answer p:last-child { padding-bottom: 4pt; }
+  /* A split beat stretches too, and every beat here is short enough to move whole. */
+  body.airy .answer p.flow, body.airy blockquote.flow { break-inside: avoid; }
+  /* Cue card: the questions open the right column so the page reads as two even halves. */
+  body.airy h1.pagebreak ~ h4 { break-before: column; margin-top: 0; }
+  body.airy .answer p > strong:first-child { color: #444; font-size: 7.6pt; }
+  body.airy .calibration {
+    border: .6pt solid #bbb; border-radius: 2pt; padding: 2.5pt 6pt; margin: 0 0 6pt; font-size: 9pt;
+  }
+  body.airy .calibration::before {
+    content: "Say this"; display: block; font-family: Helvetica, Arial, sans-serif;
+    font-size: 7pt; text-transform: uppercase; letter-spacing: .08em; color: #666;
+  }
+  body.airy .calibration ul { list-style: none; padding-left: 0; margin: 0; }
+  body.airy .tier {
+    white-space: nowrap; font-size: 7pt; font-weight: normal; text-transform: uppercase;
+    letter-spacing: .08em; color: #555; border: .6pt solid #999; border-radius: 2pt;
+    padding: 0 3pt; margin-left: 3pt; vertical-align: 1.5pt;
+  }
 }
 </style>
 </head>
-<body class="compact dense">
+<body class="compact dense airy">
 <main>
 <h1>Anduril Industries — Senior Human Factors Engineer, HSI/HFE</h1>
 <p><strong>I measure how people actually perform with a system, and I turn that into requirements that engineers can build to and test against. Along the way, I run quick rounds of design testing. I pick the method based on what the decision needs to know.</strong></p>
 <h2>Ground rules</h2>
 <ul>
-<li>Say &quot;operator,&quot; not &quot;pilot,&quot; unless the interviewer says &quot;pilot&quot; first. Never say &quot;customer,&quot; &quot;delight,&quot; &quot;pain point,&quot; or &quot;engagement.&quot;</li>
+<li>Three beats, sixty to seventy-five seconds: the claim, the proof, the boundary. Then I stop. Citations, standard numbers, and dates come out only when someone asks.</li>
+<li>I don't define terms to Jake. He's the HSI lead, so explaining HSI, its domains, or fNIRS reads as explaining his job to him.</li>
+<li>Before a design or planning answer, I ask one scoping question, and then I answer. Two or three questions per interview at most; the rest wait for my question time.</li>
+<li>Say &quot;operator&quot; and &quot;assets,&quot; not &quot;pilot&quot; or &quot;aircraft,&quot; unless the interviewer does. The operator may be a soldier. Never say &quot;customer,&quot; &quot;delight,&quot; &quot;pain point,&quot; or &quot;engagement.&quot;</li>
 <li>EchoStar is &quot;since June 2025,&quot; and I have &quot;six-plus years&quot; in industry. The only dollar figure is fifty million, always &quot;projected&quot; by an economics team's model.</li>
 <li>NASA was formative, never &quot;validation,&quot; and the thirty percent was a side effect. fNIRS was Amazon, and fMRI was Brigham. No Mercedes percentage.</li>
-<li>Program facts come only from the posting and anduril.com. I never name a platform first, and nothing Daniella shared goes into an answer.</li>
-<li>I don't claim HSI work under contract. If asked about operator experience, one honest sentence, then &quot;it's a new user group, not a new set of problems.&quot;</li>
+<li>Program facts come only from public postings and anduril.com. I never name a platform first, and nothing Daniella shared goes into an answer.</li>
+<li>I don't claim HSI work under contract or operator experience I don't have. If asked, one honest sentence, then how I'd learn the user: time with operators at test events.</li>
 <li>Never say &quot;downlevel,&quot; &quot;co-invented,&quot; or &quot;I haven't worked in defense,&quot; never name the other company or Calibrated Cognitive Friction, and never reopen level.</li>
-<li>&quot;I don't know, and here's how I'd find out&quot; beats any guess.</li>
-<li>In answers, I use the technical term and add a short gloss. The plain-English versions live in the crash course, not in the room. I say &quot;I use&quot; only for methods I've actually run; everything else is &quot;I'd use.&quot;</li>
+<li>&quot;I don't know, and here's how I'd find out&quot; beats any guess. I say &quot;I use&quot; only for methods I've actually run.</li>
 </ul>
-<p><strong>Rehearse first, out loud, each under 110 seconds:</strong> Tell me about yourself; Researcher or engineer?; Latency; HSI program fluency; Writing verifiable requirements; MPT; Span of control; the thirty-sixty-ninety.</p>
+<p><strong>Rehearse first, out loud, sixty to seventy-five seconds each:</strong> The bridge from Monday; Tell me about yourself; Researcher or engineer?; Latency; HSI program fluency; Writing verifiable requirements; MPT; Span of control; the thirty-sixty-ninety.</p>
+<div class="qhead">
+<h2>The bridge from Monday <span class="tier">Tier 1</span></h2>
+<blockquote class="note">
+<p><strong>Why it's here:</strong> Jake watched me pitch a seat built on rapid qualitative work. I name the shift once, early, so it reads as range, not reinvention. <strong>Jake only.</strong> The TPM wasn't there Monday, and the team meeting shouldn't open on a correction.</p>
+</blockquote>
+</div>
+<h3>Answer</h3>
+<div class="answer">
+<p><strong>Say it once, to Jake.</strong> &quot;Monday I led with the research half, because that was the seat. This seat is the other half: requirements, verification, and HSI documentation.&quot;</p>
+<p><strong>If asked, &quot;What happened with Air Defense?&quot;</strong> &quot;They chose someone else, the feedback was fair, and this seat is closer to my training.&quot;</p>
+<p><strong>If they raise the other resume.</strong> &quot;That earlier version used functional titles. My titles of record are Staff Product Researcher and UX Researcher II. The engineering work behind both versions is the same.&quot; I answer only what's asked about its wording, and I don't volunteer anything else.</p>
+</div>
+<hr />
 <h2>Facts I say out loud</h2>
 <ul>
 <li>I've been at EchoStar since June 2025 as a Staff Product Researcher, working on Sling, which is part of EchoStar. I built a net-new human factors function there, and I report to the VP of Product.</li>
 <li>From November 2024 to June 2025, I was a Managing Scientist in Human Factors at J.S. Held.</li>
 <li>From June 2020 to November 2024, I was a UX Researcher II in human factors in Amazon's Devices Design Group, and the sole human factors researcher in the group. I hold patent US-12532040-B1 and a 2023 Amazon Inventor Award.</li>
 <li>From 2018 to 2019, I was a PhD intern at NASA Langley on the Lunar Gateway medical workstation, and I led its human-systems integration evaluation.</li>
-<li>In 2017, at Mercedes-Benz, I ran simulator studies of sound, vibration, and biometric takeover alerts during Level 2 automated-driving handovers, measuring situation awareness and reaction time.</li>
+<li>In 2017, at Mercedes-Benz, I ran simulator studies of sound, vibration, and biometric takeover alerts during Level 2 automated-driving handovers.</li>
 <li>I have an MS in Human Factors Psychology from Old Dominion, from 2017, and a PhD from 2020. My &quot;Principles for Agentic Trust&quot; paper was accepted at ACM CSCW 2026, in Industry Perspectives.</li>
 <li>I don't hold a clearance today. I'm fully eligible, with a clean background.</li>
 </ul>
 <h2>Crash course: the ideas behind the answers</h2>
-<p><strong>How a defense program works</strong></p>
+<h4>How a defense program works</h4>
 <ul>
 <li><strong>Human systems integration (HSI).</strong> Treating the people who operate and maintain a system as part of the system, planned with the same weight as hardware and software. DoD Instruction 5000.95 splits it into seven domains: human factors engineering, manpower, personnel, training, safety and occupational health, force protection and survivability, and habitability.</li>
 <li><strong>Manpower, personnel, and training (MPT).</strong> Three of those domains, as three questions: how many people does the system need, what kind of people with what skills, and what training gets them there.</li>
-<li><strong>MIL-STD-1472H.</strong> The military's design rulebook for the human side of equipment: control sizes, display legibility, reach distances, labels, and alarms. It says what good design looks like.</li>
+<li><strong>MIL-STD-1472.</strong> The military's design rulebook for the human side of equipment: control sizes, display legibility, reach distances, labels, and alarms. The current version is H, from 2020; my NASA work in 2018 used G.</li>
 <li><strong>MIL-STD-46855A.</strong> The process rulebook. It says what human engineering work a contractor has to do, and when, across analysis, design, and test. 1472 is the &quot;what&quot;; 46855A is the &quot;how and when.&quot;</li>
 <li><strong>MIL-STD-882E.</strong> The system safety standard. Each hazard is rated on how bad it would be and how likely it is, which gives its risk level. Fixes go in a fixed order: design the hazard out, add engineered safeguards, add warnings, and only then rely on procedures and training.</li>
 <li><strong>SAE6906A.</strong> The industry standard for running an HSI program. Each requirement is numbered so a program can pick which ones apply, which is called tailoring.</li>
 <li><strong>Data item description (DI-HFAC-…).</strong> The government's template for a document the contractor delivers, such as the HSI Program Plan.</li>
-<li><strong>Design reviews.</strong> The formal gates in a classic program: system requirements review, preliminary design review, critical design review, and test readiness review. Each one has human factors work due.</li>
+<li><strong>Design reviews.</strong> The formal gates in a classic program: system requirements review (SRR), preliminary design review (PDR), critical design review (CDR), and test readiness review (TRR). Each one has human factors work due.</li>
 <li><strong>Interface control document (ICD).</strong> The agreement between two systems about exactly what data passes between them. If an operator sees that data, it needs human factors requirements, like how often it updates.</li>
-<li><strong>Human Readiness Level (HRL).</strong> A one-to-nine scale for whether a technology is ready for people to use safely, built to sit next to the Technology Readiness Level.</li>
+<li><strong>Human Readiness Level (HRL).</strong> A one-to-nine scale for whether a technology is ready for people to use safely, built to sit next to the Technology Readiness Level. DoD formally adopted a human readiness standard in August 2025.</li>
 </ul>
-<p><strong>How a requirement is built</strong></p>
+<h4>How a requirement is built</h4>
 <ul>
 <li><strong>Requirement.</strong> A &quot;shall&quot; statement, plus a minimum acceptable value (the threshold), a goal value (the objective), the conditions it applies under, and how it will be checked.</li>
 <li><strong>Verification method.</strong> The four ways to prove a requirement is met: inspection (look at it), analysis (calculate it), demonstration (show it working), or test (measure it under controlled conditions).</li>
+<li><strong>Success-run sample size.</strong> With zero failures allowed, the trials needed are the natural log of one minus the confidence, divided by the natural log of the reliability. Ninety-five percent reliability at ninety-five percent confidence takes 59 trials; ninety-nine percent takes 299.</li>
 <li><strong>Traceability.</strong> Each requirement links back to the analysis that produced it and forward to the test that proves it. Tools like Jama hold those links.</li>
 </ul>
-<p><strong>How I analyze the work</strong></p>
+<h4>How I analyze the work</h4>
 <ul>
 <li><strong>Task analysis.</strong> Breaking a job into its steps, decisions, and information needs. Almost everything else starts here.</li>
 <li><strong>Function allocation.</strong> Deciding who does each step, the human or the automation, and who has the authority to change that. Fitts lists, the old &quot;humans are better at, machines are better at&quot; tables, are only a starting point.</li>
-<li><strong>Usability FMEA.</strong> A failure modes and effects analysis for use errors: list every way a person could get a step wrong, rate how bad each would be, and fix the worst first.</li>
+<li><strong>Usability FMEA.</strong> A failure modes and effects analysis for use errors: list every way a person could get a step wrong, rate how bad each would be, and fix the worst first. The posting calls this kind of work human error analysis, or HEA.</li>
 <li><strong>Anthropometry.</strong> Body measurement. The usual rule sets reach for a small person, the fifth-percentile female, and clearance for a large one, the ninety-fifth-percentile male. ANSUR II is the Army's body-measurement survey.</li>
 <li><strong>Formative versus summative testing.</strong> Formative testing is small and repeated, and it finds problems to fix. Summative testing is larger and final, and it measures how well the design performs. Only summative results support an error rate or a safety claim.</li>
 <li><strong>Heuristic evaluation and cognitive walkthrough.</strong> Expert reviews without users. A heuristic evaluation checks the design against a list of rules, and a walkthrough steps through a task the way a new user would.</li>
 <li><strong>IMPRINT.</strong> Army software that simulates an operator's tasks step by step to predict workload and crew size before hardware exists.</li>
 </ul>
-<p><strong>How I measure the operator</strong></p>
+<h4>How I measure the operator</h4>
 <ul>
 <li><strong>Workload.</strong> How much of a person's mental capacity a task uses. The NASA Task Load Index, or NASA-TLX, is a six-question rating given after a task. The Bedford scale asks how much spare capacity was left.</li>
 <li><strong>Situation awareness (SA).</strong> Knowing what's going on, what it means, and what will happen next, which are Endsley's three levels. SAGAT pauses a simulation and quizzes the operator. SPAM asks questions while the task keeps running and times the answers.</li>
@@ -247,44 +300,43 @@ a { color: #14507d; }
 <li><strong>Psychophysics.</strong> Measuring the point at which people start to notice something, like a delay. That's how I set the latency thresholds.</li>
 <li><strong>Within-subject designs and mixed-effects models.</strong> In a within-subject design, each person tries every condition, which matters when operators are scarce. Mixed-effects models account for the fact that one person's many answers aren't independent.</li>
 </ul>
-<p><strong>How autonomy goes wrong, and how it's designed</strong></p>
+<h4>How autonomy goes wrong, and how it's designed</h4>
 <ul>
 <li><strong>Stages and levels of automation.</strong> Parasuraman, Sheridan, and Wickens split automation into four stages: gathering information, making sense of it, choosing an action, and carrying it out. Each stage can be automated to a different degree.</li>
 <li><strong>Adaptive versus adaptable automation.</strong> Adaptable means the operator changes the automation level. Adaptive means the system changes it on its own, so it has to announce the change.</li>
 <li><strong>Mode error and automation surprise.</strong> The operator believes the system is in one mode when it's in another, or the system does something the operator didn't expect.</li>
 <li><strong>Agent transparency.</strong> Chen and colleagues' model, from the Army Research Laboratory: show what the system is doing, why, and what it will do next, with how sure it is.</li>
 <li><strong>Trust calibration.</strong> People should rely on automation exactly as much as it deserves. Over-trust means accepting bad output, and disuse means ignoring good output.</li>
-<li><strong>Span of control and fan-out.</strong> How many vehicles one operator can supervise. Neglect time is how long a vehicle can run unattended, and interaction time is how long the operator needs to get it back on track. Fan-out is neglect time plus interaction time, divided by interaction time.</li>
+<li><strong>Span of control and fan-out.</strong> How many assets one operator can supervise. Neglect time is how long an asset can run unattended, and interaction time is how long the operator needs to get it back on track. Fan-out is neglect time plus interaction time, divided by interaction time.</li>
 <li><strong>Signal detection.</strong> Every alert outcome is a hit, a miss, a false alarm, or a correct rejection. Too many false alarms teach operators to ignore the alarm.</li>
 <li><strong>Multiple resources.</strong> Wickens's idea that seeing and hearing, and words and spatial information, draw on partly separate mental capacity. That's why a critical cue goes on the channel the operator isn't already using.</li>
-<li><strong>Lost link.</strong> The control connection to an uncrewed vehicle drops. The operator should know in advance what each vehicle will do when that happens.</li>
+<li><strong>Lost link.</strong> The control connection to an uncrewed asset drops. The operator should know in advance what each asset will do when that happens.</li>
 </ul>
 <div class="qhead">
-<h2>Qualifications map — Tier 1</h2>
+<h2>Qualifications map <span class="tier">Tier 1</span></h2>
 </div>
 <ul>
-<li><strong>Exact or strong.</strong> MS and PhD in Human Factors Psychology (Old Dominion, 2017 and 2020). Six-plus years of industry HF, though my titles say researcher. MIL-STD-1472 at NASA. Task analysis at NASA, Echo Hub, and EchoStar. Field research: Uber Brazil ride-alongs and Echo Hub home visits. A/B tests, think-aloud, and card sorts. Test plans and reports: the NASA evaluation plan and uFMEA report, and the Amazon latency protocol and specification. Workload and situation awareness measurement: fNIRS and eye tracking at Amazon, NASA-TLX as a manipulation check in the latency study, decomposed takeover latency at Mercedes, ECG at Brigham. Anthropometrics: fifth and ninety-fifth percentile at NASA, reach envelopes at EchoStar. Requirements and specs: latency for software, reach for hardware. Surveys and structured interviews. Clearance eligibility.</li>
-<li><strong>Partial.</strong> Uncrewed and autonomous systems, through automation handovers and the agentic AI framework. JIRA and Confluence daily, but not Jama yet. MIL-STD-1474, through audiology research and sound-based alerts. DoD HSI domains: knowledge, not practice. SAGAT and SPAM: I know them, but I haven't run them on a program.</li>
+<li><strong>Exact or strong.</strong> MS and PhD in Human Factors Psychology (Old Dominion, 2017 and 2020). Six-plus years of industry HF, though my titles say researcher. Task analysis at NASA, Echo Hub, and EchoStar. Field research: Uber Brazil ride-alongs and Echo Hub home visits. A/B tests, think-aloud, and card sorts. Test plans and reports: the NASA evaluation plan and uFMEA report, and the Amazon latency protocol and specification. Workload measurement: fNIRS and eye tracking at Amazon, NASA-TLX as a manipulation check in the latency study, decomposed takeover latency at Mercedes, ECG at Brigham. Anthropometrics: fifth and ninety-fifth percentile at NASA, reach envelopes at EchoStar. Requirements and specs: latency for software, reach for hardware. Surveys and structured interviews. Clearance eligibility.</li>
+<li><strong>Partial.</strong> MIL-STD-1472: one evaluation, in 2018, against 1472G. Uncrewed and autonomous systems, through automation handovers and the agentic AI framework. JIRA and Confluence daily, but not Jama yet. MIL-STD-1474, through audiology research and sound-based alerts. DoD HSI domains: knowledge, not practice. SAGAT and SPAM: I know them, but I haven't run them on a program.</li>
 <li><strong>Gaps.</strong> MIL-STD-46855 and 882 under contract, though I've done the analyses through a usability FMEA. Defense hardware or software. An active TS clearance.</li>
 </ul>
 <div class="parthead">
 <h1>Part 1 · Jake: the HF role and how my experience maps</h1>
 <blockquote class="note">
-<p><strong>The room.</strong> Jake has seen part of my presentation, had a strong 1:1 with me, and read the CSCW paper. He's testing human factors engineering depth: requirements, verification, HSI documentation, and how I'd join his team.</p>
+<p><strong>The room.</strong> Jake watched Monday's pitch, which led with rapid qualitative work, and he read the CSCW paper. He's testing whether I hold the engineering half: requirements, verification, and HSI documentation. He's the expert on HSI, so I use his terms without defining them.</p>
 </blockquote>
 </div>
 <div class="qhead">
-<h2>Tell me about yourself — Tier 1</h2>
+<h2>Tell me about yourself <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about yourself.&quot; Or: <em>&quot;Walk me through how your background maps to this role.&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>What I do.</strong> I'm a human factors engineer. I turn human-performance data into requirements that a program can build against, and into verification methods that a test engineer can run. I've done that for more than six years in industry, mostly where hardware, software, and automation meet.</p>
-<p class="flow"><strong>The arc.</strong> My PhD is in human factors psychology, from Old Dominion. At NASA Langley, as a PhD intern, I led the human-systems integration evaluation of a Lunar Gateway medical workstation: a usability FMEA, which is a failure modes and effects analysis for use errors, plus anthropometric reach and clearance, checked against MIL-STD-1472 and NASA-STD-3001. At Mercedes-Benz, I ran simulator studies of takeover alerts during Level 2 automation handovers. At Amazon, I set latency requirements with psychophysics, and I co-established a cognitive load framework using fNIRS, which is functional near-infrared spectroscopy, and eye tracking. Since June 2025, I've built the human factors function at EchoStar, including the reach envelopes and the latency and feedback criteria that the hardware and software teams design against.</p>
-<p><strong>What ties it together.</strong> Most of that work ends in a requirement or a design criterion, with a way to check it.</p>
-<p><strong>What I want next.</strong> I want to work on autonomy that people supervise, where the human side of the requirement decides whether the system works.</p>
+<p><strong>The claim.</strong> I'm a human factors engineer. I turn human-performance data into requirements a program can build against and tests that verify them, mostly where hardware, software, and automation meet.</p>
+<p class="flow"><strong>The proof.</strong> Since June 2025, I've built the human factors function at EchoStar, including the reach envelopes and fit criteria the hardware team designs against. At Amazon, I set latency thresholds with psychophysics that engineering adopted as targets, and measured workload with fNIRS and eye tracking. Before that, a usability FMEA and 1472 accommodation work at NASA, and takeover-alert studies at Mercedes.</p>
+<p><strong>The boundary.</strong> What I want next is autonomy that people supervise, where the human side of the requirement decides whether the system works.</p>
 </div>
 <h3>Say this</h3>
 <div class="calibration"><ul>
@@ -292,394 +344,380 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Researcher or engineer? — Tier 1</h2>
+<h2>Researcher or engineer? <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Are you a researcher or a human factors engineer?&quot; Or: <em>&quot;Your last title says researcher.&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> The engineering hat is the job. That means requirements, verification, and human systems integration documentation. Research is how I find out what a requirement needs to say.</p>
-<p><strong>The titles.</strong> My titles say researcher, but the work was human factors engineering, embedded with the hardware and software teams the way an integrated product team works: specifications, reach envelopes, and pass criteria.</p>
-<p><strong>How I'd know.</strong> A finding isn't finished until it becomes a shall statement with a threshold and a verification method. A reach envelope, a perceptual threshold, and an alert criterion each name how a test engineer would check them.</p>
-<p class="flow"><strong>Evidence, and where it stops.</strong> At Amazon, the latency thresholds became engineering's targets, with pass criteria. At EchoStar, the reach envelope and the usability criteria are what the hardware team designs against. I haven't authored HSI documentation under a DoD contract, and that's the ramp-up I'd plan for.</p>
-<p><strong>The decision it drives.</strong> I pick the method based on what the decision needs to know. Setting a hard number needs a controlled study. Choosing a design direction just needs a quick round of testing.</p>
+<p><strong>The claim.</strong> The engineering half is the job: requirements, verification, and HSI documentation. Research is how I find out what a requirement needs to say.</p>
+<p class="flow"><strong>The proof.</strong> My titles say researcher, but the outputs were engineering outputs, produced inside the hardware and software teams the way an IPT works. At Amazon, latency thresholds with pass criteria that engineering adopted as targets. At EchoStar, reach envelopes and fit criteria the hardware team designs against, from the concept review on.</p>
+<p><strong>The boundary.</strong> I haven't authored HSI documentation under a DoD contract. That's the ramp-up.</p>
 </div>
+<h3>Follow-ups</h3>
+<p class="fq"><strong>Follow-up: &quot;Your other resume says Staff Human Factors Engineer.&quot;</strong></p>
+<blockquote class="say">
+<p>That version used functional titles. My titles of record are Staff Product Researcher and UX Researcher II, and the work behind them is the same.</p>
+</blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Research is how I find the number. Engineering is how I turn it into a requirement someone can verify.&quot;</em></li>
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Why this role — Tier 1</h2>
+<h2>Why this role <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Why this role?&quot; Or: <em>&quot;Why human factors engineering at Anduril?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The consequence.</strong> In autonomy that people supervise, human limits decide whether the system works. That includes workload, fatigue, attention, and trust.</p>
-<p><strong>The public framing.</strong> The division describes its goal publicly as capable, replaceable autonomy that complements a human-centric force. If the force stays human-centric, then the human side is the integration problem, and that's exactly the work I want to do.</p>
-<p class="flow"><strong>The work.</strong> The posting reads like my job description. It covers breaking down the operator's tasks, deciding what the human does and what the automation does, testing workload and situation awareness, and writing human factors requirements into the specifications and the documents that define how systems connect.</p>
-<p><strong>The question I'd bring.</strong> Before I say anything about building on it, I'd like to hear how you see the program's human-performance foundation today.</p>
+<p><strong>The claim.</strong> In autonomy that people supervise, human limits decide whether the system works: workload, fatigue, attention, and trust.</p>
+<p><strong>The proof.</strong> The posting describes the work I want: task analysis, function allocation, workload and SA testing, HF requirements in specifications and ICDs, and HSI documentation, across programs and business lines.</p>
+<p><strong>The boundary.</strong> Which programs would this seat support first?</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Why leave a Staff role for Senior — Tier 1</h2>
+<h2>Why leave a Staff role for Senior <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Why leave a Staff role for a Senior one?&quot; Or: <em>&quot;Why should we believe you'll stay?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>Why leave.</strong> Nothing is pushing me out. I set out to build the human factors function at EchoStar, and it's running. What it doesn't have is the stakes I want to work on.</p>
-<p><strong>What I'm optimizing for.</strong> I care more about the scope of the work than the title. In my experience, the title catches up with the scope.</p>
-<p><strong>Why I'll stay.</strong> Orange County is where my partner is from, so this is a long-term move for us. I'd be based in Costa Mesa, and I'd travel to test events and to the field.</p>
+<p><strong>The claim.</strong> Nothing is pushing me out. The function I built at EchoStar is running, but it doesn't have the stakes I want to work on.</p>
+<p><strong>The proof.</strong> What I want is the work itself: requirements and verification on autonomy that people supervise.</p>
+<p><strong>The boundary.</strong> Orange County is where my partner is from, so this is a long-term move. I'd be in Costa Mesa and travel to test events.</p>
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;Two moves in two years. Why will this one stick?&quot;</strong></p>
 <blockquote class="say">
-<p>J.S. Held taught me that I want to own a product line rather than rotate across clients. EchoStar was the right move for that, and the function there is running now. This is the work I want to keep doing, in the place where my family is settling.</p>
+<p>J.S. Held taught me that I want to own a product line rather than rotate across clients. EchoStar was the right move for that, and the function there is running now. This is the work I want to keep doing, where my family is settling.</p>
 </blockquote>
-<h3>Say this</h3>
-<div class="calibration"><ul>
-<li><em>&quot;I care more about the scope than the title.&quot;</em></li>
-</ul></div>
 <hr />
 <div class="qhead">
-<h2>Mission conviction — Tier 1</h2>
+<h2>Mission conviction <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Are you comfortable working on weapons and autonomy?&quot; Or: <em>&quot;Where should the human sit in the loop?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The answer.</strong> Yes, and I'll say that directly. These systems protect warfighters, and I want to help build them.</p>
-<p><strong>The policy anchor.</strong> DoD Directive 3000.09, updated on January 25, 2023, frames the question as appropriate levels of human judgment over the use of force. I don't think of that as a single dial.</p>
-<p class="flow"><strong>The stages.</strong> Parasuraman, Sheridan, and Wickens split automation into four stages: gathering information, making sense of it, choosing an action, and carrying it out. On a mission with several aircraft, which runs from planning to tasking to monitoring to stepping in, each of those stages can be automated to a different degree.</p>
-<p><strong>The question.</strong> How does this program frame it? I'd want to set where the human sits at each stage with operator data, rather than assume it.</p>
+<p><strong>The claim.</strong> Yes. These systems protect warfighters, and I want to help build them.</p>
+<p><strong>The proof.</strong> DoD policy frames it as appropriate levels of human judgment over the use of force, and that isn't one dial. Sensing, deciding, and acting can each sit at a different level of automation, and the right level can change across a mission.</p>
+<p><strong>The boundary.</strong> I'd want operator data to set where the human sits at each stage, rather than assume it.</p>
 </div>
+<h3>Follow-ups</h3>
+<p class="fq"><strong>Follow-up: &quot;What's that based on?&quot;</strong></p>
+<blockquote class="say">
+<p>DoD Directive 3000.09, updated in January 2023, and Parasuraman, Sheridan, and Wickens's four stages of automation.</p>
+</blockquote>
 <hr />
 <div class="qhead">
-<h2>Biggest gap for this role — Tier 2</h2>
+<h2>Biggest gap for this role <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What's your biggest gap for this role?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The gap.</strong> It's DoD human systems integration documentation. I haven't authored an HSI Program Plan, and I haven't worked under contract on a MIL-STD-882 or MIL-STD-46855A program.</p>
-<p class="flow"><strong>What carries over.</strong> I've done the analyses those documents formalize. I've found hazards and ranked them by severity through a usability FMEA, and I've fixed them in the standard order: design the hazard out, guard against it, warn, and only then train. What's new to me is the paperwork and the process around that work, not the work itself.</p>
-<p class="flow"><strong>How I'd close it.</strong> I'd start with the source documents: 46855A for what the human engineering work is, the government template for the HSI plan, and 882E for how hazards get rated and formally accepted. Then I'd read the program's own plans, because the program's version is the one that actually matters. And I'd find whoever on the team has written one and pair with them through a full review cycle, so my first inputs get checked by someone who's done it.</p>
-<p><strong>The question.</strong> Which documents does the team treat as the baseline?</p>
+<p><strong>The claim.</strong> DoD HSI documentation. I haven't authored an HSI Program Plan, and I haven't worked under contract on an 882 or 46855A program.</p>
+<p class="flow"><strong>The proof.</strong> I've done the analyses those documents formalize. Today at EchoStar, body-safety and fit criteria the hardware team designs against; earlier, use errors ranked by severity in a usability FMEA and fixed in the standard order, design it out first. What's new is the process around the work, not the work.</p>
+<p><strong>The boundary.</strong> I'd read the source standards and the program's own plans, and pair with whoever has written one through a review cycle.</p>
 </div>
 <h3>Say this</h3>
 <div class="calibration"><ul>
-<li><em>&quot;I haven't written one under contract. Here's exactly how I'd learn it, and who I'd learn it from.&quot;</em></li>
+<li><em>&quot;I haven't written one under contract. Here's how I'd learn it, and who I'd learn it from.&quot;</em></li>
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>&quot;Why hire you as an engineer?&quot; — Tier 2</h2>
+<h2>&quot;Why hire you as an engineer?&quot; <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;You came from a UX research pipeline. Why should we hire you as an engineer?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> The pipeline was the door, but the work is human factors engineering, and UX research is part of how I do it well.</p>
-<p><strong>The evidence.</strong> At NASA, I ran the hazard analysis for use errors and sized the workstation to the full range of body sizes, against MIL-STD-1472. At EchoStar, I wrote the reach and mechanical fit criteria. At Amazon, I wrote latency requirements with pass-fail criteria.</p>
-<p><strong>The test.</strong> I'd ask you to judge me on whether a test engineer could verify what I write. That's the bar I hold myself to.</p>
+<p><strong>The claim.</strong> The pipeline was the door, but the work is human factors engineering.</p>
+<p><strong>The proof.</strong> At NASA, the use-error hazard analysis and accommodation against 1472. At EchoStar, the reach and mechanical fit criteria. At Amazon, latency requirements with pass-fail criteria.</p>
+<p><strong>The boundary.</strong> Judge me on whether a test engineer could verify what I write.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Biggest weakness — Tier 2</h2>
+<h2>Biggest weakness <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What's your biggest weakness?&quot; Or: <em>&quot;How do you like to be managed?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The weakness.</strong> I've built human factors functions on my own, so I'm still practicing letting other people run studies I'd have designed differently.</p>
-<p><strong>The fix.</strong> I write the standard down instead, as a test plan that says up front what each result will decide. If a study meets that standard, it runs, and that's also how the practice grows beyond me.</p>
-<p><strong>On management.</strong> I work best when my manager is clear about the outcome, gives me room on the method, and tells me early when something isn't landing.</p>
+<p><strong>The claim.</strong> I state a point of view as a conclusion before I've asked enough.</p>
+<p><strong>The proof.</strong> I got that feedback recently, and it was fair. When I know a domain well, I move to the answer before I've heard how the team sees the problem.</p>
+<p><strong>The boundary.</strong> Now I open with one scoping question, label my view as a hypothesis, and ask what I'm missing before I propose anything. On management: I work best with a clear outcome, room on the method, and early feedback when something isn't landing.</p>
 </div>
+<hr />
 <div class="qhead">
-<h2>HSI program fluency — Tier 1</h2>
+<h2>HSI program fluency <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What's your experience with MIL-STD-882 and 46855? How would you build an HSI Program Plan?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p class="flow"><strong>The claim.</strong> Human systems integration means treating the people as a full part of the system, with the same weight as the hardware and software, for the life of the program. DoD Instruction 5000.95 splits it into seven domains, from human factors engineering, manpower, personnel, and training through to safety and habitability.</p>
-<p><strong>How I'd build the plan.</strong> I'd follow the government's template for the plan, DI-HFAC-81743A. It says who owns each domain, how each human requirement links to its test, which analyses I'd run, like task analysis, workload, and crew size, and how the testing rides on the program's test events.</p>
-<p class="flow"><strong>Where HF lands.</strong> A classic DoD program has formal design reviews. Task analysis feeds the requirements at the first one, the system requirements review. Workload modeling and body-size accommodation are due by preliminary design, 1472 compliance by critical design, and the test plans before test readiness. Which of those gates does this program run? For faster programs, SAE6906A, the industry HSI standard, numbers each requirement so a program can pick which ones apply.</p>
-<p><strong>Evidence, and where it stops.</strong> I've done the analyses these standards formalize, but not under contract, and I've planned that ramp-up.</p>
-<p><strong>The decision it drives.</strong> By month three, I'd deliver HSI plan inputs and a map that links every human requirement back to its analysis and forward to its test.</p>
+<p><strong>The claim.</strong> I've done the analyses these standards formalize, but not under contract.</p>
+<p class="flow"><strong>The proof.</strong> I'd build the plan from the HSI Program Plan data item: domain owners, requirements traced to tests, the analyses, and HF objectives on existing test events. In a classic program, task analysis lands at SRR, workload and accommodation by PDR, 1472 compliance by CDR, and test plans before TRR. For faster programs, SAE6906A is built for tailoring. Which gates does this program run?</p>
+<p><strong>The boundary.</strong> By month three, I'd deliver plan inputs and a traceability map, reviewed by someone who's written one.</p>
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;Walk me through 882.&quot;</strong></p>
 <blockquote class="say flow">
-<p>MIL-STD-882E is the DoD's system safety standard. You rate each hazard on two scales. Severity has four categories: catastrophic, critical, marginal, and negligible. Probability has six levels: frequent, probable, occasional, remote, improbable, and eliminated. Together they give a risk level of high, serious, medium, or low, and the higher the risk, the more senior the person who has to formally accept it. Each hazard is tracked to closure in a hazard log. The fixes follow a set order: design the hazard out, reduce it through design changes, add engineered safeguards, add warning devices, and only then rely on signs, procedures, training, and protective equipment. My usability FMEA ran the same logic on use errors.</p>
+<p>Severity has four categories: catastrophic, critical, marginal, and negligible. Probability has six levels, from frequent down to eliminated. Together they give a risk level of high, serious, medium, or low, and the higher the risk, the more senior the person who formally accepts it. Each hazard is tracked to closure in a hazard log. Mitigation follows the design order of precedence: eliminate through design, reduce through design changes, engineered features, warning devices, and only then signs, procedures, training, and protective equipment. My usability FMEA ran the same logic on use errors.</p>
 </blockquote>
 <p class="fq"><strong>Follow-up: &quot;Which human engineering standard do you work from?&quot;</strong></p>
 <blockquote class="say">
-<p>Two, because they do different jobs. MIL-STD-1472H is the design rulebook: what the controls, displays, and alarms should look like. MIL-STD-46855A is the process rulebook: what human engineering work the contractor does across analysis, design, and test. The old 1999 handbook was folded into that standard in 2011.</p>
+<p>Two, because they do different jobs. 1472H for design criteria, and 46855A for the human engineering program across analysis, design, and test. The 1999 handbook was folded into the standard in 2011.</p>
 </blockquote>
-<p class="fq"><strong>Follow-up: &quot;Walk me through MIL-STD-46855A.&quot;</strong></p>
-<blockquote class="say flow">
-<p>MIL-STD-46855A, from May 2011, sets out the human engineering work a contractor has to do in three phases: analysis, design and development, and test and evaluation. A 2016 notice confirmed it's still in use. The work gets delivered as documents built from government templates, such as the human engineering program plan and the test plan. The HSI Program Plan sits above all of that and covers all seven domains, but it doesn't replace those other plans unless the government asks it to.</p>
+<p class="fq"><strong>Follow-up: &quot;Walk me through 46855A.&quot;</strong></p>
+<blockquote class="say">
+<p>It sets the human engineering work a contractor does in analysis, design and development, and test and evaluation, delivered through data items like the human engineering program plan and test plan. The HSI Program Plan sits above it across all seven domains, but it doesn't replace those plans unless the government directs it.</p>
 </blockquote>
-<h3>Say this</h3>
-<div class="calibration"><ul>
-<li><em>&quot;I've done the analyses these standards formalize. I haven't done them under contract, and I've planned that ramp-up.&quot;</em></li>
-</ul></div>
 <hr />
 <div class="qhead">
-<h2>Writing verifiable HF requirements — Tier 1</h2>
+<h2>Writing verifiable HF requirements <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Write me an HF requirement for an autonomy status display that a test engineer can verify.&quot; Or: <em>&quot;How do you get HF into specs and ICDs?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> A good requirement has five parts: a &quot;shall&quot; statement, a number you can measure, a minimum acceptable value and a goal value, the conditions it applies under, and how it will be checked, whether by inspection, analysis, demonstration, or test.</p>
-<p class="flow"><strong>The sample.</strong> &quot;The control station shall display the active autonomy mode for each aircraft under control. Minimum: trained operators identify the active mode within two seconds on at least ninety-five percent of checks, during a realistic multi-aircraft scenario. Goal: one second, on ninety-nine percent. Checked by: test, in a human-in-the-loop evaluation.&quot; The numbers are illustrative, and the real ones come from data.</p>
-<p class="flow"><strong>Traceability.</strong> In a requirements tool like Jama, each requirement links back to the analysis it came from and forward to the test that proves it. I've worked in JIRA and Confluence every day at Amazon and EchoStar, tracking findings through to the tickets that fixed them. I haven't used Jama yet, but it's the same logic with a formal link to the test. And where data passes between systems and ends up in front of an operator, the interface control document carries a human factors requirement too, like how often it updates.</p>
-<p><strong>Evidence, and where it stops.</strong> At Amazon, the latency specification shipped as two tiers with pass-fail criteria for each type of interaction. I haven't written into a defense interface control document, but the logic is the same.</p>
-<p><strong>The decision it drives.</strong> Every human factors finding either becomes a requirement someone can trace and test, or it gets closed with a reason.</p>
+<p><strong>The claim.</strong> A requirement is a shall statement with threshold and objective values, its conditions, and a verification method.</p>
+<p class="flow"><strong>The proof.</strong> &quot;The control station shall display the active autonomy mode for each asset under control. Threshold: trained operators identify the mode within two seconds on ninety-five percent of probes in a representative multi-asset scenario. Objective: one second, ninety-nine percent. Verification: test, in a human-in-the-loop evaluation.&quot; The numbers are illustrative.</p>
+<p class="flow"><strong>The boundary.</strong> The threshold sets the test cost. Showing ninety-five percent at ninety-five percent confidence with zero failures takes fifty-nine trials, and ninety-nine percent takes two hundred ninety-nine. I've shipped pass criteria at Amazon, not in a defense ICD, and I've used JIRA and Confluence daily, not Jama yet.</p>
 </div>
+<h3>Follow-ups</h3>
+<p class="fq"><strong>Follow-up: &quot;Where does fifty-nine come from?&quot;</strong></p>
+<blockquote class="say">
+<p>The success-run formula. With zero failures allowed, n is the natural log of one minus the confidence, divided by the natural log of the reliability. For ninety-five and ninety-five, that's 58.4, so fifty-nine.</p>
+</blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;If a test engineer can't verify it, it isn't a requirement yet.&quot;</em></li>
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>NASA: HSI, hazard analysis, and accommodation — Tier 1</h2>
+<h2>NASA: HSI, hazard analysis, and accommodation <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Walk me through the NASA work.&quot; Or: <em>&quot;Tell me about your MIL-STD-1472 experience.&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> It was a human-systems integration evaluation of a Lunar Gateway medical workstation. It was formative, meaning the goal was to find and fix problems in a simulated setting, not to certify the design.</p>
-<p class="flow"><strong>How I'd know.</strong> I built the task list with subject-matter experts. Then I ran a usability FMEA as the human error analysis, or HEA: every way a crew member could get a step wrong, ranked by severity, across three to four medical scenarios. Reach was set to the fifth-percentile female and clearance to the ninety-fifth-percentile male, against MIL-STD-1472 and NASA-STD-3001. Five representative astronaut candidates worked through the scenarios in a virtual reality simulation of microgravity.</p>
-<p class="flow"><strong>Evidence, and where it stops.</strong> The worst errors came from controls sitting next to each other that did very different things, where hitting the wrong one had serious consequences. We moved them apart over three to four design rounds, the final round had no critical input errors, and task time fell about thirty percent as a side effect. I was a PhD intern who led the evaluation, and the layout changes were joint work with the industrial designers.</p>
-<p><strong>The decision it drives.</strong> Design the error out before you warn about it. That's the 882 safety order, applied to human error.</p>
+<p><strong>The claim.</strong> A formative HSI evaluation of a Lunar Gateway medical workstation, which I led as a PhD intern.</p>
+<p class="flow"><strong>The proof.</strong> I built the task list with subject-matter experts, then ran a usability FMEA as the human error analysis across three to four medical scenarios, with reach and clearance from the fifth-percentile female to the ninety-fifth-percentile male. Five astronaut candidates worked the scenarios in VR microgravity. The worst errors came from adjacent controls with different consequences; we separated them over three to four rounds, and the final round had no critical input errors.</p>
+<p><strong>The boundary.</strong> Formative, not validation, and the thirty percent faster task time was a side effect. It was 2018, so it was 1472G, not H, and the layout was joint work with the industrial designers.</p>
 </div>
+<h3>Follow-ups</h3>
+<p class="fq"><strong>Follow-up: &quot;That was 2018. What have you done since?&quot;</strong></p>
+<blockquote class="say">
+<p>At Amazon, a latency specification engineering adopted as targets, and workload measurement with fNIRS and eye tracking. Since June 2025 at EchoStar, I've built the human factors function: reach envelopes, body-safety, and fit criteria the hardware team designs against, and an experience index reviewed at the VP level.</p>
+</blockquote>
 <hr />
 <div class="qhead">
-<h2>Setting a requirement from human data (latency) — Tier 1</h2>
+<h2>Setting a requirement from human data (latency) <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you set a requirement when nobody knows the right number?&quot; Or: <em>&quot;Tell me about your most impactful project.&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> Thresholds should come from people, measured under control, and they should ship as a requirement with its verification method and its limits.</p>
-<p class="flow"><strong>How I'd know.</strong> I built a Wizard-of-Oz rig that set the response delay on every trial to the millisecond, and I used the method of constant stimuli: thirty participants rated twelve interaction types at six fixed delays, from half a second to three seconds, for about two thousand trials. They used a three-point slowness scale, because people notice slowness, not speed.</p>
-<p class="flow"><strong>The requirement.</strong> Each interaction type got two tiers, read off the distribution of individual ratings, not the mean, with a psychometric fit across the delay levels. The high tier is the delay where more than seventy percent rate it not slow and fewer than five percent rate it too slow. The acceptable tier is more than half not slow and under fifteen percent too slow. Verification is pass-fail: you measure fielded latency against the band.</p>
-<p><strong>Evidence, and where it stops.</strong> Engineering adopted the thresholds as their targets, and an economics team's model projected about fifty million dollars. I held workload constant in that study. For operators supervising aircraft, I'd vary workload and fatigue on purpose.</p>
-<p><strong>The decision it drives.</strong> The output is a limit, a tolerance, and a pass-fail check that an engineer can run without me in the room.</p>
+<p><strong>The claim.</strong> Thresholds should come from people, measured under control, and ship with their verification method and their limits.</p>
+<p class="flow"><strong>The proof.</strong> A Wizard-of-Oz rig with millisecond control and the method of constant stimuli: thirty participants, twelve interaction types, six fixed delays, about two thousand trials. Two tiers per interaction type, read off the distribution of individual ratings, not the mean. Engineering adopted them as targets, and an economics team's model projected about fifty million dollars.</p>
+<p><strong>The boundary.</strong> I held workload constant. For operators supervising assets, workload and fatigue become manipulated factors.</p>
 </div>
 <h3>Follow-ups</h3>
+<p class="fq"><strong>Follow-up: &quot;What were the tiers?&quot;</strong></p>
+<blockquote class="say">
+<p>High tier: more than seventy percent rate the delay not slow, and fewer than five percent too slow. Acceptable: more than half not slow, under fifteen percent too slow. Verification is pass-fail against the band.</p>
+</blockquote>
 <p class="fq"><strong>Follow-up: &quot;Why constant stimuli, not a staircase?&quot;</strong></p>
 <blockquote class="say">
-<p>A staircase moves the delay up or down after each answer, and it homes in on a single point. I tested fixed delay levels instead, because I needed two cut-offs plus how quickly the ratings changed between them. And engineers have to trust the method before they'll trust the number.</p>
+<p>A staircase homes in on one point. I needed two cut-offs plus the slope between them, and engineers have to trust the method before they'll trust the number.</p>
 </blockquote>
 <p class="fq"><strong>Follow-up: &quot;How was workload held constant?&quot;</strong></p>
 <blockquote class="say">
-<p>People made the judgments during a light visual monitoring task at a fixed difficulty, set from a practice block. I ran the NASA-TLX after each block as a manipulation check only, to confirm the load landed where I aimed it, not as a result.</p>
+<p>People made the judgments during a light visual monitoring task at a fixed difficulty, set from a practice block. I ran the NASA-TLX after each block as a manipulation check only, not as a result.</p>
 </blockquote>
 <p class="fq"><strong>Follow-up: &quot;A voice assistant isn't an aircraft.&quot;</strong></p>
 <blockquote class="say">
-<p>Agreed, and the numbers don't carry over. The method does: when a person depends on an automated response, the timing limit should come from measuring people under controlled conditions. Here, I'd add the workload I held constant.</p>
+<p>Agreed, and the numbers don't carry over. The method does: when a person depends on an automated response, the timing limit should come from people measured under control.</p>
 </blockquote>
-<h3>Say this</h3>
-<div class="calibration"><ul>
-<li><em>&quot;The method carries over. The numbers won't.&quot;</em></li>
-</ul></div>
 <hr />
 <div class="qhead">
-<h2>Quantitative rigor — Tier 1</h2>
+<h2>Quantitative rigor <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Where does quant fit in your work?&quot; Or: <em>&quot;How do you analyze human-performance data?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> Quantitative work leads, and qualitative work is how I find out what to measure.</p>
-<p class="flow"><strong>How I'd know.</strong> I use psychophysics to set thresholds, and workload and situation awareness measures to track operator state. I fit mixed-effects models, because every operator contributes repeated measures, and treating those as independent overstates the evidence. I analyze in Python: pandas, statsmodels, and psychometric curve fitting.</p>
-<p class="flow"><strong>Evidence, and where it stops.</strong> The latency program is one example, and the cognitive load framework at Amazon is another. At EchoStar, I built an experience index, a longitudinal program that pairs behavioral telemetry with attitudinal metrics, reviewed at the VP level. With small operator populations, I use within-subject designs and report effect sizes with confidence intervals, not just p-values.</p>
-<p><strong>The decision it drives.</strong> The claim sets the method. An error rate needs a summative sample, but a design direction doesn't.</p>
+<p><strong>The claim.</strong> The claim sets the method. Controlled measurement when the decision needs a number; observation and usability testing when it needs to know what's actually happening.</p>
+<p><strong>The proof.</strong> Psychophysics for thresholds, and mixed-effects models, because every operator contributes repeated measures. I analyze in Python end to end. At EchoStar, I built a longitudinal experience index that pairs behavioral telemetry with attitudinal metrics, reviewed at the VP level.</p>
+<p><strong>The boundary.</strong> Small operator populations mean within-subject designs and effect sizes with intervals. An error rate needs a summative sample; a design direction doesn't.</p>
 </div>
 <h3>Say this</h3>
 <div class="calibration"><ul>
-<li><em>&quot;I pick the method based on what the decision needs to know.&quot;</em></li>
+<li><em>&quot;I pick the method by the claim the decision needs.&quot;</em></li>
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Methods toolkit — Tier 2</h2>
+<h2>Methods toolkit <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Which research methods do you use?&quot; Or: <em>&quot;Have you run A/B tests, think-alouds, or card sorts?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> I use the whole toolkit, and I pick the method based on what the decision needs to know.</p>
-<p><strong>Watching the work.</strong> Contextual inquiry and ride-alongs show me what operators actually do, as opposed to what they say they do. I ran ride-alongs at Uber in Brazil, and in-home visits for Echo Hub.</p>
-<p class="flow"><strong>Testing the design.</strong> In every rapid test-fix-retest round, I use think-aloud so I hear why someone hesitates, not just that they did. At EchoStar, I've used A/B tests on Sling flows, reading the result from the behavioral telemetry, so the decision rests on what people did rather than what they said. At Amazon, I ran a card sort to organize the Echo Hub's controls and settings around how people grouped them in their own homes.</p>
-<p><strong>Asking at scale.</strong> Surveys and structured interviews give me comparable answers across a population, and I write them so that the analysis is planned before the first response comes in.</p>
-<p><strong>The decision it drives.</strong> Each method answers a different kind of question, and I choose the one whose answer the decision actually needs.</p>
+<p><strong>The claim.</strong> I pick the method by what the decision needs.</p>
+<p><strong>The proof.</strong> Contextual inquiry and ride-alongs, at Uber in Brazil and in Echo Hub homes. Think-aloud in every test-fix-retest round. A/B tests on Sling flows, read from telemetry. A card sort to organize Echo Hub's controls and settings.</p>
+<p><strong>The boundary.</strong> Surveys and structured interviews when I need comparable answers at scale, with the analysis planned before the first response.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Formative testing with small samples — Tier 2</h2>
+<h2>Formative testing with small samples <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How many participants do you need?&quot; Or: <em>&quot;Isn't five people too few?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> Early-stage testing works best small and repeated. I typically run about five people per round for about three rounds, and I change the design between rounds.</p>
-<p><strong>How I'd know.</strong> At that stage, the goal is to find mistakes people make and rank them by how serious they are, not to estimate how often they happen. Three small rounds find more problems than one big round, because each round tests a design that already fixed the last round's issues.</p>
-<p><strong>Where it stops.</strong> A small-round finding justifies a design decision, but it doesn't support a safety claim or an error rate. If someone needs a rate, that's a larger final study, called a summative study, and I'd scope it that way.</p>
+<p><strong>The claim.</strong> Formative testing works best small and repeated: about five people a round, about three rounds, with the design changing between them.</p>
+<p><strong>The proof.</strong> The goal is to find and rank use errors, not estimate their rate, and each round tests a design that already fixed the last round's problems.</p>
+<p><strong>The boundary.</strong> A formative finding justifies a design decision, not a safety claim. A rate needs a summative study, sized by the success-run math.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Heuristic analysis and cognitive walkthroughs — Tier 2</h2>
+<h2>Heuristic analysis and cognitive walkthroughs <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you evaluate a prototype hardware and software interface?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p class="flow"><strong>The heuristic analysis.</strong> That's an expert review against a list of rules. I build the list from MIL-STD-1472H plus rules specific to the task: can the operator always see which mode the system is in, are the alerts easy to tell apart, does input work with gloves and gear on, and can the screen be read at a distance and at night. Two reviewers work separately and then compare.</p>
-<p><strong>The cognitive walkthrough.</strong> I step through each critical task the way a new operator would. At each step, I ask whether they'd know what to do, whether they'd see how to do it, and whether the feedback would tell them it worked.</p>
-<p><strong>The output.</strong> Each finding gets rated on the same severity scale as the hazard analysis and tied to the rule it breaks, and the top items get written as requirements.</p>
-<p><strong>Where it stops.</strong> Expert reviews find rule violations, but they don't show how real operators will perform. The serious findings get confirmed in a test with real operators in the loop.</p>
+<p><strong>The claim.</strong> Two expert passes before any operator sees it.</p>
+<p class="flow"><strong>The proof.</strong> A heuristic analysis against 1472H plus task rules, like mode visibility, alert discriminability, gloved input, and night legibility, by two reviewers separately. Then a cognitive walkthrough of each critical task. Findings get rated on the hazard-analysis severity scale, and the top items become requirements.</p>
+<p><strong>The boundary.</strong> Expert reviews find violations, not performance. The serious findings get confirmed in a human-in-the-loop test.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Maintainers and physical accommodation — Tier 2</h2>
+<h2>Maintainers and physical accommodation <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you address maintainers, not just operators?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The scope.</strong> I look at the hazards maintainers face, like pinch points, hot surfaces, stored energy, and heavy lifts. I also look at whether they can reach the part, fit a tool in, and get the part out.</p>
-<p><strong>The method.</strong> I use body measurements from the Army's ANSUR II survey, adjusted for clothing and gear, and I treat gloves and protective equipment as design inputs. Nobody is average on every measurement, so I design for the range of people, not an average person.</p>
-<p><strong>Evidence, and where it stops.</strong> I wrote the reach, body-safety, and mechanical fit criteria at EchoStar, and I set reach and clearance at NASA. I haven't studied defense maintainers in the field.</p>
+<p><strong>The claim.</strong> Maintainers get their own hazard and accommodation analysis: pinch points, hot surfaces, stored energy, lifts, access, and tool clearance.</p>
+<p><strong>The proof.</strong> Encumbered dimensions from ANSUR II, with gloves and protective equipment as design inputs, and design to the range, not an average person. I wrote reach, body-safety, and fit criteria at EchoStar and set reach and clearance at NASA.</p>
+<p><strong>The boundary.</strong> I haven't studied defense maintainers in the field.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Training aids and manuals — Tier 2</h2>
+<h2>Training aids and manuals <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you support training aids and manual development?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The chain.</strong> Breaking down the tasks tells me what each role has to know and be able to do, and that shapes the training aids and the manual.</p>
-<p><strong>The check first.</strong> Before I write a training requirement, I ask whether a design change could remove the need for it. In the safety order, training is the last fix, not the first.</p>
-<p><strong>The output.</strong> I deliver training needs traced to tasks, plus a list of design changes that would cut the training burden.</p>
+<p><strong>The claim.</strong> The task analysis defines the knowledge, skills, and abilities each role needs, and those shape the training aids and the manual.</p>
+<p><strong>The proof.</strong> Before I write a training requirement, I ask whether a design change could remove it. Training is the last fix in the order of precedence.</p>
+<p><strong>The boundary.</strong> I deliver training needs traced to tasks, plus the design changes that would cut the training burden.</p>
 </div>
+<hr />
 <div class="qhead">
-<h2>Building the research foundation, curiosity-first — Tier 1</h2>
+<h2>Building the research foundation, curiosity-first <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Our team already has research happening. How would you add rigor without slowing it down?&quot; <em>Use this only if they raise existing research themselves.</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> First, I learn what's working. Research that's already running is an asset, so I'd add a measurement layer under it rather than start a second program next to it.</p>
-<p><strong>How I'd know.</strong> I'd start with questions. Which decisions has the current research changed? What's measured today, and how often do test events happen?</p>
-<p><strong>The partnership.</strong> Whoever runs that research today keeps the quick design-testing loops. I'd add baseline measures of how operators perform, the task breakdown, and requirements with a way to check them, all on one shared plan, so our findings build on each other.</p>
-<p><strong>The question.</strong> Where does today's research stop short of what the program needs as a requirement?</p>
-<p><strong>The decision it drives.</strong> The result is one shared measurement plan for each program milestone, co-owned with the people already doing the work.</p>
+<p><strong>Ask first.</strong> Which decisions has the current research changed, and what's measured today?</p>
+<p><strong>The claim.</strong> Research that's already running is an asset. I'd add a measurement layer under it, not a second program next to it.</p>
+<p><strong>The proof.</strong> Whoever runs it keeps the fast loops. I'd add baselines, task analysis, and requirements with verification, on one shared plan.</p>
+<p><strong>The boundary.</strong> The plan is co-owned with the people already doing the work.</p>
 </div>
-<h3>Say this</h3>
-<div class="calibration"><ul>
-<li><em>&quot;I'd add a foundation under the research that's already working.&quot;</em></li>
-</ul></div>
 <hr />
 <div class="qhead">
-<h2>The CSCW paper, for Jake — Tier 1</h2>
+<h2>The CSCW paper, for Jake <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
-<p><strong>Question:</strong> &quot;Tell me how your agentic trust paper applies here.&quot; <em>Jake only.</em></p>
+<p><strong>Question:</strong> &quot;Tell me how your agentic trust paper applies here.&quot; <em>Jake only. He read it, so point back rather than re-pitch.</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p class="flow"><strong>The translation.</strong> The paper has four phases, and each one maps to defense. Alignment is previewing the plan and the intent before the system acts. Execution is showing what the system is doing while it acts. Control means the operator can redirect it or stop it at any point. Calibration means checking that operators rely on the system as much as it deserves, and no more.</p>
-<p><strong>My proposal.</strong> I'd propose that how much the system can do on its own should depend on two things: how bad a mistake would be, and how confident the system is. That borrows the logic of the 882 risk matrix, but it's my extension of the idea, not something 882 contains.</p>
-<p><strong>Where it stops.</strong> It's a framework, not a deployed defense result, and I'd want to test it on this program.</p>
-<p><strong>The decision it drives.</strong> Each phase becomes a set of requirements, each with a way to check it.</p>
+<p><strong>The claim.</strong> The four phases map straight to defense: Alignment previews intent, Execution shows status, Control means redirect or abort, and Calibration checks reliance against reliability.</p>
+<p><strong>The proof.</strong> My proposal is that the autonomy level for each action is set by the severity of a mistake crossed with the system's confidence, the logic of an 882 risk matrix.</p>
+<p><strong>The boundary.</strong> That's my extension, not something 882 contains, and it's a framework, not a deployed defense result. I'd want to test it here.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>The thirty-sixty-ninety, as hypotheses — Tier 1</h2>
+<h2>The thirty-sixty-ninety <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What would your first ninety days look like?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>By day thirty.</strong> I'm assuming the team has an existing HSI practice I should learn first; is that right? If so, I'd learn it, along with the program's key decisions and the research already done on the program, and I'd map where human factors enters the requirements today.</p>
-<p><strong>By day sixty.</strong> I'm assuming a simulation session or test event is within reach in that window; is it? If so, I'd use it to take a first measurement of operator workload, situation awareness, and fatigue, and I'd write a first set of human factors requirements, each with a way to check it.</p>
-<p class="flow"><strong>By day ninety.</strong> I'm assuming HSI plan inputs are wanted by then; are they? If so, I'd deliver those inputs, a measurement plan tied to the program's milestones, and a repeatable way to track how operators are performing. And does the program track Human Readiness Levels? If it does, I'd add the evidence for them.</p>
-<p><strong>The close.</strong> I'd expect week two to correct this plan, and I'd want it to.</p>
+<p><strong>Ask first.</strong> &quot;What does the team most need from this seat in the first ninety days?&quot; Then adjust the plan to the answer.</p>
+<p><strong>The claim.</strong> By day thirty, I'd learn the HSI practice, the program's key decisions, and where human factors enters the requirements today.</p>
+<p><strong>The proof.</strong> By day sixty, a workload, situation awareness, and fatigue baseline at the nearest simulation session or test event, and a first set of requirements with verification.</p>
+<p><strong>The boundary.</strong> By day ninety, HSI plan inputs and a measurement plan tied to milestones. I'd expect week two to correct this.</p>
 </div>
-<h3>Say this</h3>
-<div class="calibration"><ul>
-<li><em>&quot;I'm assuming X; is that right? If so, by day sixty I'd have the baseline.&quot;</em></li>
-</ul></div>
 <hr />
 <div class="qhead">
-<h2>Working across sites — Tier 2</h2>
+<h2>Working across sites <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you work with a team spread across Costa Mesa and London?&quot; <em>Use this only after they bring up London.</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> Teams spread across sites work when the work lives in shared documents, not in meetings.</p>
-<p class="flow"><strong>How.</strong> I'd protect a fixed overlap window, which is the Pacific morning and the London afternoon. I'd keep one shared task breakdown and one set of requirements that everyone works from, and I'd write decisions down, so nobody waits eight hours to learn what changed. I'd also share findings with the people whose work they affect before any group review.</p>
-<p><strong>The question.</strong> How is the team distributed across sites today?</p>
+<p><strong>The claim.</strong> Distributed teams work when the artifact is shared, not the meeting.</p>
+<p><strong>The proof.</strong> A fixed overlap window, Pacific morning and London afternoon, one shared task model and requirement set, and decisions written down so nobody waits eight hours to learn what changed.</p>
+<p><strong>The boundary.</strong> It depends on writing things down more than on any meeting.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Supporting several programs at once — Tier 2</h2>
+<h2>Supporting several programs at once <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you prioritize HF work across several programs?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The rule.</strong> I prioritize by risk first, and then by milestone. A hazard near a design freeze outranks a usability improvement on a program that's a year from test.</p>
-<p><strong>How it scales.</strong> I'd scale through shared standards: one requirement template, one test-plan template, and one checklist for expert reviews. That way every program gets consistent human factors work without my being in every meeting.</p>
-<p><strong>The question.</strong> How does HSI split work across programs today, and how is it staffed?</p>
+<p><strong>The claim.</strong> Risk first, then milestone. A hazard near a design freeze outranks a usability improvement a year from test.</p>
+<p><strong>The proof.</strong> I'd scale through shared standards: one requirement template, one test-plan template, and one heuristic checklist.</p>
+<p><strong>The boundary.</strong> The templates are what let the practice scale past me.</p>
 </div>
 <div class="parthead">
-<h1>Part 2 · The TPM: HF plus technology for human-machine teaming</h1>
+<h1>Part 2 · The TPM: deliverables, milestones, and cost</h1>
 <blockquote class="note">
-<p><strong>The room.</strong> The TPM has likely seen none of my material. They care about schedule, integration, testable requirements, and manpower, personnel, and training.</p>
+<p><strong>The room.</strong> The TPM runs schedule. Public program-manager postings for this division describe frequent test events, from full-software simulation at HQ to hardware-in-the-loop demonstrations. <strong>Ask once, early:</strong> &quot;Which milestones does the program run, and what operator access do test events get?&quot; Then attach each deliverable to their milestones, not to a classic SRR-to-TRR sequence. Cost goes in relative tiers: analyst time only, rides on an existing event, or needs its own run. No invented operator-hour numbers.</p>
 </blockquote>
 </div>
 <div class="qhead">
-<h2>MPT: the right person to operate this — Tier 1</h2>
+<h2>MPT: the right person to operate this <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you determine the right person to operate this system?&quot; Or: <em>&quot;Selection, KSAs, training?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> The right person comes out of the analysis; it isn't an assumption. Manpower is how many people, personnel is who they are and what knowledge, skills, and abilities they need, and training is what it takes to get them there.</p>
-<p class="flow"><strong>How I'd know.</strong> I'd start with task analysis, then function allocation, then workload per task, which together size the crew. Personnel cards for each role list the knowledge, skills, and abilities, the selection criteria, and the training burden. Before hardware exists, I'd use task-network workload modeling, like the Army's IMPRINT, which has been used to predict workload for uncrewed-vehicle operators, to size the crew and find the workload peaks. Then I'd validate the model in human-in-the-loop testing with the candidate population.</p>
-<p><strong>Evidence, and where it stops.</strong> The NASA task analysis and the Amazon workload measurement are direct experience. I haven't run IMPRINT on a program, so I'd pair with someone who has.</p>
-<p><strong>The decision it drives.</strong> The outputs are personnel cards for each role, an operator-to-aircraft ratio, and a training-burden estimate, as HSI plan inputs. Where selection or training would cost too much, I'd propose design changes instead.</p>
-<p><strong>What would change my mind.</strong> If testing shows a workload spike that the model missed, we fix the model, not the test.</p>
+<p><strong>The claim.</strong> The right person is an output of the task analysis, not an assumption.</p>
+<p class="flow"><strong>Deliverable and milestone.</strong> Personnel cards for each role, listing knowledge, skills, and abilities, selection criteria, and training burden, plus an operator-to-asset ratio, as HSI inputs before the crew size gets locked. Before hardware exists, task-network modeling like the Army's IMPRINT sizes the crew and finds the workload peaks.</p>
+<p><strong>Cost and boundary.</strong> The model is analyst time only, and validating it rides on an existing simulation event. I haven't run IMPRINT on a program, so I'd pair with someone who has, and if testing finds a peak the model missed, we fix the model.</p>
 </div>
 <h3>Say this</h3>
 <div class="calibration"><ul>
@@ -687,75 +725,81 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Span of control and multi-aircraft supervision — Tier 1</h2>
+<h2>Span of control and multi-asset supervision <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
-<p><strong>Question:</strong> &quot;How many aircraft can one operator supervise, and how would you find out?&quot;</p>
+<p><strong>Question:</strong> &quot;How many assets can one operator supervise, and how would you find out?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> The operator-to-aircraft ratio is a capacity number that you measure, not one that you choose.</p>
-<p class="flow"><strong>How I'd know.</strong> Olsen and Wood frame it with two times. Neglect time is how long an aircraft can run on its own before things start to go wrong, and interaction time is how long the operator needs to get it back on track. Fan-out, the number of aircraft one person can handle, is neglect time plus interaction time, divided by interaction time. A 2025 robotics paper found that formula overestimates, because the real number depends on how well the operator judges which aircraft can be left alone. That makes span of control a trust-calibration problem, not just an attention problem. So I'd ramp the number of aircraft in a simulation with seeded events, and I'd track time to detect, error catch rate, and workload.</p>
-<p><strong>My hypothesis.</strong> Capacity tops out where checking breaks down. Past a certain point, operators stop checking the automation's work and start just accepting it, and that point is a number I can put in a requirement.</p>
-<p><strong>The decision it drives.</strong> The output is a span-of-control requirement with the conditions it holds under. When one operator hits their limit, the alternative to pushing the ratio higher is having several operators share the fleet.</p>
+<p><strong>The claim.</strong> The operator-to-asset ratio is a capacity you measure, not one you choose.</p>
+<p><strong>Deliverable and milestone.</strong> A span-of-control requirement with its conditions, before the crew size gets locked, because it sizes the crew. It comes from a simulation that ramps the number of assets with seeded events, tracking time to detect, error catch rate, and workload.</p>
+<p class="flow"><strong>Cost and boundary.</strong> It rides on an existing full-software simulation event. The classic fan-out formula overestimates, because capacity depends on how well operators judge which assets can be left alone, so it's a trust-calibration problem. My hypothesis is that when one operator caps out, shared supervision beats a higher ratio, but I'd check that against how your operators actually work.</p>
 </div>
+<h3>Follow-ups</h3>
+<p class="fq"><strong>Follow-up: &quot;Neglect time versus interaction time?&quot;</strong></p>
+<blockquote class="say">
+<p>Neglect time is how long an asset runs unattended before performance drops, and interaction time is how long the operator needs to recover it. Fan-out is their sum divided by interaction time, from Olsen and Wood in 2004. &quot;Fan-Out Revisited,&quot; at ICRA in 2025, showed the classic models overestimate.</p>
+</blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Span of control is the point where operators stop checking.&quot;</em></li>
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Function allocation — Tier 1</h2>
+<h2>Function allocation <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
-<p><strong>Question:</strong> &quot;Walk me through function allocation for a multi-aircraft mission.&quot;</p>
+<p><strong>Question:</strong> &quot;Walk me through function allocation for a multi-asset mission.&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> Fitts lists, the old tables of what humans do better and what machines do better, are a starting point. Real allocation decides, for each stage of the work, how much the automation does, who holds authority at each moment, and what triggers a handoff.</p>
-<p class="flow"><strong>How I'd know.</strong> For each mission phase, from planning to tasking to monitoring to stepping in, I decide who handles the four stages: gathering information, making sense of it, choosing an action, and carrying it out. The level can shift during the mission, triggered by measured workload, fatigue, the mission phase, or a critical event. If the operator makes that shift, it's called adaptable automation. If the system makes it on its own, it's adaptive, and the system has to announce the change.</p>
-<p><strong>Across vehicles.</strong> For third-party platforms brought into Lattice, the way authority and modes are shown should stay the same from one vehicle to the next.</p>
-<p><strong>Evidence, and where it stops.</strong> The Mercedes work was about handing control back to a driver who wasn't expecting it, and my patent work is about mode error, when the system is in a different mode than the user thinks. Neither was military flight.</p>
-<p><strong>The decision it drives.</strong> The output is a table of who does what, who has authority, and the rules for handing off, and each handoff becomes a requirement.</p>
+<p><strong>The claim.</strong> Allocation is by stage of automation and authority, with defined triggers for every handoff.</p>
+<p class="flow"><strong>Deliverable and milestone.</strong> An allocation table for each mission phase: who senses, decides, and acts, the authority state, and the transition rules. Each transition becomes a requirement before the design freezes. If the system changes the level itself, it has to annunciate the change. My working hypothesis is that modes should look the same across Anduril and third-party assets in Lattice, which I'd test, not assume.</p>
+<p><strong>Cost and boundary.</strong> Analyst time, plus a handoff check that rides on an existing simulation event. My evidence is Mercedes takeovers and the mode-error work behind my patent; neither was military.</p>
 </div>
 <h3>Say this</h3>
 <div class="calibration"><ul>
-<li><em>&quot;Every handoff of authority is a clear, visible change.&quot;</em></li>
+<li><em>&quot;Every change of authority is a discrete, visible state.&quot;</em></li>
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Third-party platforms in Lattice — Tier 2</h2>
+<h2>Third-party platforms in Lattice <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you keep the operator experience consistent across Anduril and third-party platforms?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> The vehicles can differ, but the way the operator controls them and reads their modes shouldn't.</p>
-<p><strong>How.</strong> Every platform should use the same controls and show its modes the same way, and every alert should follow the same rules for priority, sound, and placement. The operator should know in advance what each platform does if it loses its connection, so a dropout never comes as a surprise.</p>
-<p><strong>How I'd verify it.</strong> I'd run situation awareness probes on mixed fleets, and I'd check whether operators predict each vehicle's behavior as well as they do with a single platform.</p>
-<p><strong>The question.</strong> How do you keep operator interfaces consistent as third-party platforms come into Lattice today?</p>
+<p><strong>The claim.</strong> My starting hypothesis: the assets can differ, but the control logic, mode logic, and alert grammar shouldn't.</p>
+<p><strong>Deliverable and milestone.</strong> A cross-platform interface standard, with each asset's lost-link behavior visible in advance, applied whenever a platform joins Lattice.</p>
+<p><strong>Cost and boundary.</strong> Verified with SA probes that ride on mixed-fleet simulation events: can operators predict each asset as well as a single platform?</p>
 </div>
+<hr />
 <div class="qhead">
-<h2>Human-autonomy transparency — Tier 1</h2>
+<h2>Human-autonomy transparency <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What does the operator need to see about what the autonomy is doing, and why?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> The operator needs to see what the autonomy is doing, why it's doing it, and what it will do next, along with how sure it is.</p>
-<p class="flow"><strong>How I'd know.</strong> That's the situation-awareness-based agent transparency model from Chen and colleagues at the Army Research Laboratory, which has those three levels. The closest public example is IMPACT, a research system for managing a mixed group of robotic vehicles. The failure to design against is automation surprise, where the system changes mode and the operator doesn't notice. My patent was on controls where one input means different things in different modes, which is exactly where those mode errors come from.</p>
-<p class="flow"><strong>The evidence on cost.</strong> Studies built on that model show operators performing better and trusting more appropriately as the system shows more of its reasoning. One study, Selkowitz and colleagues in 2015, found that showing more helped people trust the system the right amount without adding much workload, but it didn't improve their awareness of the situation. So I'd test how much to show under realistic workload, rather than assume it costs attention.</p>
-<p><strong>The decision it drives.</strong> The outputs are requirements for mode annunciation, intent display, and showing confidence separately from data freshness, verified with situation awareness probes and response times to automation surprises.</p>
+<p><strong>The claim.</strong> What the autonomy is doing, why, what it will do next, and how sure it is.</p>
+<p><strong>Deliverable and milestone.</strong> Requirements for mode annunciation, intent display, and confidence shown separately from data freshness, written before the display design freezes and verified at a test event with SA probes and response time to automation surprises.</p>
+<p><strong>Cost and boundary.</strong> The probes ride on an existing test event. The evidence says more transparency improves trust calibration without much added workload, but not always SA, so I'd test display density under realistic load rather than assume it.</p>
 </div>
+<h3>Follow-ups</h3>
+<p class="fq"><strong>Follow-up: &quot;What's that based on?&quot;</strong></p>
+<blockquote class="say">
+<p>Chen and colleagues' situation-awareness-based agent transparency model, from the Army Research Laboratory, and Selkowitz and colleagues in 2015.</p>
+</blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;No mode change the operator didn't see.&quot;</em></li>
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Workload and situation awareness — Tier 1</h2>
+<h2>Workload and situation awareness <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you measure workload and situation awareness?&quot;</p>
 </blockquote>
@@ -763,81 +807,78 @@ a { color: #14507d; }
 <h3>Answer</h3>
 <div class="answer">
 <p><strong>The claim.</strong> I manipulate load deliberately, and I pair subjective, performance, and physiological measures.</p>
-<p class="flow"><strong>How I'd know.</strong> At Amazon, I co-established a cognitive load framework with fNIRS and eye tracking, and I ran the NASA-TLX after each block of the latency study as a manipulation check. At Mercedes, I measured situation awareness behaviorally, through decomposed takeover latency: eyes on the road, hands on the wheel, and first control input. On this program, I'd add the Bedford scale for spare capacity, SAGAT freeze probes when I need precision, and SPAM real-time probes when the task can't stop.</p>
-<p><strong>Evidence, and where it stops.</strong> Physiology tells you that load changed, not why, and I never claim it beat the NASA-TLX. I haven't run SAGAT or SPAM on a program, so I'd pilot the probe set before a test event.</p>
-<p><strong>The decision it drives.</strong> The output is a baseline for each phase of the mission, and limits that requirements can point to.</p>
+<p class="flow"><strong>Deliverable and milestone.</strong> A baseline for each mission phase, with limits requirements can cite, from the first simulation event. At Amazon, I used fNIRS and eye tracking, with NASA-TLX as a manipulation check. At Mercedes, I measured SA behaviorally, through decomposed takeover latency. Here I'd add Bedford, SAGAT where the sim can pause, and SPAM where it can't.</p>
+<p><strong>Cost and boundary.</strong> It rides on sessions that are already running. I haven't run SAGAT or SPAM on a program, so I'd pilot the probe set first. Physiology tells you load changed, not why.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Fatigue across a long mission — Tier 1</h2>
+<h2>Fatigue across a long mission <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you measure fatigue across a long mission and turn it into a requirement?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> Fatigue builds with time on task and depends on time of day, so I measure it across the whole length of a mission and turn the drop in performance into design rules.</p>
-<p class="flow"><strong>How I'd know.</strong> I'd use the psychomotor vigilance task, a simple reaction-time test that catches lapses, plus two quick self-ratings, the Karolinska Sleepiness Scale and the Samn-Perelli checklist, at fixed intervals. I'd also track performance on the real tasks. That takes long simulation runs, not short sessions.</p>
-<p><strong>Evidence, and where it stops.</strong> My dissertation was on memory and reaction time when people are interrupted under high stress. Fatigue in the lab isn't the same as fatigue in operations, so I'd confirm the findings at test events.</p>
-<p><strong>The decision it drives.</strong> The outputs are requirements for alerts designed for a tired operator late in the mission, schedules that don't pile critical tasks at the end, and handoff rules that limit how long one person supervises, each tested over a full-length mission.</p>
+<p><strong>The claim.</strong> Fatigue builds with time on task and time of day, so I measure across the full mission length.</p>
+<p><strong>Deliverable and milestone.</strong> Rules for late-mission alerting, task scheduling, and handoff limits, from one full-length simulation run before hardware testing, with the psychomotor vigilance task and quick sleepiness ratings at fixed intervals.</p>
+<p><strong>Cost and boundary.</strong> This one needs its own run, because each run lasts the whole mission, so I'd do it once, with few operators, within-subject. Lab fatigue isn't operational fatigue, so I'd confirm at test events.</p>
 </div>
-<h3>Say this</h3>
-<div class="calibration"><ul>
-<li><em>&quot;Design the alert for the operator at hour six, not hour one.&quot;</em></li>
-</ul></div>
 <hr />
 <div class="qhead">
-<h2>Automation trust with skeptical operators — Tier 1</h2>
+<h2>Automation trust with skeptical operators <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
-<p><strong>Question:</strong> &quot;Pilots are skeptical of autonomy. How do you design for, and measure, appropriate trust?&quot;</p>
+<p><strong>Question:</strong> &quot;Operators are skeptical of autonomy. How do you design for, and measure, appropriate trust?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> I'm after the right amount of reliance. Trusting a system too much and refusing to use it are both failures, and with skeptical operators, not using it may be the bigger risk.</p>
-<p class="flow"><strong>How I'd know.</strong> Lee and See describe good trust as matching what the system can actually do. Parasuraman and Manzey showed that people get complacent when they're juggling several tasks, which is exactly what supervising several aircraft is. So I measure reliance against reliability. Over-trust shows up as acceptance staying flat across confidence bands, and disuse shows up as overrides of correct recommendations.</p>
-<p><strong>Evidence, and where it stops.</strong> At Mercedes, I studied the alerts that hand control back to a driver. Those participants were drivers, not pilots.</p>
-<p><strong>The decision it drives.</strong> I'd log reliance and recheck it after every model update. Trust gets earned by the system behaving predictably, with the operators themselves taking part in the test events.</p>
+<p><strong>The claim.</strong> The goal is appropriate reliance. Over-trust and disuse are both failures.</p>
+<p><strong>Deliverable and milestone.</strong> A reliance log at every test event, with acceptance and override rates against the system's actual reliability, rechecked after each model update. Over-trust shows up as acceptance staying flat across confidence; disuse shows up as overrides of correct recommendations.</p>
+<p><strong>Cost and boundary.</strong> It's logged data, so it's analyst time only. My evidence is Mercedes takeover alerts with drivers, not warfighters.</p>
 </div>
+<h3>Follow-ups</h3>
+<p class="fq"><strong>Follow-up: &quot;What's that based on?&quot;</strong></p>
+<blockquote class="say">
+<p>Lee and See on trust as calibration, and Parasuraman and Manzey on complacency under multitasking, which is exactly what supervising several assets is.</p>
+</blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Trust is earned by predictability, and it's measured against reliability.&quot;</em></li>
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Degraded conditions and lost link — Tier 1</h2>
+<h2>Degraded conditions and lost link <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;The link degrades or drops mid-mission. How does the operator know, and how do they recover?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> The operator has to know when the system is degraded, not just when it's wrong, and the design has to keep working in that state.</p>
-<p class="flow"><strong>How I'd know.</strong> I'd build the scenarios from field reports and subject-matter experts. They'd cover a lost or slow connection, navigation without GPS, failing sensors, weather and night, changes in autonomy mode, fatigue late in a mission, and handoffs between operators or sites. Then I'd measure whether the operator notices the problem, how long recovery takes, and the mistakes made along the way.</p>
-<p class="flow"><strong>Two rules.</strong> First, old data can still produce a confident-looking recommendation, so the display has to show confidence and data freshness separately. Second, acknowledgment and completion are different signals; collapse them and operators double-actuate. And if the connection drops, the operator should already know what each aircraft will do.</p>
-<p><strong>The decision it drives.</strong> The outputs are requirements for showing when the system is degraded and for what it does when it falls back, plus the scenarios that belong in training.</p>
+<p><strong>The claim.</strong> The operator has to know when the system is degraded, not just when it's wrong.</p>
+<p class="flow"><strong>Deliverable and milestone.</strong> Requirements for degraded-mode indication and defined lost-link behavior for each asset, plus training scenarios built from field reports, verified at a hardware-in-the-loop event. Two rules: show confidence separately from data freshness, and acknowledgment separately from completion.</p>
+<p><strong>Cost and boundary.</strong> The scenarios ride on an existing event; the cost is authoring them. I haven't tested in military field conditions, so I'd start from the field team's failure list.</p>
 </div>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Separate confidence from freshness, and acknowledgment from completion.&quot;</em></li>
 </ul></div>
+<hr />
 <div class="qhead">
-<h2>Human-in-the-loop evaluation and test planning — Tier 1</h2>
+<h2>Human-in-the-loop evaluation and test planning <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
-<p><strong>Question:</strong> &quot;How would you test human-machine teaming at a flight test event with limited operator access?&quot;</p>
+<p><strong>Question:</strong> &quot;How would you test human-machine teaming at a test event with limited operator access?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> I put human factors objectives on test events the program already runs, instead of asking for separate events.</p>
-<p class="flow"><strong>How I'd know.</strong> The test plan ties each objective to a requirement. It separates measures of performance, like time, errors, and detection, from measures of effectiveness, like mission outcome, and it names the scenarios, participants, data collection, and pass criteria. With few operators, I use within-subject designs and many trials per person.</p>
-<p class="flow"><strong>Evidence, and where it stops.</strong> Formative rounds find and rank problems, but verification claims need a summative sample. The NASA work was formative, and I say so. I wrote the evaluation plan and the use-error analysis report at NASA, and the study protocol and specification report for the latency program at Amazon.</p>
-<p><strong>The decision it drives.</strong> The output is a test report that traces every result back to the requirement it verifies.</p>
+<p><strong>The claim.</strong> Human factors objectives ride on test events the program already runs.</p>
+<p class="flow"><strong>Deliverable and milestone.</strong> A test plan before the event that ties each objective to a requirement, separates measures of performance from measures of effectiveness, and states pass criteria, then a report that traces each result back. I wrote the NASA evaluation plan and uFMEA report, and the Amazon latency protocol and specification.</p>
+<p><strong>Cost and boundary.</strong> It rides on existing events. With few operators, I use within-subject designs and many trials per person, and the success-run math tells you up front how many trials a claim costs. Formative rounds find problems; verification needs a summative sample.</p>
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;How would you plan HF verification on a program that ships in months?&quot;</strong></p>
 <blockquote class="say">
-<p>I'd tailor rather than skip. SAE6906A numbers each of its requirements so a program can pick which ones apply, and its Appendix D shows how to do that on the faster acquisition paths. I'd keep full testing for the requirements tied to safety, and I'd let the rest ride on the test events the program already has.</p>
+<p>I'd tailor rather than skip. SAE6906A numbers its requirements so a program can pick which apply. I'd keep full testing for safety-relevant requirements and let the rest ride on existing events.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
@@ -845,72 +886,88 @@ a { color: #14507d; }
 </ul></div>
 <hr />
 <div class="qhead">
-<h2>Marrying HF with real-world scenarios — Tier 1</h2>
+<h2>Marrying HF with real-world scenarios <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you marry your HF experience with real-world operational scenarios?&quot; Or: <em>&quot;How would you use wargaming outputs?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> Scenarios should come from real operations, not imagination, and the same set should run through the analysis, the models, the simulations, and the test events, so the results can be compared.</p>
-<p><strong>How I'd know.</strong> I'd build them from operator and expert input, field reports, and test events. They'd cover normal operations, workload spikes, degraded conditions, and long missions, and I'd tag each scenario with its tasks, roles, and what drives the workload.</p>
-<p><strong>Evidence, and where it stops.</strong> At NASA, the analysis was built on three to four severity-ranked medical scenarios, and at Mercedes, the takeover scenarios had defined hazards. Neither was military flight.</p>
-<p><strong>The question.</strong> Does the Advanced Capabilities team's operations analysis and wargaming feed the scenario definitions here?</p>
-<p><strong>The decision it drives.</strong> The output is a library of scenarios that the HSI plan points to.</p>
+<p><strong>The claim.</strong> Scenarios come from operations, and one set runs through analysis, models, simulation, and test, so the results compare.</p>
+<p><strong>Deliverable and milestone.</strong> A scenario library the HSI plan references, built before the requirements are set, from operator and SME input and field reports, tagged by task, role, and workload driver.</p>
+<p><strong>Cost and boundary.</strong> Analyst and SME time only. My NASA and Mercedes scenarios had defined hazards but weren't military.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Human Readiness Levels — Tier 2</h2>
+<h2>Human Readiness Levels <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you assess whether an autonomy capability is ready for operators?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> I'd rate it on a Human Readiness Level, next to its Technology Readiness Level. The technology level asks whether the hardware works; the human level asks whether people can use it safely and well.</p>
-<p><strong>The standard.</strong> ANSI/HFES 400-2021 defines a nine-level scale, built to mirror the technology readiness scale. The FY2025 National Defense Authorization Act directs DoD to review the scale for use in its procedures and to report Human Readiness Levels for all major programs.</p>
-<p><strong>How I'd use it.</strong> At each program gate, I'd report the human readiness level next to the technology readiness level, along with the evidence behind it.</p>
-<p><strong>The question.</strong> Is the program tracking Human Readiness Levels yet?</p>
+<p><strong>The claim.</strong> I'd rate it on a Human Readiness Level next to its TRL. The TRL says the hardware works; the HRL says people can use it safely.</p>
+<p><strong>The proof.</strong> ANSI/HFES 400-2021 defines the nine levels. The FY2025 NDAA required DoD to review the standard and report HRLs for major programs, and DoD formally adopted a human readiness standard in August 2025.</p>
+<p><strong>The boundary.</strong> I'd report the HRL with its evidence at each program milestone.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Safety versus schedule — Tier 2</h2>
+<h2>Safety versus schedule <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you integrate HF into a program moving at Anduril speed without becoming a schedule risk?&quot; Or: <em>&quot;How do you work in a 'whatever it takes' culture without HF getting cut?&quot;</em></p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> Early human factors work lowers schedule risk, because putting a requirement in the specification is cheaper than finding the problem at test. And it can be fast: the testing rides on existing test events, and one requirement template covers every program.</p>
-<p class="flow"><strong>The story.</strong> At EchoStar, on Sling, product wanted account changes to finish in a single tap. I pushed for a &quot;pause and review&quot; step on irreversible data loss, like deleting a profile and its saved recordings: one screen that states exactly what will be lost, with a one-tap confirm and no retention offer. I conceded that everything reversible stays one tap. We tested the step in a quick round before launch, and it shipped on irreversible actions only.</p>
-<p><strong>The principle.</strong> Irreversible actions get a gate, and everything else stays fast.</p>
-<p><strong>My line.</strong> I'd stop a shipment for a hazard that could be catastrophic when nothing else would catch it. Below that, I document the risk and get a named owner to formally accept it.</p>
-<p><strong>Evidence.</strong> At EchoStar, I brought the reach requirements into the early concept review instead of the later design review, and a control moved before any production tooling was built.</p>
+<p><strong>The claim.</strong> Early human factors lowers schedule risk, because a requirement in the specification is cheaper than a finding at test.</p>
+<p><strong>The proof.</strong> At EchoStar, I brought the reach envelope into the concept review instead of the design review, and a control moved before any production tooling was built. The testing rides on existing events, and one requirement template covers every program.</p>
+<p><strong>The boundary.</strong> I don't own risk acceptance; the program's risk acceptance authority does. If I see a catastrophic hazard with no independent detection path, I escalate it to that authority with the evidence and a recommended fix, and I make sure it's in the hazard log.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>What I'd measure first — Tier 2</h2>
+<h2>Cutting scope to hit a date <span class="tier">Tier 1</span></h2>
+<blockquote class="note">
+<p><strong>Question:</strong> &quot;What do you cut when the schedule won't move?&quot; Or: <em>&quot;Tell me about a time you had to deliver on a fixed date.&quot;</em> TPM.</p>
+</blockquote>
+</div>
+<h3>Answer</h3>
+<div class="answer">
+<p><strong>The claim.</strong> I cut scope, never controls, and I say what got cut in the first line. A smaller result with the confounds handled is useful; a bigger one with them loose is wrong.</p>
+<p class="flow"><strong>The proof.</strong> At EchoStar, the hardware date doesn't wait for a full fit study. So I deliver a bounding reach envelope from modeling and mock-ups while industrial design is still exploring form, and the physical check lands before tooling. When I cut, it's conditions first, then participants, then how far the result generalizes.</p>
+<p><strong>The boundary.</strong> The one thing I don't cut is the success criterion, written down before the work starts.</p>
+</div>
+<blockquote class="warn">
+<p>⚠️ <strong>Tell the EchoStar version only if it happened that way.</strong> If not, give the rule and the cut order, and say plainly that's how I'd cut.</p>
+</blockquote>
+<h3>Say this</h3>
+<div class="calibration"><ul>
+<li><em>&quot;Cut scope, never controls, and say what got cut in the first line.&quot;</em></li>
+</ul></div>
+<hr />
+<div class="qhead">
+<h2>What I'd measure first <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What would you measure first on a program like this, and why?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The claim.</strong> I'd measure operator workload and situation awareness across each phase of the mission on the current build, along with how long people stay on task.</p>
-<p><strong>Why.</strong> Crew size, span of control, fatigue rules, and alert design all depend on that baseline.</p>
-<p><strong>The question first.</strong> What's already measured, and which program decision would you most want human-performance data behind?</p>
+<p><strong>The claim.</strong> Operator workload and SA across each mission phase on the current build, plus time on task.</p>
+<p><strong>The proof.</strong> Crew size, span of control, fatigue rules, and alert design all depend on that baseline, and it rides on the next simulation event.</p>
+<p><strong>The boundary.</strong> It's a baseline, not a verdict; the requirements come after.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Getting HF requirements into a spec — Tier 2</h2>
+<h2>Getting HF requirements into a spec <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about a time you got HF requirements into an engineering spec or ICD.&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The story.</strong> At Amazon, the latency targets were engineering guesses. I delivered a two-tier specification with pass-fail criteria for each type of interaction, and engineering adopted it as their targets. At EchoStar, my reach and usability criteria are what the hardware team designs against.</p>
-<p><strong>Where it stops.</strong> That was a specification, not a defense interface control document. In an interface control document, I'd attach the human factors requirement to any data that ends up in front of an operator.</p>
+<p><strong>The claim.</strong> At Amazon, the latency targets were engineering guesses, and I replaced them with a two-tier specification with pass-fail criteria.</p>
+<p><strong>The proof.</strong> Engineering adopted it as their targets. At EchoStar, my reach and usability criteria are what the hardware team designs against.</p>
+<p><strong>The boundary.</strong> That was a specification, not a defense ICD. In an ICD, I'd attach the requirement to any data that ends up in front of an operator.</p>
 </div>
 <div class="parthead">
 <h1>Part 3 · The team meeting, the backup deck, and stories</h1>
@@ -919,117 +976,112 @@ a { color: #14507d; }
 </blockquote>
 </div>
 <div class="qhead">
-<h2>Single team meeting — Tier 1</h2>
+<h2>Single team meeting <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>The shape:</strong> Forty-five to sixty minutes, several people, and mixed agendas.</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>The open, thirty seconds.</strong> &quot;I measure how people actually perform with a system, and I turn that into requirements that engineers can build to and test against. Along the way, I run quick rounds of design testing. Where does human factors enter the program today?&quot;</p>
-<p><strong>Then I listen.</strong> I let Jake frame the role and the TPM frame the program, and I answer each person in their own currency: standards and requirements for Jake, and schedule and verification for the TPM.</p>
-<p><strong>The lead stories.</strong> I lead with the latency requirement, the NASA hazard analysis, and the EchoStar concept review, and I keep the rest in reserve.</p>
-<p><strong>The close.</strong> I ask one question per person from the cue card, give one sharp reflection after each answer, and then stop.</p>
+<p><strong>The open, thirty seconds.</strong> &quot;I turn human-performance data into requirements engineers can build to and test against, and I run quick design testing along the way. Where does human factors enter the program today?&quot;</p>
+<p><strong>Then I listen.</strong> Jake frames the role and the TPM frames the program. Standards and requirements for Jake; deliverables, milestones, and cost for the TPM.</p>
+<p><strong>The close.</strong> One question per person from the cue card, one sharp reflection after each answer, and then stop.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Presentation backup, ten minutes — Tier 1</h2>
+<h2>Presentation backup, ten minutes <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
-<p><strong>The shape:</strong> An HF engineering cut of the existing deck, used only if I'm asked to present: NASA four minutes, latency four, the transfer two. No new slides.</p>
+<p><strong>The shape:</strong> An HF engineering cut of the existing deck, only if I'm asked to present: latency four minutes, NASA three, the transfer three. No new slides.</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p class="flow"><strong>NASA.</strong> I ran a usability FMEA as the human error analysis across three to four scenarios, with reach at the fifth-percentile female and clearance at the ninety-fifth-percentile male, against MIL-STD-1472. We separated adjacent controls over three to four design rounds, and the final round had no critical input errors.</p>
-<p><strong>Latency.</strong> I set thresholds by the method of constant stimuli, from thirty people and about two thousand trials, shipped them as a two-tier requirement with pass-fail criteria, and verified them by measuring fielded latency against the band.</p>
-<p><strong>The transfer.</strong> I held workload constant in that study. For operators supervising aircraft, workload and time-on-task fatigue become the manipulated factors.</p>
+<p><strong>Latency.</strong> Thresholds by the method of constant stimuli, from thirty people and about two thousand trials, shipped as a two-tier requirement with pass-fail criteria.</p>
+<p><strong>NASA.</strong> A usability FMEA as the human error analysis across three to four scenarios, with reach and clearance against 1472G. We separated adjacent controls over three to four rounds, and the final round had no critical input errors.</p>
+<p><strong>The transfer.</strong> I held workload constant. For operators supervising assets, workload and fatigue become the manipulated factors.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>When you got it wrong (Echo Show benchmark) — Tier 1</h2>
+<h2>When you got it wrong (Echo Show benchmark) <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about a failure.&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>Situation.</strong> My first project at Amazon was a benchmark of Echo Show against competitors on high-priority tasks. Nobody had commissioned it. I recruited the participants myself and spent two weeks on it.</p>
+<p><strong>Situation.</strong> My first project at Amazon was a benchmark of Echo Show against competitors that nobody had commissioned. I recruited the participants myself and spent two weeks on it.</p>
 <p><strong>Result.</strong> At the readout, the director of design asked who had asked for it, and I had no answer. The roadmap was already set, and the work changed nothing.</p>
-<p><strong>Earned secret.</strong> The study was solid. The failure was that nobody had agreed up front on what the result would change.</p>
-<p><strong>Mechanism.</strong> Now, before any study runs, stakeholders commit in writing to what each possible result will change. If every branch leads to the same decision, the study doesn't run.</p>
+<p><strong>Mechanism.</strong> Now stakeholders commit in writing to what each possible result will change before a study runs. If every branch leads to the same decision, the study doesn't run.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Disagreeing with engineering (latency targets) — Tier 1</h2>
+<h2>Disagreeing with engineering (latency targets) <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about a time you disagreed with engineering.&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>Situation.</strong> At Amazon, the latency targets were engineering guesses, and they were engineering's targets, not mine.</p>
-<p class="flow"><strong>Action.</strong> The sharpest pushback came from a principal engineer in a design review, over the half-second target. His view was that it was a question of what was technically possible, and that research should describe, not set limits. I didn't win that by arguing. I rewrote the recommendation as a pass-fail test, and I gave ground where he was right, which is where the looser second tier came from.</p>
-<p><strong>Result.</strong> Engineering adopted the thresholds as their targets, and the specification outlived the program.</p>
-<p><strong>Earned secret.</strong> Once there's a test to pass, nobody is arguing from opinion anymore.</p>
+<p><strong>Situation.</strong> At Amazon, a principal engineer pushed back in a design review on the half-second target: it was a feasibility question, and research should describe, not set limits.</p>
+<p><strong>Action.</strong> I didn't win that by arguing. I rewrote the recommendation as a pass-fail test and gave ground where he was right, which is where the looser second tier came from.</p>
+<p><strong>Result.</strong> Engineering adopted the thresholds as their targets. Once there's a test to pass, nobody is arguing from opinion.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Conflict resolution — Tier 1</h2>
+<h2>Conflict resolution <span class="tier">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about a conflict with a colleague.&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p><strong>Situation.</strong> At EchoStar, a lead designer and I clashed after I presented usability findings on their concept in a cross-functional review. They saw the findings for the first time in that room.</p>
-<p><strong>Action.</strong> I asked for a one-on-one and owned my part. We named the actual decision, which was whether the concept moved forward and with what fixes, and I brought a possible direction for each finding.</p>
-<p><strong>Result.</strong> The concept moved forward with two fixes, and the designer presented the revision themselves.</p>
-<p><strong>Mechanism.</strong> No one should see a finding about their work for the first time in public.</p>
+<p><strong>Situation.</strong> At EchoStar, a lead designer saw my usability findings on their concept for the first time in a cross-functional review.</p>
+<p><strong>Action.</strong> I asked for a one-on-one and owned my part. We named the actual decision, whether the concept moved forward and with what fixes, and I brought a possible direction for each finding.</p>
+<p><strong>Result.</strong> The concept moved forward with two fixes, and the designer presented the revision. No one should see a finding about their work for the first time in public.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Disagreeing when it's infeasible (NASA haptic) — Tier 2</h2>
+<h2>Disagreeing when it's infeasible <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What do you do when engineering says your requirement isn't feasible?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p class="flow"><strong>The story.</strong> At NASA, the task analysis called for a vibration cue, and engineering said it wasn't possible on that hardware. They were right. So I separated the need from the solution, moved the information to visual and sound cues, and wrote down what we lost, so the gap stayed on the record for the next team.</p>
+<p class="flow"><strong>The story.</strong> At Amazon, a principal engineer challenged my half-second latency target as a feasibility question, and he was partly right; that's where the looser second tier came from. The same move at NASA: a vibration cue the hardware couldn't deliver went to visual and sound cues. Either way, I separate the need from the solution and document what we lost, so the gap stays on the record.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>When the designer was right — Tier 2</h2>
+<h2>When the designer was right <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;When has a designer been right and your research wrong?&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p class="flow"><strong>The story.</strong> On the workload work at Amazon, the eye tracking showed a part of the screen that nobody looked at. I read that as a visibility problem. A designer on the team saw that it was a sequence problem: people were never looking in that area at the moment it mattered. My measurement was right about where the failure was, and it said almost nothing about why.</p>
+<p class="flow"><strong>The story.</strong> On the workload work at Amazon, eye tracking showed a region nobody looked at. I read it as a salience problem. A designer saw it was a task-sequence problem: the region was never in the scan path at the moment it mattered. My measurement found where the failure was and said almost nothing about why.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Influence through measurement (experience index) — Tier 2</h2>
+<h2>Influence through measurement (experience index) <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about influencing without authority.&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p class="flow"><strong>The story.</strong> At EchoStar, product reviews reacted to whatever had broken last. I built an experience index, an ongoing measure that combines what people do in the product with what they tell us in surveys, and I brought it into the VP-level reviews. Over time, the reviews shifted toward planning ahead.</p>
-<p><strong>Earned secret.</strong> Leaders listen when you give them a number they actually want to track. That's the kind of repeatable measure of operator performance I'd build here.</p>
+<p class="flow"><strong>The story.</strong> At EchoStar, product reviews reacted to whatever had broken last. I built an experience index, pairing behavioral telemetry with attitudinal metrics, and brought it into the VP-level reviews, which shifted toward planning ahead. Leaders listen when you give them a number they actually want to track.</p>
 </div>
 <hr />
 <div class="qhead">
-<h2>Mentorship — Tier 2</h2>
+<h2>Mentorship <span class="tier">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about someone you mentored.&quot;</p>
 </blockquote>
 </div>
 <h3>Answer</h3>
 <div class="answer">
-<p class="flow"><strong>The story.</strong> At NASA, I mentored an undergraduate whose work was slipping. Coaching the work didn't help. When I finally asked how he was doing, he told me he was dealing with a family loss. I moved his deadlines and made our check-ins about him first. Now I ask every mentee early on how they like to get feedback. I've mentored junior designers and researchers since then, without formal direct reports.</p>
+<p class="flow"><strong>The story.</strong> At NASA, I mentored an undergraduate whose work was slipping. Coaching the work didn't help. When I asked how he was doing, he told me he was dealing with a family loss. I moved his deadlines and made our check-ins about him first, and now I ask every mentee early how they like to get feedback.</p>
 </div>
 <blockquote class="warn">
 <p>⚠️ <strong>No name, and no details of the loss.</strong></p>
@@ -1038,51 +1090,54 @@ a { color: #14507d; }
 <h1>Part 4 · Reference — Tier 3</h1>
 <h2>Standards and data items</h2>
 </div>
-<p class="card"><strong>Standards and dates.</strong> MIL-STD-1472H, design criteria, September 15, 2020. MIL-STD-46855A, human engineering requirements, May 24, 2011, reaffirmed by Notice 1 in 2016; it superseded the 1999 handbook, MIL-HDBK-46855A, which is cancelled. MIL-STD-882E, May 11, 2012, with Change 1 on September 27, 2023; 882E also rates software control of a hazard on a one-to-five software criticality index. DoD Instruction 5000.95, April 1, 2022. SAE6906A, December 13, 2023, with Appendix D for tailoring. DoD Directive 3000.09, January 25, 2023.</p>
+<p class="card"><strong>Standards and dates.</strong> MIL-STD-1472H, design criteria, September 15, 2020; my 2018 NASA work used 1472G. MIL-STD-46855A, human engineering requirements, May 24, 2011, reaffirmed by Notice 1 in 2016; it superseded the cancelled 1999 handbook, MIL-HDBK-46855A. MIL-STD-882E, May 11, 2012, with Change 1 on September 27, 2023; 882E also rates software control of a hazard on a one-to-five software criticality index. DoD Instruction 5000.95, April 1, 2022. SAE6906A, December 13, 2023, with Appendix D for tailoring. DoD Directive 3000.09, January 25, 2023. Human readiness: ANSI/HFES 400-2021; DoD formally adopted a human readiness standard in August 2025.</p>
 <p class="card"><strong>Data items.</strong> The HSI Program Plan template is DI-HFAC-81743A (2011). It doesn't replace the safety, training, or human engineering plans unless the government directs it. Related: the Human Engineering Program Plan, DI-HFAC-81742A, and the Human Engineering Test Plan, DI-HFAC-80743B.</p>
 <h2>Sources, if asked</h2>
-<p class="card"><strong>Who said what.</strong> Fan-out: Olsen and Wood (2004), building on Olsen and Goodrich (2003); &quot;Fan-Out Revisited&quot; (2025) found the classic formula overestimates. Transparency: Chen and colleagues, Army Research Laboratory (2014); Selkowitz and colleagues (2015). Trust: Lee and See (2004); complacency: Parasuraman and Manzey (2010). Stages of automation: Parasuraman, Sheridan, and Wickens (2000). Situation awareness: Endsley (1995). Workload: NASA-TLX, Hart and Staveland (1988).</p>
+<p class="card"><strong>Who said what.</strong> Fan-out: Olsen and Wood (2004), building on Olsen and Goodrich (2003); &quot;Fan-Out Revisited&quot; (ICRA 2025) found the classic formula overestimates. Transparency: Chen and colleagues, Army Research Laboratory (2014); Selkowitz and colleagues (2015). Trust: Lee and See (2004); complacency: Parasuraman and Manzey (2010). Stages of automation: Parasuraman, Sheridan, and Wickens (2000). Situation awareness: Endsley (1995). Workload: NASA-TLX, Hart and Staveland (1988).</p>
 <h2>Maneuver Dominance, public facts</h2>
-<p class="card"><strong>What the public record says.</strong> The division describes multi-vehicle autonomy built for real operations. It coordinates Anduril and third-party uncrewed systems, aiming for capable, cheap, quickly replaceable systems that support a force built around people. It uses Ghost and Altius, brings third-party platforms into Lattice, Anduril's software for connecting and commanding systems, and its fleet includes helicopters, drones, and fixed-wing aircraft. The culture value is &quot;Whatever It Takes&quot;: fast, scalable, and practical. Job postings include London roles, among them an Advanced Capabilities team that does operations analysis and wargaming.</p>
+<p class="card"><strong>What the public record says.</strong> Postings describe multi-asset autonomy, with aerial systems working in concert with ground maneuver forces, so the operator may be a soldier, not a pilot. Third-party platforms come into Lattice. Program-manager postings describe frequent test events, from full-software simulation at HQ to hardware-in-the-loop demonstrations. The HFE req itself is HSI across business lines, so I let Jake name the program first. Job postings include London roles, among them an Advanced Capabilities team that does operations analysis and wargaming.</p>
 <h2>Also in reference</h2>
-<p><strong>Noise and auditory displays.</strong> MIL-STD-1474E (2015) is the military noise standard: hearing-hazard signs above 85 decibels steady or 140 decibels peak, and Appendix C covers aural non-detectability, meaning how quiet a system must be so it can't be heard. My hook is undergraduate audiology research, which earned the James Jerger Award in 2014, plus sound-based alerts. An alert has to be audible over the operator's noise, and staying unheard is a real design limit for small aircraft.</p>
-<p><strong>AI in my own workflow.</strong> I use AI for first-pass qualitative coding, validated against my own coding on a held-out sample, and for drafting analysis code that I review line by line. I use approved tools only, never put participant or restricted data into outside models, and AI never decides whether a threshold is met.</p>
+<p><strong>Noise and auditory displays.</strong> MIL-STD-1474E (2015) is the military noise standard: hearing-hazard signs above 85 decibels steady or 140 decibels peak, and Appendix C covers aural non-detectability, how quiet a system must be so it can't be heard. My hook is undergraduate audiology research, which earned the James Jerger Award in 2014, plus sound-based alerts.</p>
+<p><strong>AI in my own workflow.</strong> I use AI for first-pass qualitative coding, validated against my own coding on a held-out sample, and for drafting analysis code that I review line by line. Approved tools only, no participant or restricted data in outside models, and AI never decides whether a threshold is met.</p>
 <div class="parthead">
 <h1>Part 5 · The day itself</h1>
 <h2>The loop</h2>
 </div>
-<p>Two forty-five-minute video interviews are planned but not yet confirmed: Jake Wetzel, the HSI lead in Costa Mesa, on the HF role and how my experience maps to it, and a TPM on HF plus technology for human-machine teaming. Daniella may replace both with one team meeting. Maneesh Raman is involved in defining the role; if he joins, I'll ask what he wants the seat to own. My research craft is settled, so HF engineering depth is what's being tested.</p>
+<p>Two forty-five-minute video interviews are planned but not yet confirmed: Jake Wetzel, the HSI lead in Costa Mesa, on the HF role and how my experience maps to it, and a TPM on HF plus technology for human-machine teaming. Daniella may replace both with one team meeting. Maneesh Raman is involved in defining the role; if he joins, I'll ask what he wants the seat to own.</p>
 <blockquote class="warn">
-<p>⚠️ <strong>Context only. Never put it in an answer.</strong> Daniella shared that the program is distinct from the autonomous co-pilot project, that the designers are in London, and that the research is less mature, with a designer running scrappy just-in-time research. Her feedback: show both the rigorous and the fast side, and come with curiosity.</p>
+<p>⚠️ <strong>Context only. Never put it in an answer.</strong> Daniella shared that the program is distinct from the autonomous co-pilot project, that the designers are in London, and that the research is less mature, with a designer running scrappy just-in-time research. Her feedback: show both the rigorous and the fast side, come with curiosity, and don't over-prepare a lecture.</p>
 </blockquote>
 <h2>The last check</h2>
 <ul>
-<li>Get the internal Senior req ID from Carlie, so my resume is attached to the right record.</li>
+<li>Confirm with Carlie which resume sits on the HFE record, and get the internal Senior req ID. The first resume says &quot;Staff Human Factors Engineer,&quot; &quot;Human Factors Design Engineer,&quot; NASA &quot;validation,&quot; and the Mercedes 24%; the title sentence is in the bridge card.</li>
+<li>Verify the Minaee, Mikolov, and Vinyals 2024 reference in the CSCW paper before Jake asks or I present it next month.</li>
 <li>Know my notice period and earliest start date cold. Hesitating on the start date reads as flight risk.</li>
-<li>Read 46855A and Section 4 of 882E, and privately draft a one-page HSI Program Plan outline. Only then change the gap script to: &quot;I haven't done it under contract. I've read 46855A and 882E Section 4 and drafted an outline plan to pressure-test my understanding.&quot;</li>
+<li>Read 46855A and Section 4 of 882E, and privately draft a one-page HSI Program Plan outline. Only then change the gap script to past tense.</li>
 <li>For the Sling A/B tests, the Echo Hub card sort, and the NASA evaluation plan and uFMEA report, have one sentence each ready: the sample size, the decision it changed, and my role.</li>
-<li>Time each rehearse-first answer under 110 seconds.</li>
+<li>Time each rehearse-first answer at sixty to seventy-five seconds.</li>
 </ul>
 <h2>Comp scripts — recruiter only</h2>
-<p><strong>Posture.</strong> I intend to accept, and I'll negotiate the details. If comp comes up in an interview: &quot;Comp won't be the blocker. I'll bring my asks at offer stage.&quot; I never state current comp, never accept or decline on a call, and never reopen level.</p>
-<p><strong>What I know.</strong> The base band is $146K to $194K. The comp team targets $175K to $185K, is comfortable at $190K, and can go above $194K with justification. Equity is &quot;a hundred-something,&quot; against about $300K for the UXR seat. A sign-on bonus was floated.</p>
-<p><strong>Ask order.</strong> Relocation from Denver, fully covered; then the sign-on; then base above $194K; then equity. The justification is Anduril's own pricing of me for the UXR seat, the PhD, the patent, accepting Senior after Staff, and a &quot;strong hire&quot; from Jake and the TPM.</p>
+<p><strong>Posture.</strong> Strong interest, and I'll negotiate the details. I have another process finishing soon, so timing matters to me. If comp comes up in an interview: &quot;Comp won't be the blocker. I'll bring my asks at offer stage.&quot; I never state current comp, never accept or decline on a call, and never reopen level.</p>
+<p><strong>What I know.</strong> The base band is $146K to $194K. The comp team targets $175K to $185K, is comfortable at $190K, and can go above $194K with justification. Equity is &quot;a hundred-something.&quot; A sign-on bonus was floated.</p>
+<p><strong>Ask order.</strong> Equity first, because it's the largest gap; then base above $194K; then the sign-on; then relocation from Denver, fully covered. The justification leads with the one data point Carlie asked for: a competing offer, if I have one in hand. Then the PhD as a preferred qualification, the patent, and hardware and autonomy experience.</p>
 <p><strong>Equity diligence.</strong> Instrument type, vesting and cliff, price basis, refresh policy, and tender history.</p>
 <h1 class="pagebreak">Cue card — safe to carry</h1>
 <p><strong>I measure how people actually perform with a system, and I turn that into requirements that engineers can build to and test against. Along the way, I run quick rounds of design testing. I pick the method based on what the decision needs to know.</strong></p>
-<p><strong>Curiosity first.</strong> &quot;My hypothesis is X. How close is that here?&quot;</p>
-<p><strong>Standards.</strong> 1472H is the design rulebook (September 2020). 46855A is the process rulebook (2011), and it's current; the 1999 handbook is cancelled. SAE6906A is the industry HSI standard (December 2023).</p>
-<p><strong>Human Readiness Levels.</strong> ANSI/HFES 400-2021: a one-to-nine scale for whether people can use a technology safely, next to the technology readiness level. The FY2025 NDAA directs DoD to report it for major programs.</p>
-<p><strong>Requirement template.</strong> A &quot;shall&quot; statement, a minimum and a goal value, the conditions, and how it's checked: inspection, analysis, demonstration, or test.</p>
-<p><strong>Fan-out.</strong> (Neglect time + interaction time) ÷ interaction time. Real capacity is lower, because it depends on how well the operator judges which aircraft can be left alone.</p>
-<p><strong>882.</strong> How bad times how likely gives the risk. Fix order: design it out, design change, safeguards, warnings, and only then signs, procedures, training, and protective equipment.</p>
-<p><strong>Honest gap.</strong> &quot;I've done the analyses these standards formalize, but not under contract on an 882 or 46855A program. Here's my ramp-up.&quot;</p>
+<p><strong>The bridge, Jake only.</strong> &quot;Monday I led with the research half, because that was the seat. This seat is the other half.&quot; If asked about Air Defense: &quot;They chose someone else, the feedback was fair, and this seat is closer to my training.&quot;</p>
+<p><strong>Every answer.</strong> Claim, proof, boundary, in sixty to seventy-five seconds. Two or three questions per interview at most. Citations only when asked. &quot;Assets&quot; and &quot;operators.&quot; With the TPM, ask once which milestones they run.</p>
+<p><strong>Standards.</strong> 1472H is the design rulebook (2020); my NASA work used 1472G. 46855A is the process rulebook (2011), and it's current; the 1999 handbook is cancelled. SAE6906A is the industry HSI standard (December 2023).</p>
+<p><strong>Human Readiness Levels.</strong> ANSI/HFES 400-2021, nine levels next to the TRL. DoD formally adopted a human readiness standard in August 2025.</p>
+<p><strong>Requirement template.</strong> A shall statement, threshold and objective, conditions, and verification: inspection, analysis, demonstration, or test.</p>
+<p><strong>Success run.</strong> Ninety-five percent at ninety-five percent confidence, zero failures: 59 trials. Ninety-nine percent: 299.</p>
+<p><strong>Fan-out.</strong> (Neglect time + interaction time) ÷ interaction time. Real capacity is lower, because it depends on how well the operator judges which assets can be left alone.</p>
+<p><strong>882.</strong> Severity and probability go into a matrix that gives the risk level, and the risk acceptance authority signs off; each hazard is tracked to closure in a hazard log. Eliminate, reduce, engineer, warn, and only then signs, procedures, training, and protective equipment.</p>
+<p><strong>Honest gap.</strong> &quot;I've done the analyses these standards formalize, but not under contract on an 882 or 46855A program. Here's how I'd close it.&quot;</p>
 <p><strong>If I don't know.</strong> &quot;I don't know. My best guess is X, but that's a hypothesis. The way I'd find out is...&quot;</p>
-<p><strong>Questions to ask.</strong></p>
+<h4>Questions to ask</h4>
 <ul>
-<li><strong>Jake:</strong> &quot;Where does HF enter the program's requirements today, and where would you want it earlier?&quot; &quot;What does a great first year look like for this seat?&quot; &quot;How does HSI split work across programs, and how is it staffed?&quot; &quot;What HSI documentation or standards do you use as the baseline?&quot; &quot;Is the program tracking Human Readiness Levels alongside TRLs?&quot;</li>
-<li><strong>TPM:</strong> &quot;Which program decision next quarter would you most want human-performance data behind?&quot; &quot;Where has HF input landed too late?&quot; &quot;How are test events planned, and can HF objectives ride along?&quot; &quot;What operator metrics does leadership track now, and what do they wish they had?&quot; &quot;Which gates does the program run, and where would HF evidence fit?&quot;</li>
-<li><strong>Anyone:</strong> &quot;How is the team distributed across sites?&quot; &quot;What research is already happening, and what's missing?&quot; &quot;How does HSI work with the Advanced Capabilities team on operations analysis and wargaming?&quot; &quot;How do you keep operator interfaces consistent as third-party platforms come into Lattice?&quot;</li>
+<li><strong>Jake:</strong> &quot;Where does HF enter the program's requirements today, and where would you want it earlier?&quot; &quot;What does a great first year look like for this seat?&quot; &quot;How does HSI split work across programs, and how is it staffed?&quot; &quot;What HSI documentation do you use as the baseline?&quot; &quot;Is the program tracking Human Readiness Levels?&quot;</li>
+<li><strong>TPM:</strong> &quot;Which program decision next quarter would you most want human-performance data behind?&quot; &quot;Where has HF input landed too late?&quot; &quot;How are test events planned, and can HF objectives ride along?&quot; &quot;Which gates does the program run, and where would HF evidence fit?&quot;</li>
+<li><strong>Anyone:</strong> &quot;Who's the operator, and how do I get time with them?&quot; &quot;What research is already happening, and what's missing?&quot; &quot;How does HSI work with the Advanced Capabilities team on wargaming?&quot;</li>
 </ul>
 <p><strong>To close.</strong> &quot;Is there anything I said today you'd want me to go deeper on?&quot;</p>
 
