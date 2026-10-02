@@ -216,10 +216,34 @@ a { color: #14507d; }
     letter-spacing: .08em; color: #555; border: .6pt solid #999; border-radius: 2pt;
     padding: 0 3pt; margin-left: 3pt; vertical-align: 1.5pt;
   }
+  /* Onsite guide only: its 18th page buys a larger face and memorable cues, not more content. */
+  body.story { font-size: 10.4pt; line-height: 1.34; }
+  /* The "ff" in italic "effort" still extracted as "ef ort" with only common ligatures off. */
+  body.story * { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
+  body.story .qhead { margin: 12pt 0 3.5pt; }
+  body.story .qhead h2 { font-size: 11pt; }
+  /* Tier 1 is rehearsed until fluent, so it has to be findable at a flip. */
+  body.story .qhead.t1 h2 { border-left-width: 5pt; background: #dcdcd8; }
+  body.story .tier.t1 { background: #111; color: #fff; border-color: #111; }
+  body.story .answer p { padding: 2.8pt 7pt; }
+  body.story .answer p:first-child { padding-top: 4.5pt; }
+  body.story .answer p:last-child { padding-bottom: 4.5pt; }
+  /* The memorized line: it reads as the one sentence to carry out of the room. */
+  body.story .calibration {
+    border: 0; border-left: 3pt solid #8a6d1f; border-radius: 0; background: #fbf7ea;
+    padding: 3pt 7pt 3.5pt; margin: 3pt 0 8pt; font-size: 10pt; line-height: 1.3; color: #111;
+    break-before: avoid;
+  }
+  body.story .keep { break-inside: avoid; }
+  body.story .calibration::before { color: #7a6118; font-weight: bold; }
+  body.story .fq { margin: 5.5pt 0 2pt; }
+  body.story blockquote.say { padding: 4.5pt 7pt; margin: 2pt 0 5pt; }
+  body.story .card { padding: 4.5pt 7pt; margin: 0 0 5.5pt; }
+  body.story li { margin-bottom: 2.5pt; }
 }
 </style>
 </head>
-<body class="compact">
+<body class="compact dense airy story">
 <main>
 <h1>Intuitive Surgical — Onsite</h1>
 <p><strong>Every answer should run sixty to a hundred and ten seconds, end on a design input or something I left behind, and then stop.</strong></p>
@@ -291,8 +315,8 @@ a { color: #14507d; }
 <div class="parthead">
 <h1>Part 1 · The open</h1>
 <hr />
-<div class="qhead">
-<h2>Tell me about yourself — Tier 1</h2>
+<div class="qhead t1">
+<h2>Tell me about yourself <span class="tier t1">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about yourself.&quot; Or: &quot;Walk me through your background.&quot; Or: &quot;Want to give us a quick intro?&quot;</p>
 </blockquote>
@@ -306,16 +330,16 @@ a { color: #14507d; }
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;You've never worked in a regulated medical device environment, have you?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>That's right. I haven't worked with FDA or supported a submission. What I have is the upstream work the framework depends on: task analysis, a usability FMEA, and severity-ranked use errors at NASA. I've studied both 2026 guidances, and I know reading isn't doing. I'd expect to learn the regulated practice from this team.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;I do my best work before there's a design to evaluate.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Why Intuitive — Tier 2</h2>
+<div class="qhead t2">
+<h2>Why Intuitive <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Why Intuitive?&quot; Or: &quot;Why us and not another device company?&quot; Or: &quot;What draws you to this team?&quot;</p>
 </blockquote>
@@ -332,8 +356,8 @@ a { color: #14507d; }
 <li><em>&quot;The flagship is multimodal, and that's exactly my research problem.&quot;</em></li>
 </ul></div>
 <hr />
-<div class="qhead">
-<h2>Your biggest weakness — Tier 2</h2>
+<div class="qhead t2">
+<h2>Your biggest weakness <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What's your biggest weakness?&quot; Or: &quot;What feedback do you get most often?&quot;</p>
 </blockquote>
@@ -349,8 +373,8 @@ a { color: #14507d; }
 <li><em>&quot;Headline first, reasoning on request.&quot;</em></li>
 </ul></div>
 <hr />
-<div class="qhead">
-<h2>Robotics and technical range — Tier 2</h2>
+<div class="qhead t2">
+<h2>Robotics and technical range <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How comfortable are you on the robotics side?&quot; Or: &quot;What's your experience with teleoperation or control systems?&quot; Or: &quot;How technical do you get with the engineering team?&quot;</p>
 </blockquote>
@@ -368,19 +392,19 @@ a { color: #14507d; }
 <blockquote class="say">
 <p>In any console with foot-activated functions, the classic risk is the right action on the wrong target. It's the same shape as adjacent controls with different consequences. That's what my patent addresses. One actuation produces different outcomes depending on context. The fix is making the active mapping perceptible without a deliberate check. Mode errors aren't carelessness. They're a gap between what the system has active and what the user believes is active.</p>
 </blockquote>
-<blockquote class="warn">
+<div class="keep"><blockquote class="warn">
 <p>⚠️ <strong>Keep this generic.</strong> Say &quot;any console&quot;, never Intuitive's console, and never describe how their pedals or modes work.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;I specify what the loop has to feel like to the human closing it.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
 <div class="parthead">
 <h1>Part 2 · Upstream</h1>
 <hr />
-<div class="qhead">
-<h2>Finding a need nobody had named (Echo Hub) — Tier 1</h2>
+<div class="qhead t1">
+<h2>Finding a need nobody had named (Echo Hub) <span class="tier t1">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about a time you identified a user need nobody had articulated.&quot; Or: &quot;How have you worked in ambiguity?&quot; Or: &quot;Tell me about zero-to-one research.&quot;</p>
 </blockquote>
@@ -408,16 +432,16 @@ a { color: #14507d; }
 <blockquote class="say">
 <p>I'd get the team to agree, before the first home visit, on what each result would change.</p>
 </blockquote>
-<blockquote class="warn">
+<div class="keep"><blockquote class="warn">
 <p>⚠️ <strong>There was no internal usage data,</strong> so never cite &quot;existing interaction data&quot; in this story.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;The needs that don't get written down are the ones where the workaround looks like ordinary behavior.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Defining a workflow — Tier 2</h2>
+<div class="qhead t2">
+<h2>Defining a workflow <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you define a user workflow?&quot; Or: &quot;How would you map a procedure?&quot; Or: &quot;What does workflow definition actually produce?&quot;</p>
 </blockquote>
@@ -435,8 +459,8 @@ a { color: #14507d; }
 <li><em>&quot;The normal case is the easy half. The interesting failures live in recovery.&quot;</em></li>
 </ul></div>
 <hr />
-<div class="qhead">
-<h2>Turning observations into requirements — Tier 1</h2>
+<div class="qhead t1">
+<h2>Turning observations into requirements <span class="tier t1">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you turn what surgeons tell you into something engineers can build against?&quot; Or: &quot;How do you write interface design requirements?&quot; Or: &quot;What does your output look like?&quot;</p>
 </blockquote>
@@ -462,16 +486,16 @@ a { color: #14507d; }
 <blockquote class="say flow">
 <p>It comes from psychophysics, with the uncertainty carried forward. On the latency program I used the method of constant stimuli, with fixed delays in random order, rated for felt slowness. For a force threshold I'd pick the method to fit the question. The spec takes the conservative bound of the interval, not the mean. I also choose the population percentile deliberately and write down who it excludes. A spec built on the average quietly designs for the median user and fails the tails.</p>
 </blockquote>
-<blockquote class="warn">
+<div class="keep"><blockquote class="warn">
 <p>⚠️ <strong>Keep the need channel-neutral.</strong> They ship a visual Force Gauge, so never phrase a requirement as &quot;without a visual fixation shift&quot;.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;A design input nobody can test against isn't a requirement. It's a recommendation with confident formatting.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Setting a number from human data (Alexa latency) — Tier 1</h2>
+<div class="qhead t1">
+<h2>Setting a number from human data (Alexa latency) <span class="tier t1">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about your most impactful project.&quot; Or: &quot;How do you set a requirement when nobody knows the right number?&quot; Or: &quot;Tell me about work that outlasted you.&quot;</p>
 </blockquote>
@@ -488,16 +512,16 @@ a { color: #14507d; }
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;Did your work produce that fifty million?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>It's Alexa Economics' projection from their model, not a number I measured. What I own is the thresholds and the spec. I say &quot;projected&quot; every time, because that's what it was.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;The acceptable number depends on what the user is trying to do.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Prototyping and fidelity — Tier 3</h2>
+<div class="qhead t3">
+<h2>Prototyping and fidelity <span class="tier t3">Tier 3</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you decide what to prototype?&quot; Or: &quot;What fidelity do you build?&quot; Or: &quot;Tell me about a rig you built.&quot;</p>
 </blockquote>
@@ -511,19 +535,19 @@ a { color: #14507d; }
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;When would you build higher fidelity than the question needs?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>I'd do it when the question is about the physical thing itself. That means reach, grip, weight, how it behaves in the hand, and what it's like gowned and gloved. You can't fake proprioception with a foam mock-up. Anything about perceiving the object gets real material and real geometry. Anything about information and sequence can stay cheap much longer.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Exact where the question lives, and near-zero effort everywhere else.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
 <div class="parthead">
 <h1>Part 3 · The live problem</h1>
 <hr />
-<div class="qhead">
-<h2>Researching force feedback — Tier 1</h2>
+<div class="qhead t1">
+<h2>Researching force feedback <span class="tier t1">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you approach research for force feedback on a surgical system?&quot; Or: &quot;How would you research a new capability like this?&quot;</p>
 </blockquote>
@@ -546,16 +570,16 @@ a { color: #14507d; }
 <blockquote class="say">
 <p>There are three I'd prioritize. The first is negative transfer. Experienced surgeons learned to read force visually, so I'd test whether a new cue gets in the way of that skill early on. That's a hypothesis to check, not something I'd assume. The second is cue conflict. When the haptic and visual cues disagree, that's worse than having either one alone. The third is losing feedback in the middle of a case, which is effectively a mode change the surgeon wasn't warned about.</p>
 </blockquote>
-<blockquote class="warn">
+<div class="keep"><blockquote class="warn">
 <p>⚠️ <strong>Cognitive task analysis and formative testing are not synonyms.</strong> Cognitive task analysis studies how experts think in current practice and needs no prototype, so it generates insight. Cognitive walkthroughs and formative testing need something to look at, so they evaluate a design.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;The question isn't whether force information helps. It's where each channel earns its place.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Choosing visual, audio, or haptic — Tier 2</h2>
+<div class="qhead t2">
+<h2>Choosing visual, audio, or haptic <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you decide whether information should be visual, auditory, or haptic?&quot; Or: &quot;When would you add a second channel?&quot; Or: &quot;What's the risk of redundant cues?&quot;</p>
 </blockquote>
@@ -592,8 +616,8 @@ a { color: #14507d; }
 <div class="parthead">
 <h1>Part 4 · Partners, risk, and validation</h1>
 <hr />
-<div class="qhead">
-<h2>Working with designers and engineers — Tier 2</h2>
+<div class="qhead t2">
+<h2>Working with designers and engineers <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you work with designers and engineers?&quot; Or: &quot;How do you fit into the development process?&quot; Or: &quot;Tell me about a cross-functional collaboration.&quot;</p>
 </blockquote>
@@ -610,16 +634,16 @@ a { color: #14507d; }
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;How do you work with engineers versus designers?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>It's a different currency. Designers need the constraint early and the freedom inside it. Engineers need a number with a tolerance, and a defined behavior when it can't be met. It's the same underlying finding in two different artifacts. The mistake is handing an engineer a design principle, or handing a designer an acceptance criterion.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Designers can work inside a constraint. They can't do much with a critique of something already built.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Disagreeing with engineering (NASA) — Tier 2</h2>
+<div class="qhead t2">
+<h2>Disagreeing with engineering (NASA) <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about a time you disagreed with engineering.&quot; Or: &quot;What do you do when they say your requirement isn't feasible?&quot; Or: &quot;Tell me about a conflict with a technical partner.&quot;</p>
 </blockquote>
@@ -635,16 +659,16 @@ a { color: #14507d; }
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;What if no channel could carry it?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>Then I go back up the hierarchy for a design change or a protective measure. If risk still exceeds the plan's criteria, it goes to a documented benefit-risk analysis. I win those arguments by making the risk and the options visible.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;I don't relax the need; I change how it's met.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Competing priorities — Tier 2</h2>
+<div class="qhead t2">
+<h2>Competing priorities <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you prioritize when everyone wants something?&quot; Or: &quot;We need an answer by the end of the week. What do you do?&quot; Or: &quot;How do you handle a timeline that's too short?&quot;</p>
 </blockquote>
@@ -659,16 +683,16 @@ a { color: #14507d; }
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;What if I need the threshold this week?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>Then I tell you what a week can honestly support, and I won't dress directional evidence up as a threshold. If a safety-related decision depends on it, I raise it. That part doesn't get traded for time.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Work with no open decision behind it is the first thing I cut.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Mentoring and best practices — Tier 2</h2>
+<div class="qhead t2">
+<h2>Mentoring and best practices <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Have you mentored other researchers or engineers?&quot; Or: &quot;How would you help us level up how we write requirements?&quot; Or: &quot;How do you establish best practices on a team?&quot;</p>
 </blockquote>
@@ -686,8 +710,8 @@ a { color: #14507d; }
 <li><em>&quot;Best practice transfers by artifact, not by review.&quot;</em></li>
 </ul></div>
 <hr />
-<div class="qhead">
-<h2>The struggling mentee — Tier 2</h2>
+<div class="qhead t2">
+<h2>The struggling mentee <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about someone you mentored who was struggling.&quot; Or: &quot;Tell me about a time your coaching didn't work.&quot; Or: &quot;How do you adapt to the people you mentor?&quot;</p>
 </blockquote>
@@ -703,16 +727,16 @@ a { color: #14507d; }
 <blockquote class="warn">
 <p>⚠️ <strong>Keep his details private.</strong> Give no name and no specifics of the loss, because the point is what you changed.</p>
 </blockquote>
-<blockquote class="warn">
+<div class="keep"><blockquote class="warn">
 <p>⚠️ <strong>Augustina and Nandini heard this on Sept 18.</strong> Second story: <em><mark class="draft">[FILL]</mark></em>.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Check in person-to-person before coaching the work.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Use-error analysis and residual risk — Tier 1</h2>
+<div class="qhead t1">
+<h2>Use-error analysis and residual risk <span class="tier t1">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Walk me through how you'd do a use-related risk analysis.&quot; Or: &quot;What's your usability FMEA experience?&quot; Or: &quot;When is residual risk acceptable?&quot; Or: &quot;Tell me about work where the consequences were serious.&quot;</p>
 </blockquote>
@@ -746,16 +770,16 @@ a { color: #14507d; }
 <p>Severity alone designates a critical task. Whether the remaining risk is acceptable is judged against the plan's criteria, and I'd follow how those treat probability here.</p>
 </blockquote>
 <p class="fq"><strong>Follow-up: &quot;You called the cut arbitrary.&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>In 2018 I cut the list pragmatically. Today severity alone decides, and every task stays in the file.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;I changed the layout rather than adding a warning. A label is the weakest control there is.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Human factors validation — Tier 1</h2>
+<div class="qhead t1">
+<h2>Human factors validation <span class="tier t1">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What makes a good validation study?&quot; Or: &quot;Walk me through human factors validation testing.&quot; Or: &quot;How is validation different from formative testing?&quot;</p>
 </blockquote>
@@ -779,16 +803,16 @@ a { color: #14507d; }
 <p>I find the root cause before deciding anything. If it's the design, I fix the design and show the fix works. If it's genuinely a study artifact, I document why, carefully. &quot;The participant was confused&quot; is the answer that sounds most like an excuse.</p>
 </blockquote>
 <p class="fq"><strong>Follow-up: &quot;Have you led one for a submission?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>No. I've studied the method. I haven't run one.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Validation should confirm the design, not discover problems in it.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>Design controls and the validation handoff — Tier 2</h2>
+<div class="qhead t2">
+<h2>Design controls and the validation handoff <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How does your work fit into design controls?&quot; Or: &quot;What would you hand to the validation team?&quot; Or: &quot;Walk me from user needs through to validation.&quot;</p>
 </blockquote>
@@ -806,8 +830,8 @@ a { color: #14507d; }
 <li><em>&quot;If the validation team discovers a critical task for the first time, I failed upstream, unless the program deferred it on purpose.&quot;</em></li>
 </ul></div>
 <hr />
-<div class="qhead">
-<h2>Updating a device already on the market — Tier 2</h2>
+<div class="qhead t2">
+<h2>Updating a device already on the market <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How would you approach human factors for an update to an existing product?&quot; Or: &quot;When does a change need new validation?&quot;</p>
 </blockquote>
@@ -823,8 +847,8 @@ a { color: #14507d; }
 <li><em>&quot;The critical-task analysis decides how much validation a change needs.&quot;</em></li>
 </ul></div>
 <hr />
-<div class="qhead">
-<h2>Complaint data — Tier 2</h2>
+<div class="qhead t2">
+<h2>Complaint data <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you use complaint data?&quot;</p>
 </blockquote>
@@ -865,8 +889,8 @@ a { color: #14507d; }
 <div class="parthead">
 <h1>Part 5 · Clinicians, and the failure story</h1>
 <hr />
-<div class="qhead">
-<h2>Working with clinicians — Tier 2</h2>
+<div class="qhead t2">
+<h2>Working with clinicians <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What's your experience working with surgeons?&quot; Or: &quot;How do you build credibility with clinical experts?&quot; Or: &quot;Have you worked on a medical device?&quot;</p>
 </blockquote>
@@ -887,16 +911,16 @@ a { color: #14507d; }
 <p>Not as participants, and I'd rather say that plainly. My graduate work used medical students by design, because it was isolating a cognitive mechanism rather than measuring expert performance. My clinical experience is protocol and data work at Brigham, and working with clinical subject-matter experts at NASA. That's real, but it isn't surgeons as participants. It's a genuine gap, and it's part of what draws me here.</p>
 </blockquote>
 <p class="fq"><strong>Follow-up: &quot;How would you get surgeon time for generative work?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>I understand there's a human factors operations team that handles recruiting, so I'd route through them. That way, no surgeon gets contacted twice. I'd use the specialty key opinion leader board sessions for broad questions, and save case observations for workflow. And I'd come back with what changed because of what they said. The second session is much easier to get if the first one visibly went somewhere.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;In an operating room, my job would be to be the least disruptive person in it, and still leave with the observation nobody wrote down.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>When you got it wrong (Echo Show benchmark) — Tier 2</h2>
+<div class="qhead t2">
+<h2>When you got it wrong (Echo Show benchmark) <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Tell me about a study that didn't go as planned.&quot; Or: &quot;When has your research been wrong?&quot;</p>
 </blockquote>
@@ -912,19 +936,19 @@ a { color: #14507d; }
 <blockquote class="warn">
 <p>⚠️ <strong>Second failure story:</strong> <em><mark class="draft">[FILL]</mark></em>.</p>
 </blockquote>
-<blockquote class="warn">
+<div class="keep"><blockquote class="warn">
 <p>⚠️ <strong>Graduate work gets one beat and no more.</strong> The thesis was laparoscopy in 2017, with medical students, and the dissertation was medical data entry in 2020, so never say them backwards. The thesis found that interruptions caused a resumption lag that distractions didn't, and that irrelevant interruptions cost more than procedure-relevant ones. Cite Catchpole or Weigl only if an interviewer raises operating room disruptions first.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;Initiative without a pre-agreed decision is just spend.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
 <div class="parthead">
 <h1>Part 6 · The hiring manager one-on-one</h1>
 <hr />
-<div class="qhead">
-<h2>The technical-lead pitch — Tier 1</h2>
+<div class="qhead t1">
+<h2>The technical-lead pitch <span class="tier t1">Tier 1</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What would make you Staff rather than Senior?&quot; Or: &quot;How would you raise the bar across the team?&quot; Or: &quot;What would you build here that isn't there today?&quot;</p>
 </blockquote>
@@ -942,16 +966,16 @@ a { color: #14507d; }
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;Which would you do first?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>Whichever program you put me on. The people work rides on real program work.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;The technical lead on a hard problem, and the people around me get better at it.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>First six months — Tier 2</h2>
+<div class="qhead t2">
+<h2>First six months <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;What would your first six months look like?&quot; Or: &quot;How would you ramp up?&quot; Or: &quot;What would success look like at six months?&quot;</p>
 </blockquote>
@@ -968,8 +992,8 @@ a { color: #14507d; }
 <li><em>&quot;I learn why things are done before I suggest changes.&quot;</em></li>
 </ul></div>
 <hr />
-<div class="qhead">
-<h2>Tenure and why you'll stay — Tier 2</h2>
+<div class="qhead t2">
+<h2>Tenure and why you'll stay <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;Walk me through your moves since Amazon.&quot; Or: &quot;Why are you leaving EchoStar?&quot; Or: &quot;Why should we believe you'll stay?&quot;</p>
 </blockquote>
@@ -986,16 +1010,16 @@ a { color: #14507d; }
 <p>I've already planned the move to Sunnyvale. This isn't a remote-first ask.</p>
 </blockquote>
 <p class="fq"><strong>Follow-up: &quot;Where do you see yourself in three years?&quot;</strong></p>
-<blockquote class="say">
+<div class="keep"><blockquote class="say">
 <p>I want to be the person this team trusts with its hardest upstream problem, and to have grown a couple of people along the way.</p>
 </blockquote>
 <h3>Say this</h3>
 <div class="calibration"><ul>
 <li><em>&quot;I'm looking for the place I stay for the next decade.&quot;</em></li>
-</ul></div>
+</ul></div></div>
 <hr />
-<div class="qhead">
-<h2>How you like to be managed — Tier 2</h2>
+<div class="qhead t2">
+<h2>How you like to be managed <span class="tier t2">Tier 2</span></h2>
 <blockquote class="note">
 <p><strong>Question:</strong> &quot;How do you like to be managed?&quot;</p>
 </blockquote>
@@ -1009,8 +1033,8 @@ a { color: #14507d; }
 <li><em>&quot;Clear outcomes, my method, early feedback.&quot;</em></li>
 </ul></div>
 <hr />
-<div class="qhead">
-<h2>Level, compensation, and closing scripts — Tier 1</h2>
+<div class="qhead t1">
+<h2>Level, compensation, and closing scripts <span class="tier t1">Tier 1</span></h2>
 </div>
 <p class="fq"><strong>Follow-up: &quot;Would you consider Senior?&quot;</strong></p>
 <blockquote class="say">

@@ -41,7 +41,7 @@ DOCS = {
         "out": OUT / "onsite-guide.html",
         "title": "Intuitive Surgical — Onsite",
         "break_before_part1": False,
-        "body_class": "compact",
+        "body_class": "compact dense airy story",
         "flow_chars": 300,
     },
     "checklist": {
@@ -281,6 +281,30 @@ a { color: #14507d; }
     letter-spacing: .08em; color: #555; border: .6pt solid #999; border-radius: 2pt;
     padding: 0 3pt; margin-left: 3pt; vertical-align: 1.5pt;
   }
+  /* Onsite guide only: its 18th page buys a larger face and memorable cues, not more content. */
+  body.story { font-size: 10.4pt; line-height: 1.34; }
+  /* The "ff" in italic "effort" still extracted as "ef ort" with only common ligatures off. */
+  body.story * { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
+  body.story .qhead { margin: 12pt 0 3.5pt; }
+  body.story .qhead h2 { font-size: 11pt; }
+  /* Tier 1 is rehearsed until fluent, so it has to be findable at a flip. */
+  body.story .qhead.t1 h2 { border-left-width: 5pt; background: #dcdcd8; }
+  body.story .tier.t1 { background: #111; color: #fff; border-color: #111; }
+  body.story .answer p { padding: 2.8pt 7pt; }
+  body.story .answer p:first-child { padding-top: 4.5pt; }
+  body.story .answer p:last-child { padding-bottom: 4.5pt; }
+  /* The memorized line: it reads as the one sentence to carry out of the room. */
+  body.story .calibration {
+    border: 0; border-left: 3pt solid #8a6d1f; border-radius: 0; background: #fbf7ea;
+    padding: 3pt 7pt 3.5pt; margin: 3pt 0 8pt; font-size: 10pt; line-height: 1.3; color: #111;
+    break-before: avoid;
+  }
+  body.story .keep { break-inside: avoid; }
+  body.story .calibration::before { color: #7a6118; font-weight: bold; }
+  body.story .fq { margin: 5.5pt 0 2pt; }
+  body.story blockquote.say { padding: 4.5pt 7pt; margin: 2pt 0 5pt; }
+  body.story .card { padding: 4.5pt 7pt; margin: 0 0 5.5pt; }
+  body.story li { margin-bottom: 2.5pt; }
 }
 """
 
@@ -449,6 +473,20 @@ def main() -> None:
         ))
         if "airy" in doc["body_class"].split():
             body = re.sub(r" \u2014 (Tier \d)</h2>", r' <span class="tier">\1</span></h2>', body)
+        if "story" in doc["body_class"].split():
+            body = re.sub(
+                r'<div class="qhead">(\s*<h2>[^<]*<span class=")tier(">Tier (\d))',
+                r'<div class="qhead t\3">\1tier t\3\2',
+                body,
+            )
+            # Chrome ignores break-before: avoid in columns, so a lone say-this needs a wrapper.
+            body = re.sub(
+                r'(<blockquote class="[^"]*">(?:(?!<blockquote).)*?</blockquote>\s*'
+                r'<h3>Say this</h3>\s*<div class="calibration">.*?</div>)',
+                r'<div class="keep">\1</div>',
+                body,
+                flags=re.DOTALL,
+            )
         doc["out"].write_text(
             PAGE.format(
                 title=html.escape(doc["title"]),
