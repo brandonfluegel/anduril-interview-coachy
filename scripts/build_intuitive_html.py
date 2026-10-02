@@ -300,7 +300,7 @@ a { color: #14507d; }
     break-before: avoid;
   }
   body.story .keep { break-inside: avoid; }
-  body.story .calibration::before { color: #7a6118; font-weight: bold; }
+  body.story .calibration::before { content: "Anchor"; color: #7a6118; font-weight: bold; }
   body.story .fq { margin: 5.5pt 0 2pt; }
   body.story blockquote.say { padding: 4.5pt 7pt; margin: 2pt 0 5pt; }
   body.story .card { padding: 4.5pt 7pt; margin: 0 0 5.5pt; }
@@ -387,7 +387,7 @@ def wrap_model_answers(
 
     # The calibration list is reference, not rehearsal, so it reads smaller.
     calib = re.compile(
-        r"(<h3>(?:Senior \u2192 Staff-signal|The Staff-signal|Say this)</h3>\s*)(<ul>.*?</ul>)", flags=re.DOTALL
+        r"(<h3>(?:Senior \u2192 Staff-signal|The Staff-signal|Say this|Anchor)</h3>\s*)(<ul>.*?</ul>)", flags=re.DOTALL
     )
     body = calib.sub(lambda m: f'{m.group(1)}<div class="calibration">{m.group(2)}</div>', body)
 
@@ -482,7 +482,7 @@ def main() -> None:
             # Chrome ignores break-before: avoid in columns, so a lone say-this needs a wrapper.
             body = re.sub(
                 r'(<blockquote class="[^"]*">(?:(?!<blockquote).)*?</blockquote>\s*'
-                r'<h3>Say this</h3>\s*<div class="calibration">.*?</div>)',
+                r'<h3>(?:Say this|Anchor)</h3>\s*<div class="calibration">.*?</div>)',
                 r'<div class="keep">\1</div>',
                 body,
                 flags=re.DOTALL,
