@@ -281,19 +281,19 @@ a { color: #14507d; }
     letter-spacing: .08em; color: #555; border: .6pt solid #999; border-radius: 2pt;
     padding: 0 3pt; margin-left: 3pt; vertical-align: 1.5pt;
   }
-  /* Onsite guide only: the 18-page budget buys a larger face and roomier rhythm, not more content. */
-  body.story { font-size: 10.5pt; line-height: 1.34; }
+  /* Onsite guide only: the 20-page budget buys a larger face and roomier rhythm, not more content. */
+  body.story { font-size: 10.7pt; line-height: 1.37; }
   /* The "ff" in italic "effort" still extracted as "ef ort" with only common ligatures off. */
   body.story * { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
   body.story p { margin-bottom: 4pt; }
-  body.story .qhead { margin: 13pt 0 4pt; }
+  body.story .qhead { margin: 14pt 0 4pt; }
   body.story .qhead h2 { font-size: 11.8pt; padding: 3.5pt 6pt; }
   body.story .parthead h1 { font-size: 13.5pt; padding: 5pt 8pt; }
   /* Tier 1 is rehearsed until fluent, so it has to be findable at a flip. */
   body.story .qhead.t1 h2 { border-left-width: 5pt; background: #dcdcd8; }
   body.story .tier.t1 { background: #111; color: #fff; border-color: #111; }
   body.story .tier { font-size: 7.4pt; }
-  body.story .answer p { padding: 3pt 8pt; }
+  body.story .answer p { padding: 3.2pt 8pt; }
   body.story .answer p:first-child { padding-top: 5pt; }
   body.story .answer p:last-child { padding-bottom: 5pt; }
   body.story .answer p > strong:first-child { font-size: 8pt; margin-bottom: 1.2pt; }
@@ -304,12 +304,16 @@ a { color: #14507d; }
     break-before: avoid;
   }
   body.story .keep { break-inside: avoid; }
+  /* Chrome splits even a short keep after a heading; an inline-block can't split. */
+  body.story .keep.whole { display: inline-block; width: 100%; }
   body.story .calibration::before { content: "Anchor"; color: #7a6118; font-weight: bold; font-size: 7.4pt; }
   body.story .fq { font-size: 9.6pt; margin: 7pt 0 2.5pt; }
   body.story blockquote.say { padding: 5pt 8pt; margin: 2pt 0 6pt; }
-  body.story blockquote.note { font-size: 9.8pt; padding: 4.5pt 8pt; }
-  body.story blockquote.warn { font-size: 9.6pt; padding: 4.5pt 8pt; margin: 3pt 0 6pt; }
+  body.story blockquote.note { font-size: 10pt; padding: 4.5pt 8pt; }
+  body.story blockquote.warn { font-size: 9.9pt; padding: 4.5pt 8pt; margin: 3pt 0 6pt; }
   body.story .card { padding: 5pt 8pt; margin: 0 0 6.5pt; }
+  /* The panel cards run long; held whole, each one strands a third of a column. */
+  body.story .card { break-inside: auto; orphans: 3; widows: 3; }
   body.story li { margin-bottom: 3pt; }
   body.story h4 { font-size: 9.6pt; margin-top: 8pt; }
 }
@@ -487,6 +491,12 @@ def main() -> None:
                 body,
             )
             # Chrome ignores break-before: avoid in columns, so a lone say-this needs a wrapper.
+            body = re.sub(
+                r'(<h2>The last check[^<]*</h2>\s*<ul>.*?</ul>)',
+                r'<div class="keep whole">\1</div>',
+                body,
+                flags=re.DOTALL,
+            )
             body = re.sub(
                 r'(<blockquote class="[^"]*">(?:(?!<blockquote).)*?</blockquote>\s*'
                 r'<h3>(?:Say this|Anchor)</h3>\s*<div class="calibration">.*?</div>)',

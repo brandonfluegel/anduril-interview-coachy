@@ -1,6 +1,6 @@
 # Intuitive Surgical — Onsite
 
-**Tier 1, black tag: rehearse out loud until fluent.** **Second bank: tell each story out loud twice.** The panel hears Echo Hub, the latency program, and NASA in the talk, so the second bank is for the one-on-ones. **Tier 2: know the point and the anchor. Tier 3: read twice.**
+**Tier 1, black tag: rehearse out loud until fluent.** **Second bank: tell each story out loud twice.** The panel hears Echo Hub, the latency program, and NASA in the talk, so the second bank is for lunch, the one-on-ones and the demo. **Tier 2: know the point and the anchor. Tier 3: read twice.**
 
 ## Rules
 
@@ -8,16 +8,17 @@
 - I say "user", "patient safety", "use error", "critical task", "risk control measure", and "guidance". Never "operator", "pain point", "guardrail", or "regulation". I default to "validation testing", and if they say "summative", I use their word.
 - I never call validation junior, tactical, "powered", or "comparing versions". I never call a critical-task cutoff "arbitrary".
 - Severity alone designates a critical task. Acceptability follows the risk management plan's criteria, which may include probability. Residual risk is never "a negotiation", "not my decision", "a name against it", or "a signature".
+- I never say "never" about information for safety. Training and labeling are legitimate controls on this product. I say "last in the hierarchy, with a documented rationale".
 - I don't hedge, and I never run down my own methods or say designers "don't like requirements".
 - EchoStar is "since June 2025", never a duration. Experience is six years in industry plus doctoral internships, never "ten-plus".
 - fNIRS was Amazon. fMRI, ECG and heart-rate variability, and tVNS were Brigham. Never EEG, and never a claim that a biometric beat NASA-TLX.
 - Fifty million dollars is the only dollar figure, always "projected" by Alexa Economics' model. No Echo metrics, nothing about Intuitive's internal process.
-- I never name Anduril. I say "a final round elsewhere, completed September 28".
-- Level and compensation aren't for the panel. If raised, I answer on scope and point to Reema. My current title, Staff Product Researcher, is a fact and on a slide.
+- I never name the other company. I say "I'm in a final-stage process elsewhere, with an interview next week." If asked about the September 28 final round: "That team went another direction, and the company moved me into a human factors role I'm interviewing for."
+- Level and compensation aren't for the panel. If raised, I answer on scope and point to Reema. Leela and Ashley are Senior, the level I'm interviewing at, so Staff comes up only in Reema's room. My current title, Staff Product Researcher (Human Factors), is a fact and on a slide.
 - Each interviewer describes their work before I describe it back. I never say a gap is "learnable in months", never claim their workflow "cold", and never propose a process before I've read theirs.
 - One polished line per room, the one on that room's card, and never a line from the talk. Anchors are for my memory.
 - After the talk, I point back to a deck story in one sentence and tell a second-bank story instead.
-- If an earlier answer is quoted back, I own the wording, correct it in one sentence, and move on.
+- If an earlier answer is quoted back, I own the wording, correct it in one sentence, and move on. Only Reema could raise one. Nobody else on this panel was in those rounds, so I never volunteer a correction.
 
 ## Canonical facts
 
@@ -25,36 +26,36 @@
 - **Titles of record,** for the application form: Staff Product Researcher (EchoStar, under DISH Network) and UX Researcher II (Amazon). If asked: "My titles of record say researcher. The résumé uses the functional title, and the work behind both is the same."
 - **Brigham,** 2014 to 2015, research assistant and project coordinator: fMRI, ECG and heart-rate variability, and tVNS, which was neuroscience research on a device, not human factors. **Thesis:** laparoscopy, 2017, medical students. **Dissertation:** medical data entry, 2020.
 - **NASA:** five astronaut candidates at Johnson Space Center; internship based at Langley. I derived the task list. A VR prototype in simulated microgravity, three medical scenarios, a usability FMEA, and three rounds. Reach to the 5th-percentile female, clearance to the 95th-percentile male. Ground crew gave remote guidance, never "teleoperation". The haptic cue was infeasible, so we used visual and auditory channels. The thirty percent time reduction was a side effect.
-- **Echo Hub:** about twelve households, Seattle and Denver, no internal usage data. **Uber Brazil:** one app for rental drivers; retention up five percent, pre and post, not a controlled test. **Alexa latency:** 30 participants, 12 interaction types, 6 fixed delays, about 2,000 trials analyzed, constant stimuli, rated for felt slowness.
+- **Echo Hub:** about twelve households, Seattle and Denver, no internal usage data. **Uber Brazil:** one app for rental drivers; retention up five percent, pre and post, not a controlled test. **Alexa latency:** 30 participants, 12 interaction types, 6 fixed delays, 2,160 trials run (30 x 12 x 6, the number on slides 13 and 33), about 2,000 analyzed, constant stimuli, rated for felt slowness.
 - No FDA submission experience; I bridge from MIL-STD-1472 and NASA-STD-3001. Failure stories: the Echo Show benchmark and the Mercedes pilot. No direct reports. Named mentee: a junior UX researcher at EchoStar, by role, never by name.
 
 ## The role
 
-- Human factors design engineer, upstream: user needs, interface design requirements, workflow definition, and early prototypes.
+- Human factors design engineer, upstream: user needs, interface design requirements, workflow definition, and early prototypes. I'd report directly to Reema.
 - Design engineering owns the stakeholders, task analysis, critical tasks, and risk analysis. A separate analyst team runs validation with our input. My inputs should hand off without rework.
 - The team values requirements, and wants someone to mentor and set best practices. Findings land as the finding, the design impact, and the recommended change. Onboarding is a six-week foundations program.
 
 ## Who you'll meet
 
-Everyone sees the talk first. In each one-on-one I point back to the deck, tell second-bank stories, and use only that room's one line.
+Everyone below sees the talk first, 11:00 to 12:00. Rooms are 30 minutes: one story and one question each. Nobody on this panel except Reema was near my earlier rounds, so every second-bank story is new to them. I use only that room's one line. I never recite anyone's background back to them.
 
-[[card]] **Human factors peers.** Elyse, Val, Nandini, Augustina. They're checking whether I do the work, so no overclaiming. I reference stories they've heard and add something new. **Lead with:** Use-error analysis; Human factors validation; Design controls; JS Held. **One line:** "A complaint describes an outcome. My job is to reconstruct the use scenario that produced it."
+[[card]] **The day.** 11:00 presentation (all seven). 12:00 lunch, Leela. 1:00 Reema. 1:30 Siddharth. 2:00 Gabe. 2:30 Radit. 3:00 Ann. 3:30 demo, Ashley. No breaks from 1:00 to 4:00.
 
-[[card]] **Systems engineers.** Traceability and testability: a shall statement, a tolerance, a verification method. **Lead with:** Turning observations into requirements; Mercedes-Benz handovers; Robotics and technical range; Choosing a channel. **One line:** "A design input nobody can test against isn't a requirement. It's a recommendation with confident formatting."
+[[card]] **Leela Tanikella, Sr Human Factors Design Engineer. Lunch, 12:00.** Lunch is an interview. She came up through design controls at Intuitive, so she knows requirements, risk files and traceability cold. She's checking whether my needs-to-requirements chain is real and whether I'd be good to work beside. She is Senior, the level I'm interviewing at: nothing about Staff. **Lead with:** Turning observations into requirements; Design controls and the validation handoff; Use-error analysis. **Ask:** "How early does the use-related risk analysis start on a new program?" and "Do needs findings become design inputs directly, or go through a product requirements layer?" **One line:** "A design input nobody can test against isn't a requirement. It's a recommendation with confident formatting."
 
-[[card]] **Clinical engineers.** They screen for humility and procedure literacy. I know the public workflow and vocabulary, I say I haven't observed a case, and I ask about their reasoning. **Lead with:** Working with clinicians; Defining a workflow; Researching force feedback; Ergonomics. **One line:** "In an operating room, my job would be to be the least disruptive person in it, and still leave with the observation nobody wrote down."
+[[card]] **Reema Bhavnani, Sr Manager, Human Factors Engineering. 1:00.** She is the hiring manager and would be my direct manager. She asked for humility, so it stays conversational. **Lead with:** The technical-lead pitch; First six months, her version; Tenure; The struggling mentee, second story. **Ask:** "What would you need to see to make the Staff case, and on what timeline if I start as Senior?" **One line:** "The technical lead on a hard problem, and the people around me get better at it."
 
-[[card]] **Industrial and interaction designers.** Constraints early, freedom inside them, and never a finding without a candidate direction. **Lead with:** Working with designers and engineers; Measuring what people can't report; Uber Brazil. **One line:** "Designers can work inside a constraint. They can't do much with a critique of something already built."
+[[card]] **Siddharth Gandhi, Senior Manager, Regulatory Affairs. 1:30.** His team sets regulatory strategy for multiport and reviews design input and output documentation. I open with: "I haven't worked with FDA or supported a submission." I describe what I'd hand him, defer on strategy, and call the robotic surgery guidance a draft. I name IEC 62366-1 as the international basis, not only FDA. I never say "never" about labeling or training as a control. **Lead with:** Design controls and the validation handoff; Updating a device already on the market; the draft guidance card. **Ask:** "How do category decisions get made here, and how early does human factors come in?" **One line:** "My job is making sure nothing is residual by omission."
 
-[[card]] **Product managers.** Scope options with a cost for each, and "tell me about a time". Safety and efficacy are in every option. **Lead with:** The hardware date; Competing priorities; When you got it wrong. **One line:** "Work with no open decision behind it is the first thing I cut."
+[[card]] **Gabe Brisson, Managing Sr Principal, Systems Analysis. 2:00.** Systems analysts here are robotic control engineers: motion control, safety algorithms, failure mode analysis. He has a robotics PhD and patents on manipulator control. He's checking whether I know where my expertise stops and whether my numbers can be verified. I open with "I'm not a controls engineer." On latency and telesurgery I ask, I don't assert: the method carries over, the numbers don't. Expect questions on my severity scale and on probability. **Lead with:** Robotics and technical range; Turning observations into requirements; Mercedes-Benz handovers; Choosing visual, audio, or haptic. **Ask:** "When a manipulator reaches a joint limit, how does the team decide what the surgeon should see or feel?" and "What does a useful design input from human factors look like to you?" **One line:** "I specify what the loop has to feel like to the human closing it."
 
-[[card]] **Regulatory affairs.** I open with: "I haven't worked with FDA or supported a submission." I describe what I'd hand them, defer on strategy, and call the robotic surgery guidance a draft. **Lead with:** Design controls; Updating a device on the market; the draft guidance card; JS Held. **One line:** "My job is making sure nothing is residual by omission."
+[[card]] **Radit Tantisira, Director, IA&E PMO. 2:30.** Program management for instruments and accessories (I let him define IA&E). An engineer and former R&D manager with twenty-plus years in device development. He's checking whether human factors helps a program ship: usability, risk and timelines in balance. I give scope options with a cost for each. Safety and efficacy are in every option. I never push nice-to-haves against a schedule. **Lead with:** The hardware date; Competing priorities; Design controls and the validation handoff. **Ask:** "Where does human factors input land too late on instrument programs?" **One line:** "Irreversibility sets the order."
 
-[[card]] **Reema, one-on-one.** She asked for humility, so it stays conversational. **Lead with:** The technical-lead pitch; First six months, her version; Tenure; The struggling mentee, second story. **One line:** "The technical lead on a hard problem, and the people around me get better at it."
+[[card]] **Ann Rich, Director, Product Management. 3:00.** A marketing and product background. She listens for customer value and trade-offs, not method, and asks "tell me about a time". I speak in outcomes: what changed in the product. The fifty million is always "projected". **Lead with:** Uber Brazil; Competing priorities; When you got it wrong. **Ask:** "Where would better evidence about users change a roadmap decision?" **One line:** "Work with no open decision behind it is the first thing I cut."
 
-[[card]] **The senior director.** Name not known yet. She listens for judgment and scope, so I give headlines, not walk-throughs. If she raises level: "I'm focused on the scope. Reema walked me through the path, and it made sense." **Lead with:** Why Intuitive; Tenure; Uber Brazil. **Ask:** "What would you want this team's human factors work to look like in two years?" **One line:** "I'm looking for the place I stay for the next decade."
+[[card]] **Ashley Jeong, Sr Human Factors Design Engineer. Demo, 3:30.** Hands-on time with the system, and still an interview. She is Senior: nothing about Staff. I ask before I touch, ask how features were designed, and offer no critiques. I use Researching force feedback as questions, not as a plan. It's the last session, so I keep my energy up and end with the closing question.
 
-[[card]] **Hands-on time with the system.** I ask before I touch, ask how features were designed, and offer no critiques.
+[[card]] **Backup slides, and who they're for.** 31 standards and guidance: Siddharth, Leela. 32 choosing a channel: Gabe. 33 how the thresholds were measured: Gabe. 34 submission categories: Siddharth, only if he asks. 35 how I'd set up the risk work: Gabe, Leela, Siddharth.
 
 ---
 
@@ -80,7 +81,7 @@ Everyone sees the talk first. In each one-on-one I point back to the deck, tell 
 
 **Follow-up: "You've never worked in a regulated medical device environment, have you?"**
 
-> That's right. I haven't worked with FDA or supported a submission. What I have is the upstream work the framework depends on: task analysis, a usability FMEA, and severity-ranked use errors at NASA. I've studied both 2026 guidances, and I know reading isn't doing. I'd expect to learn the regulated practice from this team.
+> That's right. I haven't worked with FDA or supported a submission. What I have is the upstream work the framework depends on: task analysis, a usability FMEA, and severity-ranked use errors at NASA. I've studied the 2026 guidances, including the draft on robotically-assisted surgical devices, and I know reading isn't doing. I'd expect to learn the regulated practice from this team.
 
 ### Anchor
 
@@ -131,6 +132,8 @@ Everyone sees the talk first. In each one-on-one I point back to the deck, tell 
 ## Robotics and technical range — Tier 2
 
 > **Question:** "How comfortable are you on the robotics side?" Or: "How technical do you get with engineering?"
+
+> ⚠️ **This is Gabe's room.** Say the claim, give the evidence and where it stops, then ask him a question.
 
 ### Answer
 
@@ -203,6 +206,8 @@ Everyone sees the talk first. In each one-on-one I point back to the deck, tell 
 **Earned secret.** A handover isn't a notification. It's a transfer of situation awareness, and each stage of it can fail on its own.
 
 **Where it transfers.** Losing force feedback mid-case is an unannounced mode change. And the public telesurgery demonstration passed instrument control between two consoles. Both are handovers.
+
+> ⚠️ **With Gabe,** offer the transfer as a question, not a claim.
 
 > ⚠️ **Say "trust ratings", never "trust".** A rating is what people said, not what they did.
 
@@ -416,7 +421,7 @@ Everyone sees the talk first. In each one-on-one I point back to the deck, tell 
 
 **Mechanism.** The spec was still the standard when I left Amazon in late 2024.
 
-**Transfer.** The same method sets a console-latency target, but the criterion changes from felt slowness to where control degrades.
+**Transfer.** The method could inform a console-latency target. The criterion would change from felt slowness to where control degrades, and the controls team would define that.
 
 ### Follow-ups
 
@@ -648,7 +653,7 @@ Say the steps out loud before starting; naming the method is half the signal.
 
 **Mechanism.** Feedback happens privately, and early on I ask each mentee how they like feedback and what I should know.
 
-> ⚠️ **No name, no details of the loss.** Augustina and Nandini heard this on Sept 18. With them and with Reema, tell the second story.
+> ⚠️ **No name, no details of the loss.** Nobody on this panel has heard the NASA story, so it's usable in any room. With Reema, tell the second story.
 
 ### Follow-ups
 
@@ -698,6 +703,8 @@ Say the steps out loud before starting; naming the method is half the signal.
 
 > Not for designating a critical task; severity alone does that. For acceptability, I follow how the plan's criteria treat it.
 
+> ⚠️ **Reema only.** I never raise it myself.
+
 **Follow-up: "You called the cut arbitrary."**
 
 > In 2018 I cut the list pragmatically. Today severity alone decides, and every task stays in the file.
@@ -706,7 +713,7 @@ Say the steps out loud before starting; naming the method is half the signal.
 
 ### Anchor
 
-- *"I changed the layout rather than adding a warning. A label is the weakest control there is."*
+- *"I changed the layout rather than adding a warning. Information comes last in the hierarchy."*
 
 ---
 
@@ -739,6 +746,8 @@ Say the steps out loud before starting; naming the method is half the signal.
 **Follow-up: "Have you led one for a submission?"**
 
 > No. I've studied the method; I haven't run one.
+
+> ⚠️ **Reema only.** The three "Earlier you said" follow-ups are for Reema. I never raise them myself.
 
 **Follow-up: "Earlier you said validation compares versions."**
 
@@ -794,7 +803,7 @@ Say the steps out loud before starting; naming the method is half the signal.
 
 **My job upstream.** Making that call defensible with the critical-task analysis attached.
 
-> ⚠️ **In the deck.** In a room, ask how category calls get made here instead.
+> ⚠️ **In the deck.** In a room, ask how category calls get made here instead. Backup slide 34 has the three categories. I show it only if asked.
 
 ### Anchor
 
@@ -847,7 +856,7 @@ Say the steps out loud before starting; naming the method is half the signal.
 
 [[card]] **FDA guidance.** The content guidance, final May 2026 and applying from August 1, sorts submissions into three human factors categories. The August 2026 Applying Human Factors revision is harmonization with QMSR, ISO 13485, ISO 14971, and IEC 62366-1, not a policy shift. AAMI HE75 is the design reference. Beyond that, I defer to regulatory.
 
-[[card]] **Draft guidance on robotically-assisted surgical devices.** Released September 24, 2026; comments due November 24. Always "draft". **Human factors:** early use-related risk, iterative evaluation, validation of the final interface. It names surgical planning, instrument preparation, connections, port switching, and instrument exchange; each instrument assessed separately; configurations and optional features; device movement in the team's way; and emergency stops and withdrawal. Simultaneous console and assistant interactions should be reflected in validation, and prior robotic experience considered. **Training:** a plan with effectiveness criteria for every user group, re-evaluated when the interface changes. **Reprocessing:** small lumens and drape-covered parts, validated under realistic soiling.
+[[card]] **Draft guidance on robotically-assisted surgical devices.** Released in late September 2026; comments due November 24. Always "draft". **Human factors:** early use-related risk, iterative evaluation, validation of the final interface. It names surgical planning, instrument preparation, connections, port switching, and instrument exchange; each instrument assessed separately; configurations and optional features; device movement in the team's way; and emergency stops and withdrawal. Simultaneous console and assistant interactions should be reflected in validation, and prior robotic experience considered. **Training:** a plan with effectiveness criteria for every user group, re-evaluated when the interface changes. **Reprocessing:** small lumens and drape-covered parts, validated under realistic soiling.
 
 #### Terminology map
 
@@ -1027,20 +1036,31 @@ Say the steps out loud before starting; naming the method is half the signal.
 
 **Personas and user groups — Tier 3.** User groups are defined in the use specification, by differences in role, training, and experience that could change use. They drive validation sampling and who owns each critical task. Here they're roles, not demographics. A persona is a communication tool built on top of them; it doesn't define them.
 
-**Labeling and training — Tier 3.** Information for safety is the weakest control. If a label carries a critical task, the design isn't finished.
+**Labeling and training — Tier 3.** Information for safety comes last in the control hierarchy. It is used when design and protective measures aren't practicable, with a documented rationale. Training is a real control on this product, and I never talk it down.
 
 **Automation, only if they raise it — Tier 3.** It works when trust matches capability: the user can see the system's state, predict it, and always override it safely. That's my Mercedes work and the CSCW framework. Say "automation", not "AI".
 
 ## Questions to ask, by name
 
-> **Regulatory affairs:** "How do category decisions get made here, and how early does human factors come in?"
+> **Leela:** "How early does the use-related risk analysis start on a new program?" And: "Do needs findings become design inputs directly, or go through a product requirements layer?"
 
-> **Systems, clinical, design, and product partners:** "Where does human factors input land too late today?" And: "What does a useful design input from human factors look like to you?"
+> **Reema:** "What would you need to see to make the Staff case, and on what timeline if I start as Senior?"
 
-> **Human factors peers:** "How early does the use-related risk analysis start on a new program?" And: "Do needs findings become design inputs directly, or go through a product requirements layer?" And: "How is the team reading the draft guidance on testing console and bedside roles together?"
+> **Siddharth:** "How do category decisions get made here, and how early does human factors come in?"
+
+> **Gabe:** "When a manipulator reaches a joint limit, how does the team decide what the surgeon should see or feel?" And: "What does a useful design input from human factors look like to you?"
+
+> **Radit:** "Where does human factors input land too late on instrument programs?"
+
+> **Ann:** "Where would better evidence about users change a roadmap decision?"
+
+> **Ashley:** "How is the team reading the draft guidance on testing console and bedside roles together?"
 
 ## The last check, before you walk in
 
+- ☐ Date and 4:00 PM end time confirmed against my flight home.
+- ☐ Deck opened on my own laptop; slides 24, 29 and 31 to 35 checked for wrapping.
+- ☐ One story and one question chosen for each of the seven rooms.
 - ☐ Every Tier 1 answer rehearsed and timed under a hundred and ten seconds; every second-bank story told out loud twice.
 - ☐ Drafted lines confirmed or cut: the NASA cue, the EchoStar junior researcher, the round-one answer, the Mercedes pilot, the Uber observations, JS Held, and The hardware date.
 - ☐ The application form shows the titles of record.

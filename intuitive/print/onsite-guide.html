@@ -216,19 +216,19 @@ a { color: #14507d; }
     letter-spacing: .08em; color: #555; border: .6pt solid #999; border-radius: 2pt;
     padding: 0 3pt; margin-left: 3pt; vertical-align: 1.5pt;
   }
-  /* Onsite guide only: the 18-page budget buys a larger face and roomier rhythm, not more content. */
-  body.story { font-size: 10.5pt; line-height: 1.34; }
+  /* Onsite guide only: the 20-page budget buys a larger face and roomier rhythm, not more content. */
+  body.story { font-size: 10.7pt; line-height: 1.37; }
   /* The "ff" in italic "effort" still extracted as "ef ort" with only common ligatures off. */
   body.story * { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0, "dlig" 0; }
   body.story p { margin-bottom: 4pt; }
-  body.story .qhead { margin: 13pt 0 4pt; }
+  body.story .qhead { margin: 14pt 0 4pt; }
   body.story .qhead h2 { font-size: 11.8pt; padding: 3.5pt 6pt; }
   body.story .parthead h1 { font-size: 13.5pt; padding: 5pt 8pt; }
   /* Tier 1 is rehearsed until fluent, so it has to be findable at a flip. */
   body.story .qhead.t1 h2 { border-left-width: 5pt; background: #dcdcd8; }
   body.story .tier.t1 { background: #111; color: #fff; border-color: #111; }
   body.story .tier { font-size: 7.4pt; }
-  body.story .answer p { padding: 3pt 8pt; }
+  body.story .answer p { padding: 3.2pt 8pt; }
   body.story .answer p:first-child { padding-top: 5pt; }
   body.story .answer p:last-child { padding-bottom: 5pt; }
   body.story .answer p > strong:first-child { font-size: 8pt; margin-bottom: 1.2pt; }
@@ -239,12 +239,16 @@ a { color: #14507d; }
     break-before: avoid;
   }
   body.story .keep { break-inside: avoid; }
+  /* Chrome splits even a short keep after a heading; an inline-block can't split. */
+  body.story .keep.whole { display: inline-block; width: 100%; }
   body.story .calibration::before { content: "Anchor"; color: #7a6118; font-weight: bold; font-size: 7.4pt; }
   body.story .fq { font-size: 9.6pt; margin: 7pt 0 2.5pt; }
   body.story blockquote.say { padding: 5pt 8pt; margin: 2pt 0 6pt; }
-  body.story blockquote.note { font-size: 9.8pt; padding: 4.5pt 8pt; }
-  body.story blockquote.warn { font-size: 9.6pt; padding: 4.5pt 8pt; margin: 3pt 0 6pt; }
+  body.story blockquote.note { font-size: 10pt; padding: 4.5pt 8pt; }
+  body.story blockquote.warn { font-size: 9.9pt; padding: 4.5pt 8pt; margin: 3pt 0 6pt; }
   body.story .card { padding: 5pt 8pt; margin: 0 0 6.5pt; }
+  /* The panel cards run long; held whole, each one strands a third of a column. */
+  body.story .card { break-inside: auto; orphans: 3; widows: 3; }
   body.story li { margin-bottom: 3pt; }
   body.story h4 { font-size: 9.6pt; margin-top: 8pt; }
 }
@@ -253,23 +257,24 @@ a { color: #14507d; }
 <body class="compact dense airy story">
 <main>
 <h1>Intuitive Surgical — Onsite</h1>
-<p><strong>Tier 1, black tag: rehearse out loud until fluent.</strong> <strong>Second bank: tell each story out loud twice.</strong> The panel hears Echo Hub, the latency program, and NASA in the talk, so the second bank is for the one-on-ones. <strong>Tier 2: know the point and the anchor. Tier 3: read twice.</strong></p>
+<p><strong>Tier 1, black tag: rehearse out loud until fluent.</strong> <strong>Second bank: tell each story out loud twice.</strong> The panel hears Echo Hub, the latency program, and NASA in the talk, so the second bank is for lunch, the one-on-ones and the demo. <strong>Tier 2: know the point and the anchor. Tier 3: read twice.</strong></p>
 <h2>Rules</h2>
 <ul>
 <li>Every answer runs sixty to a hundred and ten seconds, ends on a design input or something I left behind, and then stops.</li>
 <li>I say &quot;user&quot;, &quot;patient safety&quot;, &quot;use error&quot;, &quot;critical task&quot;, &quot;risk control measure&quot;, and &quot;guidance&quot;. Never &quot;operator&quot;, &quot;pain point&quot;, &quot;guardrail&quot;, or &quot;regulation&quot;. I default to &quot;validation testing&quot;, and if they say &quot;summative&quot;, I use their word.</li>
 <li>I never call validation junior, tactical, &quot;powered&quot;, or &quot;comparing versions&quot;. I never call a critical-task cutoff &quot;arbitrary&quot;.</li>
 <li>Severity alone designates a critical task. Acceptability follows the risk management plan's criteria, which may include probability. Residual risk is never &quot;a negotiation&quot;, &quot;not my decision&quot;, &quot;a name against it&quot;, or &quot;a signature&quot;.</li>
+<li>I never say &quot;never&quot; about information for safety. Training and labeling are legitimate controls on this product. I say &quot;last in the hierarchy, with a documented rationale&quot;.</li>
 <li>I don't hedge, and I never run down my own methods or say designers &quot;don't like requirements&quot;.</li>
 <li>EchoStar is &quot;since June 2025&quot;, never a duration. Experience is six years in industry plus doctoral internships, never &quot;ten-plus&quot;.</li>
 <li>fNIRS was Amazon. fMRI, ECG and heart-rate variability, and tVNS were Brigham. Never EEG, and never a claim that a biometric beat NASA-TLX.</li>
 <li>Fifty million dollars is the only dollar figure, always &quot;projected&quot; by Alexa Economics' model. No Echo metrics, nothing about Intuitive's internal process.</li>
-<li>I never name Anduril. I say &quot;a final round elsewhere, completed September 28&quot;.</li>
-<li>Level and compensation aren't for the panel. If raised, I answer on scope and point to Reema. My current title, Staff Product Researcher, is a fact and on a slide.</li>
+<li>I never name the other company. I say &quot;I'm in a final-stage process elsewhere, with an interview next week.&quot; If asked about the September 28 final round: &quot;That team went another direction, and the company moved me into a human factors role I'm interviewing for.&quot;</li>
+<li>Level and compensation aren't for the panel. If raised, I answer on scope and point to Reema. Leela and Ashley are Senior, the level I'm interviewing at, so Staff comes up only in Reema's room. My current title, Staff Product Researcher (Human Factors), is a fact and on a slide.</li>
 <li>Each interviewer describes their work before I describe it back. I never say a gap is &quot;learnable in months&quot;, never claim their workflow &quot;cold&quot;, and never propose a process before I've read theirs.</li>
 <li>One polished line per room, the one on that room's card, and never a line from the talk. Anchors are for my memory.</li>
 <li>After the talk, I point back to a deck story in one sentence and tell a second-bank story instead.</li>
-<li>If an earlier answer is quoted back, I own the wording, correct it in one sentence, and move on.</li>
+<li>If an earlier answer is quoted back, I own the wording, correct it in one sentence, and move on. Only Reema could raise one. Nobody else on this panel was in those rounds, so I never volunteer a correction.</li>
 </ul>
 <h2>Canonical facts</h2>
 <ul>
@@ -277,26 +282,26 @@ a { color: #14507d; }
 <li><strong>Titles of record,</strong> for the application form: Staff Product Researcher (EchoStar, under DISH Network) and UX Researcher II (Amazon). If asked: &quot;My titles of record say researcher. The résumé uses the functional title, and the work behind both is the same.&quot;</li>
 <li><strong>Brigham,</strong> 2014 to 2015, research assistant and project coordinator: fMRI, ECG and heart-rate variability, and tVNS, which was neuroscience research on a device, not human factors. <strong>Thesis:</strong> laparoscopy, 2017, medical students. <strong>Dissertation:</strong> medical data entry, 2020.</li>
 <li><strong>NASA:</strong> five astronaut candidates at Johnson Space Center; internship based at Langley. I derived the task list. A VR prototype in simulated microgravity, three medical scenarios, a usability FMEA, and three rounds. Reach to the 5th-percentile female, clearance to the 95th-percentile male. Ground crew gave remote guidance, never &quot;teleoperation&quot;. The haptic cue was infeasible, so we used visual and auditory channels. The thirty percent time reduction was a side effect.</li>
-<li><strong>Echo Hub:</strong> about twelve households, Seattle and Denver, no internal usage data. <strong>Uber Brazil:</strong> one app for rental drivers; retention up five percent, pre and post, not a controlled test. <strong>Alexa latency:</strong> 30 participants, 12 interaction types, 6 fixed delays, about 2,000 trials analyzed, constant stimuli, rated for felt slowness.</li>
+<li><strong>Echo Hub:</strong> about twelve households, Seattle and Denver, no internal usage data. <strong>Uber Brazil:</strong> one app for rental drivers; retention up five percent, pre and post, not a controlled test. <strong>Alexa latency:</strong> 30 participants, 12 interaction types, 6 fixed delays, 2,160 trials run (30 x 12 x 6, the number on slides 13 and 33), about 2,000 analyzed, constant stimuli, rated for felt slowness.</li>
 <li>No FDA submission experience; I bridge from MIL-STD-1472 and NASA-STD-3001. Failure stories: the Echo Show benchmark and the Mercedes pilot. No direct reports. Named mentee: a junior UX researcher at EchoStar, by role, never by name.</li>
 </ul>
 <h2>The role</h2>
 <ul>
-<li>Human factors design engineer, upstream: user needs, interface design requirements, workflow definition, and early prototypes.</li>
+<li>Human factors design engineer, upstream: user needs, interface design requirements, workflow definition, and early prototypes. I'd report directly to Reema.</li>
 <li>Design engineering owns the stakeholders, task analysis, critical tasks, and risk analysis. A separate analyst team runs validation with our input. My inputs should hand off without rework.</li>
 <li>The team values requirements, and wants someone to mentor and set best practices. Findings land as the finding, the design impact, and the recommended change. Onboarding is a six-week foundations program.</li>
 </ul>
 <h2>Who you'll meet</h2>
-<p>Everyone sees the talk first. In each one-on-one I point back to the deck, tell second-bank stories, and use only that room's one line.</p>
-<p class="card"><strong>Human factors peers.</strong> Elyse, Val, Nandini, Augustina. They're checking whether I do the work, so no overclaiming. I reference stories they've heard and add something new. <strong>Lead with:</strong> Use-error analysis; Human factors validation; Design controls; JS Held. <strong>One line:</strong> &quot;A complaint describes an outcome. My job is to reconstruct the use scenario that produced it.&quot;</p>
-<p class="card"><strong>Systems engineers.</strong> Traceability and testability: a shall statement, a tolerance, a verification method. <strong>Lead with:</strong> Turning observations into requirements; Mercedes-Benz handovers; Robotics and technical range; Choosing a channel. <strong>One line:</strong> &quot;A design input nobody can test against isn't a requirement. It's a recommendation with confident formatting.&quot;</p>
-<p class="card"><strong>Clinical engineers.</strong> They screen for humility and procedure literacy. I know the public workflow and vocabulary, I say I haven't observed a case, and I ask about their reasoning. <strong>Lead with:</strong> Working with clinicians; Defining a workflow; Researching force feedback; Ergonomics. <strong>One line:</strong> &quot;In an operating room, my job would be to be the least disruptive person in it, and still leave with the observation nobody wrote down.&quot;</p>
-<p class="card"><strong>Industrial and interaction designers.</strong> Constraints early, freedom inside them, and never a finding without a candidate direction. <strong>Lead with:</strong> Working with designers and engineers; Measuring what people can't report; Uber Brazil. <strong>One line:</strong> &quot;Designers can work inside a constraint. They can't do much with a critique of something already built.&quot;</p>
-<p class="card"><strong>Product managers.</strong> Scope options with a cost for each, and &quot;tell me about a time&quot;. Safety and efficacy are in every option. <strong>Lead with:</strong> The hardware date; Competing priorities; When you got it wrong. <strong>One line:</strong> &quot;Work with no open decision behind it is the first thing I cut.&quot;</p>
-<p class="card"><strong>Regulatory affairs.</strong> I open with: &quot;I haven't worked with FDA or supported a submission.&quot; I describe what I'd hand them, defer on strategy, and call the robotic surgery guidance a draft. <strong>Lead with:</strong> Design controls; Updating a device on the market; the draft guidance card; JS Held. <strong>One line:</strong> &quot;My job is making sure nothing is residual by omission.&quot;</p>
-<p class="card"><strong>Reema, one-on-one.</strong> She asked for humility, so it stays conversational. <strong>Lead with:</strong> The technical-lead pitch; First six months, her version; Tenure; The struggling mentee, second story. <strong>One line:</strong> &quot;The technical lead on a hard problem, and the people around me get better at it.&quot;</p>
-<p class="card"><strong>The senior director.</strong> Name not known yet. She listens for judgment and scope, so I give headlines, not walk-throughs. If she raises level: &quot;I'm focused on the scope. Reema walked me through the path, and it made sense.&quot; <strong>Lead with:</strong> Why Intuitive; Tenure; Uber Brazil. <strong>Ask:</strong> &quot;What would you want this team's human factors work to look like in two years?&quot; <strong>One line:</strong> &quot;I'm looking for the place I stay for the next decade.&quot;</p>
-<p class="card"><strong>Hands-on time with the system.</strong> I ask before I touch, ask how features were designed, and offer no critiques.</p>
+<p>Everyone below sees the talk first, 11:00 to 12:00. Rooms are 30 minutes: one story and one question each. Nobody on this panel except Reema was near my earlier rounds, so every second-bank story is new to them. I use only that room's one line. I never recite anyone's background back to them.</p>
+<p class="card"><strong>The day.</strong> 11:00 presentation (all seven). 12:00 lunch, Leela. 1:00 Reema. 1:30 Siddharth. 2:00 Gabe. 2:30 Radit. 3:00 Ann. 3:30 demo, Ashley. No breaks from 1:00 to 4:00.</p>
+<p class="card"><strong>Leela Tanikella, Sr Human Factors Design Engineer. Lunch, 12:00.</strong> Lunch is an interview. She came up through design controls at Intuitive, so she knows requirements, risk files and traceability cold. She's checking whether my needs-to-requirements chain is real and whether I'd be good to work beside. She is Senior, the level I'm interviewing at: nothing about Staff. <strong>Lead with:</strong> Turning observations into requirements; Design controls and the validation handoff; Use-error analysis. <strong>Ask:</strong> &quot;How early does the use-related risk analysis start on a new program?&quot; and &quot;Do needs findings become design inputs directly, or go through a product requirements layer?&quot; <strong>One line:</strong> &quot;A design input nobody can test against isn't a requirement. It's a recommendation with confident formatting.&quot;</p>
+<p class="card"><strong>Reema Bhavnani, Sr Manager, Human Factors Engineering. 1:00.</strong> She is the hiring manager and would be my direct manager. She asked for humility, so it stays conversational. <strong>Lead with:</strong> The technical-lead pitch; First six months, her version; Tenure; The struggling mentee, second story. <strong>Ask:</strong> &quot;What would you need to see to make the Staff case, and on what timeline if I start as Senior?&quot; <strong>One line:</strong> &quot;The technical lead on a hard problem, and the people around me get better at it.&quot;</p>
+<p class="card"><strong>Siddharth Gandhi, Senior Manager, Regulatory Affairs. 1:30.</strong> His team sets regulatory strategy for multiport and reviews design input and output documentation. I open with: &quot;I haven't worked with FDA or supported a submission.&quot; I describe what I'd hand him, defer on strategy, and call the robotic surgery guidance a draft. I name IEC 62366-1 as the international basis, not only FDA. I never say &quot;never&quot; about labeling or training as a control. <strong>Lead with:</strong> Design controls and the validation handoff; Updating a device already on the market; the draft guidance card. <strong>Ask:</strong> &quot;How do category decisions get made here, and how early does human factors come in?&quot; <strong>One line:</strong> &quot;My job is making sure nothing is residual by omission.&quot;</p>
+<p class="card"><strong>Gabe Brisson, Managing Sr Principal, Systems Analysis. 2:00.</strong> Systems analysts here are robotic control engineers: motion control, safety algorithms, failure mode analysis. He has a robotics PhD and patents on manipulator control. He's checking whether I know where my expertise stops and whether my numbers can be verified. I open with &quot;I'm not a controls engineer.&quot; On latency and telesurgery I ask, I don't assert: the method carries over, the numbers don't. Expect questions on my severity scale and on probability. <strong>Lead with:</strong> Robotics and technical range; Turning observations into requirements; Mercedes-Benz handovers; Choosing visual, audio, or haptic. <strong>Ask:</strong> &quot;When a manipulator reaches a joint limit, how does the team decide what the surgeon should see or feel?&quot; and &quot;What does a useful design input from human factors look like to you?&quot; <strong>One line:</strong> &quot;I specify what the loop has to feel like to the human closing it.&quot;</p>
+<p class="card"><strong>Radit Tantisira, Director, IA&amp;E PMO. 2:30.</strong> Program management for instruments and accessories (I let him define IA&amp;E). An engineer and former R&amp;D manager with twenty-plus years in device development. He's checking whether human factors helps a program ship: usability, risk and timelines in balance. I give scope options with a cost for each. Safety and efficacy are in every option. I never push nice-to-haves against a schedule. <strong>Lead with:</strong> The hardware date; Competing priorities; Design controls and the validation handoff. <strong>Ask:</strong> &quot;Where does human factors input land too late on instrument programs?&quot; <strong>One line:</strong> &quot;Irreversibility sets the order.&quot;</p>
+<p class="card"><strong>Ann Rich, Director, Product Management. 3:00.</strong> A marketing and product background. She listens for customer value and trade-offs, not method, and asks &quot;tell me about a time&quot;. I speak in outcomes: what changed in the product. The fifty million is always &quot;projected&quot;. <strong>Lead with:</strong> Uber Brazil; Competing priorities; When you got it wrong. <strong>Ask:</strong> &quot;Where would better evidence about users change a roadmap decision?&quot; <strong>One line:</strong> &quot;Work with no open decision behind it is the first thing I cut.&quot;</p>
+<p class="card"><strong>Ashley Jeong, Sr Human Factors Design Engineer. Demo, 3:30.</strong> Hands-on time with the system, and still an interview. She is Senior: nothing about Staff. I ask before I touch, ask how features were designed, and offer no critiques. I use Researching force feedback as questions, not as a plan. It's the last session, so I keep my energy up and end with the closing question.</p>
+<p class="card"><strong>Backup slides, and who they're for.</strong> 31 standards and guidance: Siddharth, Leela. 32 choosing a channel: Gabe. 33 how the thresholds were measured: Gabe. 34 submission categories: Siddharth, only if he asks. 35 how I'd set up the risk work: Gabe, Leela, Siddharth.</p>
 <hr />
 <div class="parthead">
 <h1>Part 1 · The open</h1>
@@ -320,7 +325,7 @@ a { color: #14507d; }
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;You've never worked in a regulated medical device environment, have you?&quot;</strong></p>
 <div class="keep"><blockquote class="say">
-<p>That's right. I haven't worked with FDA or supported a submission. What I have is the upstream work the framework depends on: task analysis, a usability FMEA, and severity-ranked use errors at NASA. I've studied both 2026 guidances, and I know reading isn't doing. I'd expect to learn the regulated practice from this team.</p>
+<p>That's right. I haven't worked with FDA or supported a submission. What I have is the upstream work the framework depends on: task analysis, a usability FMEA, and severity-ranked use errors at NASA. I've studied the 2026 guidances, including the draft on robotically-assisted surgical devices, and I know reading isn't doing. I'd expect to learn the regulated practice from this team.</p>
 </blockquote>
 <h3>Anchor</h3>
 <div class="calibration"><ul>
@@ -371,6 +376,9 @@ a { color: #14507d; }
 <p><strong>Question:</strong> &quot;How comfortable are you on the robotics side?&quot; Or: &quot;How technical do you get with engineering?&quot;</p>
 </blockquote>
 </div>
+<blockquote class="warn">
+<p>⚠️ <strong>This is Gabe's room.</strong> Say the claim, give the evidence and where it stops, then ask him a question.</p>
+</blockquote>
 <h3>Answer</h3>
 <div class="answer">
 <p><strong>The claim.</strong> I'm not a controls engineer. I specify what the loop has to feel like to the human closing it. That's adjacent expertise, not a lesser version of the same one.</p>
@@ -431,6 +439,9 @@ a { color: #14507d; }
 <p><strong>Earned secret.</strong> A handover isn't a notification. It's a transfer of situation awareness, and each stage of it can fail on its own.</p>
 <p><strong>Where it transfers.</strong> Losing force feedback mid-case is an unannounced mode change. And the public telesurgery demonstration passed instrument control between two consoles. Both are handovers.</p>
 </div>
+<blockquote class="warn">
+<p>⚠️ <strong>With Gabe,</strong> offer the transfer as a question, not a claim.</p>
+</blockquote>
 <div class="keep"><blockquote class="warn">
 <p>⚠️ <strong>Say &quot;trust ratings&quot;, never &quot;trust&quot;.</strong> A rating is what people said, not what they did.</p>
 </blockquote>
@@ -618,7 +629,7 @@ a { color: #14507d; }
 <p><strong>Result.</strong> The spec is intent-dependent, because the data was. Alexa Economics ran it through their model and projected about fifty million dollars over fifteen months.</p>
 <p><strong>Earned secret.</strong> The acceptable number depends on what the user is trying to do.</p>
 <p><strong>Mechanism.</strong> The spec was still the standard when I left Amazon in late 2024.</p>
-<p><strong>Transfer.</strong> The same method sets a console-latency target, but the criterion changes from felt slowness to where control degrades.</p>
+<p><strong>Transfer.</strong> The method could inform a console-latency target. The criterion would change from felt slowness to where control degrades, and the controls team would define that.</p>
 </div>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;Did your work produce that fifty million?&quot;</strong></p>
@@ -835,7 +846,7 @@ a { color: #14507d; }
 <p><strong>Mechanism.</strong> Feedback happens privately, and early on I ask each mentee how they like feedback and what I should know.</p>
 </div>
 <blockquote class="warn">
-<p>⚠️ <strong>No name, no details of the loss.</strong> Augustina and Nandini heard this on Sept 18. With them and with Reema, tell the second story.</p>
+<p>⚠️ <strong>No name, no details of the loss.</strong> Nobody on this panel has heard the NASA story, so it's usable in any room. With Reema, tell the second story.</p>
 </blockquote>
 <h3>Follow-ups</h3>
 <p class="fq"><strong>Follow-up: &quot;Tell me about another one.&quot; The second story.</strong></p>
@@ -881,6 +892,9 @@ a { color: #14507d; }
 <blockquote class="say">
 <p>Not for designating a critical task; severity alone does that. For acceptability, I follow how the plan's criteria treat it.</p>
 </blockquote>
+<blockquote class="warn">
+<p>⚠️ <strong>Reema only.</strong> I never raise it myself.</p>
+</blockquote>
 <p class="fq"><strong>Follow-up: &quot;You called the cut arbitrary.&quot;</strong></p>
 <blockquote class="say">
 <p>In 2018 I cut the list pragmatically. Today severity alone decides, and every task stays in the file.</p>
@@ -890,7 +904,7 @@ a { color: #14507d; }
 </blockquote>
 <h3>Anchor</h3>
 <div class="calibration"><ul>
-<li><em>&quot;I changed the layout rather than adding a warning. A label is the weakest control there is.&quot;</em></li>
+<li><em>&quot;I changed the layout rather than adding a warning. Information comes last in the hierarchy.&quot;</em></li>
 </ul></div></div>
 <hr />
 <div class="qhead t1">
@@ -919,6 +933,9 @@ a { color: #14507d; }
 <p class="fq"><strong>Follow-up: &quot;Have you led one for a submission?&quot;</strong></p>
 <blockquote class="say">
 <p>No. I've studied the method; I haven't run one.</p>
+</blockquote>
+<blockquote class="warn">
+<p>⚠️ <strong>Reema only.</strong> The three &quot;Earlier you said&quot; follow-ups are for Reema. I never raise them myself.</p>
 </blockquote>
 <p class="fq"><strong>Follow-up: &quot;Earlier you said validation compares versions.&quot;</strong></p>
 <blockquote class="say">
@@ -974,7 +991,7 @@ a { color: #14507d; }
 <p><strong>My job upstream.</strong> Making that call defensible with the critical-task analysis attached.</p>
 </div>
 <div class="keep"><blockquote class="warn">
-<p>⚠️ <strong>In the deck.</strong> In a room, ask how category calls get made here instead.</p>
+<p>⚠️ <strong>In the deck.</strong> In a room, ask how category calls get made here instead. Backup slide 34 has the three categories. I show it only if asked.</p>
 </blockquote>
 <h3>Anchor</h3>
 <div class="calibration"><ul>
@@ -1018,7 +1035,7 @@ a { color: #14507d; }
 <p class="card"><strong>ISO 14971.</strong> Hazard, sequence of events, hazardous situation, harm. Acceptability criteria are set in the plan first. Controls in fixed order: design it out, protect, inform. Only risk that exceeds the criteria, with further control impracticable, goes to benefit-risk. Then overall residual risk is evaluated.</p>
 <p class="card"><strong>Alarms.</strong> IEC 60601-1-8 defines alarm priority. My Mercedes takeover alerts were the same problem: urgency for someone already under load.</p>
 <p class="card"><strong>FDA guidance.</strong> The content guidance, final May 2026 and applying from August 1, sorts submissions into three human factors categories. The August 2026 Applying Human Factors revision is harmonization with QMSR, ISO 13485, ISO 14971, and IEC 62366-1, not a policy shift. AAMI HE75 is the design reference. Beyond that, I defer to regulatory.</p>
-<p class="card"><strong>Draft guidance on robotically-assisted surgical devices.</strong> Released September 24, 2026; comments due November 24. Always &quot;draft&quot;. <strong>Human factors:</strong> early use-related risk, iterative evaluation, validation of the final interface. It names surgical planning, instrument preparation, connections, port switching, and instrument exchange; each instrument assessed separately; configurations and optional features; device movement in the team's way; and emergency stops and withdrawal. Simultaneous console and assistant interactions should be reflected in validation, and prior robotic experience considered. <strong>Training:</strong> a plan with effectiveness criteria for every user group, re-evaluated when the interface changes. <strong>Reprocessing:</strong> small lumens and drape-covered parts, validated under realistic soiling.</p>
+<p class="card"><strong>Draft guidance on robotically-assisted surgical devices.</strong> Released in late September 2026; comments due November 24. Always &quot;draft&quot;. <strong>Human factors:</strong> early use-related risk, iterative evaluation, validation of the final interface. It names surgical planning, instrument preparation, connections, port switching, and instrument exchange; each instrument assessed separately; configurations and optional features; device movement in the team's way; and emergency stops and withdrawal. Simultaneous console and assistant interactions should be reflected in validation, and prior robotic experience considered. <strong>Training:</strong> a plan with effectiveness criteria for every user group, re-evaluated when the interface changes. <strong>Reprocessing:</strong> small lumens and drape-covered parts, validated under realistic soiling.</p>
 <h4>Terminology map</h4>
 <ul>
 <li><strong>Summative evaluation</strong> = <strong>validation testing</strong>.</li>
@@ -1182,25 +1199,40 @@ a { color: #14507d; }
 <p><strong>Measuring cognitive load — Tier 3.</strong> Cheapest first: NASA-TLX and task performance; eye tracking for what users didn't notice; heart-rate variability or skin conductance for load over a long case; fNIRS only when the question needs continuous objective data.</p>
 <p><strong>Ergonomics — Tier 3.</strong> In long cases the problem is fatigue and posture over hours, not first-minute reach. Cover the 5th-percentile female to the 95th-percentile male, and document who falls outside. I haven't measured surgeons, so I'd start with complaints and case observation.</p>
 <p><strong>Personas and user groups — Tier 3.</strong> User groups are defined in the use specification, by differences in role, training, and experience that could change use. They drive validation sampling and who owns each critical task. Here they're roles, not demographics. A persona is a communication tool built on top of them; it doesn't define them.</p>
-<p><strong>Labeling and training — Tier 3.</strong> Information for safety is the weakest control. If a label carries a critical task, the design isn't finished.</p>
+<p><strong>Labeling and training — Tier 3.</strong> Information for safety comes last in the control hierarchy. It is used when design and protective measures aren't practicable, with a documented rationale. Training is a real control on this product, and I never talk it down.</p>
 <p><strong>Automation, only if they raise it — Tier 3.</strong> It works when trust matches capability: the user can see the system's state, predict it, and always override it safely. That's my Mercedes work and the CSCW framework. Say &quot;automation&quot;, not &quot;AI&quot;.</p>
 <h2>Questions to ask, by name</h2>
 <blockquote class="note">
-<p><strong>Regulatory affairs:</strong> &quot;How do category decisions get made here, and how early does human factors come in?&quot;</p>
+<p><strong>Leela:</strong> &quot;How early does the use-related risk analysis start on a new program?&quot; And: &quot;Do needs findings become design inputs directly, or go through a product requirements layer?&quot;</p>
 </blockquote>
 <blockquote class="note">
-<p><strong>Systems, clinical, design, and product partners:</strong> &quot;Where does human factors input land too late today?&quot; And: &quot;What does a useful design input from human factors look like to you?&quot;</p>
+<p><strong>Reema:</strong> &quot;What would you need to see to make the Staff case, and on what timeline if I start as Senior?&quot;</p>
 </blockquote>
 <blockquote class="note">
-<p><strong>Human factors peers:</strong> &quot;How early does the use-related risk analysis start on a new program?&quot; And: &quot;Do needs findings become design inputs directly, or go through a product requirements layer?&quot; And: &quot;How is the team reading the draft guidance on testing console and bedside roles together?&quot;</p>
+<p><strong>Siddharth:</strong> &quot;How do category decisions get made here, and how early does human factors come in?&quot;</p>
 </blockquote>
-<h2>The last check, before you walk in</h2>
+<blockquote class="note">
+<p><strong>Gabe:</strong> &quot;When a manipulator reaches a joint limit, how does the team decide what the surgeon should see or feel?&quot; And: &quot;What does a useful design input from human factors look like to you?&quot;</p>
+</blockquote>
+<blockquote class="note">
+<p><strong>Radit:</strong> &quot;Where does human factors input land too late on instrument programs?&quot;</p>
+</blockquote>
+<blockquote class="note">
+<p><strong>Ann:</strong> &quot;Where would better evidence about users change a roadmap decision?&quot;</p>
+</blockquote>
+<blockquote class="note">
+<p><strong>Ashley:</strong> &quot;How is the team reading the draft guidance on testing console and bedside roles together?&quot;</p>
+</blockquote>
+<div class="keep whole"><h2>The last check, before you walk in</h2>
 <ul>
+<li>☐ Date and 4:00 PM end time confirmed against my flight home.</li>
+<li>☐ Deck opened on my own laptop; slides 24, 29 and 31 to 35 checked for wrapping.</li>
+<li>☐ One story and one question chosen for each of the seven rooms.</li>
 <li>☐ Every Tier 1 answer rehearsed and timed under a hundred and ten seconds; every second-bank story told out loud twice.</li>
 <li>☐ Drafted lines confirmed or cut: the NASA cue, the EchoStar junior researcher, the round-one answer, the Mercedes pilot, the Uber observations, JS Held, and The hardware date.</li>
 <li>☐ The application form shows the titles of record.</li>
 <li>☐ Every room ends with: &quot;Is there anything I said today you'd want me to go deeper on?&quot;</li>
-</ul>
+</ul></div>
 
 </main>
 </body>
